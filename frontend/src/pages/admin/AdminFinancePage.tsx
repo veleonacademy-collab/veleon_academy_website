@@ -1,217 +1,231 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchTasks } from "../../api/admin";
+import { academyApi } from "../../api/academy";
 import { BackButton } from "../../components/ui/BackButton";
-import { format, subDays, startOfYear, startOfMonth, startOfWeek, endOfDay, parseISO } from "date-fns";
-import { Task } from "../../types/task";
+import { formatCurrency, formatDate } from "../../utils/formatUtils";
+import { Receipt, TrendingUp, Users, GraduationCap, ArrowUpDown, Search, Filter } from "lucide-react";
+
+interface FinanceStats {
+  total_revenue: number;
+  total_students: number;
+  total_enrollments: number;
+}
+
+interface Transaction {
+  id: number;
+  user_id: number;
+  enrollment_id: number;
+  amount: number;
+  status: string;
+  reference: string;
+  provider: string;
+  created_at: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  course_title?: string;
+}
 
 const AdminFinancePage: React.FC = () => {
-  const [dateRange, setDateRange] = useState<string>("all");
-  const [customStart, setCustomStart] = useState<string>("");
-  const [customEnd, setCustomEnd] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
-  const { minDate, maxDate } = useMemo(() => {
-    const now = new Date();
-    let min: Date | undefined;
-    let max: Date | undefined = endOfDay(now);
-
-    switch (dateRange) {
-      case "year":
-        min = startOfYear(now);
-        break;
-      case "month":
-        min = startOfMonth(now);
-        break;
-      case "week":
-        min = startOfWeek(now);
-        break;
-      case "custom":
-        if (customStart) min = new Date(customStart);
-        if (customEnd) max = endOfDay(new Date(customEnd));
-        break;
-      case "all":
-      default:
-        min = undefined;
-        max = undefined;
-        break;
-    }
-
-    return {
-      minDate: min ? min.toISOString() : undefined,
-      maxDate: max ? max.toISOString() : undefined
-    };
-  }, [dateRange, customStart, customEnd]);
-
-  const { data: tasks, isLoading } = useQuery({
-    queryKey: ["tasks", "finance", minDate, maxDate],
-    queryFn: () => fetchTasks({ minDate, maxDate }),
+  const { data: stats, isLoading: statsLoading } = useQuery<FinanceStats>({
+    queryKey: ["admin-finance-stats"],
+    queryFn: academyApi.getAdminFinance,
   });
 
-  const stats = useMemo(() => {
-    if (!tasks) return { revenue: 0, received: 0, cost: 0, profit: 0, count: 0 };
-    
-    return tasks.reduce((acc: any, t: any) => {
-      const revenue = Number(t.totalAmount) || 0;
-      const received = Number(t.amountPaid) || 0;
-      const cost = Number(t.productionCost) || 0;
-      // Profit based on Charged Amount - Cost. Alternatively could be Received - Cost.
-      // Usually "Revenue" in accounting is what you charged (Accrual).
-      // "Profit" = Revenue - Expenses.
-      const profit = revenue - cost;
+  const { data: transactions, isLoading: txLoading } = useQuery<Transaction[]>({
+    queryKey: ["admin-transactions"],
+    queryFn: () => academyApi.getAdminTransactions(),
+  });
 
-      return {
-        revenue: acc.revenue + revenue,
-        received: acc.received + received,
-        cost: acc.cost + cost,
-        profit: acc.profit + profit,
-        count: acc.count + 1
-      };
-    }, { revenue: 0, received: 0, cost: 0, profit: 0, count: 0 });
-  }, [tasks]);
+  const filteredTransactions = transactions?.filter((tx: Transaction) => {
+    const matchesSearch = 
+      tx.first_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      tx.last_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      tx.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      tx.reference?.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesStatus = statusFilter === "all" || tx.status === statusFilter;
+    
+    return matchesSearch && matchesStatus;
+  });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 pb-12">
       <div className="flex flex-col gap-4">
         <BackButton />
-        <div className="flex items-center justify-between flex-wrap gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Financial Overview</h1>
-            <p className="text-sm text-gray-500">Track revenue, production costs, and profit profitability.</p>
-          </div>
-          
-          <div className="flex items-center gap-2 bg-white p-1 rounded-lg border border-gray-200 shadow-sm">
-             <select 
-                value={dateRange} 
-                onChange={(e) => setDateRange(e.target.value)}
-                className="bg-transparent border-none text-sm font-bold text-gray-700 focus:ring-0 cursor-pointer py-1 px-3"
-             >
-                <option value="all">All Time</option>
-                <option value="year">This Year</option>
-                <option value="month">This Month</option>
-                <option value="week">This Week</option>
-                <option value="custom">Custom Range</option>
-             </select>
+            <h1 className="text-3xl font-black text-gray-900 tracking-tight">Academy Finance</h1>
+            <p className="text-gray-500 font-medium">Monitor revenue and student payments across the academy.</p>
           </div>
         </div>
       </div>
 
-      {dateRange === "custom" && (
-         <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-200">
-            <div className="flex flex-col gap-1">
-               <label className="text-xs font-bold text-gray-500 uppercase">From</label>
-               <input 
-                  type="date" 
-                  value={customStart}
-                  onChange={(e) => setCustomStart(e.target.value)}
-                  className="rounded-lg border-gray-200 text-sm"
-               />
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="relative overflow-hidden group bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
+          <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:scale-110 transition-transform duration-500">
+            <TrendingUp size={120} />
+          </div>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-4 bg-primary/10 rounded-2xl text-primary">
+              <TrendingUp size={24} />
             </div>
-            <div className="flex flex-col gap-1">
-               <label className="text-xs font-bold text-gray-500 uppercase">To</label>
-               <input 
-                  type="date" 
-                  value={customEnd}
-                  onChange={(e) => setCustomEnd(e.target.value)}
-                  className="rounded-lg border-gray-200 text-sm"
-               />
-            </div>
-         </div>
-      )}
+            <span className="font-black uppercase tracking-[0.2em] text-[10px] text-gray-400">Total Revenue</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-4xl font-black text-gray-900">
+              {statsLoading ? "..." : formatCurrency(stats?.total_revenue || 0)}
+            </span>
+            <span className="text-xs font-bold text-approve mt-2 flex items-center gap-1">
+              <TrendingUp size={12} /> Live from all enrollments
+            </span>
+          </div>
+        </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Revenue (Charged)</p>
-           <p className="mt-2 text-2xl font-bold text-gray-900">
-              {isLoading ? "..." : `₦${stats.revenue.toLocaleString()}`}
-           </p>
+        <div className="relative overflow-hidden group bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
+          <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:scale-110 transition-transform duration-500">
+            <Users size={120} />
+          </div>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-4 bg-indigo-50 rounded-2xl text-indigo-600">
+              <Users size={24} />
+            </div>
+            <span className="font-black uppercase tracking-[0.2em] text-[10px] text-gray-400">Total Students</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-4xl font-black text-gray-900">
+              {statsLoading ? "..." : stats?.total_students || 0}
+            </span>
+            <span className="text-xs font-bold text-gray-400 mt-2">Enrolled across all courses</span>
+          </div>
         </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Cash Collected</p>
-           <p className="mt-2 text-2xl font-bold text-green-600">
-              {isLoading ? "..." : `₦${stats.received.toLocaleString()}`}
-           </p>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Production Cost</p>
-           <p className="mt-2 text-2xl font-bold text-red-600">
-              {isLoading ? "..." : `₦${stats.cost.toLocaleString()}`}
-           </p>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm bg-gradient-to-br from-gray-900 to-black text-white">
-           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Net Profit</p>
-           <p className="mt-2 text-2xl font-bold text-white">
-              {isLoading ? "..." : `₦${stats.profit.toLocaleString()}`}
-           </p>
-           <p className="text-xs text-gray-400 mt-1">Based on Total Charged - Cost</p>
+
+        <div className="relative overflow-hidden group bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
+          <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:scale-110 transition-transform duration-500">
+            <GraduationCap size={120} />
+          </div>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-4 bg-amber-50 rounded-2xl text-amber-600">
+              <GraduationCap size={24} />
+            </div>
+            <span className="font-black uppercase tracking-[0.2em] text-[10px] text-gray-400">Total Enrollments</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-4xl font-black text-gray-900">
+              {statsLoading ? "..." : stats?.total_enrollments || 0}
+            </span>
+            <span className="text-xs font-bold text-gray-400 mt-2">Course registrations</span>
+          </div>
         </div>
       </div>
 
-      {/* Transactions Table */}
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-           <h3 className="font-bold text-gray-900">Transactions ({stats.count})</h3>
+      {/* Transactions Section */}
+      <div className="space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <h2 className="text-xl font-black text-gray-900 flex items-center gap-3">
+            <Receipt className="text-primary" />
+            Payment History
+          </h2>
+
+          <div className="flex items-center gap-3">
+             <div className="relative group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" size={18} />
+                <input 
+                  type="text" 
+                  placeholder="Search students or ref..." 
+                  className="pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-bold focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all w-64"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+             </div>
+             <div className="relative flex items-center bg-white border border-gray-200 rounded-2xl px-4 py-3 group focus-within:ring-4 focus-within:ring-primary/10 focus-within:border-primary transition-all">
+                <Filter className="text-gray-400" size={18} />
+                <select 
+                  className="bg-transparent text-sm font-bold outline-none border-none cursor-pointer pl-2"
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                >
+                  <option value="all">All Status</option>
+                  <option value="success">Success</option>
+                  <option value="pending">Pending</option>
+                  <option value="failed">Failed</option>
+                </select>
+             </div>
+          </div>
         </div>
-        <div className="overflow-x-auto">
-           <table className="w-full text-left text-sm">
-             <thead className="bg-white text-xs font-bold uppercase tracking-wider text-gray-500 border-b border-gray-100">
-               <tr>
-                 <th className="px-6 py-4">Date</th>
-                 <th className="px-6 py-4">Customer</th>
-                 <th className="px-6 py-4">Category</th>
-                 <th className="px-6 py-4 text-right">Charged</th>
-                 <th className="px-6 py-4 text-right">Paid</th>
-                 <th className="px-6 py-4 text-right">Cost</th>
-                 <th className="px-6 py-4 text-right">Profit</th>
-               </tr>
-             </thead>
-             <tbody className="divide-y divide-gray-50">
-               {isLoading && (
+
+        <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50/50 border-b border-gray-100">
+                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">Student & Course</th>
+                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">Transaction ID</th>
+                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">Amount</th>
+                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">Date</th>
+                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.25em] text-gray-400 text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {txLoading ? (
+                  Array.from({ length: 5 }).map((_, i) => (
+                    <tr key={i} className="animate-pulse">
+                      <td colSpan={5} className="px-8 py-6 h-20 bg-gray-50/30"></td>
+                    </tr>
+                  ))
+                ) : filteredTransactions?.length === 0 ? (
                   <tr>
-                     <td colSpan={7} className="px-6 py-8 text-center text-gray-400">Loading data...</td>
+                    <td colSpan={5} className="px-8 py-20 text-center">
+                      <div className="flex flex-col items-center gap-4 text-gray-400">
+                         <Receipt size={48} className="opacity-20" />
+                         <p className="font-black uppercase tracking-widest text-xs">No transactions found</p>
+                      </div>
+                    </td>
                   </tr>
-               )}
-               {tasks?.map((t: any) => {
-                 const revenue = Number(t.totalAmount) || 0;
-                 const cost = Number(t.productionCost) || 0;
-                 const paid = Number(t.amountPaid) || 0;
-                 const profit = revenue - cost;
-                 
-                 return (
-                   <tr key={t.id} className="hover:bg-gray-50 transition-colors">
-                     <td className="px-6 py-4 text-gray-600">
-                        {t.createdAt ? format(parseISO(t.createdAt), "MMM d, yyyy") : "-"}
-                     </td>
-                     <td className="px-6 py-4 font-medium text-gray-900">
-                        {t.customerName}
-                     </td>
-                     <td className="px-6 py-4">
-                        <span className="inline-block rounded-md bg-gray-100 px-2 py-1 text-xs font-bold text-gray-600 uppercase">
-                           {t.category}
-                        </span>
-                     </td>
-                     <td className="px-6 py-4 text-right font-medium text-gray-900">
-                        ₦{revenue.toLocaleString()}
-                     </td>
-                     <td className="px-6 py-4 text-right font-medium text-green-600">
-                        ₦{paid.toLocaleString()}
-                     </td>
-                     <td className="px-6 py-4 text-right font-medium text-red-600">
-                        -₦{cost.toLocaleString()}
-                     </td>
-                     <td className="px-6 py-4 text-right font-bold text-gray-900">
-                        ₦{profit.toLocaleString()}
-                     </td>
-                   </tr>
-                 );
-               })}
-               {!isLoading && tasks?.length === 0 && (
-                  <tr>
-                     <td colSpan={7} className="px-6 py-8 text-center text-gray-400">No transactions found for this period.</td>
-                  </tr>
-               )}
-             </tbody>
-           </table>
+                ) : (
+                  filteredTransactions?.map((tx: Transaction) => (
+                    <tr key={tx.id} className="hover:bg-gray-50/50 transition-colors group">
+                      <td className="px-8 py-6">
+                        <div className="flex flex-col">
+                          <span className="font-black text-gray-900">{tx.first_name} {tx.last_name}</span>
+                          <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{tx.course_title || 'General Payment'}</span>
+                        </div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="flex flex-col">
+                          <span className="font-mono text-xs font-medium text-gray-500">#{tx.reference || tx.id}</span>
+                          <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter">{tx.provider}</span>
+                        </div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <span className="font-black text-gray-900">{formatCurrency(tx.amount)}</span>
+                      </td>
+                      <td className="px-8 py-6">
+                        <span className="text-xs font-bold text-gray-500">{formatDate(tx.created_at)}</span>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="flex justify-center">
+                          <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                            tx.status === 'success' || tx.status === 'paid' 
+                              ? 'bg-approve/10 text-approve border border-approve/20' 
+                              : tx.status === 'failed' 
+                              ? 'bg-secondary/10 text-secondary border border-secondary/20'
+                              : 'bg-amber-50 text-amber-600 border border-amber-100'
+                          }`}>
+                            {tx.status}
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

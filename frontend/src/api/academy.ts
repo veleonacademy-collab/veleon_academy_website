@@ -95,4 +95,9 @@ export const academyApi = {
 
   deleteCurriculumItem: (id: number) => 
     http.delete(`/academy/admin/curriculum/${id}`).then(r => r.data),
+
+  getAdminFinance: () => http.get<any>("/academy/admin/finance").then(r => r.data),
+
+  getAdminTransactions: (params?: { studentId?: number; enrollmentId?: number }) =>
+    http.get<any[]>("/academy/admin/transactions", { params }).then(r => r.data),
 };

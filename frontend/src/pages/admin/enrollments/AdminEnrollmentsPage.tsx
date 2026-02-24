@@ -173,6 +173,7 @@ const AdminEnrollmentsPage: React.FC = () => {
                 <th className="px-6 py-4">Plan & Status</th>
                 <th className="px-6 py-4">Portal</th>
                 <th className="px-6 py-4">Tutor</th>
+                <th className="px-6 py-4 text-right">Total Paid</th>
                 <th className="px-6 py-4 text-right">Assign Tutor</th>
               </tr>
             </thead>
@@ -215,14 +216,17 @@ const AdminEnrollmentsPage: React.FC = () => {
                           {s.status}
                        </span>
                     </td>
-                    <td className="px-6 py-5 font-bold text-sm">
-                      {s.tutor_id ? (
-                        <div className="text-primary italic">@{s.tutor_first_name}</div>
-                      ) : (
-                        <div className="text-gray-300">Not assigned</div>
-                      )}
-                    </td>
-                    <td className="px-6 py-5 text-right">
+                      <td className="px-6 py-5 font-bold text-sm">
+                        {s.tutor_id ? (
+                          <div className="text-primary italic">@{s.tutor_first_name}</div>
+                        ) : (
+                          <div className="text-gray-300">Not assigned</div>
+                        )}
+                      </td>
+                      <td className="px-6 py-5 text-right font-black text-gray-900">
+                        {formatCurrency(s.total_paid || 0)}
+                      </td>
+                      <td className="px-6 py-5 text-right">
                       <select
                         className="rounded-xl border border-gray-200 px-4 py-2 text-xs font-bold uppercase tracking-widest focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all bg-white text-gray-700 disabled:opacity-50"
                         value={s.tutor_id || ""}

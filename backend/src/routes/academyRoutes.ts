@@ -151,6 +151,20 @@ academyRouter.get(
   AcademyController.getAdminRemarks
 );
 
+academyRouter.get(
+  "/admin/finance",
+  authenticate,
+  requireRole(["admin"]),
+  AcademyController.getAdminFinanceStats
+);
+
+academyRouter.get(
+  "/admin/transactions",
+  authenticate,
+  requireRole(["admin"]),
+  AcademyController.getAdminTransactions
+);
+
 // Curriculum routes
 academyRouter.get(
   "/curriculum/:courseId",

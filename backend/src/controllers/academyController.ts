@@ -544,4 +544,52 @@ export class AcademyController {
       next(error);
     }
   }
+
+  // --- FINANCE & TRANSACTIONS ---
+
+  static async getAdminFinanceStats(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await pool.query(`
+        SELECT 
+          COALESCE(SUM(total_paid), 0) as total_revenue,
+          COUNT(DISTINCT student_id) as total_students,
+          COUNT(*) as total_enrollments
+        FROM enrollments
+      `);
+      res.json(result.rows[0]);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getAdminTransactions(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { studentId, enrollmentId } = req.query;
+      let query = `
+        SELECT t.*, u.first_name, u.last_name, u.email, c.title as course_title
+        FROM transactions t
+        JOIN users u ON t.user_id = u.id
+        LEFT JOIN enrollments e ON t.enrollment_id = e.id
+        LEFT JOIN courses c ON e.course_id = c.id
+        WHERE 1=1
+      `;
+      const params = [];
+
+      if (studentId) {
+        params.push(studentId);
+        query += ` AND t.user_id = $${params.length}`;
+      }
+      if (enrollmentId) {
+        params.push(enrollmentId);
+        query += ` AND t.enrollment_id = $${params.length}`;
+      }
+
+      query += " ORDER BY t.created_at DESC";
+      
+      const result = await pool.query(query, params);
+      res.json(result.rows);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
