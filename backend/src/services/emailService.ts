@@ -46,6 +46,7 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
   try {
     const info = await transporter.sendMail({
       from: `"${env.email.fromName}" <${env.email.from}>`,
+      replyTo: env.email.from,
       to: options.to,
       subject: options.subject,
       text: options.text,
@@ -76,21 +77,30 @@ export async function sendStudentWelcomeEmail(
   const html = `
     <!DOCTYPE html>
     <html>
-      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-        <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h2 style="color: #00a9c0;">Welcome to Veleon Academy, ${firstName}!</h2>
-          <p>Your enrollment has been successfully processed. An account has been created for you.</p>
-          <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
-            <p><strong>Login Details:</strong></p>
-            <p>Email: ${email}</p>
-            <p>Temporary Password: <code style="background: #eee; padding: 2px 5px;">${password}</code></p>
+      <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0;">
+        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div style="background: linear-gradient(135deg, #00a9c0 0%, #007d8f 100%); padding: 40px 20px; text-align: center; color: white;">
+            <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Welcome to Veleon Academy!</h1>
+            <p style="margin-top: 10px; font-size: 18px; opacity: 0.9;">Your journey to tech excellence starts here</p>
           </div>
-          <p>You can access your courses, recordings, and assignments in your student portal.</p>
-          <p style="text-align: center;">
-            <a href="${portalUrl}" style="background-color: #00a9c0; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Go to Student Portal</a>
-          </p>
-          <p>Please change your password after your first login.</p>
-          <p>Best regards,<br>Veleon Academy Team</p>
+          <div style="padding: 40px 30px;">
+            <h2 style="color: #333; margin-bottom: 20px;">Hi ${firstName},</h2>
+            <p style="font-size: 16px; margin-bottom: 25px;">Your account has been successfully created. You can now access our premium tech courses, recordings, and assignments.</p>
+            
+            <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; border: 1px dashed #00a9c0; margin-bottom: 30px;">
+              <h3 style="margin-top: 0; color: #007d8f; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">Access Credentials</h3>
+              <p style="margin: 10px 0; font-family: monospace; font-size: 15px;"><strong>Email:</strong> ${email}</p>
+              <p style="margin: 10px 0; font-family: monospace; font-size: 15px;"><strong>Temporary Password:</strong> ${password}</p>
+            </div>
+
+            <p style="text-align: center;">
+              <a href="${portalUrl}" style="background-color: #00a9c0; color: white; padding: 14px 30px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-size: 16px;">Log In to Your Portal</a>
+            </p>
+            <p style="font-size: 14px; color: #888; margin-top: 30px; text-align: center;"><em>Please change your password after your first login for security.</em></p>
+          </div>
+          <div style="background: #fdfdfd; padding: 20px 30px; text-align: center; border-top: 1px solid #eee; color: #888; font-size: 14px;">
+            <p>&copy; ${new Date().getFullYear()} Veleon Academy. All rights reserved.</p>
+          </div>
         </div>
       </body>
     </html>
@@ -109,13 +119,14 @@ export async function sendStudentWelcomeEmail(
  */
 export async function sendRecordingNotificationEmail(
   email: string,
+  firstName: string,
   courseTitle: string,
   recordingTitle: string,
   recordingUrl: string
 ): Promise<void> {
   const html = `
     <div style="font-family: Arial, sans-serif;">
-      <h2>New Class Recording Available</h2>
+      <h2>Hi ${firstName}, New Class Recording Available</h2>
       <p>A new recording for <strong>${courseTitle}</strong> has been uploaded: <strong>${recordingTitle}</strong></p>
       <p>You can watch it now using the link below:</p>
       <p><a href="${recordingUrl}">Watch Recording</a></p>
@@ -135,6 +146,7 @@ export async function sendRecordingNotificationEmail(
  */
 export async function sendVerificationEmail(
   email: string,
+  firstName: string,
   token: string
 ): Promise<void> {
   const verificationUrl = `${env.appUrl}/verify-email?token=${token}`;
@@ -217,7 +229,7 @@ export async function sendVerificationEmail(
             <h1>🎉 Welcome!</h1>
           </div>
           <div class="content">
-            <p>Hello,</p>
+            <p>Hi ${firstName},</p>
             <p>Thank you for registering! Please verify your email address to activate your account.</p>
             <p>Click the button below to verify your email:</p>
             <div style="text-align: center;">
@@ -239,6 +251,8 @@ export async function sendVerificationEmail(
 
   const text = `
     Welcome!
+    
+    Hi ${firstName},
     
     Thank you for registering! Please verify your email address to activate your account.
     
@@ -263,6 +277,7 @@ export async function sendVerificationEmail(
  */
 export async function sendPasswordResetEmail(
   email: string,
+  firstName: string,
   token: string
 ): Promise<void> {
   const resetUrl = `${env.appUrl}/reset-password?token=${token}`;
@@ -352,7 +367,7 @@ export async function sendPasswordResetEmail(
             <h1>🔐 Password Reset</h1>
           </div>
           <div class="content">
-            <p>Hello,</p>
+            <p>Hi ${firstName},</p>
             <p>We received a request to reset your password. Click the button below to create a new password:</p>
             <div style="text-align: center;">
               <a href="${resetUrl}" class="button">Reset Password</a>
@@ -375,6 +390,8 @@ export async function sendPasswordResetEmail(
   const text = `
     Password Reset
     
+    Hi ${firstName},
+    
     We received a request to reset your password. Click the link below to create a new password:
     ${resetUrl}
     
@@ -388,5 +405,170 @@ export async function sendPasswordResetEmail(
     subject: "Reset Your Password",
     html,
     text,
+  });
+}
+
+/**
+ * Send enrollment confirmation email
+ */
+export async function sendEnrollmentConfirmationEmail(
+  email: string,
+  firstName: string,
+  courseTitle: string
+): Promise<void> {
+  const portalUrl = `${env.appUrl}/login`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0;">
+        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div style="background: linear-gradient(135deg, #00a9c0 0%, #007d8f 100%); padding: 40px 20px; text-align: center; color: white;">
+            <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Enrollment Confirmed!</h1>
+            <p style="margin-top: 10px; font-size: 18px; opacity: 0.9;">Welcome to your new learning journey</p>
+          </div>
+          <div style="padding: 40px 30px;">
+            <h2 style="color: #333; margin-bottom: 20px;">Hi ${firstName},</h2>
+            <p style="font-size: 16px; margin-bottom: 25px;">Congratulations! You have successfully enrolled in <strong>${courseTitle}</strong>. We are thrilled to have you as part of Veleon Academy.</p>
+            
+            <div style="background: #f8fcfd; border-radius: 8px; padding: 25px; border-left: 4px solid #00a9c0; margin-bottom: 30px;">
+              <h3 style="margin-top: 0; color: #007d8f; font-size: 18px;">What's Next?</h3>
+              <ul style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 10px;">Access your course materials and dashboard</li>
+                <li style="margin-bottom: 10px;">Check the class timetable</li>
+                <li style="margin-bottom: 10px;">Connect with your tutor and fellow students</li>
+              </ul>
+            </div>
+
+            <p style="text-align: center;">
+              <a href="${portalUrl}" style="background-color: #00a9c0; color: white; padding: 14px 30px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-size: 16px; transition: background 0.3s;">Access Student Portal</a>
+            </p>
+          </div>
+          <div style="background: #fdfdfd; padding: 20px 30px; text-align: center; border-top: 1px solid #eee; color: #888; font-size: 14px;">
+            <p>If you have any questions, feel free to reply to this email.</p>
+            <p style="margin-top: 10px;">&copy; ${new Date().getFullYear()} Veleon Academy. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await sendEmail({
+    to: email,
+    subject: `Enrollment Confirmed: ${courseTitle} - Veleon Academy`,
+    html,
+  });
+}
+
+/**
+ * Send payment receipt email
+ */
+export async function sendPaymentReceiptEmail(
+  email: string,
+  firstName: string,
+  amount: number,
+  currency: string,
+  description: string,
+  reference: string
+): Promise<void> {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0;">
+        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div style="background: #333; padding: 30px 20px; text-align: center; color: white;">
+            <h1 style="margin: 0; font-size: 24px;">Payment Receipt</h1>
+            <p style="margin-top: 5px; opacity: 0.8;">Thank you for your payment</p>
+          </div>
+          <div style="padding: 40px 30px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <div style="font-size: 48px; font-weight: 700; color: #00a9c0;">
+                ${currency} ${amount.toLocaleString()}
+              </div>
+              <p style="color: #888; margin-top: 5px;">Transaction Reference: ${reference}</p>
+            </div>
+
+            <div style="border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 20px 0; margin-bottom: 30px;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 10px 0; color: #888;">Name</td>
+                  <td style="padding: 10px 0; text-align: right; font-weight: 600;">${firstName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; color: #888;">Description</td>
+                  <td style="padding: 10px 0; text-align: right; font-weight: 600;">${description}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; color: #888;">Date</td>
+                  <td style="padding: 10px 0; text-align: right; font-weight: 600;">${new Date().toLocaleDateString()}</td>
+                </tr>
+              </table>
+            </div>
+
+            <p style="font-size: 14px; color: #888; text-align: center;">
+              This is an automated receipt for your payment to Veleon Academy. Please keep this for your records.
+            </p>
+          </div>
+          <div style="background: #fdfdfd; padding: 20px 30px; text-align: center; border-top: 1px solid #eee; color: #888; font-size: 14px;">
+            <p>&copy; ${new Date().getFullYear()} Veleon Academy. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await sendEmail({
+    to: email,
+    subject: `Payment Receipt: ${description}`,
+    html,
+  });
+}
+
+/**
+ * Send assignment notification email
+ */
+export async function sendAssignmentNotificationEmail(
+  email: string,
+  firstName: string,
+  courseTitle: string,
+  assignmentTitle: string,
+  dueDate: string
+): Promise<void> {
+  const portalUrl = `${env.appUrl}/login`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0;">
+        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div style="background: #d11c07; padding: 30px 20px; text-align: center; color: white;">
+            <h1 style="margin: 0; font-size: 24px;">New Assignment Posted</h1>
+            <p style="margin-top: 5px; opacity: 0.9;">Stay on track with your learning</p>
+          </div>
+          <div style="padding: 40px 30px;">
+            <h2 style="color: #333; margin-top: 0;">Hi ${firstName},</h2>
+            <p style="font-size: 16px;">A new assignment has recently been posted for your course: <strong>${courseTitle}</strong></p>
+            
+            <div style="background: #fff5f4; border-left: 4px solid #d11c07; padding: 20px; border-radius: 4px; margin: 25px 0;">
+              <h3 style="margin-top: 0; color: #d11c07;">${assignmentTitle}</h3>
+              <p style="margin-bottom: 0;"><strong>Due Date:</strong> ${new Date(dueDate).toLocaleDateString()}</p>
+            </div>
+
+            <p style="text-align: center; margin-top: 30px;">
+              <a href="${portalUrl}" style="background-color: #d11c07; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 600;">View Assignment in Portal</a>
+            </p>
+          </div>
+          <div style="background: #fdfdfd; padding: 20px 30px; text-align: center; border-top: 1px solid #eee; color: #888; font-size: 14px;">
+            <p>&copy; ${new Date().getFullYear()} Veleon Academy. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await sendEmail({
+    to: email,
+    subject: `New Assignment: ${courseTitle} - ${assignmentTitle}`,
+    html,
   });
 }

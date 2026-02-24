@@ -16,7 +16,8 @@ class SocketService {
   public connect(token: string): Socket {
     if (this.socket) return this.socket;
 
-    this.socket = io(import.meta.env.VITE_API_URL || "http://localhost:5000", {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL?.replace(/\/api$/, "") || "http://localhost:5003";
+    this.socket = io(apiUrl, {
       auth: { token },
       withCredentials: true,
     });

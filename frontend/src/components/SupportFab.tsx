@@ -3,6 +3,7 @@ import { MessageCircle, Phone, Smartphone, X, MessageSquare } from 'lucide-react
 import { EnquiryModal } from './EnquiryModal';
 import { useAuth } from '../state/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { SUPPORT_PHONE, WHATSAPP_NUMBER } from '../utils/constants';
 
 export const SupportFab = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,21 +30,21 @@ export const SupportFab = () => {
         {isOpen && (
           <div className="flex flex-col items-end gap-3 transition-all duration-200 animate-in slide-in-from-bottom-5 fade-in">
              {/* WhatsApp - Using a generic number/link */}
-             <a 
-               href="https://wa.me/" 
-               target="_blank"
-               rel="noreferrer"
-               className="flex items-center gap-2 rounded-full bg-green-500 px-4 py-2 text-white shadow-lg hover:bg-green-600 transition-transform hover:scale-105"
-             >
+              <a 
+                href={`https://wa.me/${WHATSAPP_NUMBER}`} 
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 rounded-full bg-green-500 px-4 py-2 text-white shadow-lg hover:bg-green-600 transition-transform hover:scale-105"
+              >
                <span className="text-sm font-medium">WhatsApp</span>
                <Smartphone size={18} />
              </a>
              
              {/* Call */}
-             <a 
-               href="tel:+1234567890" 
-               className="flex items-center gap-2 rounded-full bg-blue-500 px-4 py-2 text-white shadow-lg hover:bg-blue-600 transition-transform hover:scale-105"
-             >
+              <a 
+                href={`tel:${SUPPORT_PHONE}`} 
+                className="flex items-center gap-2 rounded-full bg-blue-500 px-4 py-2 text-white shadow-lg hover:bg-blue-600 transition-transform hover:scale-105"
+              >
                <span className="text-sm font-medium">Call Us</span>
                <Phone size={18} />
              </a>

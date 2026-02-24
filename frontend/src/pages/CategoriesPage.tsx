@@ -19,7 +19,7 @@ const CategoriesPage: React.FC = () => {
             All <span className="text-primary italic">Categories</span>
           </h1>
           <p className="text-muted-foreground">
-            Explore our collections by category.
+            Explore our curriculum by technology.
           </p>
         </div>
       </div>
@@ -50,7 +50,7 @@ const CategoriesPage: React.FC = () => {
                   )}
                 </div>
                 <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-primary opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
-                  EXPLORE COLLECTION
+                  EXPLORE COURSES
                   <svg
                     className="h-4 w-4"
                     fill="none"

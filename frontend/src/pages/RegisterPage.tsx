@@ -111,13 +111,13 @@ const RegisterPage: React.FC = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-6 shadow">
-        <h1 className="mb-4 text-xl font-semibold">Create an account</h1>
+      <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
+        <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>
         {validationError && (
           <p className="mb-3 text-xs text-destructive">{validationError}</p>
         )}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex gap-3">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+          <div className="flex gap-2 sm:gap-3">
             <div className="flex-1 space-y-1">
               <Label htmlFor="firstName">First name</Label>
               <Input
@@ -173,7 +173,7 @@ const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={registerMutation.isPending}
-            className="flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex w-full items-center justify-center rounded-xl bg-primary px-4 py-3 sm:py-2.5 text-sm font-bold text-white tracking-widest hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 shadow-lg shadow-primary/20 transition-all active:scale-[0.98] uppercase"
           >
             {registerMutation.isPending
               ? "Creating account..."
@@ -194,7 +194,7 @@ const RegisterPage: React.FC = () => {
           />
         </div>
 
-        {verificationLink && (
+        {/* {verificationLink && (
           <div className="mt-4 break-all rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-3 text-xs">
             <p className="font-medium text-yellow-600 dark:text-yellow-400 mb-1">
               Dev Mode: Verification Link
@@ -208,10 +208,10 @@ const RegisterPage: React.FC = () => {
               {verificationLink}
             </a>
           </div>
-        )}
-        <p className="mt-4 text-xs text-muted-foreground">
+        )} */}
+        <p className="mt-4 text-[10px] sm:text-xs text-muted-foreground text-center">
           Already have an account?{" "}
-          <Link to="/login" state={location.state} className="text-primary hover:underline">
+          <Link to="/login" state={location.state} className="text-primary font-bold hover:underline">
             Sign in
           </Link>
         </p>
@@ -238,14 +238,14 @@ const RegisterPage: React.FC = () => {
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">
               Please check your inbox and click the verification link to
-              activate your account.
+              activate your account. If you don't see it, please <strong>check your spam folder</strong>.
             </p>
             <p className="text-xs text-muted-foreground">
               Didn't receive the email?
             </p>
           </div>
 
-          {verificationLink && (
+          {/* {verificationLink && (
             <div className="rounded-lg bg-primary/5 border border-primary/10 p-4 space-y-2">
               <p className="text-xs font-semibold text-primary">
                 Immediate Verification Link (Dev):
@@ -261,7 +261,7 @@ const RegisterPage: React.FC = () => {
                 </a>
               </div>
             </div>
-          )}
+          )} */}
 
           <button
             onClick={handleResendVerification}

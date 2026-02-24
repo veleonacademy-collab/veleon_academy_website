@@ -47,10 +47,10 @@ export const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 md:py-20 bg-zinc-50 border-y border-zinc-200 overflow-hidden">
+    <section className="py-10 md:py-20 bg-zinc-50 border-y border-zinc-200 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4">
         
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white border border-zinc-200 shadow-sm mb-4">
             <div className="flex -space-x-2">
                {[1,2,3].map(i => (
@@ -61,7 +61,7 @@ export const TestimonialsSection: React.FC = () => {
             </div>
             <span className="text-[10px] md:text-xs font-bold uppercase tracking-wide text-zinc-600">Trusted by 500+ Customers</span>
           </div>
-          <h2 className="text-2xl md:text-5xl font-black tracking-tighter text-zinc-900 uppercase">
+          <h2 className="text-xl sm:text-3xl md:text-5xl font-black tracking-tighter text-zinc-900 uppercase leading-[1.1]">
             Stories from the <span className="text-primary italic">Community</span>
           </h2>
         </div>
@@ -131,12 +131,12 @@ export const TestimonialsSection: React.FC = () => {
             </div>
         </div>
         
-        <div className="mt-10 md:mt-16 text-center">
-             <div className="inline-block p-6 rounded-2xl bg-primary/5 border border-primary/10">
+        <div className="mt-8 md:mt-16 text-center">
+             <div className="inline-block p-5 sm:p-8 rounded-2xl bg-primary/5 border border-primary/10 w-full sm:w-auto">
                 <h3 className="text-lg md:text-xl font-bold text-zinc-900 mb-2">Ready to join them?</h3>
-                <p className="text-zinc-600 mb-6 text-sm">Experience the premium service and quality for yourself.</p>
-                <a href="#collections" className="inline-flex items-center justify-center rounded-full bg-black px-8 py-3 text-xs font-bold uppercase tracking-widest text-white hover:bg-zinc-800 transition-colors">
-                    Shop Now
+                <p className="text-zinc-600 mb-4 sm:mb-6 text-sm">Experience the premium service and quality for yourself.</p>
+                <a href="#courses" className="inline-flex items-center justify-center rounded-full bg-black px-8 py-3 text-xs font-bold uppercase tracking-widest text-white hover:bg-zinc-800 transition-colors">
+                    Enroll Now
                 </a>
              </div>
         </div>

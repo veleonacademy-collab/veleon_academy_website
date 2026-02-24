@@ -5,13 +5,16 @@ import { useAuth } from "../state/AuthContext";
 import { socketService } from "../lib/socket";
 import { getStoredTokens } from "../utils/tokenStorage";
 import { SupportFab } from "./SupportFab";
-import { APP_NAME, SUPPORT_EMAIL } from "../utils/constants";
+import { APP_NAME, SUPPORT_EMAIL, INSTAGRAM_URL, TIKTOK_URL } from "../utils/constants";
+import { EnquiryModal } from "./EnquiryModal";
+import { Instagram, Music2, MessageSquare } from "lucide-react";
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, clearAuth } = useAuth();
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   React.useEffect(() => {
     if (user) {
@@ -29,7 +32,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <header className="border-b border-gray-200 bg-white/80 backdrop-blur sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link to="/" className="text-lg font-semibold text-primary">
-            {APP_NAME}
+            {/* {APP_NAME} */}
+            <img src="/veleonacademy_logo.png" alt="Logo" className="h-12" />
           </Link>
 
           {/* Mobile Menu Button */}
@@ -179,20 +183,37 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             <ul className="space-y-2 text-sm text-gray-600">
               <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li><a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-primary transition-colors">Contact</a></li>
+              <li>
+                <button 
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="hover:text-primary transition-colors text-left"
+                >
+                  Contact
+                </button>
+              </li>
             </ul>
           </div>
         </div>
         <div className="mx-auto max-w-6xl px-6 mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
           <p>© {new Date().getFullYear()} {APP_NAME}. All rights reserved.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-             <span>Twitter</span>
-             <span>GitHub</span>
-             <span>Discord</span>
+          <div className="flex gap-6 mt-4 md:mt-0">
+             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#E4405F] transition-colors" title="Instagram">
+               <Instagram size={18} />
+             </a>
+             <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-black transition-colors" title="TikTok">
+               <Music2 size={18} />
+             </a>
+             <a href="#" className="text-gray-400 hover:text-[#5865F2] transition-colors" title="Discord">
+               <MessageSquare size={18} />
+             </a>
           </div>
         </div>
       </footer>
       <SupportFab />
+      <EnquiryModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </div>
   );
 };

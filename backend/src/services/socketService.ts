@@ -19,7 +19,7 @@ export class SocketService {
     return SocketService.instance;
   }
 
-  public initialize(httpServer: HttpServer, allowedOrigin: string): void {
+  public initialize(httpServer: HttpServer, allowedOrigin: string | string[]): void {
     this.io = new Server(httpServer, {
       cors: {
         origin: allowedOrigin,

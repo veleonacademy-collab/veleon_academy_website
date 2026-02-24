@@ -124,8 +124,8 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-6 shadow">
-      <h1 className="mb-4 text-xl font-semibold">Login</h1>
+    <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
+      <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
       {error && (
         <div className="mb-3 space-y-2">
           <p className="text-xs text-destructive">{error}</p>
@@ -142,7 +142,7 @@ const LoginPage: React.FC = () => {
           )}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -173,7 +173,7 @@ const LoginPage: React.FC = () => {
         <button
           type="submit"
           disabled={loginMutation.isPending}
-          className="flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex w-full items-center justify-center rounded-xl bg-primary px-4 py-3 sm:py-2.5 text-sm font-bold text-white tracking-widest hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 shadow-lg shadow-primary/20 transition-all active:scale-[0.98] uppercase"
         >
           {loginMutation.isPending ? "Signing in..." : "Sign in"}
         </button>
@@ -190,9 +190,9 @@ const LoginPage: React.FC = () => {
           width="100%"
         />
       </div>
-      <p className="mt-4 text-xs text-muted-foreground">
+      <p className="mt-4 text-[10px] sm:text-xs text-muted-foreground text-center">
         Don&apos;t have an account?{" "}
-        <Link to="/register" state={location.state} className="text-primary hover:underline">
+        <Link to="/register" state={location.state} className="text-primary font-bold hover:underline">
           Sign up
         </Link>
       </p>

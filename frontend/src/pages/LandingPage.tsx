@@ -3,12 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import AdSection from "../components/AdSection";
 import { TestimonialsSection } from "../components/TestimonialsSection";
-import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sparkles } from "lucide-react";
+import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sparkles, Briefcase, CheckCircle, Target, BrainCircuit } from "lucide-react";
 import { academyApi } from "../api/academy";
 import { formatCurrency } from "../utils/formatUtils";
+import { useAuth } from "../state/AuthContext";
 
 
 const LandingPage: React.FC = () => {
+  const { user } = useAuth();
   const { data: courses, isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: academyApi.getCourses,
@@ -60,9 +62,9 @@ const LandingPage: React.FC = () => {
   ];
   
   return (
-    <div className="space-y-12 pb-20">
+    <div className="space-y-8 sm:space-y-12 pb-10 sm:pb-20">
       {/* Hero Section */}
-      <section className="relative h-[80vh] w-full overflow-hidden">
+      <section className="relative min-h-[70vh] sm:h-[80vh] w-full overflow-hidden flex items-center">
         <div className="absolute inset-0 bg-slate-900">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/10" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -72,19 +74,47 @@ const LandingPage: React.FC = () => {
             <Sparkles className="h-3 w-3" />
             Empowering Tech Leaders
           </div>
-          <h1 className="font-heading text-5xl sm:text-7xl md:text-8xl font-black text-white tracking-tighter mb-6 leading-[0.9]">
+          <h1 className="font-heading text-4xl sm:text-7xl md:text-7xl font-black text-white tracking-tighter mb-4 sm:mb-6 leading-[0.95] sm:leading-[0.9]">
             MASTER THE <span className="text-primary">FUTURE</span> OF TECHNOLOGY
           </h1>
-          <p className="max-w-2xl text-lg md:text-xl text-slate-300 mb-10 font-medium">
+          <p className="max-w-2xl text-base sm:text-lg md:text-xl text-slate-300 mb-8 sm:mb-10 font-medium px-2">
             Join Veleon Academy. Industry-led training in Software Engineering, Data Analytics, and Data Science. From Zero to Job-Ready.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-             <Link
-                to="/register"
-                className="w-full sm:w-auto rounded-xl bg-primary text-white px-10 py-5 font-bold text-sm tracking-widest hover:bg-primary/90 transition-all duration-300 shadow-2xl shadow-primary/20 hover:scale-105"
-            >
-                REGISTER NOW
-            </Link>
+
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8 sm:mb-12 max-w-4xl animate-fade-in-up">
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+              <div className="bg-primary/20 p-1 rounded-full"><BrainCircuit className="h-4 w-4 text-primary" /></div>
+              <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">AI Leverage</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+              <div className="bg-blue-500/20 p-1 rounded-full"><Target className="h-4 w-4 text-blue-400" /></div>
+              <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">Career Positioning</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+              <div className="bg-green-500/20 p-1 rounded-full"><Users className="h-4 w-4 text-green-400" /></div>
+              <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">10:1 Student-Tutor Ratio</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+              <div className="bg-purple-500/20 p-1 rounded-full"><Award className="h-4 w-4 text-purple-400" /></div>
+              <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">Resume & Presentation</span>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto text-center ">
+             {user ? (
+               <a
+                  href="#courses"
+                  className="w-full sm:w-auto rounded-xl bg-primary text-white px-10 py-5 font-bold text-sm tracking-widest hover:bg-primary/90 transition-all duration-300 shadow-2xl shadow-primary/20 hover:scale-105"
+               >
+                  REGISTER NOW
+               </a>
+             ) : (
+               <Link
+                  to="/register"
+                  className="w-full sm:w-auto rounded-xl bg-primary text-white px-10 py-5 font-bold text-sm tracking-widest hover:bg-primary/90 transition-all duration-300 shadow-2xl shadow-primary/20 hover:scale-105"
+               >
+                  REGISTER NOW
+               </Link>
+             )}
              <a
                 href="#courses"
                 className="w-full sm:w-auto rounded-xl border border-slate-700 bg-slate-800/50 backdrop-blur-sm text-white px-10 py-5 font-bold text-sm tracking-widest hover:bg-slate-700 transition-all duration-300"
@@ -96,12 +126,12 @@ const LandingPage: React.FC = () => {
       </section>
       
       {/* Featured Learning Path */}
-      <section className="mx-auto max-w-7xl px-4 -mt-16 relative z-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="mx-auto max-w-7xl px-4 -mt-10 sm:-mt-16 relative z-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {featuredCourses.map((fc) => (
                 <div
                     key={fc.name}
-                    className="flex flex-col p-8 rounded-2xl border bg-white shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-primary/10 transition-all hover:-translate-y-2 group"
+                    className="flex flex-col p-6 sm:p-8 rounded-2xl border bg-white shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-primary/10 transition-all hover:-translate-y-2 group"
                 >
                     <div className={`h-14 w-14 rounded-2xl ${fc.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                         <fc.icon className="h-7 w-7" />
@@ -119,10 +149,10 @@ const LandingPage: React.FC = () => {
 
 
       {/* Courses Grid */}
-      <section id="courses" className="mx-auto max-w-7xl px-4 space-y-12">
-        <div className="text-center space-y-4">
-            <h2 className="text-4xl font-black text-slate-900 tracking-tight">Available <span className="text-primary italic">Programs</span></h2>
-            <p className="text-slate-500 max-w-2xl mx-auto">Choose from our curriculum designed by industry experts to get you hired.</p>
+      <section id="courses" className="mx-auto max-w-7xl px-4 space-y-8 sm:space-y-12">
+        <div className="text-center space-y-3 sm:space-y-4">
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Available <span className="text-primary italic">Programs</span></h2>
+            <p className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto">Choose from our curriculum designed by industry experts to get you hired.</p>
         </div>
 
         {isLoading ? (
@@ -143,12 +173,12 @@ const LandingPage: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                     <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-2xl font-bold text-slate-900 leading-tight">{course.title}</h3>
-                        <span className="text-primary font-black text-xl">{formatCurrency(course.price)}</span>
+                        <h3 className="text-xl sm:text-xl font-bold text-slate-900 leading-tight">{course.title}</h3>
+                        <span className="text-primary font-black text-lg sm:text-xl">{formatCurrency(course.price)}</span>
                     </div>
-                    <p className="text-slate-600 line-clamp-2 text-sm mb-8">{course.description}</p>
+                    <p className="text-slate-600 line-clamp-2 text-xs sm:text-sm mb-6 sm:mb-8">{course.description}</p>
                     <div className="flex items-center justify-between pt-6 border-t border-slate-100">
                         <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
                             <Users className="h-4 w-4" />
@@ -178,12 +208,12 @@ const LandingPage: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                     <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-2xl font-bold text-slate-900 leading-tight">{course.title}</h3>
-                        <span className="text-primary font-black text-xl">{formatCurrency(course.price)}</span>
+                        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">{course.title}</h3>
+                        <span className="text-primary font-black text-lg sm:text-xl">{formatCurrency(course.price)}</span>
                     </div>
-                    <p className="text-slate-600 line-clamp-2 text-sm mb-8">{course.description}</p>
+                    <p className="text-slate-600 line-clamp-2 text-xs sm:text-sm mb-6 sm:mb-8">{course.description}</p>
                     <div className="flex items-center justify-between pt-6 border-t border-slate-100">
                         <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
                             <Users className="h-4 w-4" />
@@ -204,10 +234,10 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-slate-50 py-24">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-                <h2 className="text-4xl font-black text-slate-900 leading-[1.1]">Why Students Choose <span className="text-primary">Veleon Academy</span></h2>
+      <section className="bg-slate-50 py-12 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div className="space-y-6 sm:space-y-8">
+                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-[1.15] sm:leading-[1.1]">Why Students Choose <span className="text-primary">Veleon Academy</span></h2>
                 <div className="space-y-6">
                     <div className="flex gap-4">
                         <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
@@ -236,9 +266,27 @@ const LandingPage: React.FC = () => {
                             <p className="text-sm text-slate-500">Get access to our mentorship community even after graduation.</p>
                         </div>
                     </div>
+                    <div className="flex gap-4">
+                        <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+                            <Briefcase className="h-5 w-5" />
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-slate-900">Career & AI Readiness</h4>
+                            <p className="text-sm text-slate-500">Learn presentation, resume writing, career positioning, and how to leverage AI in this evolving ecosystem.</p>
+                        </div>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
+                            <Target className="h-5 w-5" />
+                        </div>
+                        <div>
+                            <h4 className="font-bold text-slate-900">10:1 Personalized Monitoring</h4>
+                            <p className="text-sm text-slate-500">Max 10 students per tutor ensuring proper monitoring, interaction, and personalized growth.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="relative">
+            <div className="relative mt-8 md:mt-0">
                 <div className="aspect-square rounded-3xl bg-primary/20 absolute -top-4 -right-4 -z-10" />
                 <img 
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
@@ -249,8 +297,8 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Social Proof Section */}
-      <TestimonialsSection />
+      {/* Social Proof Section - Hidden until tech-related testimonials are ready */}
+      {/* <TestimonialsSection /> */}
     </div>
   );
 };

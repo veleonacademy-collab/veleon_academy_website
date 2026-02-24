@@ -216,9 +216,9 @@ const StudentDashboardPage: React.FC = () => {
           >
             <MessageSquare className="h-3.5 w-3.5" /> Support
           </button>
-          <Link to="/" className="flex items-center gap-1.5 bg-primary text-white px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:opacity-90 transition-all shadow-md shadow-primary/20">
+          {/* <Link to="/" className="flex items-center gap-1.5 bg-primary text-white px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:opacity-90 transition-all shadow-md shadow-primary/20">
             Courses <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -241,23 +241,42 @@ const StudentDashboardPage: React.FC = () => {
         <div className="space-y-5">
 
           {/* ── Stats — 2×2 on mobile, 4-col on desktop ── */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { icon: <CheckCircle2 className="h-5 w-5" />, color: "text-approve bg-approve/10", label: "Paid", value: formatCurrency(stats?.totalPaid || 0) },
-              { icon: <Clock className="h-5 w-5" />,        color: "text-secondary bg-secondary/10", label: "Balance", value: formatCurrency(stats?.totalRemaining || 0) },
-              { icon: <CreditCard className="h-5 w-5" />,   color: "text-secondary bg-secondary/10", label: "Next Due", value: formatCurrency(stats?.nextPaymentAmount || 0) },
-              { icon: <Calendar className="h-5 w-5" />,     color: "text-primary bg-primary/10", label: "Due Date", value: stats?.nextPaymentDate ? new Date(stats.nextPaymentDate).toLocaleDateString("en-GB", {day:"2-digit", month:"short"}) : "Paid Off" },
-            ].map((s, i) => (
-              <div key={i} className="bg-white p-4 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-sm">
-                <div className={`h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 ${s.color}`}>
-                  {s.icon}
+          <div className="bg-slate-900 rounded-2xl p-px shadow-lg shadow-slate-200/50">
+            <div className="bg-white rounded-[calc(1rem-1px)] p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-10">
+                <div className="text-center md:text-left">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Total Paid</p>
+                  <p className="text-lg font-black text-slate-900">{formatCurrency(stats?.totalPaid || 0)}</p>
                 </div>
-                <div className="min-w-0">
-                  <span className="block text-base sm:text-lg font-black text-slate-900 leading-tight truncate">{s.value}</span>
-                  <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{s.label}</span>
+                <div className="h-8 w-px bg-slate-100 hidden md:block" />
+                <div className="text-center md:text-left">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Remaining</p>
+                  <p className="text-lg font-black text-secondary">{formatCurrency(stats?.totalRemaining || 0)}</p>
+                </div>
+                <div className="h-8 w-px bg-slate-100 hidden md:block" />
+                <div className="text-center md:text-left">
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Next Settlement</p>
+                  <div className="flex items-baseline gap-2">
+                    <p className="text-lg font-black text-slate-900">{formatCurrency(stats?.nextPaymentAmount || 0)}</p>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase">
+                      {stats?.nextPaymentDate ? `Due ${new Date(stats.nextPaymentDate).toLocaleDateString("en-GB", {day:"2-digit", month:"short"})}` : "Paid"}
+                    </span>
+                  </div>
                 </div>
               </div>
-            ))}
+              {stats?.totalRemaining > 0 && (
+                <button 
+                  onClick={() => {
+                    const nextEnr = enrollments.find((e: any) => e.totalPaid < e.course_price);
+                    if (nextEnr) setPaymentModal(nextEnr);
+                    else if (enrollments.length > 0) setPaymentModal(enrollments[0]);
+                  }}
+                  className="w-full md:w-auto bg-slate-900 text-white px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-lg shadow-primary/10"
+                >
+                  SETTLE BALANCE
+                </button>
+              )}
+            </div>
           </div>
 
           {/* ── Course Cards ── */}
@@ -332,13 +351,13 @@ const StudentDashboardPage: React.FC = () => {
 
                       {/* Nav buttons */}
                       <div className="grid grid-cols-3 gap-1.5">
-                        <Link to={`/academy/course/${enrollment.courseId}`}
+                        {/* <Link to={`/academy/course/${enrollment.courseId}`}
                           className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-primary hover:text-white transition-all font-black text-[8px] uppercase tracking-widest text-center">
                           <PlayCircle className="h-3.5 w-3.5" /> Home
-                        </Link>
+                        </Link> */}
                         <Link to={`/academy/course/${enrollment.courseId}#assignments`}
-                          className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-secondary hover:text-white transition-all font-black text-[8px] uppercase tracking-widest text-center">
-                          <FileText className="h-3.5 w-3.5" /> Tasks
+                          className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-secondary hover:text-white transition-all font-black text-[8px] uppercase  text-center">
+                          <FileText className="h-3.5 w-3.5" /> Class and Tasks
                         </Link>
                         {enrollment.timetable_url ? (
                           <a href={enrollment.timetable_url.includes("cloudinary.com") && enrollment.timetable_url.includes("/upload/")
@@ -346,7 +365,7 @@ const StudentDashboardPage: React.FC = () => {
                               : enrollment.timetable_url}
                             target="_blank" rel="noreferrer" download
                             className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-900 hover:text-white transition-all font-black text-[8px] uppercase tracking-widest text-center">
-                            <Calendar className="h-3.5 w-3.5" /> Class
+                            <Calendar className="h-3.5 w-3.5" /> TimeTable
                           </a>
                         ) : (
                           <div className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50/50 text-slate-300 font-black text-[8px] uppercase tracking-widest text-center">

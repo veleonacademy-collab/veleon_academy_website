@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AcademyService } from "../services/academyService.js";
 import { pool } from "../database/pool.js";
-import { sendRecordingNotificationEmail } from "../services/emailService.js";
+import { sendRecordingNotificationEmail, sendAssignmentNotificationEmail } from "../services/emailService.js";
 
 export class AcademyController {
   // --- COURSE MANAGEMENT (Admin/Tutor) ---
@@ -69,12 +69,12 @@ export class AcademyController {
 
       // Notify all enrolled students
       const studentsRes = await pool.query(
-        "SELECT u.email FROM enrollments e JOIN users u ON e.student_id = u.id WHERE e.course_id = $1",
+        "SELECT u.email, u.first_name FROM enrollments e JOIN users u ON e.student_id = u.id WHERE e.course_id = $1",
         [courseId]
       );
 
       for (const student of studentsRes.rows) {
-        await sendRecordingNotificationEmail(student.email, courseTitle, title, videoUrl);
+        await sendRecordingNotificationEmail(student.email, student.first_name, courseTitle, title, videoUrl);
       }
 
       res.status(201).json(recording);
@@ -95,7 +95,26 @@ export class AcademyController {
          VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
         [courseId, tutorId, title, description, fileUrl, dueDate]
       );
-      res.status(201).json(result.rows[0]);
+      const assignment = result.rows[0];
+
+      // Notify all enrolled students
+      try {
+        const courseRes = await pool.query("SELECT title FROM courses WHERE id = $1", [courseId]);
+        const courseTitle = courseRes.rows[0]?.title || "Course";
+
+        const studentsRes = await pool.query(
+          "SELECT u.email, u.first_name FROM enrollments e JOIN users u ON e.student_id = u.id WHERE e.course_id = $1",
+          [courseId]
+        );
+
+        for (const student of studentsRes.rows) {
+          await sendAssignmentNotificationEmail(student.email, student.first_name, courseTitle, title, dueDate);
+        }
+      } catch (err) {
+        console.error(`Failed to send assignment notifications: ${err}`);
+      }
+
+      res.status(201).json(assignment);
     } catch (error) {
       next(error);
     }

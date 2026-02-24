@@ -175,25 +175,25 @@ const CourseDetailPage: React.FC = () => {
                  <div className="divide-y divide-slate-100">
                     {curriculum.length > 0 ? (
                         curriculum.map((item: any) => (
-                            <div key={item.id} className="p-8 flex items-start gap-6 hover:bg-slate-50 transition-colors group">
-                                <div className={`mt-1 h-6 w-6 rounded-full flex items-center justify-center flex-shrink-0 ${
+                            <div key={item.id} className="p-4 sm:p-5 flex items-start gap-4 hover:bg-slate-50 transition-colors group">
+                                <div className={`mt-1 h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0 ${
                                     item.is_completed 
                                         ? "bg-approve text-white" 
                                         : "bg-slate-100 text-slate-300"
                                 }`}>
-                                    <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                    <svg className="h-3 w-3 fill-current" viewBox="0 0 20 20">
                                         <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <div className="flex items-center gap-3 mb-1">
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-0.5">
                                         <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Topic #{item.order_index}</span>
                                         {item.is_completed && <span className="text-[10px] font-black text-approve uppercase tracking-widest">Completed</span>}
                                     </div>
-                                    <h4 className={`text-xl font-bold mb-2 ${item.is_completed ? "text-slate-400" : "text-slate-900"} transition-all`}>
+                                    <h4 className={`text-base font-bold mb-1 ${item.is_completed ? "text-slate-400" : "text-slate-900"} transition-all`}>
                                         {item.title}
                                     </h4>
-                                    <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">{item.content}</p>
+                                    <p className="text-slate-400 text-xs leading-relaxed max-w-2xl">{item.content}</p>
                                 </div>
                             </div>
                         ))
@@ -208,18 +208,20 @@ const CourseDetailPage: React.FC = () => {
               <div className="grid gap-4">
                   {assignments.length > 0 ? (
                       assignments.map((a: any) => (
-                        <div key={a.id} className="bg-white p-8 rounded-2xl border border-slate-100 hover:border-secondary transition-all">
-                             <div className="flex justify-between items-start mb-4">
-                                 <h4 className="text-xl font-bold text-slate-900">{a.title}</h4>
-                                 <div className="text-right">
-                                    <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Due Date</div>
-                                    <div className="text-sm font-bold text-secondary">{new Date(a.due_date).toLocaleDateString()}</div>
+                        <div key={a.id} className="bg-white p-5 rounded-2xl border border-slate-100 hover:border-secondary transition-all">
+                             <div className="flex justify-between items-start mb-3">
+                                 <div>
+                                    <h4 className="text-lg font-bold text-slate-900 mb-1">{a.title}</h4>
+                                    <div className="flex items-center gap-2">
+                                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Due Date:</span>
+                                       <span className="text-xs font-bold text-secondary">{new Date(a.due_date).toLocaleDateString()}</span>
+                                    </div>
                                  </div>
                              </div>
-                             <p className="text-slate-500 text-sm mb-6 leading-relaxed">{a.description}</p>
+                             <p className="text-slate-500 text-xs mb-5 leading-relaxed">{a.description}</p>
                              {a.file_url && (
-                                <a href={a.file_url} className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 text-slate-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors">
-                                    <FileText className="h-4 w-4" /> Download Resource
+                                <a href={a.file_url} className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-50 text-slate-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors border border-slate-100">
+                                    <FileText className="h-3.5 w-3.5" /> Resource
                                 </a>
                              )}
                         </div>

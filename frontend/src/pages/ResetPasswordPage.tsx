@@ -53,12 +53,12 @@ const ResetPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto max-w-md rounded-xl border border-border bg-card p-6 shadow">
-      <h1 className="mb-4 text-xl font-semibold">Reset password</h1>
+    <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
+      <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Reset password</h1>
       {validationError && (
         <p className="mb-3 text-xs text-destructive">{validationError}</p>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         <div className="space-y-1">
           <Label htmlFor="password">New password</Label>
           <Input
@@ -82,7 +82,7 @@ const ResetPasswordPage: React.FC = () => {
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex w-full items-center justify-center rounded-xl bg-primary px-4 py-3 sm:py-2.5 text-sm font-bold text-white tracking-widest hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 shadow-lg shadow-primary/20 transition-all active:scale-[0.98] uppercase"
         >
           {mutation.isPending ? "Resetting..." : "Reset password"}
         </button>

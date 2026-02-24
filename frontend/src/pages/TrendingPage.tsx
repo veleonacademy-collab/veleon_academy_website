@@ -125,7 +125,7 @@ const TrendingPage: React.FC = () => {
                         to={`/item/${trend.data.id}`}
                         className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-primary hover:text-black transition-colors"
                       >
-                        Shop This Style <span className="ml-2 text-xl">→</span>
+                        Explore Course <span className="ml-2 text-xl">→</span>
                       </Link>
                     ) : (
                       <a

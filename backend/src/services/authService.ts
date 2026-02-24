@@ -95,7 +95,7 @@ export async function registerUser(input: unknown): Promise<string> {
 
     // Send verification email (outside transaction)
     try {
-      await sendVerificationEmail(data.email, verificationToken);
+      await sendVerificationEmail(data.email, data.firstName, verificationToken);
     } catch (error) {
       console.error("Failed to send verification email:", error);
       console.log(`Email verification link: ${env.appUrl}/verify-email?token=${verificationToken}`);
@@ -254,8 +254,8 @@ export async function requestPasswordReset(email: string): Promise<void> {
   );
 
   // Send password reset email
-  try {
-    await sendPasswordResetEmail(email, token);
+    try {
+    await sendPasswordResetEmail(email, user.first_name, token);
   } catch (error) {
     // Log error but don't fail the request
     console.error("Failed to send password reset email:", error);
@@ -457,7 +457,7 @@ export async function resendVerificationEmail(email: string): Promise<string> {
 
   // Send verification email
   try {
-    await sendVerificationEmail(email, verificationToken);
+    await sendVerificationEmail(email, user.first_name, verificationToken);
   } catch (error) {
     // Log error but don't fail the request
     console.error("Failed to send verification email:", error);

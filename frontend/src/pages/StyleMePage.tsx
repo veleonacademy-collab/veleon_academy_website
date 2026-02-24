@@ -108,8 +108,8 @@ const StyleMePage: React.FC = () => {
         <BackButton />
       </div>
       <section className="text-center space-y-4 max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">STYLE <span className="text-primary italic">STUDIO</span></h1>
-        <p className="text-gray-500 text-lg">Experiment with colors, match your favorites, and visualize your future self.</p>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter">PORTFOLIO <span className="text-primary italic">STUDIO</span></h1>
+        <p className="text-gray-500 text-lg">Experiment with design systems, visualize your projects, and build your digital identity.</p>
       </section>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -182,8 +182,8 @@ const StyleMePage: React.FC = () => {
                ) : (
                   <div className="text-center p-8 space-y-4 transition-transform group-hover:scale-105">
                     <div className="text-6xl mb-4">👤</div>
-                    <h3 className="text-xl font-bold">Create Your 2D Avatar</h3>
-                    <p className="text-sm text-gray-400 max-w-xs">Upload a photo to see how our collection fits your silhouette.</p>
+                    <h3 className="text-xl font-bold">Create Your Digital Profile</h3>
+                    <p className="text-sm text-gray-400 max-w-xs">Upload a professional photo to see how your profile integrates with our dashboard.</p>
                     <label className={`inline-flex items-center gap-2 rounded-full bg-black text-white px-8 py-3 font-bold text-xs tracking-widest cursor-pointer hover:bg-primary transition-colors ${isUploading ? "opacity-50 cursor-not-allowed" : ""}`}>
                        {isUploading ? (
                          <>
@@ -229,7 +229,7 @@ const StyleMePage: React.FC = () => {
 
         <aside className="lg:col-span-3 space-y-6">
            <div className="rounded-3xl border border-gray-100 p-6 h-full flex flex-col">
-              <h2 className="text-xl font-bold mb-6">Wardrobe</h2>
+              <h2 className="text-xl font-bold mb-6">Course Portfolio</h2>
               <div className="flex-1 space-y-4 overflow-y-auto pr-2 max-h-[600px]">
                  {wardrobe.map((item: any) => (
                    <div 

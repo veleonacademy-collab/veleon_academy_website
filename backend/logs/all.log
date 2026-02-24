@@ -7400,3 +7400,658 @@
 2026-02-24 11:15:49:1549 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 823.197 ms[39m
 2026-02-24 11:15:49:1549 [35mhttp[39m: [35mGET /api/academy/admin/students 304 - - 855.019 ms[39m
 2026-02-24 11:15:49:1549 [35mhttp[39m: [35mGET /api/academy/admin/tutors 304 - - 850.259 ms[39m
+2026-02-24 15:35:56:3556 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 15:35:56:3556 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 15:35:56:3556 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 15:35:56:3556 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 15:35:56:3556 [32minfo[39m: [32m[VERIFY REQUEST] Received verification request - Provider: paystack, Reference: eyejowscpm[39m
+2026-02-24 15:35:56:3556 [32minfo[39m: [32m[VERIFY REQUEST] Calling paymentService.verifyTransaction...[39m
+2026-02-24 15:35:56:3556 [32minfo[39m: [32m[PAYMENT SERVICE] verifyTransaction called - Provider: paystack, Reference: eyejowscpm[39m
+2026-02-24 15:35:56:3556 [32minfo[39m: [32m[PAYMENT SERVICE] Delegating to PaystackService.verifyTransaction[39m
+2026-02-24 15:35:56:3556 [32minfo[39m: [32m[PAYSTACK VERIFY] Starting verification for reference: eyejowscpm[39m
+2026-02-24 15:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 15:35:56:3556 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 15:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 500 71 - 226.711 ms[39m
+2026-02-24 15:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 15:35:56:3556 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 15:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 500 71 - 8.061 ms[39m
+2026-02-24 15:35:57:3557 [32minfo[39m: [32m[PAYSTACK VERIFY] API Response - Status: success, Amount: 3750000, Currency: NGN[39m
+2026-02-24 15:35:57:3557 [32minfo[39m: [32m[PAYSTACK VERIFY] Metadata: {"userId":"4","transactionId":"10","isInstallment":"true","currentInstallment":"1","itemId":"1","type":"installment","quantity":"1","referrer":"http://localhost:5173/"}[39m
+2026-02-24 15:35:57:3557 [32minfo[39m: [32m[PAYSTACK VERIFY] Transaction eyejowscpm verified successfully. Calling handleChargeSuccess...[39m
+2026-02-24 15:35:57:3557 [32minfo[39m: [32m[PAYSTACK CHARGE] Starting handleChargeSuccess for reference: eyejowscpm[39m
+2026-02-24 15:35:57:3557 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference eyejowscpm: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 15:35:57:3557 [32minfo[39m: [32m[VERIFY REQUEST] Verification result: FAILED[39m
+2026-02-24 15:35:57:3557 [35mhttp[39m: [35mPOST /api/payments/verify 200 17 - 1418.097 ms[39m
+2026-02-24 15:35:57:3557 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 15:35:57:3557 [35mhttp[39m: [35mGET /api/auth/me 401 54 - 4.372 ms[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:36:47:3647 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:48:3648 [35mhttp[39m: [35mGET /api/academy/courses 200 2054 - 894.681 ms[39m
+2026-02-24 15:36:48:3648 [35mhttp[39m: [35mGET /api/auth/me 200 307 - 936.169 ms[39m
+2026-02-24 15:36:48:3648 [35mhttp[39m: [35mGET /api/ads 200 2 - 949.867 ms[39m
+2026-02-24 15:36:48:3648 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:49:3649 [35mhttp[39m: [35mGET /api/auth/me 304 - - 156.551 ms[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:36:54:3654 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:55:3655 [35mhttp[39m: [35mGET /api/ads 304 - - 142.890 ms[39m
+2026-02-24 15:36:55:3655 [35mhttp[39m: [35mGET /api/auth/me 304 - - 182.527 ms[39m
+2026-02-24 15:36:55:3655 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 15:36:55:3655 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 205.955 ms[39m
+2026-02-24 15:36:55:3655 [35mhttp[39m: [35mGET /api/auth/me 304 - - 143.565 ms[39m
+2026-02-24 15:37:07:377 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5175[39m
+2026-02-24 15:37:07:377 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5175[39m
+2026-02-24 15:37:08:378 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 3908 - 388.777 ms[39m
+2026-02-24 15:37:25:3725 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 15:37:25:3725 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:37:25:3725 [35mhttp[39m: [35mGET /api/academy/courses 401 54 - 1.370 ms[39m
+2026-02-24 15:37:25:3725 [35mhttp[39m: [35mGET /api/ads 304 - - 149.895 ms[39m
+2026-02-24 15:37:26:3726 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:37:26:3726 [35mhttp[39m: [35mGET /api/academy/courses 401 54 - 1.026 ms[39m
+2026-02-24 15:40:51:4051 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:40:51:4051 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:40:51:4051 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:40:51:4051 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:40:51:4051 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:48:09:489 [37mdebug[39m: [37m[Request] HEAD /api/academy/courses | Origin: undefined[39m
+2026-02-24 15:48:10:4810 [35mhttp[39m: [35mHEAD /api/academy/courses 200 2054 - 228.887 ms[39m
+2026-02-24 15:50:52:5052 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 15:50:52:5052 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 15:50:53:5053 [35mhttp[39m: [35mGET /api/ads 304 - - 241.763 ms[39m
+2026-02-24 15:50:53:5053 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 879.697 ms[39m
+2026-02-24 15:52:43:5243 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:43:5243 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:43:5243 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:52:43:5243 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:43:5243 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:58:5258 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:58:5258 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:52:58:5258 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:58:5258 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:52:59:5259 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:53:40:5340 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:53:40:5340 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:53:40:5340 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:53:40:5340 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:53:40:5340 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:54:03:543 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:54:03:543 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:54:03:543 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:54:03:543 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:54:04:544 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:55:37:5537 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:55:37:5537 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:55:37:5537 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:55:37:5537 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:55:37:5537 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:01:561 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:01:561 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:56:01:561 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:01:561 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:01:561 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:29:5629 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:29:5629 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:29:5629 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:56:29:5629 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:29:5629 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:47:5647 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:47:5647 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 15:56:47:5647 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:47:5647 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 15:56:48:5648 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 16:12:42:1242 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/register | Origin: http://localhost:5175[39m
+2026-02-24 16:12:42:1242 [37mdebug[39m: [37m[Request] POST /api/auth/register | Origin: http://localhost:5175[39m
+2026-02-24 16:12:45:1245 [35mhttp[39m: [35mPOST /api/auth/register 201 191 - 3410.550 ms[39m
+2026-02-24 16:13:38:1338 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 16:13:38:1338 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5002[39m
+2026-02-24 16:14:04:144 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:14:04:144 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:14:04:144 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [35mhttp[39m: [35mGET /api/auth/me 200 319 - 2128.916 ms[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/admin/students | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/admin/tutors | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] GET /api/academy/admin/students | Origin: http://localhost:5173[39m
+2026-02-24 16:14:06:146 [37mdebug[39m: [37m[Request] GET /api/academy/admin/tutors | Origin: http://localhost:5173[39m
+2026-02-24 16:14:07:147 [35mhttp[39m: [35mGET /api/auth/me 304 - - 1173.769 ms[39m
+2026-02-24 16:14:09:149 [35mhttp[39m: [35mGET /api/academy/admin/tutors 304 - - 3357.756 ms[39m
+2026-02-24 16:14:09:149 [35mhttp[39m: [35mGET /api/academy/courses 200 2054 - 3384.677 ms[39m
+2026-02-24 16:14:09:149 [35mhttp[39m: [35mGET /api/academy/admin/students 200 1061 - 3387.767 ms[39m
+2026-02-24 16:18:06:186 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/register | Origin: http://localhost:5175[39m
+2026-02-24 16:18:06:186 [37mdebug[39m: [37m[Request] POST /api/auth/register | Origin: http://localhost:5175[39m
+2026-02-24 16:18:10:1810 [35mhttp[39m: [35mPOST /api/auth/register 201 191 - 3909.927 ms[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 16:23:31:2331 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 16:23:32:2332 [35mhttp[39m: [35mGET /api/auth/me 304 - - 241.877 ms[39m
+2026-02-24 16:23:32:2332 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 16:23:32:2332 [35mhttp[39m: [35mGET /api/auth/me 304 - - 163.359 ms[39m
+2026-02-24 16:23:33:2333 [35mhttp[39m: [35mPOST /api/auth/verify-email 200 42 - 1094.444 ms[39m
+2026-02-24 16:23:33:2333 [35mhttp[39m: [35mPOST /api/auth/verify-email 200 42 - 1114.546 ms[39m
+2026-02-24 16:25:39:2539 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 16:25:39:2539 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 16:25:39:2539 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5002[39m
+2026-02-24 16:25:39:2539 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 16:25:40:2540 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 16:37:57:3757 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/login | Origin: http://localhost:5175[39m
+2026-02-24 16:37:57:3757 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5175[39m
+2026-02-24 16:37:58:3758 [35mhttp[39m: [35mPOST /api/auth/login 200 731 - 971.859 ms[39m
+2026-02-24 16:37:58:3758 [37mdebug[39m: [37m[Request] OPTIONS /api/users/me/transactions | Origin: http://localhost:5175[39m
+2026-02-24 16:37:58:3758 [37mdebug[39m: [37m[Request] OPTIONS /api/users/me/tasks | Origin: http://localhost:5175[39m
+2026-02-24 16:37:58:3758 [37mdebug[39m: [37m[Request] GET /api/users/me/transactions | Origin: http://localhost:5175[39m
+2026-02-24 16:37:58:3758 [37mdebug[39m: [37m[Request] GET /api/users/me/tasks | Origin: http://localhost:5175[39m
+2026-02-24 16:37:58:3758 [35mhttp[39m: [35mGET /api/users/me/transactions 200 2 - 214.076 ms[39m
+2026-02-24 16:38:01:381 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 16:38:01:381 [35mhttp[39m: [35mGET /api/users/me/tasks 500 52 - 2592.495 ms[39m
+2026-02-24 16:38:02:382 [37mdebug[39m: [37m[Request] GET /api/users/me/tasks | Origin: http://localhost:5175[39m
+2026-02-24 16:38:02:382 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 16:38:02:382 [35mhttp[39m: [35mGET /api/users/me/tasks 500 52 - 604.239 ms[39m
+2026-02-24 16:38:06:386 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 16:38:06:386 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 16:38:06:386 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 16:38:06:386 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 16:38:07:387 [35mhttp[39m: [35mGET /api/ads 200 2 - 1674.830 ms[39m
+2026-02-24 16:38:08:388 [35mhttp[39m: [35mGET /api/academy/courses 200 2054 - 2084.128 ms[39m
+2026-02-24 16:42:45:4245 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 16:42:45:4245 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 16:42:45:4245 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 16:42:45:4245 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 16:42:46:4246 [35mhttp[39m: [35mGET /api/ads 304 - - 171.321 ms[39m
+2026-02-24 16:42:46:4246 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 161.511 ms[39m
+2026-02-24 17:00:46:046 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:00:46:046 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 17:02:18:218 [35mhttp[39m: [35mGET /api/ads 304 - - 241.696 ms[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:02:19:219 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:02:19:219 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 246.908 ms[39m
+2026-02-24 17:02:19:219 [35mhttp[39m: [35mGET /api/auth/me 200 315 - 1034.484 ms[39m
+2026-02-24 17:02:19:219 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5175[39m
+2026-02-24 17:02:19:219 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 1119.960 ms[39m
+2026-02-24 17:02:20:220 [35mhttp[39m: [35mGET /api/auth/me 304 - - 325.284 ms[39m
+2026-02-24 17:02:20:220 [35mhttp[39m: [35mGET /api/auth/me 200 319 - 1174.149 ms[39m
+2026-02-24 17:02:20:220 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:02:20:220 [35mhttp[39m: [35mGET /api/auth/me 304 - - 213.917 ms[39m
+2026-02-24 17:02:20:220 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:02:20:220 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:02:20:220 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 1548.927 ms[39m
+2026-02-24 17:02:20:220 [35mhttp[39m: [35mGET /api/auth/me 304 - - 288.514 ms[39m
+2026-02-24 17:02:20:220 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/admin/students | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/admin/tutors | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [37mdebug[39m: [37m[Request] GET /api/academy/admin/students | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [37mdebug[39m: [37m[Request] GET /api/academy/admin/tutors | Origin: http://localhost:5173[39m
+2026-02-24 17:02:21:221 [35mhttp[39m: [35mGET /api/auth/me 304 - - 183.698 ms[39m
+2026-02-24 17:02:21:221 [35mhttp[39m: [35mGET /api/academy/admin/students 304 - - 211.263 ms[39m
+2026-02-24 17:02:21:221 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 272.980 ms[39m
+2026-02-24 17:02:21:221 [35mhttp[39m: [35mGET /api/academy/admin/tutors 304 - - 295.812 ms[39m
+2026-02-24 17:04:34:434 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 17:04:34:434 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-24 17:04:35:435 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 965.926 ms[39m
+2026-02-24 17:06:29:629 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/create-checkout-session | Origin: http://localhost:5175[39m
+2026-02-24 17:06:29:629 [37mdebug[39m: [37m[Request] POST /api/payments/create-checkout-session | Origin: http://localhost:5175[39m
+2026-02-24 17:06:29:629 [32minfo[39m: [32mPayment Request Received: {"amount":"150000.00","currency":"NGN","type":"installment","itemId":1,"provider":"paystack","metadata":{"firstName":"Ayodeji","lastName":"Comp","email":"omidoyinayodeji@yahoo.com","courseId":1,"paymentPlan":"installment","installmentsTotal":"4"}}[39m
+2026-02-24 17:06:30:630 [32minfo[39m: [32m[PAYMENT] New installment plan — total: 150000.00, periods: 4, per-instalment: 37500[39m
+2026-02-24 17:06:30:630 [32minfo[39m: [32mCreating installment plan for user 11: 150000.00 NGN over 4 months for item 1[39m
+2026-02-24 17:06:36:636 [35mhttp[39m: [35mPOST /api/payments/create-checkout-session 200 80 - 6807.904 ms[39m
+2026-02-24 17:06:52:652 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:06:52:652 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:06:52:652 [35mhttp[39m: [35mPOST /api/payments/verify 401 54 - 2.662 ms[39m
+2026-02-24 17:07:29:729 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:07:29:729 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:07:29:729 [35mhttp[39m: [35mPOST /api/payments/verify 401 54 - 3.177 ms[39m
+2026-02-24 17:07:34:734 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:07:34:734 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:07:34:734 [35mhttp[39m: [35mPOST /api/payments/verify 401 54 - 1.894 ms[39m
+2026-02-24 17:07:58:758 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 17:07:58:758 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 17:07:59:759 [35mhttp[39m: [35mPOST /api/auth/login 200 731 - 549.140 ms[39m
+2026-02-24 17:07:59:759 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:07:59:759 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:07:59:759 [32minfo[39m: [32m[VERIFY REQUEST] Received verification request - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 17:07:59:759 [32minfo[39m: [32m[VERIFY REQUEST] Calling paymentService.verifyTransaction...[39m
+2026-02-24 17:07:59:759 [32minfo[39m: [32m[PAYMENT SERVICE] verifyTransaction called - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 17:07:59:759 [32minfo[39m: [32m[PAYMENT SERVICE] Delegating to PaystackService.verifyTransaction[39m
+2026-02-24 17:07:59:759 [32minfo[39m: [32m[PAYSTACK VERIFY] Starting verification for reference: cn7i3zdhft[39m
+2026-02-24 17:08:00:80 [32minfo[39m: [32m[PAYSTACK VERIFY] API Response - Status: success, Amount: 3750000, Currency: NGN[39m
+2026-02-24 17:08:00:80 [32minfo[39m: [32m[PAYSTACK VERIFY] Metadata: {"userId":"11","transactionId":"24","isInstallment":"true","currentInstallment":"1","itemId":"1","installmentsTotal":"4","type":"installment","quantity":"1","referrer":"http://localhost:5175/"}[39m
+2026-02-24 17:08:00:80 [32minfo[39m: [32m[PAYSTACK VERIFY] Transaction cn7i3zdhft verified successfully. Calling handleChargeSuccess...[39m
+2026-02-24 17:08:00:80 [32minfo[39m: [32m[PAYSTACK CHARGE] Starting handleChargeSuccess for reference: cn7i3zdhft[39m
+2026-02-24 17:08:06:86 [32minfo[39m: [32m[PAYSTACK CHARGE] handleChargeSuccess completed for reference: cn7i3zdhft[39m
+2026-02-24 17:08:06:86 [32minfo[39m: [32m[PAYSTACK VERIFY] handleChargeSuccess completed for cn7i3zdhft[39m
+2026-02-24 17:08:06:86 [32minfo[39m: [32m[VERIFY REQUEST] Verification result: SUCCESS[39m
+2026-02-24 17:08:06:86 [35mhttp[39m: [35mPOST /api/payments/verify 200 16 - 7040.485 ms[39m
+2026-02-24 17:08:06:86 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:08:06:86 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:08:06:86 [35mhttp[39m: [35mGET /api/auth/me 200 318 - 214.781 ms[39m
+2026-02-24 17:09:43:943 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:09:43:943 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:09:43:943 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:09:44:944 [35mhttp[39m: [35mGET /api/auth/me 304 - - 193.238 ms[39m
+2026-02-24 17:09:44:944 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:09:44:944 [35mhttp[39m: [35mGET /api/auth/me 304 - - 193.781 ms[39m
+2026-02-24 17:09:57:957 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 17:09:57:957 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 17:09:58:958 [35mhttp[39m: [35mPOST /api/auth/login 200 742 - 560.366 ms[39m
+2026-02-24 17:09:58:958 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 17:09:58:958 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 17:09:58:958 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 1340 - 507.957 ms[39m
+2026-02-24 17:10:31:1031 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/course/1 | Origin: http://localhost:5173[39m
+2026-02-24 17:10:31:1031 [37mdebug[39m: [37m[Request] GET /api/academy/student/course/1 | Origin: http://localhost:5173[39m
+2026-02-24 17:10:32:1032 [35mhttp[39m: [35mGET /api/academy/student/course/1 200 1553 - 994.716 ms[39m
+2026-02-24 17:11:05:115 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 17:11:05:115 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 17:11:05:115 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 17:11:05:115 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 17:11:05:115 [35mhttp[39m: [35mGET /api/ads 200 2 - 312.172 ms[39m
+2026-02-24 17:11:07:117 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 1512.760 ms[39m
+2026-02-24 17:12:58:1258 [37mdebug[39m: [37m[Request] OPTIONS /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:12:58:1258 [37mdebug[39m: [37m[Request] POST /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:13:01:131 [35mhttp[39m: [35mPOST /api/chat/conversations 201 8 - 2541.467 ms[39m
+2026-02-24 17:13:02:132 [37mdebug[39m: [37m[Request] GET /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:13:02:132 [35mhttp[39m: [35mGET /api/chat/conversations 200 201 - 187.169 ms[39m
+2026-02-24 17:13:02:132 [37mdebug[39m: [37m[Request] GET /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:13:02:132 [35mhttp[39m: [35mGET /api/chat/conversations 304 - - 186.737 ms[39m
+2026-02-24 17:14:05:145 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:05:145 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:05:145 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 17:14:05:145 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:09:149 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:34:1434 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:34:1434 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 17:14:34:1434 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:34:1434 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:14:35:1435 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:00:150 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:00:150 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:00:150 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 17:15:00:150 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:00:150 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:18:1518 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:18:1518 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:18:1518 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:15:18:1518 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 17:15:18:1518 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 17:35:53:3553 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:53:3553 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:53:3553 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:53:3553 [35mhttp[39m: [35mGET /api/auth/me 200 318 - 484.760 ms[39m
+2026-02-24 17:35:53:3553 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:54:3554 [37mdebug[39m: [37m[Request] OPTIONS /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:35:54:3554 [37mdebug[39m: [37m[Request] OPTIONS /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:35:54:3554 [37mdebug[39m: [37m[Request] GET /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:35:55:3555 [35mhttp[39m: [35mGET /api/auth/me 304 - - 1058.489 ms[39m
+2026-02-24 17:35:55:3555 [35mhttp[39m: [35mGET /api/chat/conversations 200 201 - 1030.983 ms[39m
+2026-02-24 17:35:55:3555 [37mdebug[39m: [37m[Request] GET /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:35:55:3555 [35mhttp[39m: [35mGET /api/chat/conversations 304 - - 193.835 ms[39m
+2026-02-24 17:35:55:3555 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:35:55:3555 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:35:55:3555 [32minfo[39m: [32m[VERIFY REQUEST] Received verification request - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 17:35:55:3555 [32minfo[39m: [32m[VERIFY REQUEST] Calling paymentService.verifyTransaction...[39m
+2026-02-24 17:35:55:3555 [32minfo[39m: [32m[PAYMENT SERVICE] verifyTransaction called - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 17:35:55:3555 [32minfo[39m: [32m[PAYMENT SERVICE] Delegating to PaystackService.verifyTransaction[39m
+2026-02-24 17:35:55:3555 [32minfo[39m: [32m[PAYSTACK VERIFY] Starting verification for reference: cn7i3zdhft[39m
+2026-02-24 17:35:55:3555 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:55:3555 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:55:3555 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 200 318 - 190.111 ms[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 304 - - 168.439 ms[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 304 - - 160.053 ms[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 188.906 ms[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 304 - - 166.998 ms[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 304 - - 174.253 ms[39m
+2026-02-24 17:35:56:3556 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:56:3556 [32minfo[39m: [32m[PAYSTACK VERIFY] API Response - Status: success, Amount: 3750000, Currency: NGN[39m
+2026-02-24 17:35:56:3556 [32minfo[39m: [32m[PAYSTACK VERIFY] Metadata: {"userId":"11","transactionId":"24","isInstallment":"true","currentInstallment":"1","itemId":"1","installmentsTotal":"4","type":"installment","quantity":"1","referrer":"http://localhost:5175/"}[39m
+2026-02-24 17:35:56:3556 [32minfo[39m: [32m[PAYSTACK VERIFY] Transaction cn7i3zdhft verified successfully. Calling handleChargeSuccess...[39m
+2026-02-24 17:35:56:3556 [32minfo[39m: [32m[PAYSTACK CHARGE] Starting handleChargeSuccess for reference: cn7i3zdhft[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/auth/me 304 - - 198.441 ms[39m
+2026-02-24 17:35:56:3556 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 1340 - 426.515 ms[39m
+2026-02-24 17:35:57:3557 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:35:57:3557 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 930.013 ms[39m
+2026-02-24 17:35:58:3558 [32minfo[39m: [32m[PAYSTACK CHARGE] Transaction cn7i3zdhft already processed. Skipping enrollment.[39m
+2026-02-24 17:35:58:3558 [32minfo[39m: [32m[PAYSTACK VERIFY] handleChargeSuccess completed for cn7i3zdhft[39m
+2026-02-24 17:35:58:3558 [32minfo[39m: [32m[VERIFY REQUEST] Verification result: SUCCESS[39m
+2026-02-24 17:35:58:3558 [35mhttp[39m: [35mPOST /api/payments/verify 200 16 - 2257.453 ms[39m
+2026-02-24 17:35:58:3558 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:35:58:3558 [35mhttp[39m: [35mGET /api/auth/me 304 - - 422.156 ms[39m
+2026-02-24 17:38:28:3828 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:28:3828 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [32minfo[39m: [32m[VERIFY REQUEST] Received verification request - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 17:38:29:3829 [32minfo[39m: [32m[VERIFY REQUEST] Calling paymentService.verifyTransaction...[39m
+2026-02-24 17:38:29:3829 [32minfo[39m: [32m[PAYMENT SERVICE] verifyTransaction called - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 17:38:29:3829 [32minfo[39m: [32m[PAYMENT SERVICE] Delegating to PaystackService.verifyTransaction[39m
+2026-02-24 17:38:29:3829 [32minfo[39m: [32m[PAYSTACK VERIFY] Starting verification for reference: cn7i3zdhft[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [35mhttp[39m: [35mGET /api/auth/me 304 - - 874.929 ms[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 17:38:29:3829 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 382.731 ms[39m
+2026-02-24 17:38:30:3830 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 1005.069 ms[39m
+2026-02-24 17:38:30:3830 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 1014.997 ms[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 1005.478 ms[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[PAYSTACK VERIFY] API Response - Status: success, Amount: 3750000, Currency: NGN[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[PAYSTACK VERIFY] Metadata: {"userId":"11","transactionId":"24","isInstallment":"true","currentInstallment":"1","itemId":"1","installmentsTotal":"4","type":"installment","quantity":"1","referrer":"http://localhost:5175/"}[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[PAYSTACK VERIFY] Transaction cn7i3zdhft verified successfully. Calling handleChargeSuccess...[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[PAYSTACK CHARGE] Starting handleChargeSuccess for reference: cn7i3zdhft[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[PAYSTACK CHARGE] Transaction cn7i3zdhft already processed. Skipping enrollment.[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[PAYSTACK VERIFY] handleChargeSuccess completed for cn7i3zdhft[39m
+2026-02-24 17:38:30:3830 [32minfo[39m: [32m[VERIFY REQUEST] Verification result: SUCCESS[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mPOST /api/payments/verify 200 16 - 1243.561 ms[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 180.920 ms[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 177.841 ms[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] OPTIONS /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] OPTIONS /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 185.999 ms[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 185.492 ms[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/chat/conversations 304 - - 171.835 ms[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/chat/conversations | Origin: http://localhost:5173[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/chat/conversations 304 - - 156.308 ms[39m
+2026-02-24 17:38:30:3830 [35mhttp[39m: [35mGET /api/auth/me 304 - - 183.055 ms[39m
+2026-02-24 17:38:30:3830 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 17:38:31:3831 [35mhttp[39m: [35mGET /api/auth/me 304 - - 223.893 ms[39m
+2026-02-24 17:38:31:3831 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 1204.100 ms[39m
+2026-02-24 18:14:29:1429 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 18:14:29:1429 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 18:14:30:1430 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 1405.636 ms[39m
+2026-02-24 18:14:38:1438 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:14:38:1438 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:14:38:1438 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:14:38:1438 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:14:39:1439 [35mhttp[39m: [35mGET /api/ads 200 2 - 167.279 ms[39m
+2026-02-24 18:14:40:1440 [35mhttp[39m: [35mGET /api/academy/courses 200 2054 - 1058.930 ms[39m
+2026-02-24 18:16:40:1640 [32minfo[39m: [32mUser 11 connected with socket goh6JFydUqaDiCmBAAAB[39m
+2026-02-24 18:16:41:1641 [32minfo[39m: [32mUser 11 connected with socket eaj6jDvmcFM8rvqFAAAD[39m
+2026-02-24 18:16:41:1641 [32minfo[39m: [32mUser 11 connected with socket xMjK3OVS77Q2n4rEAAAF[39m
+2026-02-24 18:16:41:1641 [32minfo[39m: [32mUser 11 connected with socket vLgaUeUPsYJnMxA6AAAH[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mUser 11 connected with socket pJLQgZiebPVaCP5eAAAC[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mUser 11 connected with socket FrIov2qKyAd5vGYaAAAD[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 18:17:02:172 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-24 18:17:03:173 [32minfo[39m: [32mUser 11 connected with socket gV9gMd88dBu8AXPXAAAG[39m
+2026-02-24 18:17:03:173 [32minfo[39m: [32mUser 11 connected with socket C7c2uLh1A8m_8jy9AAAH[39m
+2026-02-24 18:18:16:1816 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 18:18:16:1816 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 18:18:16:1816 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 387.164 ms[39m
+2026-02-24 18:18:22:1822 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:18:22:1822 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:18:22:1822 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:18:22:1822 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:18:22:1822 [35mhttp[39m: [35mGET /api/ads 304 - - 199.886 ms[39m
+2026-02-24 18:18:32:1832 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 9724.226 ms[39m
+2026-02-24 18:27:15:2715 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:27:15:2715 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:27:15:2715 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:27:15:2715 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:27:16:2716 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 291.707 ms[39m
+2026-02-24 18:27:16:2716 [35mhttp[39m: [35mGET /api/ads 304 - - 298.617 ms[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] OPTIONS /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] POST /api/payments/verify | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [32minfo[39m: [32m[VERIFY REQUEST] Received verification request - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 18:32:02:322 [32minfo[39m: [32m[VERIFY REQUEST] Calling paymentService.verifyTransaction...[39m
+2026-02-24 18:32:02:322 [32minfo[39m: [32m[PAYMENT SERVICE] verifyTransaction called - Provider: paystack, Reference: cn7i3zdhft[39m
+2026-02-24 18:32:02:322 [32minfo[39m: [32m[PAYMENT SERVICE] Delegating to PaystackService.verifyTransaction[39m
+2026-02-24 18:32:02:322 [32minfo[39m: [32m[PAYSTACK VERIFY] Starting verification for reference: cn7i3zdhft[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] POST /api/auth/verify-email | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:32:02:322 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 18:32:02:322 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 196.557 ms[39m
+2026-02-24 18:32:02:322 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 18:32:02:322 [35mhttp[39m: [35mPOST /api/auth/verify-email 400 41 - 235.751 ms[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[PAYSTACK VERIFY] API Response - Status: success, Amount: 3750000, Currency: NGN[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[PAYSTACK VERIFY] Metadata: {"userId":"11","transactionId":"24","isInstallment":"true","currentInstallment":"1","itemId":"1","installmentsTotal":"4","type":"installment","quantity":"1","referrer":"http://localhost:5175/"}[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[PAYSTACK VERIFY] Transaction cn7i3zdhft verified successfully. Calling handleChargeSuccess...[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[PAYSTACK CHARGE] Starting handleChargeSuccess for reference: cn7i3zdhft[39m
+2026-02-24 18:32:03:323 [35mhttp[39m: [35mGET /api/ads 304 - - 911.249 ms[39m
+2026-02-24 18:32:03:323 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 908.608 ms[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[PAYSTACK CHARGE] Transaction cn7i3zdhft already processed. Skipping enrollment.[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[PAYSTACK VERIFY] handleChargeSuccess completed for cn7i3zdhft[39m
+2026-02-24 18:32:03:323 [32minfo[39m: [32m[VERIFY REQUEST] Verification result: SUCCESS[39m
+2026-02-24 18:32:03:323 [35mhttp[39m: [35mPOST /api/payments/verify 200 16 - 1694.327 ms[39m
+2026-02-24 18:32:03:323 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 18:32:03:323 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 18:32:04:324 [35mhttp[39m: [35mGET /api/auth/me 304 - - 212.114 ms[39m
+2026-02-24 18:32:05:325 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 2634.646 ms[39m
+2026-02-24 18:38:21:3821 [32minfo[39m: [32mSocket pJLQgZiebPVaCP5eAAAC disconnected[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:38:22:3822 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 18:38:26:3826 [35mhttp[39m: [35mGET /api/auth/me 304 - - 3865.155 ms[39m
+2026-02-24 18:38:26:3826 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 18:38:26:3826 [35mhttp[39m: [35mGET /api/ads 304 - - 3880.695 ms[39m
+2026-02-24 18:38:26:3826 [32minfo[39m: [32mUser 11 connected with socket yrc7mKmlg65ckm9XAAAJ[39m
+2026-02-24 18:38:26:3826 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 4044.164 ms[39m
+2026-02-24 18:38:26:3826 [35mhttp[39m: [35mGET /api/auth/me 304 - - 173.664 ms[39m
+2026-02-24 18:51:45:5145 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:51:45:5145 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:51:47:5147 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 18:51:47:5147 [35mhttp[39m: [35mGET /api/academy/courses 500 71 - 1801.867 ms[39m
+2026-02-24 18:51:48:5148 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:51:48:5148 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 18:51:48:5148 [35mhttp[39m: [35mGET /api/academy/courses 500 71 - 6.021 ms[39m
+2026-02-24 18:54:40:5440 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:54:40:5440 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 18:54:41:5441 [35mhttp[39m: [35mGET /api/academy/courses 200 2054 - 1026.784 ms[39m
+2026-02-24 19:09:49:949 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:09:49:949 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:09:50:950 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 232.456 ms[39m
+2026-02-24 19:16:06:166 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:16:06:166 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:16:06:166 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 180.748 ms[39m
+2026-02-24 19:16:19:1619 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 19:16:19:1619 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 19:16:20:1620 [35mhttp[39m: [35mGET /api/ads 304 - - 237.486 ms[39m
+2026-02-24 19:18:38:1838 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:18:38:1838 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:18:39:1839 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 1230.923 ms[39m
+2026-02-24 19:32:34:3234 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:32:34:3234 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:32:34:3234 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 225.831 ms[39m
+2026-02-24 19:33:58:3358 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:33:58:3358 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:33:58:3358 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 189.949 ms[39m
+2026-02-24 19:35:58:3558 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:35:58:3558 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:35:58:3558 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 173.900 ms[39m
+2026-02-24 19:36:33:3633 [32minfo[39m: [32mSocket yrc7mKmlg65ckm9XAAAJ disconnected[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 19:36:34:3634 [35mhttp[39m: [35mGET /api/ads 304 - - 186.344 ms[39m
+2026-02-24 19:36:35:3635 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 1139.565 ms[39m
+2026-02-24 19:36:44:3644 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-02-24 19:36:44:3644 [35mhttp[39m: [35mGET /api/auth/me 500 61 - 10020.905 ms[39m
+2026-02-24 19:36:44:3644 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 19:36:44:3644 [35mhttp[39m: [35mGET /api/auth/me 200 318 - 257.806 ms[39m
+2026-02-24 19:42:12:4212 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:42:12:4212 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 174.122 ms[39m
+2026-02-24 19:43:29:4329 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:43:29:4329 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 182.010 ms[39m
+2026-02-24 19:46:16:4616 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:46:16:4616 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 270.840 ms[39m
+2026-02-24 19:47:44:4744 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:47:45:4745 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 206.951 ms[39m
+2026-02-24 19:51:16:5116 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:51:17:5117 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 821.222 ms[39m
+2026-02-24 19:51:32:5132 [32minfo[39m: [32mSocket FrIov2qKyAd5vGYaAAAD disconnected[39m
+2026-02-24 19:53:02:532 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 19:53:02:532 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 177.692 ms[39m
+2026-02-24 19:54:31:5431 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:54:31:5431 [35mhttp[39m: [35mGET /api/academy/student/dashboard 401 54 - 2.058 ms[39m
+2026-02-24 19:54:32:5432 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:54:32:5432 [35mhttp[39m: [35mGET /api/academy/student/dashboard 401 54 - 4.725 ms[39m
+2026-02-24 19:55:30:5530 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/change-password | Origin: http://localhost:5173[39m
+2026-02-24 19:55:30:5530 [37mdebug[39m: [37m[Request] POST /api/auth/change-password | Origin: http://localhost:5173[39m
+2026-02-24 19:55:30:5530 [35mhttp[39m: [35mPOST /api/auth/change-password 401 54 - 3.212 ms[39m
+2026-02-24 19:55:49:5549 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 19:55:49:5549 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 19:55:51:5551 [35mhttp[39m: [35mPOST /api/auth/login 200 742 - 1443.975 ms[39m
+2026-02-24 19:55:51:5551 [32minfo[39m: [32mUser 11 connected with socket DSenl3p1N9JUf27ZAAAL[39m
+2026-02-24 19:56:11:5611 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/change-password | Origin: http://localhost:5173[39m
+2026-02-24 19:56:11:5611 [37mdebug[39m: [37m[Request] POST /api/auth/change-password | Origin: http://localhost:5173[39m
+2026-02-24 19:56:12:5612 [35mhttp[39m: [35mPOST /api/auth/change-password 200 44 - 1388.190 ms[39m
+2026-02-24 19:56:20:5620 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:56:20:5620 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:56:24:5624 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 4034.410 ms[39m
+2026-02-24 19:59:46:5946 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:59:46:5946 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:59:46:5946 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 360.657 ms[39m
+2026-02-24 19:59:47:5947 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 19:59:48:5948 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 1447.822 ms[39m
+2026-02-24 20:10:28:1028 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:10:28:1028 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:10:29:1029 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 469.414 ms[39m
+2026-02-24 20:10:29:1029 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:10:29:1029 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 478.593 ms[39m
+2026-02-24 20:12:25:1225 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:12:25:1225 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:12:26:1226 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 433.116 ms[39m
+2026-02-24 20:12:26:1226 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:12:26:1226 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 387.671 ms[39m
+2026-02-24 20:14:25:1425 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:14:25:1425 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:14:26:1426 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 868.509 ms[39m
+2026-02-24 20:14:26:1426 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:14:26:1426 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 400.280 ms[39m
+2026-02-24 20:14:31:1431 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:14:31:1431 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:14:31:1431 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:14:31:1431 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:14:31:1431 [35mhttp[39m: [35mGET /api/ads 304 - - 171.048 ms[39m
+2026-02-24 20:14:34:1434 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 3262.204 ms[39m
+2026-02-24 20:16:08:168 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:16:08:168 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:16:11:1611 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 2921.903 ms[39m
+2026-02-24 20:16:11:1611 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:16:12:1612 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 530.312 ms[39m
+2026-02-24 20:18:37:1837 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:18:37:1837 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:18:38:1838 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 568.833 ms[39m
+2026-02-24 20:18:38:1838 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:18:38:1838 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 445.926 ms[39m
+2026-02-24 20:21:09:219 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/course/1 | Origin: http://localhost:5173[39m
+2026-02-24 20:21:09:219 [37mdebug[39m: [37m[Request] GET /api/academy/student/course/1 | Origin: http://localhost:5173[39m
+2026-02-24 20:21:14:2114 [35mhttp[39m: [35mGET /api/academy/student/course/1 200 1553 - 4662.675 ms[39m
+2026-02-24 20:24:31:2431 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/course/1 | Origin: http://localhost:5173[39m
+2026-02-24 20:24:31:2431 [37mdebug[39m: [37m[Request] GET /api/academy/student/course/1 | Origin: http://localhost:5173[39m
+2026-02-24 20:24:36:2436 [35mhttp[39m: [35mGET /api/academy/student/course/1 304 - - 5309.426 ms[39m
+2026-02-24 20:42:32:4232 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:42:32:4232 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:42:32:4232 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:42:32:4232 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:42:32:4232 [35mhttp[39m: [35mGET /api/ads 304 - - 232.774 ms[39m
+2026-02-24 20:42:32:4232 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 775.175 ms[39m
+2026-02-24 20:47:14:4714 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:47:14:4714 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:47:14:4714 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:47:14:4714 [35mhttp[39m: [35mGET /api/auth/me 200 318 - 333.439 ms[39m
+2026-02-24 20:47:14:4714 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:47:14:4714 [32minfo[39m: [32mUser 11 connected with socket -hxByPEJq5-kwB_CAAAN[39m
+2026-02-24 20:47:15:4715 [35mhttp[39m: [35mGET /api/auth/me 304 - - 842.711 ms[39m
+2026-02-24 20:48:19:4819 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 20:48:19:4819 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 20:48:20:4820 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-02-24 20:48:20:4820 [35mhttp[39m: [35mPOST /api/auth/login 401 40 - 683.432 ms[39m
+2026-02-24 20:48:24:4824 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 20:48:24:4824 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-02-24 20:48:24:4824 [35mhttp[39m: [35mPOST /api/auth/login 401 40 - 593.180 ms[39m
+2026-02-24 20:48:33:4833 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 20:48:33:4833 [37mdebug[39m: [37m[Request] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-02-24 20:48:35:4835 [35mhttp[39m: [35mPOST /api/auth/login 200 742 - 1944.517 ms[39m
+2026-02-24 20:48:35:4835 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:48:35:4835 [37mdebug[39m: [37m[Request] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-02-24 20:48:36:4836 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 569.059 ms[39m
+2026-02-24 20:49:04:494 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:49:04:494 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:49:04:494 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:49:04:494 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:49:04:494 [35mhttp[39m: [35mGET /api/ads 304 - - 262.426 ms[39m
+2026-02-24 20:49:06:496 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 2057.253 ms[39m
+2026-02-24 20:58:05:585 [32minfo[39m: [32mSocket -hxByPEJq5-kwB_CAAAN disconnected[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:58:06:586 [35mhttp[39m: [35mGET /api/ads 304 - - 189.553 ms[39m
+2026-02-24 20:58:08:588 [35mhttp[39m: [35mGET /api/academy/courses 200 2053 - 2408.741 ms[39m
+2026-02-24 20:58:09:589 [35mhttp[39m: [35mGET /api/auth/me 200 318 - 3783.390 ms[39m
+2026-02-24 20:58:09:589 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-24 20:58:10:5810 [32minfo[39m: [32mUser 11 connected with socket c3HdZtGM9ZDaEM51AAAP[39m
+2026-02-24 20:58:10:5810 [35mhttp[39m: [35mGET /api/auth/me 304 - - 190.492 ms[39m

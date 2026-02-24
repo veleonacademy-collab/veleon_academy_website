@@ -64,16 +64,16 @@ async function bootstrap(): Promise<void> {
   const app = express();
   const httpServer = createServer(app);
 
-  // Initialize Socket.io
-  const socketService = SocketService.getInstance();
-  socketService.initialize(httpServer, env.appUrl);
-
   const allowedOrigins = [
     "http://localhost:5173",
     "https://fashionharth.vercel.app",
     "http://localhost:5175",
     env.appUrl
-  ].filter(Boolean);
+  ].filter(Boolean) as string[];
+
+  // Initialize Socket.io
+  const socketService = SocketService.getInstance();
+  socketService.initialize(httpServer, allowedOrigins);
 
   // 1. Logging and debugging
   app.use((req, res, next) => {
@@ -144,8 +144,8 @@ async function bootstrap(): Promise<void> {
   app.use("/api/upload", uploadRouter);
   app.use("/api/settings", systemSettingsRouter);
   app.use("/api/ads", adRouter);
-  app.use("/api", categoryRouter);
   app.use("/api/academy", academyRouter);
+  app.use("/api", categoryRouter);
 
 
   app.use(errorHandler);

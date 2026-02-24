@@ -3,6 +3,7 @@ import { env } from "../config/env.js";
 import { CreateCheckoutSessionOptions, PaymentProvider } from "./payment/types.js";
 import { pool } from "../database/pool.js";
 import { logger } from "../utils/logger.js";
+import { sendPaymentReceiptEmail } from "./emailService.js";
 
 export class StripeService implements PaymentProvider {
   private stripe: Stripe;
@@ -216,8 +217,25 @@ export class StripeService implements PaymentProvider {
         }
     }
 
+    // Send Payment Receipt Email
+    try {
+        const userRes = await pool.query("SELECT first_name, email FROM users WHERE id = $1", [userId]);
+        const user = userRes.rows[0];
+        if (user) {
+            await sendPaymentReceiptEmail(
+                user.email,
+                user.first_name,
+                (session.amount_total || 0) / 100,
+                (session.currency || 'USD').toUpperCase(),
+                description,
+                providerPaymentId || session.id
+            );
+        }
+    } catch (err) {
+        logger.error(`[STRIPE CHARGE] Failed to send receipt email to user ${userId}: ${err}`);
+    }
+
     if (type === "subscription" && session.subscription) {
-      // ... handling existing subscription logic
       const subscription = await this.stripe.subscriptions.retrieve(session.subscription as string);
       await pool.query(
         "INSERT INTO subscriptions (user_id, plan_id, provider_subscription_id, status, current_period_start, current_period_end) VALUES ($1, $2, $3, $4, TO_TIMESTAMP($5), TO_TIMESTAMP($6)) ON CONFLICT (provider_subscription_id) DO UPDATE SET status = $4, current_period_end = TO_TIMESTAMP($6), updated_at = NOW()",
@@ -238,12 +256,10 @@ export class StripeService implements PaymentProvider {
     if ((type === "item" || isFirstInstallment) && itemIdFromMeta) {
       const itemId = parseInt(itemIdFromMeta);
       
-      // 1. Fetch item details
       const itemRes = await pool.query("SELECT title, category, price FROM items WHERE id = $1", [itemId]);
       const item = itemRes.rows[0];
       if (!item) return;
 
-      // 2. Fetch or create a customer profile
       const userRes = await pool.query("SELECT first_name, last_name, email FROM users WHERE id = $1", [userId]);
       const user = userRes.rows[0];
       
@@ -260,7 +276,6 @@ export class StripeService implements PaymentProvider {
         customerId = newCustomer.rows[0].id;
       }
       
-      // 3. Create a production task
       const dueDate = new Date();
       dueDate.setDate(dueDate.getDate() + 14); 
       const deadline = new Date(dueDate);

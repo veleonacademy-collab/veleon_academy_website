@@ -10,8 +10,8 @@ const PricingPage: React.FC = () => {
       name: 'Essential Access',
       price: 49,
       type: 'one-time' as const,
-      description: 'Lifetime ownership of our core fashion technology.',
-      features: ['Full 2D Avatar Access', 'Basic Style History', 'Standard Support', 'Core Collections'],
+      description: 'Lifetime access to our foundational tech curriculum.',
+      features: ['Full 2D Avatar Access', 'Basic Course History', 'Standard Support', 'Core Tech Tracks'],
       icon: (
         <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -19,11 +19,11 @@ const PricingPage: React.FC = () => {
       )
     },
     {
-      name: 'Style Connoisseur',
+      name: 'Academy Pro',
       price: 19,
       type: 'subscription' as const,
-      description: 'The ultimate experience for the modern trendsetter.',
-      features: ['Unlimited Save Slots', 'Early Access Items', 'Personal Stylist Bot', 'Priority VIP Support', 'Exclusive Collaborations'],
+      description: 'The ultimate experience for the modern developer.',
+      features: ['Unlimited Lab Access', 'Early Access Courses', 'AI Learning Assistant', 'Priority VIP Support', 'Exclusive Workshops'],
       isPopular: true,
       icon: (
         <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ const PricingPage: React.FC = () => {
             Flexible Payment Options
           </div>
           <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">
-            Elevate Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-primary bg-300% animate-shimmer">Wardrobe</span>
+            Elevate Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-primary bg-300% animate-shimmer">Career</span>
           </h1>
           <p className="text-gray-400 max-w-xl mx-auto mb-12 font-medium leading-relaxed">
             Choose a plan that fits your lifestyle. Seamlessly transition between traditional payments and modern flexibility.
@@ -153,12 +153,12 @@ const PricingPage: React.FC = () => {
         </div>
         
         <div className="mt-20 text-center">
-          <p className="text-gray-500 text-xs font-bold tracking-widest uppercase mb-4">Trusted by trendsetters globally</p>
+          <p className="text-gray-500 text-xs font-bold tracking-widest uppercase mb-4">Trusted by developers globally</p>
           <div className="flex flex-wrap justify-center gap-8 opacity-30 grayscale contrast-125">
-             <span className="text-2xl font-black italic">VOGUE</span>
-             <span className="text-2xl font-black">GQ</span>
-             <span className="text-2xl font-black tracking-widest">EST.1992</span>
-             <span className="text-2xl font-black">ELLE</span>
+             <span className="text-2xl font-black italic">GITHUB</span>
+             <span className="text-2xl font-black uppercase">StackOverflow</span>
+             <span className="text-2xl font-black tracking-widest uppercase">Dev.to</span>
+             <span className="text-2xl font-black">MEDIUM</span>
           </div>
         </div>
       </div>

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Item } from "../types/item";
 import { SmartImage } from "./ui/SmartImage";
 
-interface FashionCardProps {
+interface AcademyCardProps {
   item: Item;
   onFavorite?: (id: number) => void;
 }
 
-const FashionCard: React.FC<FashionCardProps> = ({ item, onFavorite }) => {
+const AcademyCard: React.FC<AcademyCardProps> = ({ item, onFavorite }) => {
   return (
     <div className="group relative overflow-hidden rounded-xl bg-card border border-border shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
       {/* Image Container */}
@@ -56,8 +56,8 @@ const FashionCard: React.FC<FashionCardProps> = ({ item, onFavorite }) => {
         <div className="flex justify-between items-start mb-1">
           <p className="text-xs font-medium text-primary uppercase tracking-wider">{item.category}</p>
           {item.isTrending && (
-            <span className="inline-block rounded-full bg-black px-2 py-0.5 text-[10px] font-bold text-white">
-              TRENDING
+            <span className="inline-block rounded-full bg-black px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest">
+              POPULAR
             </span>
           )}
         </div>
@@ -71,4 +71,4 @@ const FashionCard: React.FC<FashionCardProps> = ({ item, onFavorite }) => {
   );
 };
 
-export default FashionCard;
+export default AcademyCard;

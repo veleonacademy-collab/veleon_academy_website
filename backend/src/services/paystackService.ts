@@ -5,7 +5,7 @@ import { CreateCheckoutSessionOptions, PaymentProvider } from "./payment/types.j
 import { pool } from "../database/pool.js";
 import { logger } from "../utils/logger.js";
 import { AcademyService } from "./academyService.js";
-import { sendStudentWelcomeEmail } from "./emailService.js";
+import { sendStudentWelcomeEmail, sendEnrollmentConfirmationEmail, sendPaymentReceiptEmail } from "./emailService.js";
 import { hashPassword } from "../utils/password.js";
 import { randomBytes } from "crypto";
 
@@ -167,7 +167,8 @@ export class PaystackService implements PaymentProvider {
 
     // 1. Handle User Account
     let userId: number;
-    const userRes = await pool.query("SELECT id FROM users WHERE email = $1", [email]);
+    let firstName: string;
+    const userRes = await pool.query("SELECT id, first_name FROM users WHERE email = $1", [email]);
     
     if (userRes.rows.length === 0) {
       // Auto-create account
@@ -175,7 +176,7 @@ export class PaystackService implements PaymentProvider {
       const tempPassword = randomBytes(4).toString("hex"); // 8 chars
       const passwordHash = await hashPassword(tempPassword);
       
-      const firstName = metadata?.firstName || "Student";
+      firstName = metadata?.firstName || "Student";
       const lastName = metadata?.lastName || "";
 
       const newUser = await pool.query(
@@ -193,6 +194,7 @@ export class PaystackService implements PaymentProvider {
       }
     } else {
       userId = userRes.rows[0].id;
+      firstName = userRes.rows[0].first_name || metadata?.firstName || "Student";
     }
 
     // 2. Record Transaction
@@ -203,7 +205,26 @@ export class PaystackService implements PaymentProvider {
     );
     const transactionId = txResult.rows[0].id;
 
-    // 3. Enroll Student
+    // 3. Fetch Details for email/receipt (Check courses or items)
+    let displayTitle = "Purchase";
+    const courseRes = await pool.query("SELECT title FROM courses WHERE id = $1", [courseId]);
+    if (courseRes.rows.length > 0) {
+      displayTitle = courseRes.rows[0].title;
+    } else {
+      const itemRes = await pool.query("SELECT title FROM items WHERE id = $1", [courseId]);
+      if (itemRes.rows.length > 0) {
+        displayTitle = itemRes.rows[0].title;
+      }
+    }
+
+    // 4. Check for existing enrollment to determine if this is "first enrollment"
+    const existingEnrollment = await pool.query(
+      "SELECT id FROM enrollments WHERE student_id = $1 AND course_id = $2",
+      [userId, courseId]
+    );
+    const isNewEnrollment = existingEnrollment.rows.length === 0;
+
+    // 5. Enroll Student
     await AcademyService.enrollStudent({
       studentId: userId,
       courseId,
@@ -212,7 +233,7 @@ export class PaystackService implements PaymentProvider {
       installmentsTotal
     });
 
-    // 4. Record installment if applicable
+    // 6. Record installment if applicable
     if (paymentPlan === "installment") {
       // Count how many installments have already been paid for this course by this user
       const previousPayments = await pool.query(
@@ -226,6 +247,26 @@ export class PaystackService implements PaymentProvider {
          VALUES ($1, $2, $3, $4, NOW(), 'paid', $5)`,
         [transactionId, installmentNumber, installmentsTotal, amountPaid, data.reference]
       );
+    }
+
+    // 7. Send Emails
+    try {
+      // Always send payment receipt
+      await sendPaymentReceiptEmail(
+        email, 
+        firstName, 
+        amountPaid, 
+        data.currency, 
+        paymentPlan === 'installment' ? `${displayTitle} (Installment Payment)` : displayTitle, 
+        data.reference
+      );
+
+      // Send enrollment confirmation only on first purchase/enrollment
+      if (isNewEnrollment && courseRes.rows.length > 0) {
+        await sendEnrollmentConfirmationEmail(email, firstName, displayTitle);
+      }
+    } catch (err) {
+      logger.error(`[PAYSTACK CHARGE] Failed to send notification emails to ${email}: ${err}`);
     }
 
     logger.info(`[PAYSTACK CHARGE] handleChargeSuccess completed for reference: ${data.reference}`);

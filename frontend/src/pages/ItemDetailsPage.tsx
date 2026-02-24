@@ -12,8 +12,8 @@ import { SmartImage } from "../components/ui/SmartImage";
 import { AcademyLoader } from "../components/ui/FashionLoader";
 import { TestimonialsSection } from "../components/TestimonialsSection";
 import { MessageCircle, ShieldCheck, Truck, RotateCcw, Clock, Star, CheckCircle2 } from "lucide-react";
+import { WHATSAPP_NUMBER } from "../utils/constants";
 
-const WHATSAPP_NUMBER = "2349000000000"; // Replace with actual number
 
 const ItemDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -65,9 +65,9 @@ const ItemDetailsPage: React.FC = () => {
   const reviews = hasActualReviews 
       ? item.reviews 
       : [
-          { name: "Chioma A.", rating: 5, text: "The fit is absolutely perfect. Delivery was faster than expected!" },
-          { name: "David K.", rating: 5, text: "Premium quality indeed. Wore this to my convocation and got so many compliments." },
-          { name: "Sarah J.", rating: 4, text: "Beautiful fabric, exactly as shown in the pictures." }
+          { name: "Chioma A.", rating: 5, text: "The project-based approach is absolutely great. The mentors are very helpful!" },
+          { name: "David K.", rating: 5, text: "Premium quality curriculum. Landed a job at a top tech firm shortly after graduation." },
+          { name: "Sarah J.", rating: 4, text: "Solid learning material, exactly what I needed to switch careers." }
       ];
 
   const reviewCount = hasActualReviews ? item.reviews!.length : 128; // Fallback "social proof" count
@@ -100,7 +100,7 @@ const ItemDetailsPage: React.FC = () => {
               )}
                {item.isTrending && (
                 <div className="absolute top-4 left-4 lg:top-6 lg:left-6 z-20 rounded-full bg-primary px-3 py-1 lg:px-4 lg:py-2 text-[8px] lg:text-[10px] font-black tracking-[0.2em] text-white shadow-lg uppercase">
-                  Trending Piece
+                  Featured Program
                 </div>
               )}
               {/* Inspiration Image Overlay */}
@@ -141,13 +141,13 @@ const ItemDetailsPage: React.FC = () => {
             {/* Urgency Banner */}
             <div className="flex items-center gap-2 rounded-lg bg-amber-50 px-4 py-2 text-amber-700 border border-amber-100 animate-pulse">
                 <Clock className="h-4 w-4" />
-                <span className="text-xs font-bold uppercase tracking-wide">High Demand: Only 3 slots left for this design</span>
+                <span className="text-xs font-bold uppercase tracking-wide">High Demand: Only 3 slots left for this cohort</span>
             </div>
 
           <div>
             <div className="flex items-center justify-between">
                 <div className="mb-2 md:mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-widest uppercase">
-                  Handcrafted Excellence
+                  Expert-Led Training
                 </div>
                 <div className="flex items-center gap-1 text-amber-400">
                     <Star className="h-4 w-4 fill-current" />
@@ -198,7 +198,7 @@ const ItemDetailsPage: React.FC = () => {
                 activeTab === "details" ? "border-b-2 border-primary text-black" : "text-zinc-400 hover:text-black"
               }`}
             >
-              Fabric & Fit
+              Curriculum & Skills
             </button>
              <button
               onClick={() => setActiveTab("reviews")}
@@ -239,9 +239,9 @@ const ItemDetailsPage: React.FC = () => {
                         {item.description || "Premium fabric selection with tailored precision. Designed for an impeccable drape and lasting comfort."}
                     </p>
                     <ul className="space-y-2 mt-4">
-                        <li className="flex items-center gap-2 text-sm text-zinc-600"><CheckCircle2 className="h-4 w-4 text-green-500" /> Premium Cotton-Linen Blend</li>
-                        <li className="flex items-center gap-2 text-sm text-zinc-600"><CheckCircle2 className="h-4 w-4 text-green-500" /> Professional Dry Clean Only</li>
-                        <li className="flex items-center gap-2 text-sm text-zinc-600"><CheckCircle2 className="h-4 w-4 text-green-500" /> Available in Custom Sizes</li>
+                        <li className="flex items-center gap-2 text-sm text-zinc-600"><CheckCircle2 className="h-4 w-4 text-green-500" /> Full Stack Hands-on Curriculum</li>
+                        <li className="flex items-center gap-2 text-sm text-zinc-600"><CheckCircle2 className="h-4 w-4 text-green-500" /> Professional Mentorship</li>
+                        <li className="flex items-center gap-2 text-sm text-zinc-600"><CheckCircle2 className="h-4 w-4 text-green-500" /> Lifetime Community Access</li>
                     </ul>
                 </div>
             )}

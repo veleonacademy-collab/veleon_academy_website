@@ -9,6 +9,9 @@ import {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 
+// Flag to track if server is awake to avoid redundant toasts
+let isServerAwake = false;
+
 // Axios instance used across the app for API calls.
 export const http = axios.create({
   baseURL: API_BASE_URL,
@@ -24,13 +27,20 @@ http.interceptors.request.use((config) => {
   
   // Custom property to track if toast was shown
   (config as any)._startTime = Date.now();
-  (config as any)._timeoutId = setTimeout(() => {
-    toast("Waking up our fashion engine... Just a moment! 👗", {
-      icon: "⌛",
-      duration: 10000,
-      id: "server-wake-up" // Use fixed ID to avoid multiple toasts
-    });
-  }, 3000); // Show after 3 seconds of waiting
+  
+  // Only show wake-up message if server isn't confirmed awake yet
+  if (!isServerAwake) {
+    (config as any)._timeoutId = setTimeout(() => {
+      // Final check before showing toast
+      if (!isServerAwake) {
+        toast("Waking up our tech engine... Just a moment! �", {
+          icon: "⌛",
+          duration: 10000,
+          id: "server-wake-up" // Use fixed ID to avoid multiple toasts
+        });
+      }
+    }, 5000); // Show after 5 seconds of waiting
+  }
 
   return config;
 });
@@ -38,6 +48,7 @@ http.interceptors.request.use((config) => {
 // Clear timeout on response
 http.interceptors.response.use(
   (response) => {
+    isServerAwake = true; // Mark server as awake on success
     const timeoutId = (response.config as any)._timeoutId;
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -46,6 +57,11 @@ http.interceptors.response.use(
     return response;
   },
   async (error) => {
+    // If we have a response, the server is awake (even if it's an error status)
+    if (error.response) {
+      isServerAwake = true;
+    }
+    
     const timeoutId = (error.config as any)._timeoutId;
     if (timeoutId) {
       clearTimeout(timeoutId);

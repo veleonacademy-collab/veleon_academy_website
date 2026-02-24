@@ -282,3 +282,21 @@
 2026-02-24 09:07:46:746 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
 2026-02-24 09:08:00:80 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
 2026-02-24 09:08:01:81 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 15:35:56:3556 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 15:35:56:3556 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 15:35:57:3557 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference eyejowscpm: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 16:38:01:381 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 16:38:02:382 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 17:02:19:219 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:02:20:220 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:35:56:3556 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:35:57:3557 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:38:30:3830 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 17:38:30:3830 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 18:32:02:322 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 18:32:02:322 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 18:51:47:5147 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 18:51:48:5148 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-02-24 19:36:44:3644 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-02-24 20:48:20:4820 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-02-24 20:48:24:4824 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
