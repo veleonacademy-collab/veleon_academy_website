@@ -1,0 +1,284 @@
+2025-12-19 00:55:35:5535 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:35:5535 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:42:5542 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:42:5542 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:50:5550 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:50:5550 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:56:5556 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:55:57:5557 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:56:01:561 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:56:01:561 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:56:08:568 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-19 00:56:08:568 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-22 12:46:26:4626 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-22 13:45:47:4547 [31merror[39m: [31mFailed to start server password authentication failed for user "postgres"[39m
+2025-12-22 13:49:51:4951 [31merror[39m: [31mFailed to start server getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2025-12-22 14:06:04:64 [31merror[39m: [31mError handler caught: relation "users" does not exist[39m
+2025-12-22 14:06:14:614 [31merror[39m: [31mError handler caught: relation "users" does not exist[39m
+2025-12-22 14:06:22:622 [31merror[39m: [31mError handler caught: relation "users" does not exist[39m
+2025-12-22 14:09:08:98 [31merror[39m: [31mError handler caught: relation "users" does not exist[39m
+2025-12-22 14:29:04:294 [31merror[39m: [31mError handler caught: Please verify your email before logging in.[39m
+2025-12-22 14:31:29:3129 [31merror[39m: [31mError handler caught: Please verify your email before logging in.[39m
+2025-12-22 14:41:03:413 [31merror[39m: [31mError handler caught: Please verify your email before logging in.[39m
+2025-12-22 14:41:56:4156 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-01-06 11:18:14:1814 [31merror[39m: [31mMigration failed: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-06 11:18:39:1839 [31merror[39m: [31mMigration failed: Tenant or user not found[39m
+2026-01-06 11:41:49:4149 [31merror[39m: [31mMigration failed: Tenant or user not found[39m
+2026-01-06 23:11:44:1144 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-06 23:13:47:1347 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-06 23:29:44:2944 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-07 11:52:31:5231 [31merror[39m: [31mError handler caught: Please verify your email before logging in.[39m
+2026-01-07 12:15:15:1515 [31merror[39m: [31mError handler caught: Please verify your email before logging in.[39m
+2026-01-07 12:16:00:160 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-01-07 12:17:02:172 [31merror[39m: [31mError handler caught: relation "user_payment_profiles" does not exist[39m
+2026-01-07 12:17:07:177 [31merror[39m: [31mError handler caught: relation "user_payment_profiles" does not exist[39m
+2026-01-07 12:17:13:1713 [31merror[39m: [31mError handler caught: Request failed with status code 401[39m
+2026-01-07 12:18:11:1811 [31merror[39m: [31mError fetching conversations: relation "conversations" does not exist[39m
+2026-01-07 12:18:14:1814 [31merror[39m: [31mError fetching conversations: relation "conversations" does not exist[39m
+2026-01-07 12:19:19:1919 [31merror[39m: [31mError fetching conversations: relation "conversations" does not exist[39m
+2026-01-07 12:19:22:1922 [31merror[39m: [31mError fetching conversations: relation "conversations" does not exist[39m
+2026-01-07 12:22:00:220 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-07 12:27:01:271 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-07 12:27:02:272 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-07 12:29:28:2928 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-01-08 06:26:54:2654 [31merror[39m: [31mError handler caught: relation "favorites" does not exist[39m
+2026-01-08 06:26:56:2656 [31merror[39m: [31mError handler caught: relation "favorites" does not exist[39m
+2026-01-08 06:31:19:3119 [31merror[39m: [31mError handler caught: relation "favorites" does not exist[39m
+2026-01-08 06:31:20:3120 [31merror[39m: [31mError handler caught: relation "favorites" does not exist[39m
+2026-01-08 14:46:16:4616 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-08 14:46:16:4616 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-08 14:46:16:4616 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-08 14:46:17:4617 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-08 14:46:55:4655 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-08 14:46:56:4656 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-08 14:47:10:4710 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-01-08 14:47:18:4718 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-01-08 14:47:30:4730 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-01-09 01:47:10:4710 [31merror[39m: [31mError handler caught: relation "favorites" does not exist[39m
+2026-01-09 01:47:11:4711 [31merror[39m: [31mError handler caught: relation "favorites" does not exist[39m
+2026-01-09 02:03:40:340 [31merror[39m: [31mError handler caught: relation "tasks" does not exist[39m
+2026-01-09 02:03:40:340 [31merror[39m: [31mError handler caught: relation "customers" does not exist[39m
+2026-01-09 02:03:41:341 [31merror[39m: [31mError handler caught: relation "tasks" does not exist[39m
+2026-01-09 02:03:42:342 [31merror[39m: [31mError handler caught: relation "customers" does not exist[39m
+2026-01-09 02:06:22:622 [31merror[39m: [31mMigration failed: relation "idx_messages_conversation_id" already exists[39m
+2026-01-09 02:10:11:1011 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-09 02:10:12:1012 [31merror[39m: [31mError handler caught: column u.username does not exist[39m
+2026-01-09 02:10:25:1025 [31merror[39m: [31mError handler caught: column u.username does not exist[39m
+2026-01-09 02:10:27:1027 [31merror[39m: [31mError handler caught: column u.username does not exist[39m
+2026-01-09 03:47:36:4736 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-09 03:47:37:4737 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-09 03:56:48:5648 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-09 03:56:49:5649 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-09 03:56:53:5653 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-09 03:56:55:5655 [31merror[39m: [31mError handler caught: Invalid API Key provided: sk_test_...[39m
+2026-01-09 04:01:45:145 [31merror[39m: [31mError handler caught: Request failed with status code 401[39m
+2026-01-10 06:02:17:217 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:35:16:3516 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:38:50:3850 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:38:51:3851 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:58:23:5823 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:58:24:5824 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:58:24:5824 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:58:24:5824 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:58:24:5824 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 11:58:50:5850 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-01-13 11:59:06:596 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-01-13 12:19:09:199 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-01-13 12:19:57:1957 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 12:45:16:4516 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-01-13 13:45:53:4553 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 13:45:57:4557 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 13:45:57:4557 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 23:44:10:4410 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-13 23:44:10:4410 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-14 00:03:57:357 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-14 00:03:58:358 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-14 00:03:58:358 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-14 12:43:25:4325 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-14 12:43:57:4357 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-14 12:45:02:452 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-14 12:46:08:468 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-01-15 10:11:26:1126 [31merror[39m: [31mError handler caught: Request failed with status code 401[39m
+2026-01-15 10:22:45:2245 [31merror[39m: [31mFailed to start server trendingRouter is not defined[39m
+2026-01-15 10:22:55:2255 [31merror[39m: [31mFailed to start server trendingRouter is not defined[39m
+2026-01-15 10:47:37:4737 [31merror[39m: [31mError handler caught: Request failed with status code 400[39m
+2026-01-15 10:47:58:4758 [31merror[39m: [31mError handler caught: Request failed with status code 400[39m
+2026-01-15 10:50:05:505 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 400[39m
+2026-01-15 10:50:05:505 [31merror[39m: [31mPaystack response: {"status":false,"message":"Email Address is required","meta":{"nextStep":"Provide all required params "},"type":"validation_error","code":"missing_params"}[39m
+2026-01-15 10:50:05:505 [31merror[39m: [31mError handler caught: Request failed with status code 400[39m
+2026-01-15 10:52:39:5239 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 403[39m
+2026-01-15 10:52:39:5239 [31merror[39m: [31mPaystack response: {"status":false,"message":"Currency not supported by merchant","meta":{"nextStep":"Ensure you're passing the currency code for a currency enabled on your integration"},"type":"validation_error","code":"unsupported_currency"}[39m
+2026-01-15 10:52:39:5239 [31merror[39m: [31mError handler caught: Request failed with status code 403[39m
+2026-01-15 10:56:27:5627 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 403[39m
+2026-01-15 10:56:27:5627 [31merror[39m: [31mPaystack response: {"status":false,"message":"Currency not supported by merchant","meta":{"nextStep":"Ensure you're passing the currency code for a currency enabled on your integration"},"type":"validation_error","code":"unsupported_currency"}[39m
+2026-01-15 10:56:27:5627 [31merror[39m: [31mError handler caught: Request failed with status code 403[39m
+2026-01-15 10:56:50:5650 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 403[39m
+2026-01-15 10:56:50:5650 [31merror[39m: [31mPaystack response: {"status":false,"message":"Currency not supported by merchant","meta":{"nextStep":"Ensure you're passing the currency code for a currency enabled on your integration"},"type":"validation_error","code":"unsupported_currency"}[39m
+2026-01-15 10:56:50:5650 [31merror[39m: [31mError handler caught: Request failed with status code 403[39m
+2026-01-15 10:57:58:5758 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 403[39m
+2026-01-15 10:57:58:5758 [31merror[39m: [31mPaystack response: {"status":false,"message":"Currency not supported by merchant","meta":{"nextStep":"Ensure you're passing the currency code for a currency enabled on your integration"},"type":"validation_error","code":"unsupported_currency"}[39m
+2026-01-15 10:57:58:5758 [31merror[39m: [31mError handler caught: Request failed with status code 403[39m
+2026-01-15 10:58:19:5819 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 403[39m
+2026-01-15 10:58:19:5819 [31merror[39m: [31mPaystack response: {"status":false,"message":"Currency not supported by merchant","meta":{"nextStep":"Ensure you're passing the currency code for a currency enabled on your integration"},"type":"validation_error","code":"unsupported_currency"}[39m
+2026-01-15 10:58:19:5819 [31merror[39m: [31mError handler caught: Request failed with status code 403[39m
+2026-01-15 11:18:13:1813 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-15 11:34:42:3442 [31merror[39m: [31mBackground crawl failed relation "trending_news" does not exist[39m
+2026-01-15 11:40:55:4055 [31merror[39m: [31mBackground crawl failed relation "trending_news" does not exist[39m
+2026-01-15 11:51:42:5142 [31merror[39m: [31mError handler caught: Verification not supported by provider[39m
+2026-01-15 12:04:05:45 [31merror[39m: [31mError handler caught: relation "trending_news" does not exist[39m
+2026-01-15 12:04:06:46 [31merror[39m: [31mError handler caught: relation "trending_news" does not exist[39m
+2026-01-15 13:23:00:230 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-15 13:23:00:230 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-15 13:30:55:3055 [31merror[39m: [31mFailed to start server uploadRouter is not defined[39m
+2026-01-15 13:38:54:3854 [31merror[39m: [31mCloudinary upload failed: getaddrinfo EAI_AGAIN api.cloudinary.com[39m
+2026-01-15 13:38:54:3854 [31merror[39m: [31mError in uploadImage controller: Failed to upload image to Cloudinary[39m
+2026-01-15 13:38:54:3854 [31merror[39m: [31mError handler caught: Failed to upload image to Cloudinary[39m
+2026-01-15 13:50:03:503 [31merror[39m: [31mError handler caught: column "inspired_image_url" of relation "items" does not exist[39m
+2026-01-15 13:51:01:511 [31merror[39m: [31mMigration failed: column "role_access" does not exist[39m
+2026-01-17 23:07:04:74 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-17 23:10:59:1059 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-17 23:11:00:110 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-17 23:22:30:2230 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-18 08:27:39:2739 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-19 12:23:26:2326 [31merror[39m: [31mMigration failed: column "delivery_destination" of relation "tasks" already exists[39m
+2026-01-19 12:24:53:2453 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-19 12:43:33:4333 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-19 14:14:35:1435 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference yiwez45jgk: column "provider_payment_id" of relation "installments" does not exist[39m
+2026-01-19 14:15:35:1535 [31merror[39m: [31mPaystack initialization failed: Request failed with status code 403[39m
+2026-01-19 14:15:35:1535 [31merror[39m: [31mPaystack response: {"status":false,"message":"Currency not supported by merchant","meta":{"nextStep":"Ensure you're passing the currency code for a currency enabled on your integration"},"type":"validation_error","code":"unsupported_currency"}[39m
+2026-01-19 14:15:35:1535 [31merror[39m: [31mError handler caught: Request failed with status code 403[39m
+2026-01-20 23:04:03:43 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-20 23:37:58:3758 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-20 23:38:30:3830 [31merror[39m: [31mCloudinary upload failed: getaddrinfo EAI_AGAIN api.cloudinary.com[39m
+2026-01-20 23:38:30:3830 [31merror[39m: [31mError in uploadImage controller: Failed to upload image to Cloudinary[39m
+2026-01-20 23:38:30:3830 [31merror[39m: [31mError handler caught: Failed to upload image to Cloudinary[39m
+2026-01-20 23:43:11:4311 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference 1p6tcyx6y9: column "provider_payment_id" of relation "installments" does not exist[39m
+2026-01-21 10:02:51:251 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference rndifsufs7: column "provider_payment_id" of relation "installments" does not exist[39m
+2026-01-21 11:22:42:2242 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-01-21 11:22:42:2242 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-26 18:41:54:4154 [31merror[39m: [31mError handler caught: canceling statement due to statement timeout[39m
+2026-01-26 18:49:16:4916 [31merror[39m: [31mError handler caught: canceling statement due to statement timeout[39m
+2026-01-26 18:50:47:5047 [31merror[39m: [31m[PAYSTACK CHARGE] Error in task creation process: column "production_notes" of relation "tasks" does not exist[39m
+2026-01-26 18:50:47:5047 [31merror[39m: [31merror: column "production_notes" of relation "tasks" does not exist[39m
+[31m    at C:\Users\OmiD\Desktop\veleonex\fashion\backend\node_modules\pg-pool\index.js:45:11[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async PaystackService.handleChargeSuccess (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\services\paystackService.ts:307:32)[39m
+[31m    at async PaystackService.verifyTransaction (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\services\paystackService.ts:117:9)[39m
+[31m    at async PaymentService.verifyTransaction (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\services\paymentService.ts:31:14)[39m
+[31m    at async verifyRequest (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\controllers\paymentController.ts:139:21)[39m
+2026-01-26 18:51:25:5125 [31merror[39m: [31m[PAYSTACK CHARGE] Error in task creation process: column "production_notes" of relation "tasks" does not exist[39m
+2026-01-26 18:51:25:5125 [31merror[39m: [31merror: column "production_notes" of relation "tasks" does not exist[39m
+[31m    at C:\Users\OmiD\Desktop\veleonex\fashion\backend\node_modules\pg-pool\index.js:45:11[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+[31m    at async PaystackService.handleChargeSuccess (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\services\paystackService.ts:307:32)[39m
+[31m    at async PaystackService.verifyTransaction (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\services\paystackService.ts:117:9)[39m
+[31m    at async PaymentService.verifyTransaction (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\services\paymentService.ts:31:14)[39m
+[31m    at async verifyRequest (C:\Users\OmiD\Desktop\veleonex\fashion\backend\src\controllers\paymentController.ts:139:21)[39m
+2026-01-26 19:07:06:76 [31merror[39m: [31mError handler caught: canceling statement due to statement timeout[39m
+2026-01-26 19:27:19:2719 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-27 12:50:32:5032 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-01-31 09:59:16:5916 [31merror[39m: [31mError handler caught: getaddrinfo ENOTFOUND aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-31 09:59:16:5916 [31merror[39m: [31mError handler caught: getaddrinfo ENOTFOUND aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-31 09:59:16:5916 [31merror[39m: [31mError handler caught: getaddrinfo ENOTFOUND aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-31 09:59:17:5917 [31merror[39m: [31mError handler caught: getaddrinfo ENOTFOUND aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-31 21:31:11:3111 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-01-31 21:43:54:4354 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-north-1.pooler.supabase.com[39m
+2026-02-01 00:00:10:010 [31merror[39m: [31mWeekly fashion crawl failed Connection terminated due to connection timeout[39m
+2026-02-23 08:41:27:4127 [31merror[39m: [31mDatabase connection failed password authentication failed for user "postgres"[39m
+2026-02-23 10:42:18:4218 [31merror[39m: [31mError fetching ads: relation "ads" does not exist[39m
+2026-02-23 10:43:28:4328 [31merror[39m: [31mError fetching ads: relation "ads" does not exist[39m
+2026-02-23 10:43:30:4330 [31merror[39m: [31mError fetching ads: relation "ads" does not exist[39m
+2026-02-23 10:43:43:4343 [31merror[39m: [31mError handler caught: Wrong recipient, payload audience != requiredAudience[39m
+2026-02-23 10:44:00:440 [31merror[39m: [31mError handler caught: Wrong recipient, payload audience != requiredAudience[39m
+2026-02-23 10:52:27:5227 [31merror[39m: [31mError handler caught: relation "users" does not exist[39m
+2026-02-23 10:56:43:5643 [31merror[39m: [31mMigration failed: relation "enrollments" does not exist[39m
+2026-02-23 19:13:35:1335 [31merror[39m: [31mMigration failed: column "tutor_id" of relation "enrollments" already exists[39m
+2026-02-23 19:26:29:2629 [31merror[39m: [31mError handler caught: relation "categories" does not exist[39m
+2026-02-23 19:26:30:2630 [31merror[39m: [31mError handler caught: relation "measurement_fields" does not exist[39m
+2026-02-23 19:26:32:2632 [31merror[39m: [31mError handler caught: relation "categories" does not exist[39m
+2026-02-23 19:26:35:2635 [31merror[39m: [31mError handler caught: relation "measurement_fields" does not exist[39m
+2026-02-23 19:29:51:2951 [31merror[39m: [31mError handler caught: Invalid role.[39m
+2026-02-23 19:39:51:3951 [31merror[39m: [31mMigration failed: column "tutor_id" of relation "enrollments" already exists[39m
+2026-02-24 03:16:49:1649 [31merror[39m: [31mMigration failed: column "tutor_id" of relation "enrollments" already exists[39m
+2026-02-24 04:13:17:1317 [31merror[39m: [31mCloudinary upload failed: cloud_name is disabled[39m
+2026-02-24 04:13:17:1317 [31merror[39m: [31mError in uploadImage controller: Failed to upload image to Cloudinary[39m
+2026-02-24 04:13:17:1317 [31merror[39m: [31mError handler caught: Failed to upload image to Cloudinary[39m
+2026-02-24 04:28:41:2841 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-02-24 04:54:15:5415 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:54:15:5415 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:54:16:5416 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:54:17:5417 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:54:44:5444 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:54:44:5444 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:54:45:5445 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:54:46:5446 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:54:58:5458 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:54:58:5458 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:54:59:5459 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:55:00:550 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:56:32:5632 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:56:32:5632 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:56:34:5634 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:56:34:5634 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:57:26:5726 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:57:26:5726 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:57:29:5729 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:57:29:5729 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:18:5818 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:58:18:5818 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:20:5820 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:58:20:5820 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:24:5824 [31merror[39m: [31mError handler caught: relation "categories" does not exist[39m
+2026-02-24 04:58:26:5826 [31merror[39m: [31mError handler caught: relation "categories" does not exist[39m
+2026-02-24 04:58:29:5829 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:58:29:5829 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:30:5830 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:30:5830 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:58:42:5842 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:42:5842 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:58:44:5844 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:58:44:5844 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:59:38:5938 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:59:38:5938 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:59:40:5940 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:59:40:5940 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:59:46:5946 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:59:46:5946 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:59:54:5954 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:59:54:5954 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 04:59:55:5955 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 04:59:56:5956 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:05:47:547 [31merror[39m: [31mCloudinary upload failed: Unsupported ZIP file[39m
+2026-02-24 05:05:47:547 [31merror[39m: [31mError in uploadImage controller: Failed to upload image to Cloudinary[39m
+2026-02-24 05:05:47:547 [31merror[39m: [31mError handler caught: Failed to upload image to Cloudinary[39m
+2026-02-24 05:27:12:2712 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:27:13:2713 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:27:14:2714 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:27:15:2715 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:28:38:2838 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:28:39:2839 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:28:40:2840 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:28:41:2841 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:28:56:2856 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:28:56:2856 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:28:57:2857 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:28:58:2858 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:29:11:2911 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:29:11:2911 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:29:13:2913 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:29:13:2913 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:33:52:3352 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:33:52:3352 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:33:54:3354 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:33:54:3354 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:34:51:3451 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:34:51:3451 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:34:53:3453 [31merror[39m: [31mError handler caught: column "description" does not exist[39m
+2026-02-24 05:34:53:3453 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 05:36:42:3642 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference eyejowscpm: column "description" of relation "transactions" does not exist[39m
+2026-02-24 05:36:46:3646 [31merror[39m: [31m[PAYSTACK VERIFY] Verification error for reference eyejowscpm: column "description" of relation "transactions" does not exist[39m
+2026-02-24 09:07:36:736 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 09:07:46:746 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 09:07:46:746 [31merror[39m: [31mError handler caught: Invalid verification token.[39m
+2026-02-24 09:08:00:80 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m
+2026-02-24 09:08:01:81 [31merror[39m: [31mError handler caught: column t.transaction_id does not exist[39m

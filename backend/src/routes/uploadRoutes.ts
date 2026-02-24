@@ -1,0 +1,18 @@
+import { Router } from "express";
+import multer from "multer";
+import { authenticate } from "../middleware/authMiddleware.js";
+import { uploadFile } from "../controllers/uploadController.js";
+
+const uploadRouter = Router();
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50MB limit
+  },
+});
+
+// Require authentication for uploads
+uploadRouter.post("/", authenticate, upload.single("file"), uploadFile);
+
+export { uploadRouter };
