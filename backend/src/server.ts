@@ -18,7 +18,7 @@ import { taskRouter } from "./routes/taskRoutes.js";
 import { lookRouter } from "./routes/lookRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
-import { pingDatabase } from "./database/pool.js";
+import { pool, pingDatabase } from "./database/pool.js";
 import { logger } from "./utils/logger.js";
 import { rateLimiter, authRateLimiter } from "./middleware/rateLimiter.js";
 import { SocketService } from "./services/socketService.js";
@@ -129,6 +129,18 @@ async function bootstrap(): Promise<void> {
 
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok" });
+  });
+
+  app.get("/veleonheart", async (_req, res) => {
+    try {
+      await pool.query(
+        "UPDATE veleonheart SET last_ping = CURRENT_TIMESTAMP, counter = counter + 1 WHERE id = 1"
+      );
+      res.status(200).json({ status: "alive", heart: "beating" });
+    } catch (err) {
+      logger.error("VeleonHeart check failed", err);
+      res.status(500).json({ error: "Heartbeat failed" });
+    }
   });
 
   app.use("/api/auth", authRateLimiter, authRouter);

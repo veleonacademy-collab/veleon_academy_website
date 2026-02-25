@@ -8055,3 +8055,68 @@
 2026-02-24 20:58:09:589 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
 2026-02-24 20:58:10:5810 [32minfo[39m: [32mUser 11 connected with socket c3HdZtGM9ZDaEM51AAAP[39m
 2026-02-24 20:58:10:5810 [35mhttp[39m: [35mGET /api/auth/me 304 - - 190.492 ms[39m
+2026-02-24 21:09:57:957 [32minfo[39m: [32mSocket c3HdZtGM9ZDaEM51AAAP disconnected[39m
+2026-02-24 21:09:57:957 [32minfo[39m: [32mSocket DSenl3p1N9JUf27ZAAAL disconnected[39m
+2026-02-24 21:09:57:957 [32minfo[39m: [32mSocket C7c2uLh1A8m_8jy9AAAH disconnected[39m
+2026-02-24 21:09:57:957 [32minfo[39m: [32mSocket gV9gMd88dBu8AXPXAAAG disconnected[39m
+2026-02-25 09:39:05:395 [32minfo[39m: [32mUser 11 connected with socket P_ROEnQewjuRJcybAAAS[39m
+2026-02-25 09:39:09:399 [32minfo[39m: [32mUser 11 connected with socket CDqrD5MXyGyLsxLDAAAV[39m
+2026-02-25 09:39:09:399 [32minfo[39m: [32mUser 11 connected with socket 40VIMcgYSIaYF3D2AAAW[39m
+2026-02-25 09:39:09:399 [32minfo[39m: [32mUser 11 connected with socket 6V2YACZS0aiNa9SbAAAX[39m
+2026-02-25 09:42:36:4236 [32minfo[39m: [32mSocket CDqrD5MXyGyLsxLDAAAV disconnected[39m
+2026-02-25 09:42:38:4238 [37mdebug[39m: [37m[Request] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-25 09:42:38:4238 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-25 09:42:39:4239 [37mdebug[39m: [37m[Request] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-25 09:42:39:4239 [37mdebug[39m: [37m[Request] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-25 09:42:39:4239 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-25 09:42:41:4241 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 2297.653 ms[39m
+2026-02-25 09:42:41:4241 [35mhttp[39m: [35mGET /api/auth/me 304 - - 2331.423 ms[39m
+2026-02-25 09:42:41:4241 [37mdebug[39m: [37m[Request] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-02-25 09:42:41:4241 [32minfo[39m: [32mUser 11 connected with socket jdwb1ORzCS8tRwOkAAAZ[39m
+2026-02-25 09:42:41:4241 [35mhttp[39m: [35mGET /api/auth/me 304 - - 177.989 ms[39m
+2026-02-25 10:04:54:454 [32minfo[39m: [32mStarting database migrations...[39m
+2026-02-25 10:04:54:454 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-02-25 10:04:55:455 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-02-25 10:04:55:455 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-02-25 10:04:55:455 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-02-25 10:04:55:455 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-02-25 10:04:55:455 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-02-25 10:04:55:455 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-02-25 10:04:56:456 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-02-25 10:04:57:457 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-02-25 10:04:58:458 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-02-25 10:04:58:458 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-02-25 10:04:58:458 [31merror[39m: [31mMigration failed: column "tutor_id" of relation "enrollments" already exists[39m
+2026-02-25 10:12:01:121 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-25 10:12:01:121 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5003[39m
+2026-02-25 10:12:01:121 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-25 10:12:01:121 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-25 10:12:01:121 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-25 10:12:01:121 [32minfo[39m: [32mUser 11 connected with socket tPkJgtG4PUrpXpobAAAB[39m
+2026-02-25 10:12:02:122 [32minfo[39m: [32mUser 11 connected with socket tlDci98RQ98yY3DRAAAE[39m
+2026-02-25 10:12:02:122 [32minfo[39m: [32mUser 11 connected with socket 2SlrwZWaJnoL4ZHhAAAF[39m
+2026-02-25 10:12:03:123 [32minfo[39m: [32mUser 11 connected with socket jCJiBOr2p87DEK51AAAH[39m
