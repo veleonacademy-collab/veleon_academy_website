@@ -131,7 +131,7 @@ async function bootstrap(): Promise<void> {
     res.json({ status: "ok" });
   });
 
-  app.get("/veleonheart", async (_req, res) => {
+  app.get("/api/veleonheart", async (_req, res) => {
     try {
       await pool.query(
         "UPDATE veleonheart SET last_ping = CURRENT_TIMESTAMP, counter = counter + 1 WHERE id = 1"
