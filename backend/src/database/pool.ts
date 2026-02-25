@@ -11,17 +11,27 @@ export const pool = new Pool({
   
   // Connection pool settings
   max: 20, // Maximum number of connections in the pool
-  min: 2, // Minimum number of connections to maintain
+  min: 5, // Keep at least 5 connections alive to avoid cold starts
   idleTimeoutMillis: 30000, // Close idle connections after 30 seconds
-  connectionTimeoutMillis: 10000, // Wait up to 10 seconds for a connection
+  connectionTimeoutMillis: 5000, // Wait up to 5 seconds for a connection
   
+  // SSL is required for Supabase and improves connection stability/speed when handled correctly by the driver
+  ssl: {
+    rejectUnauthorized: false
+  },
+
   // Retry settings for DNS and connection issues
   keepAlive: true,
   keepAliveInitialDelayMillis: 10000,
 });
 
 export async function pingDatabase(): Promise<void> {
+  const start = Date.now();
   await pool.query("SELECT 1");
+  const duration = Date.now() - start;
+  if (duration > 500) {
+    console.warn(`[DB] Ping took ${duration}ms - Possible slow connection to Supabase`);
+  }
 }
 
 

@@ -75,9 +75,23 @@ async function bootstrap(): Promise<void> {
   const socketService = SocketService.getInstance();
   socketService.initialize(httpServer, allowedOrigins);
 
-  // 1. Logging and debugging
+  // 1. Performance monitoring & Logging
   app.use((req, res, next) => {
-    logger.debug(`[Request] ${req.method} ${req.url} | Origin: ${req.headers.origin}`);
+    const start = Date.now();
+    logger.debug(`[Request Start] ${req.method} ${req.url} | Origin: ${req.headers.origin}`);
+    
+    // Patch res.end to calculate total time
+    const originalEnd = res.end;
+    res.end = function(chunk?: any, encoding?: any, cb?: any) {
+      const duration = Date.now() - start;
+      if (duration > 1000) {
+        logger.warn(`[SLOW REQUEST] ${req.method} ${req.url} took ${duration}ms`);
+      } else {
+        logger.debug(`[Request End] ${req.method} ${req.url} took ${duration}ms`);
+      }
+      return originalEnd.call(this, chunk, encoding, cb);
+    };
+    
     next();
   });
 

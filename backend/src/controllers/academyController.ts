@@ -73,9 +73,17 @@ export class AcademyController {
         [courseId]
       );
 
-      for (const student of studentsRes.rows) {
-        await sendRecordingNotificationEmail(student.email, student.first_name, courseTitle, title, videoUrl);
-      }
+      // Notify all enrolled students (Non-blocking)
+      const notifyStudents = async () => {
+        for (const student of studentsRes.rows) {
+          try {
+            await sendRecordingNotificationEmail(student.email, student.first_name, courseTitle, title, videoUrl);
+          } catch (err) {
+            console.error(`Failed to send recording email to ${student.email}:`, err);
+          }
+        }
+      };
+      notifyStudents();
 
       res.status(201).json(recording);
     } catch (error) {
@@ -107,9 +115,17 @@ export class AcademyController {
           [courseId]
         );
 
-        for (const student of studentsRes.rows) {
-          await sendAssignmentNotificationEmail(student.email, student.first_name, courseTitle, title, dueDate);
-        }
+        // Notify all enrolled students (Non-blocking)
+        const notifyStudents = async () => {
+          for (const student of studentsRes.rows) {
+            try {
+              await sendAssignmentNotificationEmail(student.email, student.first_name, courseTitle, title, dueDate);
+            } catch (err) {
+              console.error(`Failed to send assignment email to ${student.email}:`, err);
+            }
+          }
+        };
+        notifyStudents();
       } catch (err) {
         console.error(`Failed to send assignment notifications: ${err}`);
       }
