@@ -40,6 +40,7 @@ export async function registerUser(input: unknown): Promise<string> {
   const data = registerSchema.parse(input);
 
   const client = await pool.connect();
+  let verificationToken: string;
   try {
     await client.query("BEGIN");
 
@@ -54,7 +55,7 @@ export async function registerUser(input: unknown): Promise<string> {
     }
 
     const passwordHash = await hashPassword(data.password);
-    const verificationToken = randomBytes(32).toString("hex");
+    verificationToken = randomBytes(32).toString("hex");
 
     // Check if a customer already exists with this email
     const existingCustomer = await client.query(
@@ -92,22 +93,22 @@ export async function registerUser(input: unknown): Promise<string> {
     }
 
     await client.query("COMMIT");
-
-    // Send verification email (outside transaction)
-    try {
-      await sendVerificationEmail(data.email, data.firstName, verificationToken);
-    } catch (error) {
-      console.error("Failed to send verification email:", error);
-      console.log(`Email verification link: ${env.appUrl}/verify-email?token=${verificationToken}`);
-    }
-
-    return verificationToken;
   } catch (error) {
     await client.query("ROLLBACK");
     throw error;
   } finally {
     client.release();
   }
+
+  // Send verification email in the background (fire and forget)
+  // This avoids holding up the HTTP response and the database connection
+  sendVerificationEmail(data.email, data.firstName, verificationToken).catch((error) => {
+    console.error("Failed to send verification email (background):", error);
+    // In dev, we still log the link so it can be used even if SMTP fails
+    console.log(`Email verification link (fallback): ${env.appUrl}/verify-email?token=${verificationToken}`);
+  });
+
+  return verificationToken;
 }
 
 export async function loginUser(
@@ -253,17 +254,15 @@ export async function requestPasswordReset(email: string): Promise<void> {
     [token, expiresAt, user.id]
   );
 
-  // Send password reset email
-    try {
-    await sendPasswordResetEmail(email, user.first_name, token);
-  } catch (error) {
+  // Send password reset email in the background (fire and forget)
+  sendPasswordResetEmail(email, user.first_name, token).catch((error) => {
     // Log error but don't fail the request
-    console.error("Failed to send password reset email:", error);
+    console.error("Failed to send password reset email (background):", error);
     // Fallback: log the link for development
     console.log(
-      `Password reset link: ${env.appUrl}/reset-password?token=${token}`
+      `Password reset link (fallback): ${env.appUrl}/reset-password?token=${token}`
     );
-  }
+  });
 }
 
 const resetPasswordSchema = z.object({
@@ -455,17 +454,15 @@ export async function resendVerificationEmail(email: string): Promise<string> {
     [verificationToken, user.id]
   );
 
-  // Send verification email
-  try {
-    await sendVerificationEmail(email, user.first_name, verificationToken);
-  } catch (error) {
+  // Send verification email in the background (fire and forget)
+  sendVerificationEmail(email, user.first_name, verificationToken).catch((error) => {
     // Log error but don't fail the request
-    console.error("Failed to send verification email:", error);
+    console.error("Failed to send verification email (background):", error);
     // Fallback: log the link for development
     console.log(
-      `Email verification link: ${env.appUrl}/verify-email?token=${verificationToken}`
+      `Email verification link (fallback): ${env.appUrl}/verify-email?token=${verificationToken}`
     );
-  }
+  });
 
   return verificationToken;
 }

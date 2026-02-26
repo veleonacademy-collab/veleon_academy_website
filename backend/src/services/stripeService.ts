@@ -218,22 +218,25 @@ export class StripeService implements PaymentProvider {
     }
 
     // Send Payment Receipt Email
-    try {
-        const userRes = await pool.query("SELECT first_name, email FROM users WHERE id = $1", [userId]);
-        const user = userRes.rows[0];
-        if (user) {
-            await sendPaymentReceiptEmail(
-                user.email,
-                user.first_name,
-                (session.amount_total || 0) / 100,
-                (session.currency || 'USD').toUpperCase(),
-                description,
-                providerPaymentId || session.id
-            );
+    // Send Payment Receipt Email in background
+    (async () => {
+        try {
+            const userRes = await pool.query("SELECT first_name, email FROM users WHERE id = $1", [userId]);
+            const user = userRes.rows[0];
+            if (user) {
+                await sendPaymentReceiptEmail(
+                    user.email,
+                    user.first_name,
+                    (session.amount_total || 0) / 100,
+                    (session.currency || 'USD').toUpperCase(),
+                    description,
+                    providerPaymentId || session.id
+                );
+            }
+        } catch (err) {
+            logger.error(`[STRIPE CHARGE] Failed to send receipt email to user ${userId}: ${err}`);
         }
-    } catch (err) {
-        logger.error(`[STRIPE CHARGE] Failed to send receipt email to user ${userId}: ${err}`);
-    }
+    })();
 
     if (type === "subscription" && session.subscription) {
       const subscription = await this.stripe.subscriptions.retrieve(session.subscription as string);

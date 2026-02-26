@@ -186,12 +186,10 @@ export class PaystackService implements PaymentProvider {
       );
       userId = newUser.rows[0].id;
 
-      // Send Welcome Email
-      try {
-        await sendStudentWelcomeEmail(email, tempPassword, firstName);
-      } catch (err) {
+      // Send Welcome Email in background
+      sendStudentWelcomeEmail(email, tempPassword, firstName).catch((err) => {
         logger.error(`[PAYSTACK CHARGE] Failed to send welcome email to ${email}: ${err}`);
-      }
+      });
     } else {
       userId = userRes.rows[0].id;
       firstName = userRes.rows[0].first_name || metadata?.firstName || "Student";
@@ -249,25 +247,28 @@ export class PaystackService implements PaymentProvider {
       );
     }
 
-    // 7. Send Emails
-    try {
-      // Always send payment receipt
-      await sendPaymentReceiptEmail(
-        email, 
-        firstName, 
-        amountPaid, 
-        data.currency, 
-        paymentPlan === 'installment' ? `${displayTitle} (Installment Payment)` : displayTitle, 
-        data.reference
-      );
+    // 7. Send Emails in the background (fire and forget)
+    // This avoids blocking the webhook response or verification request
+    (async () => {
+      try {
+        // Always send payment receipt
+        await sendPaymentReceiptEmail(
+          email, 
+          firstName, 
+          amountPaid, 
+          data.currency, 
+          paymentPlan === 'installment' ? `${displayTitle} (Installment Payment)` : displayTitle, 
+          data.reference
+        );
 
-      // Send enrollment confirmation only on first purchase/enrollment
-      if (isNewEnrollment && courseRes.rows.length > 0) {
-        await sendEnrollmentConfirmationEmail(email, firstName, displayTitle);
+        // Send enrollment confirmation only on first purchase/enrollment
+        if (isNewEnrollment && courseRes.rows.length > 0) {
+          await sendEnrollmentConfirmationEmail(email, firstName, displayTitle);
+        }
+      } catch (err) {
+        logger.error(`[PAYSTACK CHARGE] Failed to send notification emails to ${email}: ${err}`);
       }
-    } catch (err) {
-      logger.error(`[PAYSTACK CHARGE] Failed to send notification emails to ${email}: ${err}`);
-    }
+    })();
 
     logger.info(`[PAYSTACK CHARGE] handleChargeSuccess completed for reference: ${data.reference}`);
   }

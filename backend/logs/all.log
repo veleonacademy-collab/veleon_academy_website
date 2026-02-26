@@ -8333,3 +8333,12 @@
 2026-02-25 22:27:51:2751 [37mdebug[39m: [37m[Request Start] HEAD /api/academy/courses | Origin: undefined[39m
 2026-02-25 22:27:52:2752 [37mdebug[39m: [37m[Request End] HEAD /courses took 402ms[39m
 2026-02-25 22:27:52:2752 [35mhttp[39m: [35mHEAD /api/academy/courses 200 2053 - 401.088 ms[39m
+2026-02-25 23:21:00:210 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5175[39m
+2026-02-25 23:21:00:210 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5175[39m
+2026-02-25 23:21:01:211 [33mwarn[39m: [33m[SLOW REQUEST] GET / took 1124ms[39m
+2026-02-25 23:21:01:211 [35mhttp[39m: [35mGET /api/ads 200 2 - 1113.982 ms[39m
+2026-02-25 23:21:02:212 [35mhttp[39m: [35mGET /api/academy/courses - - - - ms[39m
+2026-02-25 23:21:05:215 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 5112ms[39m
+2026-02-26 00:00:00:00 [32minfo[39m: [32mRunning daily overdue installment check...[39m
+2026-02-26 00:00:00:00 [32minfo[39m: [32mProcessing overdue installments...[39m
+2026-02-26 00:00:00:00 [32minfo[39m: [32mLocked portals for 0 students.[39m
