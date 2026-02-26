@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
 import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book } from "lucide-react";
+import SEO from "../components/SEO";
 
 const CourseDetailPage: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
@@ -37,6 +38,12 @@ const CourseDetailPage: React.FC = () => {
 
   return (
     <div className="space-y-10">
+      <SEO 
+        title={course?.title || "Course Details"}
+        description={course?.description || undefined}
+        image={course?.thumbnail_url || undefined}
+        type="course"
+      />
       {/* Back */}
       <Link
         to="/student/dashboard"

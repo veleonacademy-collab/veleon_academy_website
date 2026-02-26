@@ -8365,3 +8365,5 @@
 2026-02-26 11:49:32:4932 [37mdebug[39m: [37m[Request Start] POST /api/auth/resend-verification | Origin: http://localhost:5173[39m
 2026-02-26 11:49:32:4932 [37mdebug[39m: [37m[Request End] POST /resend-verification took 351ms[39m
 2026-02-26 11:49:32:4932 [35mhttp[39m: [35mPOST /api/auth/resend-verification 200 201 - 351.814 ms[39m
+2026-02-26 12:21:56:2156 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-26 12:21:56:2156 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m

@@ -13,6 +13,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import type { GoogleOAuthRequest } from "../types/oauth";
 import type { AuthTokens, User } from "../types/auth";
+import SEO from "../components/SEO";
 
 const RegisterPage: React.FC = () => {
   const { clearAuth, setAuth } = useAuth();
@@ -114,6 +115,10 @@ const RegisterPage: React.FC = () => {
 
   return (
     <>
+      <SEO 
+        title="Create Account"
+        description="Join Veleon Academy today. Create an account to start your journey in software engineering, data science, and more."
+      />
       <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
         <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>
         {validationError && (
@@ -248,7 +253,7 @@ const RegisterPage: React.FC = () => {
             </p>
           </div>
 
-          {showDevLink && verificationLink && (
+          {/* {showDevLink && verificationLink && (
             <div className="rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-4 space-y-2">
               <p className="text-xs font-semibold text-yellow-600 dark:text-yellow-400">
                 Immediate Verification Link:
@@ -264,7 +269,7 @@ const RegisterPage: React.FC = () => {
                 </a>
               </div>
             </div>
-          )}
+          )} */}
 
           <button
             onClick={handleResendVerification}

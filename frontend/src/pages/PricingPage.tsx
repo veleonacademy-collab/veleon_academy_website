@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckoutButton } from '../components/Payment/CheckoutButton';
 import { BackButton } from '../components/ui/BackButton';
+import SEO from '../components/SEO';
 
 const PricingPage: React.FC = () => {
   const [provider, setProvider] = React.useState<'stripe' | 'paystack'>('paystack');
@@ -48,6 +49,10 @@ const PricingPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen py-24 px-4 overflow-hidden">
+      <SEO 
+        title="Pricing Plans"
+        description="Choose a plan that fits your lifestyle. Flexible payment options for your tech education at Veleon Academy."
+      />
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/10 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-purple-500/10 blur-[100px] rounded-full -z-10" />

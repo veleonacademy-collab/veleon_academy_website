@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemaps (enable after generation)
+# Sitemap: https://veleonacademy.veleonex.com/sitemap.xml
+
+# Disallow sensitive paths
+Disallow: /admin/
+Disallow: /tutor/
+Disallow: /student/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /chat/
+Disallow: /payment/

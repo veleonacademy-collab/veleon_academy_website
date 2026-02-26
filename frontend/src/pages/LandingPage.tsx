@@ -7,7 +7,7 @@ import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sp
 import { academyApi } from "../api/academy";
 import { formatCurrency } from "../utils/formatUtils";
 import { useAuth } from "../state/AuthContext";
-
+import SEO from "../components/SEO";
 
 const LandingPage: React.FC = () => {
   const { user } = useAuth();
@@ -63,6 +63,10 @@ const LandingPage: React.FC = () => {
   
   return (
     <div className="space-y-8 sm:space-y-12 pb-10 sm:pb-20">
+      <SEO 
+        title="Home"
+        description="Master the future of technology with Veleon Academy. Industry-led training in Software Engineering, Data Analytics, and Data Science."
+      />
       {/* Hero Section */}
       <section className="relative min-h-[70vh] sm:h-[80vh] w-full overflow-hidden flex items-center">
         <div className="absolute inset-0 bg-slate-900">

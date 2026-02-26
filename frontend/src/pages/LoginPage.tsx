@@ -10,6 +10,7 @@ import { loginSchema } from "../validation/authSchemas";
 import type { GoogleOAuthRequest } from "../types/oauth";
 import { Input } from "../components/forms/Input";
 import { Label } from "../components/forms/Label";
+import SEO from "../components/SEO";
 
 interface LocationState {
   from?: { 
@@ -130,6 +131,10 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
+      <SEO 
+        title="Login"
+        description="Login to your Veleon Academy account to access your courses, dashboard, and learning resources."
+      />
       <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
       {error && (
         <div className="mb-3 space-y-2">
