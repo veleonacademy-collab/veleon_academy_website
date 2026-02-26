@@ -1,27 +1,29 @@
-import nodemailer from "nodemailer";
+import axios from "axios";
 import { env } from "../config/env.js";
 
-// Create reusable transporter using Brevo SMTP
-const transporter = nodemailer.createTransport({
-  host: env.email.smtp.host,
-  port: env.email.smtp.port,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: env.email.smtp.user,
-    pass: env.email.smtp.pass,
+// Brevo API instance
+const brevoClient = axios.create({
+  baseURL: "https://api.brevo.com/v3",
+  headers: {
+    "api-key": env.email.brevoApiKey,
+    "Content-Type": "application/json",
+    "Accept": "application/json",
   },
 });
 
-// Verify transporter configuration on startup (only in development)
+// Verify API key on startup
 if (env.nodeEnv === "development") {
-  transporter.verify((error, success) => {
-    if (error) {
-      console.error("❌ Email service configuration error:", error.message);
-      console.log("💡 Please configure your Brevo SMTP credentials in .env file");
-    } else {
-      console.log("✅ Email service is ready to send emails");
-    }
-  });
+  if (!env.email.brevoApiKey || env.email.brevoApiKey === "") {
+    console.warn("⚠️ BREVO_API_KEY is missing in your .env file. Email delivery will likely fail.");
+  } else {
+    // Check account status as a ping
+    brevoClient.get("/account")
+      .then(() => console.log("✅ Brevo API is ready to send emails"))
+      .catch((err) => {
+        console.error("❌ Brevo API configuration error:", err.response?.data?.message || err.message);
+        console.log("💡 Please check your BREVO_API_KEY in .env file");
+      });
+  }
 }
 
 interface EmailOptions {
@@ -32,35 +34,44 @@ interface EmailOptions {
 }
 
 /**
- * Send an email using Brevo SMTP
+ * Send an email using Brevo HTTP API
+ * Faster and more reliable on platforms like Render than SMTP
  */
 export async function sendEmail(options: EmailOptions): Promise<void> {
   console.log("==================================================================");
-  console.log("📧 Email Service (Simulation) - Logging Email Content:");
+  console.log("📧 Email Service (API) - Sending Email:");
   console.log("------------------------------------------------------------------");
   console.log("To:", options.to);
   console.log("Subject:", options.subject);
-  console.log("Text Body:", options.text);
   console.log("==================================================================");
 
   try {
-    const info = await transporter.sendMail({
-      from: `"${env.email.fromName}" <${env.email.from}>`,
-      replyTo: env.email.from,
-      to: options.to,
+    const payload = {
+      sender: {
+        name: env.email.fromName,
+        email: env.email.from,
+      },
+      to: [{ email: options.to }],
       subject: options.subject,
-      text: options.text,
-      html: options.html,
-    });
+      htmlContent: options.html,
+      textContent: options.text || options.subject, // Fallback text
+      replyTo: { email: env.email.from },
+    };
+
+    const response = await brevoClient.post("/smtp/email", payload);
 
     if (env.nodeEnv === "development") {
-      console.log("📧 Email sent:", info.messageId);
+      console.log("📧 Email sent via API:", response.data.messageId);
       console.log("   To:", options.to);
       console.log("   Subject:", options.subject);
     }
-  } catch (error) {
-    console.error("❌ Error sending email:", error);
-    throw new Error("Failed to send email");
+  } catch (error: any) {
+    const errorMsg = error.response?.data?.message || error.message;
+    console.error("❌ Error sending email via Brevo API:", errorMsg);
+    if (error.response?.data?.errors) {
+      console.error("   Details:", JSON.stringify(error.response.data.errors, null, 2));
+    }
+    throw new Error(`Failed to send email: ${errorMsg}`);
   }
 }
 
