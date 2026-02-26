@@ -8342,3 +8342,26 @@
 2026-02-26 00:00:00:00 [32minfo[39m: [32mRunning daily overdue installment check...[39m
 2026-02-26 00:00:00:00 [32minfo[39m: [32mProcessing overdue installments...[39m
 2026-02-26 00:00:00:00 [32minfo[39m: [32mLocked portals for 0 students.[39m
+2026-02-26 11:44:55:4455 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-02-26 11:44:57:4457 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-02-26 11:45:03:453 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-02-26 11:45:03:453 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-02-26 11:45:49:4549 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-02-26 11:45:49:4549 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-26 11:45:49:4549 [37mdebug[39m: [37m[Request End] GET / took 252ms[39m
+2026-02-26 11:45:49:4549 [35mhttp[39m: [35mGET /api/ads 200 2 - 233.785 ms[39m
+2026-02-26 11:45:50:4550 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1323ms[39m
+2026-02-26 11:45:50:4550 [35mhttp[39m: [35mGET /api/academy/courses 200 2053 - 1322.100 ms[39m
+2026-02-26 11:48:14:4814 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/register | Origin: http://localhost:5173[39m
+2026-02-26 11:48:14:4814 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/register took 2ms[39m
+2026-02-26 11:48:14:4814 [37mdebug[39m: [37m[Request Start] POST /api/auth/register | Origin: http://localhost:5173[39m
+2026-02-26 11:48:15:4815 [33mwarn[39m: [33m[SLOW REQUEST] POST /register took 1642ms[39m
+2026-02-26 11:48:15:4815 [35mhttp[39m: [35mPOST /api/auth/register 201 191 - 1641.772 ms[39m
+2026-02-26 11:48:47:4847 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-02-26 11:48:47:4847 [37mdebug[39m: [37m[Request End] GET /courses took 211ms[39m
+2026-02-26 11:48:47:4847 [35mhttp[39m: [35mGET /api/academy/courses 200 2053 - 210.163 ms[39m
+2026-02-26 11:49:32:4932 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/resend-verification | Origin: http://localhost:5173[39m
+2026-02-26 11:49:32:4932 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/resend-verification took 1ms[39m
+2026-02-26 11:49:32:4932 [37mdebug[39m: [37m[Request Start] POST /api/auth/resend-verification | Origin: http://localhost:5173[39m
+2026-02-26 11:49:32:4932 [37mdebug[39m: [37m[Request End] POST /resend-verification took 351ms[39m
+2026-02-26 11:49:32:4932 [35mhttp[39m: [35mPOST /api/auth/resend-verification 200 201 - 351.814 ms[39m

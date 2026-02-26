@@ -30,6 +30,8 @@ const LoginPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showResendButton, setShowResendButton] = useState(false);
   const [unverifiedEmail, setUnverifiedEmail] = useState("");
+  const [verificationLink, setVerificationLink] = useState("");
+  const [showDevLink, setShowDevLink] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: async (values: { email: string; password: string }) => {
@@ -68,9 +70,12 @@ const LoginPage: React.FC = () => {
 
   const resendMutation = useMutation({
     mutationFn: async (email: string) => {
-      await http.post("/auth/resend-verification", { email });
+      const { data } = await http.post<{ verificationLink: string }>("/auth/resend-verification", { email });
+      return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setVerificationLink(data.verificationLink);
+      setShowDevLink(true);
       toast.success("Verification email has been resent! Please check your inbox.");
     },
   });
@@ -139,6 +144,21 @@ const LoginPage: React.FC = () => {
                 ? "Resending..."
                 : "📧 Resend Verification Email"}
             </button>
+          )}
+          {showDevLink && verificationLink && (
+            <div className="mt-4 break-all rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-3 text-xs">
+              <p className="font-medium text-yellow-600 dark:text-yellow-400 mb-1">
+                Dev Mode: Verification Link
+              </p>
+              <a 
+                href={verificationLink} 
+                className="text-primary underline hover:opacity-80 transition-opacity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {verificationLink}
+              </a>
+            </div>
           )}
         </div>
       )}

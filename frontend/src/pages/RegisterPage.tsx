@@ -27,6 +27,7 @@ const RegisterPage: React.FC = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
   const [verificationLink, setVerificationLink] = useState("");
+  const [showDevLink, setShowDevLink] = useState(false);
 
   const oauthMutation = useMutation({
     mutationFn: async (payload: GoogleOAuthRequest) => {
@@ -53,6 +54,7 @@ const RegisterPage: React.FC = () => {
       setRegisteredEmail(variables.email);
       setVerificationLink(data.verificationLink);
       setShowSuccessModal(true);
+      setShowDevLink(false);
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -70,6 +72,7 @@ const RegisterPage: React.FC = () => {
     },
     onSuccess: (data) => {
       setVerificationLink(data.verificationLink);
+      setShowDevLink(true);
       toast.success("Verification email has been resent!");
     },
   });
@@ -194,10 +197,10 @@ const RegisterPage: React.FC = () => {
           />
         </div>
 
-        {/* {verificationLink && (
+        {showDevLink && verificationLink && (
           <div className="mt-4 break-all rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-3 text-xs">
             <p className="font-medium text-yellow-600 dark:text-yellow-400 mb-1">
-              Dev Mode: Verification Link
+              Dev Mode: Verification Link (Resent)
             </p>
             <a 
               href={verificationLink} 
@@ -208,7 +211,7 @@ const RegisterPage: React.FC = () => {
               {verificationLink}
             </a>
           </div>
-        )} */}
+        )}
         <p className="mt-4 text-[10px] sm:text-xs text-muted-foreground text-center">
           Already have an account?{" "}
           <Link to="/login" state={location.state} className="text-primary font-bold hover:underline">
@@ -245,10 +248,10 @@ const RegisterPage: React.FC = () => {
             </p>
           </div>
 
-          {/* {verificationLink && (
-            <div className="rounded-lg bg-primary/5 border border-primary/10 p-4 space-y-2">
-              <p className="text-xs font-semibold text-primary">
-                Immediate Verification Link (Dev):
+          {showDevLink && verificationLink && (
+            <div className="rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-4 space-y-2">
+              <p className="text-xs font-semibold text-yellow-600 dark:text-yellow-400">
+                Immediate Verification Link:
               </p>
               <div className="break-all p-2 bg-background rounded border text-[10px] font-mono">
                 <a 
@@ -261,7 +264,7 @@ const RegisterPage: React.FC = () => {
                 </a>
               </div>
             </div>
-          )} */}
+          )}
 
           <button
             onClick={handleResendVerification}
