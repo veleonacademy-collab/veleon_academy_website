@@ -120,7 +120,12 @@ const RegisterPage: React.FC = () => {
         description="Join Veleon Academy today. Create an account to start your journey in software engineering, data science, and more."
       />
       <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
-        <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>
+        <div className="flex justify-center mb-6">
+          <Link to="/">
+            <img src="/veleonacademy_logo.png" alt="VeleonAcademy" className="h-16 w-auto" />
+          </Link>
+        </div>
+        <h1 className="mb-4 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>
         {validationError && (
           <p className="mb-3 text-xs text-destructive">{validationError}</p>
         )}

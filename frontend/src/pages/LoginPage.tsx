@@ -135,7 +135,12 @@ const LoginPage: React.FC = () => {
         title="Login"
         description="Login to your Veleon Academy account to access your courses, dashboard, and learning resources."
       />
-      <h1 className="mb-4 text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
+      <div className="flex justify-center mb-6">
+        <Link to="/">
+          <img src="/veleonacademy_logo.png" alt="VeleonAcademy" className="h-16 w-auto" />
+        </Link>
+      </div>
+      <h1 className="mb-4 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
       {error && (
         <div className="mb-3 space-y-2">
           <p className="text-xs text-destructive">{error}</p>

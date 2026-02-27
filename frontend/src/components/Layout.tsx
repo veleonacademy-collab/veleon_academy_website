@@ -160,8 +160,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <footer className="border-t border-gray-200 bg-gray-50 mt-12 py-12">
         <div className="mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="text-lg font-semibold text-primary block mb-4">
-              {APP_NAME}
+            <Link to="/" className="block mb-4">
+              <img src="/veleonacademy_logo.png" alt={APP_NAME} className="h-10" />
             </Link>
             <p className="text-gray-600 text-sm max-w-sm">
               Empowering the next generation of tech leaders through hands-on learning and mentorship.
