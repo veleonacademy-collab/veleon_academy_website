@@ -58,6 +58,7 @@ import StaffSupportPage from "./pages/staff/StaffSupportPage";
 import AdminFinancePage from "./pages/admin/AdminFinancePage";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 import AdminAdsPage from "./pages/admin/AdminAdsPage";
+import Analytics from "./components/Analytics";
 
 import AdminCoursesPage from "./pages/admin/courses/AdminCoursesPage";
 import AdminCurriculumPage from "./pages/admin/courses/AdminCurriculumPage";
@@ -73,6 +74,7 @@ const App: React.FC = () => {
   return (
     <StripeProvider>
       <Layout>
+        <Analytics />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/trending" element={<TrendingPage />} />
@@ -156,7 +158,7 @@ const App: React.FC = () => {
         <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
           <Route path="/student/dashboard" element={<StudentDashboardPage />} />
         </Route>
-        <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
+        <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
           <Route path="/user/dashboard" element={<UserDashboardPage />} />
         </Route>
 

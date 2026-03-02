@@ -49,14 +49,29 @@ const PrivacyPolicyPage: React.FC = () => {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">4. Data Security</h2>
+          <h2 className="text-2xl font-bold text-primary mb-4">4. Cookies and Tracking Technologies</h2>
+          <p className="text-gray-300 mb-4">
+            We use cookies and similar tracking technologies to track activity on our service and hold certain information. 
+            Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze our service.
+          </p>
+          <p className="text-gray-300 mb-4">
+            We use the following third-party analytics providers:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
+            <li><strong className="text-white">Google Analytics:</strong> We use Google Analytics to monitor and analyze the use of our service. Google uses the data collected to track and monitor the use of our service. This data is shared with other Google services.</li>
+            <li><strong className="text-white">Microsoft Clarity:</strong> We use Microsoft Clarity to understand how you interact with our website through heatmaps and session recordings. This helps us improve our user experience and identify technical issues.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold text-primary mb-4">5. Data Security</h2>
           <p className="text-gray-300">
             We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">5. Contact Us</h2>
+          <h2 className="text-2xl font-bold text-primary mb-4">6. Contact Us</h2>
           <p className="text-gray-300">
             If you have any questions about this privacy policy or our privacy practices, please contact us at:{" "}
             <a href={`mailto:${PRIVACY_EMAIL}`} className="text-primary hover:underline">{PRIVACY_EMAIL}</a>
