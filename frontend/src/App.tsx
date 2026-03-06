@@ -159,7 +159,7 @@ const App: React.FC = () => {
           <Route path="/student/dashboard" element={<StudentDashboardPage />} />
         </Route>
         <Route element={<ProtectedRoute allowedRoles={["student", "user"]} />}>
-          <Route path="/user/dashboard" element={<StudentDashboardPage />} />
+          <Route path="/student/dashboard" element={<StudentDashboardPage />} />
         </Route>
 
         {/* Course detail — accessible to both students and tutors */}
