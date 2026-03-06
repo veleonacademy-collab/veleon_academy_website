@@ -158,7 +158,7 @@ export class AcademyController {
 
       let enrollment: any = null;
 
-      if (role === 'student') {
+      if (role === 'student' || role === 'user') {
         // Check enrollment and lock status
         const enrollmentRes = await pool.query(
           "SELECT * FROM enrollments WHERE student_id = $1 AND course_id = $2",

@@ -76,7 +76,7 @@ export async function registerUser(input: unknown): Promise<string> {
         data.lastName,
         data.email,
         passwordHash,
-        "user",
+        "student",
         verificationToken,
         customerId
       ]

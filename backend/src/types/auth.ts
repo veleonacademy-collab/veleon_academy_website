@@ -1,4 +1,4 @@
-export type UserRole = "admin" | "tutor" | "student";
+export type UserRole = "admin" | "tutor" | "student" | "user";
 
 export interface JwtPayload {
   sub: number;

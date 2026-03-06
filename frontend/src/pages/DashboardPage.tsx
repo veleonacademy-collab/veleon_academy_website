@@ -18,11 +18,7 @@ const DashboardPage: React.FC = () => {
     return <Navigate to="/tutor/dashboard" replace />;
   }
 
-  if (user.role === "user") {
-    return <Navigate to="/user/dashboard" replace />;
-  }
-
-  // Default: student role
+  // Handle student role (and legacy 'user' role)
   return <Navigate to="/student/dashboard" replace />;
 };
 
