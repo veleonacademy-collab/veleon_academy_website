@@ -4,6 +4,7 @@ import { CreateCheckoutSessionOptions, PaymentProvider } from "./payment/types.j
 import { pool } from "../database/pool.js";
 import { logger } from "../utils/logger.js";
 import { sendPaymentReceiptEmail } from "./emailService.js";
+import { trackTikTokEvent } from "./tiktokService.js";
 
 export class StripeService implements PaymentProvider {
   private stripe: Stripe;
@@ -235,6 +236,31 @@ export class StripeService implements PaymentProvider {
             }
         } catch (err) {
             logger.error(`[STRIPE CHARGE] Failed to send receipt email to user ${userId}: ${err}`);
+        }
+    })();
+
+    // NEW: Track TikTok Purchase (server-side CAPI)
+    (async () => {
+        try {
+            const userRes = await pool.query("SELECT email FROM users WHERE id = $1", [userId]);
+            const user = userRes.rows[0];
+            if (user) {
+                await trackTikTokEvent({
+                    event: "CompletePayment",
+                    event_id: providerPaymentId || session.id,
+                    user: {
+                        email: user.email,
+                    },
+                    properties: {
+                        value: (session.amount_total || 0) / 100,
+                        currency: (session.currency || 'USD').toUpperCase(),
+                        content_name: description,
+                        content_type: "product",
+                    }
+                });
+            }
+        } catch (err) {
+            logger.error(`[STRIPE CHARGE] TikTok Tracking Error: ${err}`);
         }
     })();
 

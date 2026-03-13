@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import type { GoogleOAuthRequest } from "../types/oauth";
 import type { AuthTokens, User } from "../types/auth";
 import SEO from "../components/SEO";
+import { trackTikTokEvent } from "../utils/analytics";
 
 const RegisterPage: React.FC = () => {
   const { clearAuth, setAuth } = useAuth();
@@ -62,6 +63,9 @@ const RegisterPage: React.FC = () => {
       setPassword("");
       setConfirmPassword("");
       setValidationError(null);
+      
+      // Track TikTok registration
+      trackTikTokEvent('CompleteRegistration');
     },
     // Error handling is done globally in queryClient
   });

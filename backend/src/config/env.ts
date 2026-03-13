@@ -54,6 +54,10 @@ export const env = {
     publicDomain: process.env.R2_PUBLIC_DOMAIN || "",
   },
   storageProvider: process.env.STORAGE_PROVIDER || "cloudinary",
+  tiktok: {
+    accessToken: process.env.TIKTOK_ACCESS_TOKEN || "",
+    pixelId: process.env.TIKTOK_PIXEL_ID || "",
+  },
 };
 
 // Trigger nodemon restart for updated .env

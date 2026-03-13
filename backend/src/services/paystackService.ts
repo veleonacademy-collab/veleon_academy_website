@@ -8,6 +8,7 @@ import { AcademyService } from "./academyService.js";
 import { sendStudentWelcomeEmail, sendEnrollmentConfirmationEmail, sendPaymentReceiptEmail } from "./emailService.js";
 import { hashPassword } from "../utils/password.js";
 import { randomBytes } from "crypto";
+import { trackTikTokEvent } from "./tiktokService.js";
 
 export class PaystackService implements PaymentProvider {
   private readonly baseUrl = "https://api.paystack.co";
@@ -247,7 +248,23 @@ export class PaystackService implements PaymentProvider {
       );
     }
 
-    // 7. Send Emails in the background (fire and forget)
+    // 7. Track TikTok Purchase (server-side CAPI)
+    trackTikTokEvent({
+      event: "CompletePayment", // Or "Purchase"
+      event_id: data.reference,
+      user: {
+        email: email,
+      },
+      properties: {
+        value: amountPaid,
+        currency: data.currency,
+        content_id: courseId.toString(),
+        content_name: displayTitle,
+        content_type: "product",
+      }
+    }).catch(err => logger.error(`[PAYSTACK CHARGE] TikTok Tracking Error: ${err}`));
+
+    // 8. Send Emails in the background (fire and forget)
     // This avoids blocking the webhook response or verification request
     (async () => {
       try {

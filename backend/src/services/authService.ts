@@ -15,6 +15,7 @@ import {
   sendPasswordResetEmail,
 } from "./emailService.js";
 import { createCustomer, updateCustomer } from "./customerService.js";
+import { trackTikTokEvent } from "./tiktokService.js";
 
 const registerSchema = z.object({
   firstName: z
@@ -99,6 +100,14 @@ export async function registerUser(input: unknown): Promise<string> {
   } finally {
     client.release();
   }
+
+  // Track TikTok event (server-side CAPI)
+  trackTikTokEvent({
+    event: "CompleteRegistration",
+    user: {
+      email: data.email,
+    },
+  }).catch((err) => console.error("TikTok Tracking Error:", err));
 
   // Send verification email in the background (fire and forget)
   // This avoids holding up the HTTP response and the database connection

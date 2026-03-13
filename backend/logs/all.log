@@ -8585,3 +8585,73 @@
 2026-03-06 14:06:42:642 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 287ms[39m
 2026-03-06 14:06:42:642 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 288.695 ms[39m
 2026-03-06 14:12:44:1244 [32minfo[39m: [32mSocket a6x16qUg-J-RFDphAAAF disconnected[39m
+2026-03-06 14:17:50:1750 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-06 14:17:50:1750 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 2ms[39m
+2026-03-06 14:17:50:1750 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-06 14:17:50:1750 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 344ms[39m
+2026-03-06 14:17:50:1750 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 343.945 ms[39m
+2026-03-06 14:17:55:1755 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-03-06 14:17:55:1755 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 1ms[39m
+2026-03-06 14:17:55:1755 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-06 14:17:55:1755 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-03-06 14:17:55:1755 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-06 14:17:55:1755 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-06 14:17:56:1756 [37mdebug[39m: [37m[Request End] GET / took 153ms[39m
+2026-03-06 14:17:56:1756 [35mhttp[39m: [35mGET /api/ads 304 - - 152.869 ms[39m
+2026-03-06 14:17:56:1756 [37mdebug[39m: [37m[Request End] GET /courses took 163ms[39m
+2026-03-06 14:17:56:1756 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 162.800 ms[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 1ms[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 2ms[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request End] GET /courses took 159ms[39m
+2026-03-06 14:18:07:187 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 160.346 ms[39m
+2026-03-06 14:18:07:187 [37mdebug[39m: [37m[Request End] GET / took 167ms[39m
+2026-03-06 14:18:08:188 [35mhttp[39m: [35mGET /api/ads 304 - - 166.339 ms[39m
+2026-03-06 14:18:09:189 [33mwarn[39m: [33m[SLOW REQUEST] GET /me took 1725ms[39m
+2026-03-06 14:18:09:189 [35mhttp[39m: [35mGET /api/auth/me 200 314 - 1725.351 ms[39m
+2026-03-06 14:18:09:189 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-06 14:18:09:189 [32minfo[39m: [32mUser 21 connected with socket XrLSOkqItAwOiHdpAAAJ[39m
+2026-03-06 14:18:09:189 [37mdebug[39m: [37m[Request End] GET /me took 236ms[39m
+2026-03-06 14:18:09:189 [35mhttp[39m: [35mGET /api/auth/me 304 - - 235.876 ms[39m
+2026-03-06 14:18:09:189 [32minfo[39m: [32mSocket XrLSOkqItAwOiHdpAAAJ disconnected[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/oauth/google took 1ms[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request Start] POST /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request End] POST /oauth/google took 567ms[39m
+2026-03-06 14:18:19:1819 [35mhttp[39m: [35mPOST /api/auth/oauth/google 200 738 - 567.256 ms[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 45ms[39m
+2026-03-06 14:18:19:1819 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-06 14:18:19:1819 [32minfo[39m: [32mUser 21 connected with socket 6DDvjknlhQPs_IFLAAAL[39m
+2026-03-06 14:18:20:1820 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 513ms[39m
+2026-03-06 14:18:20:1820 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 1383 - 513.667 ms[39m
+2026-03-13 15:10:53:1053 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-03-13 15:10:55:1055 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-03-13 15:10:59:1059 [33mwarn[39m: [33mDNS resolution failed (attempt 3/5), retrying in 8000ms...[39m
+2026-03-13 15:11:07:117 [33mwarn[39m: [33mDNS resolution failed (attempt 4/5), retrying in 10000ms...[39m
+2026-03-13 15:11:19:1119 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:11:19:1119 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:14:33:1433 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:14:33:1433 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:14:45:1445 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:14:45:1445 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:15:11:1511 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:15:11:1511 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:15:24:1524 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:15:24:1524 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:15:34:1534 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:15:34:1534 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:16:01:161 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:16:02:162 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:16:28:1628 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:16:28:1628 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:16:34:1634 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:16:34:1634 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
