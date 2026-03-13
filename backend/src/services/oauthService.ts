@@ -81,10 +81,12 @@ export async function loginWithGoogle(
           VALUES ($1, $2, $3, $4, $5, true, $6)
           RETURNING *
         `,
-        [firstName, lastName, email, randomPasswordHash, "user", customerId]
+        [firstName, lastName, email, randomPasswordHash, "student", customerId]
       );
 
       user = insert.rows[0];
+
+      
 
       // If customer existed, link it back to the user
       if (customerId) {

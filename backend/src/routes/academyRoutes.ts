@@ -12,7 +12,7 @@ academyRouter.get("/courses", AcademyController.getCourses);
 academyRouter.get(
   "/student/dashboard",
   authenticate,
-  requireRole(["student"]),
+  requireRole(["student", "user"]),
   AcademyController.getStudentDashboard
 );
 
@@ -26,7 +26,7 @@ academyRouter.get(
 academyRouter.post(
   "/student/complaints",
   authenticate,
-  requireRole(["student"]),
+  requireRole(["student", "user"]),
   AcademyController.createComplaint
 );
 

@@ -8655,3 +8655,18 @@
 2026-03-13 15:16:28:1628 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
 2026-03-13 15:16:34:1634 [32minfo[39m: [32mDatabase connection established successfully[39m
 2026-03-13 15:16:34:1634 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:16:44:1644 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 15:16:44:1644 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 15:17:01:171 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-13 15:17:01:171 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-13 15:17:01:171 [37mdebug[39m: [37m[Request End] GET / took 434ms[39m
+2026-03-13 15:17:01:171 [35mhttp[39m: [35mGET /api/ads 200 2 - 427.698 ms[39m
+2026-03-13 15:17:02:172 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1676ms[39m
+2026-03-13 15:17:02:172 [35mhttp[39m: [35mGET /api/academy/courses 200 2673 - 1675.363 ms[39m
+2026-03-13 16:55:42:5542 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 16:55:42:5542 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 16:56:07:567 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 16:56:07:567 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 16:56:28:5628 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-13 16:56:28:5628 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-13 16:58:12:5812 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
