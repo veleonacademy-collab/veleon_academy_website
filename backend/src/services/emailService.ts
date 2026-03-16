@@ -194,7 +194,7 @@ export async function sendVerificationEmail(
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
           }
           .header {
-            background: linear-gradient(135deg, #d11c07 0%, #00a9c0 100%);
+            background: linear-gradient(135deg, #00a9c0 0%, #007d8f 100%);
             padding: 40px 20px;
             text-align: center;
             color: white;
@@ -237,7 +237,7 @@ export async function sendVerificationEmail(
             border-top: 1px solid #e9ecef;
           }
           .link {
-            color: #d11c07;
+            color: #00a9c0;
             word-break: break-all;
             font-size: 14px;
           }
@@ -246,17 +246,16 @@ export async function sendVerificationEmail(
       <body>
         <div class="container">
           <div class="header">
-            <h1>🚀 Don't Get Left Behind!</h1>
+            <h1>🚀 You've Taken the First Step!</h1>
           </div>
           <div class="content">
             <p>Hi ${firstName},</p>
-            <p style="font-size: 20px; font-weight: 700; color: #d11c07; margin-bottom: 10px;">Welcome! Here are our courses — pick yours today</p>
-            <div style="text-align: center; margin-bottom: 30px;">
-              <a href="${env.appUrl}/courses" style="display: inline-block; padding: 12px 24px; background-color: #fdf2f1; color: #d11c07; text-decoration: none; border-radius: 6px; border: 2px solid #d11c07; font-weight: 700;">BROWSE HOT COURSES 🔥</a>
-            </div>
             
-            <p>The tech industry is the <strong>fastest path to financial freedom</strong> and a life-proof career. By registering, you've taken the first step. Now, take the second before someone else takes your spot.</p>
-            <p><strong>URGENT:</strong> You must verify your email to unlock your account and secure your registration.</p>
+            <p><strong>Congratulations!</strong> By registering, you've just taken the first step toward your future—a step that is already better than most people who only talk about their dreams but never start.</p>
+            
+            <p>You’re already ahead of the curve. The next step is to now proceed to choose your course. We recommend doing this as soon as possible, as our <strong>seats are filling up fast</strong>.</p>
+            
+            <p>Please verify your email below to secure your registration and continue your journey.</p>
             
             <div style="text-align: center;">
               <a href="${verificationUrl}" class="button">VERIFY MY EMAIL NOW</a>
@@ -277,24 +276,24 @@ export async function sendVerificationEmail(
   `;
 
   const text = `
-    🚀 ACTION REQUIRED: Unlock Your Tech Future Today!
+    🚀 You've Taken the First Step!
     
     Hi ${firstName}, 
     
-    Tech is the highest-paying industry in the world—don't let this opportunity pass you by. 
+    Congratulations! By registering, you've just taken the first step toward your future—a step that is already better than most people who never start.
     
-    BROWSE HOT COURSES: ${env.appUrl}/courses
+    The next step is to now proceed to choose your course. Seats are filling up fast, so we recommend picking yours today.
     
     VERIFY YOUR EMAIL NOW: ${verificationUrl}
     
-    Warning: This link expires in 24 hours. Secure your spot before enrollment closes!
+    Note: This link expires in 24 hours. 
     
-    © ${new Date().getFullYear()} ${env.email.fromName}. All rights reserved.
+    © ${new Date().getFullYear()} ${env.email.fromName}. Your future starts today.
   `;
 
   await sendEmail({
     to: email,
-    subject: "Verify Your Email Address",
+    subject: "Verification Email: Congratulations on taking the first step! 🚀",
     html,
     text,
   });
