@@ -123,17 +123,17 @@ const RegisterPage: React.FC = () => {
         title="Create Account"
         description="Join Veleon Academy today. Create an account to start your journey in software engineering, data science, and more."
       />
-      <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
-        <div className="flex justify-center mb-6">
+      <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-4 sm:p-6 shadow-xl md:mt-0 -mt-8">
+        <div className="flex justify-center mb-4">
           <Link to="/">
             <img src="/veleonacademy_logo.png" alt="VeleonAcademy" className="h-16 w-auto" />
           </Link>
         </div>
-        <h1 className="mb-4 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>
+        <h1 className="mb-3 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>
         {validationError && (
           <p className="mb-3 text-xs text-destructive">{validationError}</p>
         )}
-        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-2.5">
           <div className="flex gap-2 sm:gap-3">
             <div className="flex-1 space-y-1">
               <Label htmlFor="firstName">First name</Label>
@@ -198,7 +198,7 @@ const RegisterPage: React.FC = () => {
           </button>
         </form>
 
-        <div className="mt-4 border-t border-border pt-4 flex justify-center">
+        <div className="mt-3 border-t border-border pt-3 flex justify-center">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={() => {
@@ -226,7 +226,7 @@ const RegisterPage: React.FC = () => {
             </a>
           </div>
         )}
-        <p className="mt-4 text-[10px] sm:text-xs text-muted-foreground text-center">
+        <p className="mt-3 text-[10px] sm:text-xs text-muted-foreground text-center">
           Already have an account?{" "}
           <Link to="/login" state={location.state} className="text-primary font-bold hover:underline">
             Sign in

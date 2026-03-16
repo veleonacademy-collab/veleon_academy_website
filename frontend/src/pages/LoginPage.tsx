@@ -130,17 +130,17 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-xl">
+    <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-4 sm:p-6 shadow-xl">
       <SEO 
         title="Login"
         description="Login to your Veleon Academy account to access your courses, dashboard, and learning resources."
       />
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-4">
         <Link to="/">
           <img src="/veleonacademy_logo.png" alt="VeleonAcademy" className="h-16 w-auto" />
         </Link>
       </div>
-      <h1 className="mb-4 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
+      <h1 className="mb-3 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
       {error && (
         <div className="mb-3 space-y-2">
           <p className="text-xs text-destructive">{error}</p>
@@ -172,7 +172,7 @@ const LoginPage: React.FC = () => {
           )}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -208,7 +208,7 @@ const LoginPage: React.FC = () => {
           {loginMutation.isPending ? "Signing in..." : "Sign in"}
         </button>
       </form>
-      <div className="mt-4 border-t border-border pt-4 flex justify-center">
+      <div className="mt-3 border-t border-border pt-3 flex justify-center">
         <GoogleLogin
           onSuccess={handleGoogleSuccess}
           onError={() => {
@@ -220,7 +220,7 @@ const LoginPage: React.FC = () => {
           width="100%"
         />
       </div>
-      <p className="mt-4 text-[10px] sm:text-xs text-muted-foreground text-center">
+      <p className="mt-3 text-[10px] sm:text-xs text-muted-foreground text-center">
         Don&apos;t have an account?{" "}
         <Link to="/register" state={location.state} className="text-primary font-bold hover:underline">
           Sign up
