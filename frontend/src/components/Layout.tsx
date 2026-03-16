@@ -7,7 +7,7 @@ import { getStoredTokens } from "../utils/tokenStorage";
 import { SupportFab } from "./SupportFab";
 import { APP_NAME, SUPPORT_EMAIL, INSTAGRAM_URL, TIKTOK_URL } from "../utils/constants";
 import { EnquiryModal } from "./EnquiryModal";
-import { Instagram, Music2, MessageSquare, AlertCircle, Send, Loader2 } from "lucide-react";
+import { Instagram, Music2, MessageSquare, Mail, Send, Loader2 } from "lucide-react";
 import { http } from "../api/http";
 import toast from "react-hot-toast";
 
@@ -63,23 +63,29 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <div className="min-h-screen bg-background text-foreground">
       {user && !user.isEmailVerified && (
-        <div className="bg-yellow-500/10 border-b border-yellow-500/20 text-yellow-800 dark:text-yellow-400 py-3 px-6">
+        <div className="bg-primary/5 border-b border-primary/10 text-slate-600 py-3 px-6">
           <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm font-medium">
-              <AlertCircle size={16} className="text-yellow-600" />
-              <span>Please verify your email to fully activate your account. Check your inbox for the link.</span>
+              <Mail size={16} className="text-primary flex-shrink-0" />
+              <span className="hidden sm:inline">Welcome! 🚀 Just a quick step—check your inbox to verify your email address.</span>
+              <span className="sm:hidden text-xs">Quick step: Verify your email! 🚀</span>
             </div>
             <button
               onClick={handleResend}
               disabled={isResending}
-              className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-yellow-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-yellow-700 disabled:opacity-50 transition-all active:scale-95"
+              className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white hover:opacity-90 disabled:opacity-50 transition-all active:scale-95 shadow-sm"
             >
               {isResending ? (
                 <Loader2 size={12} className="animate-spin" />
               ) : (
                 <Send size={12} />
               )}
-              {isResending ? "Sending..." : "Resend Link"}
+              {isResending ? "Sending..." : (
+                <>
+                  <span className="hidden sm:inline">Resend Link</span>
+                  <span className="sm:hidden">Resend</span>
+                </>
+              )}
             </button>
           </div>
         </div>

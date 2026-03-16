@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
-import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, ShieldAlert } from "lucide-react";
+import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail } from "lucide-react";
 import SEO from "../components/SEO";
 import { useAuth } from "../state/AuthContext";
 
@@ -154,18 +154,18 @@ const CourseDetailPage: React.FC = () => {
           )}
         </div>
       ) : !isVerified ? (
-        <div className="bg-yellow-50 border border-yellow-100 rounded-3xl p-12 text-center">
-          <div className="h-16 w-16 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mx-auto mb-4 shadow-sm">
-            <ShieldAlert className="h-8 w-8" />
+        <div className="bg-slate-50 border border-slate-100 rounded-3xl p-12 text-center">
+          <div className="h-16 w-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 shadow-sm">
+            <Mail className="h-8 w-8" />
           </div>
-          <h3 className="text-xl font-bold text-slate-900 mb-2 uppercase tracking-tight">Email Verification Required</h3>
+          <h3 className="text-xl font-bold text-slate-900 mb-2 uppercase tracking-tight">You're just one click away! ✨</h3>
           <p className="text-slate-500 max-w-md mx-auto text-sm leading-relaxed mb-6">
-            To access course materials, recordings, and assignments, please verify your email address. 
-            Check your inbox for the link we sent you.
+            <span className="hidden sm:inline">We're excited to have you! To start watching your recordings and downloading assignments, just verify your email address via the link we sent to your inbox.</span>
+            <span className="sm:hidden">Verify your email to access all materials! ✨</span>
           </p>
-          <div className="p-4 bg-white/50 border border-yellow-100 rounded-xl inline-block">
-             <p className="text-[10px] font-black text-yellow-600 uppercase tracking-widest mb-1">Why this is needed:</p>
-             <p className="text-xs text-slate-400">Security and communication regarding your certification.</p>
+          <div className="p-4 bg-white/50 border border-slate-100 rounded-xl inline-block">
+             <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Why do we do this?</p>
+             <p className="text-xs text-slate-400">It keeps your account safe and ensures your hard-earned certificates reach you!</p>
           </div>
         </div>
       ) : (

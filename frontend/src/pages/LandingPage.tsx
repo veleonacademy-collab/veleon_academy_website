@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import AdSection from "../components/AdSection";
 import { TestimonialsSection } from "../components/TestimonialsSection";
-import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sparkles, Briefcase, CheckCircle, Target, BrainCircuit } from "lucide-react";
+import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sparkles, Briefcase, CheckCircle, Target, BrainCircuit, CreditCard } from "lucide-react";
 import { academyApi } from "../api/academy";
 import { formatCurrency } from "../utils/formatUtils";
 import { useAuth } from "../state/AuthContext";
@@ -99,6 +99,10 @@ const LandingPage: React.FC = () => {
               <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">10:1 Student-Tutor Ratio</span>
             </div>
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+              <div className="bg-orange-500/20 p-1 rounded-full"><CreditCard className="h-4 w-4 text-orange-400" /></div>
+              <span className="text-white text-xs sm:text-sm font-black tracking-tight">Flexible Installments ✅</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
               <div className="bg-purple-500/20 p-1 rounded-full"><Award className="h-4 w-4 text-purple-400" /></div>
               <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">Resume & Presentation</span>
             </div>
@@ -160,6 +164,14 @@ const LandingPage: React.FC = () => {
                 Enrollment Closing: Limited Spots Available
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">CHOOSE YOUR <span className="text-primary italic underline decoration-secondary/30">TRANSFORMATION</span></h2>
+            
+            <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 max-w-lg mx-auto transform hover:scale-105 transition-all duration-300 shadow-sm">
+                <p className="text-primary font-bold text-sm sm:text-base flex items-center justify-center gap-2">
+                    <span className="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">FlexPay</span>
+                    Installment payment available for all courses! 💳
+                </p>
+            </div>
+
             <p className="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto font-medium italic">"The best time to plant a tree was 20 years ago. The second best time is <span className="text-primary font-bold">NOW</span>."</p>
             <p className="text-slate-600 text-sm sm:text-base max-w-3xl mx-auto">Stop dreaming about a tech career and start building it. Our intensive, industry-led programs are designed to take you from Zero to Senior. <b>Secure your seat before the next cohort fills up.</b></p>
         </div>
@@ -194,6 +206,7 @@ const LandingPage: React.FC = () => {
                             Active Cohort
                         </div>
                         <div className="flex flex-col items-end gap-1">
+                            <span className="text-[10px] text-slate-600 font-bold italic bg-slate-100 px-2 py-0.5 rounded-full">Installment available ✅</span>
                             <span className="text-[10px] text-red-500 font-bold animate-pulse">Few seats left!</span>
                             <Link 
                                 to={`/enroll/${course.id}`}
@@ -232,6 +245,7 @@ const LandingPage: React.FC = () => {
                             Active Cohort
                         </div>
                         <div className="flex flex-col items-end gap-1">
+                            <span className="text-[10px] text-slate-600 font-bold italic bg-slate-100 px-2 py-0.5 rounded-full">Installment available ✅</span>
                             <span className="text-[10px] text-red-500 font-bold animate-pulse">Enrollment closing!</span>
                             <Link 
                                 to="/register"

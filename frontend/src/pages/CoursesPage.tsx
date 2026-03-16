@@ -60,6 +60,14 @@ const CoursesPage: React.FC = () => {
           <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-none uppercase">
             Pick Your <span className="text-primary italic">Career Path</span>
           </h1>
+          
+          <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 max-w-lg mx-auto transform hover:scale-105 transition-transform duration-300 shadow-sm">
+            <p className="text-primary font-bold text-sm sm:text-base flex items-center justify-center gap-2">
+              <span className="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">New</span>
+              Grab your installment payment option today! 💳
+            </p>
+          </div>
+
           <p className="text-slate-600 text-lg sm:text-xl max-w-2xl mx-auto font-medium">
             Join the elite 1% of tech talent. Choose a course and start your journey to a high-paying tech role in months, not years.
           </p>
@@ -97,7 +105,7 @@ const CoursesPage: React.FC = () => {
                     </div>
                     <div className="flex flex-col items-end gap-1">
                       <div className="flex flex-wrap justify-end gap-2">
-                        <span className="text-[10px] text-slate-400 font-medium italic">Installment available ✅</span>
+                        <span className="text-[10px] text-slate-600 font-bold italic bg-slate-100 px-2 py-0.5 rounded-full">Installment available ✅</span>
                         <span className="text-[10px] text-red-500 font-bold animate-pulse text-right">Limited Seats Available</span>
                       </div>
                       <Link 
@@ -137,7 +145,7 @@ const CoursesPage: React.FC = () => {
                     </div>
                     <div className="flex flex-col items-end gap-1">
                       <div className="flex flex-wrap justify-end gap-2">
-                        <span className="text-[10px] text-slate-400 font-medium italic">Installment available ✅</span>
+                        <span className="text-[10px] text-slate-600 font-bold italic bg-slate-100 px-2 py-0.5 rounded-full">Installment available ✅</span>
                         <span className="text-[10px] text-red-500 font-bold animate-pulse text-right">Limited spots!</span>
                       </div>
                       <Link 

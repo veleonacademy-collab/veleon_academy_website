@@ -9032,3 +9032,204 @@
 2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
 2026-03-16 20:33:18:3318 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 177ms[39m
 2026-03-16 20:33:18:3318 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 176.880 ms[39m
+2026-03-16 20:33:35:3335 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:33:36:3336 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 733ms[39m
+2026-03-16 20:33:36:3336 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 732.253 ms[39m
+2026-03-16 20:36:00:360 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 20:36:00:360 [32minfo[39m: [32mTest counter updated to 7[39m
+2026-03-16 20:36:17:3617 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:36:17:3617 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 160ms[39m
+2026-03-16 20:36:17:3617 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 159.520 ms[39m
+2026-03-16 20:36:35:3635 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:36:35:3635 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 170ms[39m
+2026-03-16 20:36:35:3635 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 169.420 ms[39m
+2026-03-16 20:39:00:390 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 20:39:00:390 [32minfo[39m: [32mTest counter updated to 9[39m
+2026-03-16 20:39:17:3917 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:39:17:3917 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 168ms[39m
+2026-03-16 20:39:17:3917 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 167.888 ms[39m
+2026-03-16 20:40:04:404 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:40:04:404 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 184ms[39m
+2026-03-16 20:40:04:404 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 183.158 ms[39m
+2026-03-16 23:00:33:033 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 23:00:33:033 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:00:33:033 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 23:00:34:034 [32minfo[39m: [32mTest counter updated to 57[39m
+2026-03-16 23:00:34:034 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:00:34:034 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:00:34:034 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 164ms[39m
+2026-03-16 23:00:34:034 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 160.332 ms[39m
+2026-03-16 23:00:36:036 [33mwarn[39m: [33m[SLOW REQUEST] GET /footer_test_counter took 1746ms[39m
+2026-03-16 23:00:36:036 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 1746.552 ms[39m
+2026-03-16 23:00:42:042 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-03-16 23:00:42:042 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/login took 3ms[39m
+2026-03-16 23:00:42:042 [37mdebug[39m: [37m[Request Start] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-03-16 23:00:43:043 [33mwarn[39m: [33m[SLOW REQUEST] POST /login took 1053ms[39m
+2026-03-16 23:00:43:043 [35mhttp[39m: [35mPOST /api/auth/login 200 745 - 1052.218 ms[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 1ms[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 4ms[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 23:00:44:044 [32minfo[39m: [32mUser 32 connected with socket emjBxPTHbwze7MjeAAAB[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request End] GET /courses took 245ms[39m
+2026-03-16 23:00:44:044 [35mhttp[39m: [35mGET /api/academy/courses 200 2673 - 244.926 ms[39m
+2026-03-16 23:00:44:044 [37mdebug[39m: [37m[Request End] GET / took 268ms[39m
+2026-03-16 23:00:44:044 [35mhttp[39m: [35mGET /api/ads 200 2 - 266.226 ms[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 1ms[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 160ms[39m
+2026-03-16 23:01:58:158 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 158.736 ms[39m
+2026-03-16 23:01:58:158 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 305ms[39m
+2026-03-16 23:01:58:158 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 329.860 ms[39m
+2026-03-16 23:01:59:159 [33mwarn[39m: [33m[SLOW REQUEST] GET /footer_test_counter took 1343ms[39m
+2026-03-16 23:01:59:159 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 1343.328 ms[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 16ms[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 165ms[39m
+2026-03-16 23:02:06:26 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 164.723 ms[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 173ms[39m
+2026-03-16 23:02:06:26 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 172.119 ms[39m
+2026-03-16 23:02:06:26 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 253ms[39m
+2026-03-16 23:02:06:26 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 250.550 ms[39m
+2026-03-16 23:02:14:214 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:14:214 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 1ms[39m
+2026-03-16 23:02:14:214 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:14:214 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 241ms[39m
+2026-03-16 23:02:14:214 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 241.636 ms[39m
+2026-03-16 23:02:15:215 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:15:215 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:15:215 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 216ms[39m
+2026-03-16 23:02:15:215 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 214.016 ms[39m
+2026-03-16 23:02:15:215 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 301ms[39m
+2026-03-16 23:02:15:215 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 300.453 ms[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 0ms[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 159ms[39m
+2026-03-16 23:02:47:247 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 159.687 ms[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 191ms[39m
+2026-03-16 23:02:47:247 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 191.210 ms[39m
+2026-03-16 23:02:47:247 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 766ms[39m
+2026-03-16 23:02:47:247 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 763.561 ms[39m
+2026-03-16 23:03:00:30 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:03:00:30 [32minfo[39m: [32mTest counter updated to 59[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 1ms[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 282ms[39m
+2026-03-16 23:03:21:321 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 282.455 ms[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 194ms[39m
+2026-03-16 23:03:21:321 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 193.624 ms[39m
+2026-03-16 23:03:21:321 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 280ms[39m
+2026-03-16 23:03:21:321 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 276.975 ms[39m
+2026-03-16 23:05:08:58 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:05:08:58 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-03-16 23:05:08:58 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:05:09:59 [37mdebug[39m: [37m[Request End] GET /courses took 316ms[39m
+2026-03-16 23:05:09:59 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 315.977 ms[39m
+2026-03-16 23:06:00:60 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:06:00:60 [32minfo[39m: [32mTest counter updated to 61[39m
+2026-03-16 23:06:16:616 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 23:06:16:616 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 2ms[39m
+2026-03-16 23:06:16:616 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:06:16:616 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-03-16 23:06:16:616 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 23:06:16:616 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:06:17:617 [37mdebug[39m: [37m[Request End] GET /courses took 273ms[39m
+2026-03-16 23:06:17:617 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 272.533 ms[39m
+2026-03-16 23:06:17:617 [37mdebug[39m: [37m[Request End] GET / took 348ms[39m
+2026-03-16 23:06:17:617 [35mhttp[39m: [35mGET /api/ads 304 - - 349.420 ms[39m
+2026-03-16 23:06:21:621 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:06:21:621 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 1ms[39m
+2026-03-16 23:06:21:621 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:06:21:621 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 267ms[39m
+2026-03-16 23:06:21:621 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 268.439 ms[39m
+2026-03-16 23:06:22:622 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:06:22:622 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:06:22:622 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 191ms[39m
+2026-03-16 23:06:22:622 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 190.666 ms[39m
+2026-03-16 23:06:22:622 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 273ms[39m
+2026-03-16 23:06:22:622 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 273.243 ms[39m
+2026-03-16 23:07:13:713 [32minfo[39m: [32mSocket emjBxPTHbwze7MjeAAAB disconnected[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 1ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET /courses took 164ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 163.112 ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 164ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 163.049 ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET / took 266ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/ads 304 - - 265.548 ms[39m
+2026-03-16 23:07:13:713 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET /api/settings/footer_test_counter took 221ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 500 71 - 221.108 ms[39m
+2026-03-16 23:07:13:713 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET /api/auth/me took 228ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/auth/me 500 71 - 227.654 ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 163ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 163.284 ms[39m
+2026-03-16 23:07:13:713 [37mdebug[39m: [37m[Request End] GET /me took 168ms[39m
+2026-03-16 23:07:13:713 [35mhttp[39m: [35mGET /api/auth/me 200 321 - 167.004 ms[39m
+2026-03-16 23:07:14:714 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 253ms[39m
+2026-03-16 23:07:14:714 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 261.143 ms[39m
+2026-03-16 23:09:00:90 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:09:00:90 [32minfo[39m: [32mTest counter updated to 63[39m
+2026-03-16 23:09:22:922 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:09:22:922 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 277ms[39m
+2026-03-16 23:09:22:922 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 275.915 ms[39m
+2026-03-16 23:10:14:1014 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:10:14:1014 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:10:14:1014 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 155ms[39m
+2026-03-16 23:10:14:1014 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 154.490 ms[39m
+2026-03-16 23:10:14:1014 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 363ms[39m
+2026-03-16 23:10:14:1014 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 364.337 ms[39m
+2026-03-16 23:12:00:120 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:12:01:121 [32minfo[39m: [32mTest counter updated to 65[39m
+2026-03-16 23:12:22:1222 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:12:22:1222 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 402ms[39m
+2026-03-16 23:12:22:1222 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 401.815 ms[39m
+2026-03-16 23:13:14:1314 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:13:14:1314 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:13:14:1314 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 148ms[39m
+2026-03-16 23:13:14:1314 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 147.359 ms[39m
+2026-03-16 23:13:14:1314 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 359ms[39m
+2026-03-16 23:13:14:1314 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 358.122 ms[39m
+2026-03-16 23:15:00:150 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:15:01:151 [32minfo[39m: [32mTest counter updated to 67[39m
+2026-03-16 23:15:22:1522 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:15:22:1522 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 375ms[39m
+2026-03-16 23:15:22:1522 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 375.023 ms[39m
+2026-03-16 23:16:13:1613 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:16:13:1613 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 382ms[39m
+2026-03-16 23:16:13:1613 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 381.982 ms[39m
+2026-03-16 23:16:14:1614 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:16:14:1614 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 359ms[39m
+2026-03-16 23:16:14:1614 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 357.313 ms[39m
+2026-03-16 23:18:00:180 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 23:18:01:181 [32minfo[39m: [32mTest counter updated to 69[39m
+2026-03-16 23:18:22:1822 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 23:18:22:1822 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 364ms[39m
+2026-03-16 23:18:22:1822 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 136 - 363.689 ms[39m
