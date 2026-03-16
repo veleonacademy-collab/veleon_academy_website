@@ -3,9 +3,14 @@ import { useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { http } from "../api/http";
+import { useAuth } from "../state/AuthContext";
+import { useNavigate } from "react-router-dom";
+import type { AuthTokens, User } from "../types/auth";
 
 const VerifyEmailPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
   const token = searchParams.get("token");
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
@@ -14,12 +19,22 @@ const VerifyEmailPage: React.FC = () => {
 
   const verifyMutation = useMutation({
     mutationFn: async (payload: { token: string }) => {
-      await http.post("/auth/verify-email", payload);
+      const { data } = await http.post<{ user: User; tokens: AuthTokens }>(
+        "/auth/verify-email",
+        payload
+      );
+      return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       setStatus("success");
-      setMessage("Your email has been verified. You can now log in.");
+      setMessage("Your email has been verified! Redirecting...");
       toast.success("Email verified successfully!");
+      
+      setAuth(data.user, data.tokens);
+      
+      setTimeout(() => {
+        navigate("/courses", { replace: true });
+      }, 2000);
     },
     onError: () => {
       setStatus("error");

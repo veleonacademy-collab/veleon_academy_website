@@ -7,7 +7,9 @@ import { getStoredTokens } from "../utils/tokenStorage";
 import { SupportFab } from "./SupportFab";
 import { APP_NAME, SUPPORT_EMAIL, INSTAGRAM_URL, TIKTOK_URL } from "../utils/constants";
 import { EnquiryModal } from "./EnquiryModal";
-import { Instagram, Music2, MessageSquare } from "lucide-react";
+import { Instagram, Music2, MessageSquare, AlertCircle, Send, Loader2 } from "lucide-react";
+import { http } from "../api/http";
+import toast from "react-hot-toast";
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, clearAuth } = useAuth();
@@ -15,6 +17,20 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const isLandingPage = location.pathname === "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+
+  const handleResend = async () => {
+    if (!user?.email) return;
+    setIsResending(true);
+    try {
+      await http.post("/auth/resend-verification", { email: user.email });
+      toast.success("Verification email sent! Check your inbox.");
+    } catch (err) {
+      toast.error("Failed to resend email. Please try again later.");
+    } finally {
+      setIsResending(false);
+    }
+  };
 
   React.useEffect(() => {
     if (user) {
@@ -29,6 +45,28 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {user && !user.isEmailVerified && (
+        <div className="bg-yellow-500/10 border-b border-yellow-500/20 text-yellow-800 dark:text-yellow-400 py-3 px-6">
+          <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <AlertCircle size={16} className="text-yellow-600" />
+              <span>Please verify your email to fully activate your account. Check your inbox for the link.</span>
+            </div>
+            <button
+              onClick={handleResend}
+              disabled={isResending}
+              className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-yellow-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-yellow-700 disabled:opacity-50 transition-all active:scale-95"
+            >
+              {isResending ? (
+                <Loader2 size={12} className="animate-spin" />
+              ) : (
+                <Send size={12} />
+              )}
+              {isResending ? "Sending..." : "Resend Link"}
+            </button>
+          </div>
+        </div>
+      )}
       <header className="border-b border-gray-200 bg-white/80 backdrop-blur sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link to="/" className="text-lg font-semibold text-primary">

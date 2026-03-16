@@ -29,10 +29,6 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [showResendButton, setShowResendButton] = useState(false);
-  const [unverifiedEmail, setUnverifiedEmail] = useState("");
-  const [verificationLink, setVerificationLink] = useState("");
-  const [showDevLink, setShowDevLink] = useState(false);
 
   const loginMutation = useMutation({
     mutationFn: async (values: { email: string; password: string }) => {
@@ -53,31 +49,7 @@ const LoginPage: React.FC = () => {
       navigate(redirectTo || "/courses", { replace: true });
     },
     onError: (err: any) => {
-      // Check if error is related to email verification
-      const errorMessage = err?.response?.data?.message || err.message;
-      if (
-        errorMessage?.toLowerCase().includes("verify your email") ||
-        errorMessage?.toLowerCase().includes("email verification")
-      ) {
-        setError(errorMessage);
-        setShowResendButton(true);
-        setUnverifiedEmail(email);
-      } else {
-        setError(errorMessage);
-        setShowResendButton(false);
-      }
-    },
-  });
-
-  const resendMutation = useMutation({
-    mutationFn: async (email: string) => {
-      const { data } = await http.post<{ verificationLink: string }>("/auth/resend-verification", { email });
-      return data;
-    },
-    onSuccess: (data) => {
-      setVerificationLink(data.verificationLink);
-      setShowDevLink(true);
-      toast.success("Verification email has been resent! Please check your inbox.");
+      setError(err?.response?.data?.message || err.message);
     },
   });
 
@@ -99,13 +71,11 @@ const LoginPage: React.FC = () => {
         : "/courses";
       navigate(redirectTo || "/courses", { replace: true });
     },
-    // Error handling is done globally in queryClient
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setShowResendButton(false);
 
     const parsed = loginSchema.safeParse({ email, password });
     if (!parsed.success) {
@@ -117,12 +87,6 @@ const LoginPage: React.FC = () => {
     loginMutation.mutate(parsed.data);
   };
 
-  const handleResendVerification = () => {
-    if (unverifiedEmail) {
-      resendMutation.mutate(unverifiedEmail);
-    }
-  };
-
   const handleGoogleSuccess = (credentialResponse: any) => {
     if (credentialResponse.credential) {
       oauthMutation.mutate({ idToken: credentialResponse.credential });
@@ -132,8 +96,8 @@ const LoginPage: React.FC = () => {
   return (
     <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-4 sm:p-6 shadow-xl">
       <SEO 
-        title="Login"
-        description="Login to your Veleon Academy account to access your courses, dashboard, and learning resources."
+          title="Login"
+          description="Login to your Veleon Academy account to access your courses, dashboard, and learning resources."
       />
       <div className="flex justify-center mb-4">
         <Link to="/">
@@ -142,34 +106,8 @@ const LoginPage: React.FC = () => {
       </div>
       <h1 className="mb-3 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>
       {error && (
-        <div className="mb-3 space-y-2">
-          <p className="text-xs text-destructive">{error}</p>
-          {showResendButton && (
-            <button
-              onClick={handleResendVerification}
-              disabled={resendMutation.isPending}
-              className="w-full rounded-md border border-warning/50 bg-warning/10 px-3 py-2 text-xs font-medium text-warning hover:bg-warning/20 disabled:cursor-not-allowed disabled:opacity-60 transition-colors"
-            >
-              {resendMutation.isPending
-                ? "Resending..."
-                : "📧 Resend Verification Email"}
-            </button>
-          )}
-          {showDevLink && verificationLink && (
-            <div className="mt-4 break-all rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-3 text-xs">
-              <p className="font-medium text-yellow-600 dark:text-yellow-400 mb-1">
-                Dev Mode: Verification Link
-              </p>
-              <a 
-                href={verificationLink} 
-                className="text-primary underline hover:opacity-80 transition-opacity"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {verificationLink}
-              </a>
-            </div>
-          )}
+        <div className="mb-3">
+          <p className="text-xs text-destructive text-center">{error}</p>
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">

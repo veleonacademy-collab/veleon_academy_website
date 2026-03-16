@@ -13,6 +13,8 @@ import {
   changePassword,
 } from "../services/authService.js";
 import { loginWithGoogle } from "../services/oauthService.js";
+import { signAccessToken, signRefreshToken } from "../utils/jwt.js";
+import { pool } from "../database/pool.js";
 import { env } from "../config/env.js";
 
 export async function register(
@@ -21,12 +23,25 @@ export async function register(
   next: NextFunction
 ): Promise<void> {
   try {
-    const verificationToken = await registerUser(req.body);
+    const { user, verificationToken } = await registerUser(req.body);
     const verificationLink = `${env.appUrl}/verify-email?token=${verificationToken}`;
+    
+    // Generate tokens for immediate login
+    const accessToken = signAccessToken(user.id, user.role);
+    const refreshToken = signRefreshToken(user.id, user.role);
+
+    // Save refresh token to DB
+    await pool.query(
+      "UPDATE users SET refresh_token = $1, updated_at = NOW() WHERE id = $2",
+      [refreshToken, user.id]
+    );
+
     res
       .status(201)
       .json({ 
-        message: "Registration successful. Please verify your email.",
+        message: "Registration successful.",
+        user,
+        tokens: { accessToken, refreshToken },
         verificationLink 
       });
   } catch (err) {
@@ -97,8 +112,23 @@ export async function verifyEmailController(
       res.status(400).json({ message: "Verification token is required." });
       return;
     }
-    await verifyEmail(token);
-    res.json({ message: "Email verified successfully." });
+    const user = await verifyEmail(token);
+    
+    // Generate tokens for immediate login
+    const accessToken = signAccessToken(user.id, user.role);
+    const refreshToken = signRefreshToken(user.id, user.role);
+
+    // Save refresh token to DB
+    await pool.query(
+      "UPDATE users SET refresh_token = $1, updated_at = NOW() WHERE id = $2",
+      [refreshToken, user.id]
+    );
+
+    res.json({ 
+      message: "Email verified successfully.", 
+      user, 
+      tokens: { accessToken, refreshToken } 
+    });
   } catch (err) {
     next(err);
   }

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
-import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book } from "lucide-react";
+import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, ShieldAlert } from "lucide-react";
 import SEO from "../components/SEO";
+import { useAuth } from "../state/AuthContext";
 
 const CourseDetailPage: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
@@ -17,11 +18,15 @@ const CourseDetailPage: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<"recordings" | "assignments" | "curriculum">("recordings");
   
+  const { user } = useAuth();
+  
   const course = details?.course;
   const enrollment = details?.enrollment;
   const recordings = details?.recordings || [];
   const assignments = details?.assignments || [];
   const curriculum = details?.curriculum || [];
+
+  const isVerified = user?.isEmailVerified;
 
   if (isLoading) return <div className="py-20 text-center font-bold text-slate-400">Loading course...</div>;
 
@@ -147,6 +152,21 @@ const CourseDetailPage: React.FC = () => {
               {new Date(enrollment.nextPaymentDue).toLocaleDateString()}
             </div>
           )}
+        </div>
+      ) : !isVerified ? (
+        <div className="bg-yellow-50 border border-yellow-100 rounded-3xl p-12 text-center">
+          <div className="h-16 w-16 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mx-auto mb-4 shadow-sm">
+            <ShieldAlert className="h-8 w-8" />
+          </div>
+          <h3 className="text-xl font-bold text-slate-900 mb-2 uppercase tracking-tight">Email Verification Required</h3>
+          <p className="text-slate-500 max-w-md mx-auto text-sm leading-relaxed mb-6">
+            To access course materials, recordings, and assignments, please verify your email address. 
+            Check your inbox for the link we sent you.
+          </p>
+          <div className="p-4 bg-white/50 border border-yellow-100 rounded-xl inline-block">
+             <p className="text-[10px] font-black text-yellow-600 uppercase tracking-widest mb-1">Why this is needed:</p>
+             <p className="text-xs text-slate-400">Security and communication regarding your certification.</p>
+          </div>
         </div>
       ) : (
         <div className="space-y-6">

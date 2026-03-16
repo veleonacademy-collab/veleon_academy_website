@@ -48,21 +48,13 @@ const RegisterPage: React.FC = () => {
 
   const registerMutation = useMutation({
     mutationFn: async (payload: RegisterPayload) => {
-      const { data } = await http.post<{ verificationLink: string }>("/auth/register", payload);
+      const { data } = await http.post<{ user: User; tokens: AuthTokens; verificationLink: string }>("/auth/register", payload);
       return data;
     },
-    onSuccess: (data, variables) => {
-      clearAuth();
-      setRegisteredEmail(variables.email);
-      setVerificationLink(data.verificationLink);
-      setShowSuccessModal(true);
-      setShowDevLink(false);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setValidationError(null);
+    onSuccess: (data) => {
+      setAuth(data.user, data.tokens);
+      toast.success(`Welcome, ${data.user.firstName}! Please check your email for verification.`);
+      navigate("/courses", { replace: true });
       
       // Track TikTok registration
       trackTikTokEvent('CompleteRegistration');

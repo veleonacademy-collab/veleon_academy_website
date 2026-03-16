@@ -37,11 +37,12 @@ const loginSchema = z.object({
   password: z.string().min(1, "Password is required."),
 });
 
-export async function registerUser(input: unknown): Promise<string> {
+export async function registerUser(input: unknown): Promise<{ user: PublicUser; verificationToken: string }> {
   const data = registerSchema.parse(input);
 
   const client = await pool.connect();
   let verificationToken: string;
+  let user: User;
   try {
     await client.query("BEGIN");
 
@@ -66,11 +67,11 @@ export async function registerUser(input: unknown): Promise<string> {
 
     const customerId = existingCustomer.rows.length > 0 ? existingCustomer.rows[0].id : null;
 
-    const result = await client.query(
+    const result = await client.query<User>(
       `
         INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, email_verification_token, customer_id)
         VALUES ($1, $2, $3, $4, $5, false, $6, $7)
-        RETURNING id
+        RETURNING *
       `,
       [
         data.firstName,
@@ -83,7 +84,8 @@ export async function registerUser(input: unknown): Promise<string> {
       ]
     );
 
-    const userId = result.rows[0].id;
+    user = result.rows[0];
+    const userId = user.id;
 
     // If customer existed, link it back to the user
     if (customerId) {
@@ -117,7 +119,7 @@ export async function registerUser(input: unknown): Promise<string> {
     console.log(`Email verification link (fallback): ${env.appUrl}/verify-email?token=${verificationToken}`);
   });
 
-  return verificationToken;
+  return { user: toPublicUser(user), verificationToken };
 }
 
 export async function loginUser(
@@ -149,11 +151,13 @@ export async function loginUser(
     throw error;
   }
 
+  /* 
   if (!user.is_email_verified) {
     const error = new Error("Please verify your email before logging in.");
     (error as any).statusCode = 403;
     throw error;
   }
+  */
 
   if (user.status === "disabled") {
     const error = new Error("Your account has been disabled. Please contact the administrator.");
@@ -212,7 +216,7 @@ export async function refreshTokens(
   };
 }
 
-export async function verifyEmail(token: string): Promise<void> {
+export async function verifyEmail(token: string): Promise<PublicUser> {
   const result = await pool.query<User>(
     "SELECT * FROM users WHERE email_verification_token = $1",
     [token]
@@ -225,16 +229,19 @@ export async function verifyEmail(token: string): Promise<void> {
     throw error;
   }
 
-  await pool.query(
+  const updatedResult = await pool.query<User & { phone: string | null; dob: Date | null }>(
     `
       UPDATE users
       SET is_email_verified = true,
           email_verification_token = NULL,
           updated_at = NOW()
       WHERE id = $1
+      RETURNING *
     `,
     [user.id]
   );
+  
+  return toPublicUser(updatedResult.rows[0]);
 }
 
 export async function requestPasswordReset(email: string): Promise<void> {
