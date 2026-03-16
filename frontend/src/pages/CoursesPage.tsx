@@ -96,7 +96,10 @@ const CoursesPage: React.FC = () => {
                       Active Cohort
                     </div>
                     <div className="flex flex-col items-end gap-1">
-                      <span className="text-[10px] text-red-500 font-bold animate-pulse">Limited Seats Available</span>
+                      <div className="flex flex-wrap justify-end gap-2">
+                        <span className="text-[10px] text-slate-400 font-medium italic">Installment available ✅</span>
+                        <span className="text-[10px] text-red-500 font-bold animate-pulse text-right">Limited Seats Available</span>
+                      </div>
                       <Link 
                         to={`/enroll/${course.id}`}
                         className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
@@ -133,7 +136,10 @@ const CoursesPage: React.FC = () => {
                       Active Cohort
                     </div>
                     <div className="flex flex-col items-end gap-1">
-                      <span className="text-[10px] text-red-500 font-bold animate-pulse">Limited spots!</span>
+                      <div className="flex flex-wrap justify-end gap-2">
+                        <span className="text-[10px] text-slate-400 font-medium italic">Installment available ✅</span>
+                        <span className="text-[10px] text-red-500 font-bold animate-pulse text-right">Limited spots!</span>
+                      </div>
                       <Link 
                         to="/register"
                         className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
