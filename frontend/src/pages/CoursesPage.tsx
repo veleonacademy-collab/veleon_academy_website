@@ -96,7 +96,7 @@ const CoursesPage: React.FC = () => {
                       Active Cohort
                     </div>
                     <div className="flex flex-col items-end gap-1">
-                      <span className="text-[10px] text-red-500 font-bold animate-pulse">9/10 seats filled!</span>
+                      <span className="text-[10px] text-red-500 font-bold animate-pulse">Limited Seats Available</span>
                       <Link 
                         to={`/enroll/${course.id}`}
                         className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
