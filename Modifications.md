@@ -22,14 +22,11 @@ Also add these two emails:
 
 
 
-If no payment after 24 hours:
-"You're one step away — complete your enrollment today" with a direct link
+
 
 .................................................
 
 After email verification → automatically log them in and skip the login step
 
-- Send a follow up email 1 hour later if they haven't enrolled saying "You're one step away — pick your course!"
-
-Immediately after registration the welcome email should have this.:
-"Welcome! Here are our courses — pick yours today" with a direct link to courses page
+If no payment after 1 hour or 24 hours:
+"You're one step away — complete your enrollment today" with a direct link

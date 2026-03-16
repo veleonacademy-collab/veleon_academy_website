@@ -8790,3 +8790,18 @@
 2026-03-16 15:05:05:55 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
 2026-03-16 15:05:06:56 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 353ms[39m
 2026-03-16 15:05:06:56 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 354.512 ms[39m
+2026-03-16 15:09:21:921 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:09:21:921 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:09:21:921 [32minfo[39m: [32mUser 28 connected with socket EZuj2kYAtBn9-42KAAAB[39m
+2026-03-16 15:09:27:927 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:09:27:927 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:09:28:928 [32minfo[39m: [32mUser 28 connected with socket Gp4OwykE6qsrZ3CnAAAB[39m
+2026-03-16 15:09:38:938 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:09:38:938 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:09:39:939 [32minfo[39m: [32mUser 28 connected with socket d0gVl3dB-nivCW4RAAAB[39m
+2026-03-16 15:10:12:1012 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:10:12:1012 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:10:12:1012 [32minfo[39m: [32mUser 28 connected with socket bXlLCEy3BkcidaKdAAAB[39m
+2026-03-16 15:15:54:1554 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:15:54:1554 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:15:54:1554 [32minfo[39m: [32mUser 28 connected with socket IB7ClTfHr1vds8QrAAAB[39m

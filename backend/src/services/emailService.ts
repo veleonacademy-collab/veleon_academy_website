@@ -91,12 +91,20 @@ export async function sendStudentWelcomeEmail(
       <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0;">
         <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
           <div style="background: linear-gradient(135deg, #00a9c0 0%, #007d8f 100%); padding: 40px 20px; text-align: center; color: white;">
-            <h1 style="margin: 0; font-size: 28px; font-weight: 700;">Welcome to Veleon Academy!</h1>
-            <p style="margin-top: 10px; font-size: 18px; opacity: 0.9;">Your journey to tech excellence starts here</p>
+            <h1 style="margin: 0; font-size: 28px; font-weight: 700;">🚀 Your Tech Future Starts NOW!</h1>
+            <p style="margin-top: 10px; font-size: 18px; opacity: 0.9;">The most successful people in tech don't wait — they act.</p>
           </div>
           <div style="padding: 40px 30px;">
             <h2 style="color: #333; margin-bottom: 20px;">Hi ${firstName},</h2>
-            <p style="font-size: 16px; margin-bottom: 25px;">Your account has been successfully created. You can now access our premium tech courses, recordings, and assignments.</p>
+            
+            <p style="font-size: 20px; font-weight: 700; color: #d11c07; margin-bottom: 15px;">🔥 Welcome! Here are our courses — pick yours today</p>
+            <p style="font-size: 16px; margin-bottom: 20px; color: #444;">Tech is the #1 path to a <strong>six-figure salary</strong> and career freedom. Don't let this opportunity slip away while others are out-earning you.</p>
+            
+            <div style="text-align: center; margin-bottom: 35px;">
+              <a href="${env.appUrl}/courses" style="display: inline-block; padding: 16px 32px; background-color: #d11c07; color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 18px; box-shadow: 0 4px 10px rgba(209, 28, 7, 0.3);">SECURE YOUR SPOT NOW</a>
+            </div>
+            
+            <p style="font-size: 16px; margin-bottom: 25px;">Your account is ready. Log in below to access your premium dashboard, expert recordings, and life-changing assignments.</p>
             
             <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; border: 1px dashed #00a9c0; margin-bottom: 30px;">
               <h3 style="margin-top: 0; color: #007d8f; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">Access Credentials</h3>
@@ -107,7 +115,7 @@ export async function sendStudentWelcomeEmail(
             <p style="text-align: center;">
               <a href="${portalUrl}" style="background-color: #00a9c0; color: white; padding: 14px 30px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-size: 16px;">Log In to Your Portal</a>
             </p>
-            <p style="font-size: 14px; color: #888; margin-top: 30px; text-align: center;"><em>Please change your password after your first login for security.</em></p>
+            <p style="font-size: 14px; color: #888; margin-top: 30px; text-align: center;"><em>Important: Seats are filling fast. High-demand courses close enrollment without notice.</em></p>
           </div>
           <div style="background: #fdfdfd; padding: 20px 30px; text-align: center; border-top: 1px solid #eee; color: #888; font-size: 14px;">
             <p>&copy; ${new Date().getFullYear()} Veleon Academy. All rights reserved.</p>
@@ -119,9 +127,9 @@ export async function sendStudentWelcomeEmail(
 
   await sendEmail({
     to: email,
-    subject: "Welcome to Veleon Academy - Your Account is Ready",
+    subject: "🔥 You're In! Start Your High-Paying Tech Career Today",
     html,
-    text: `Welcome to Veleon Academy! Your login email is ${email} and your temporary password is ${password}. Access your portal at ${portalUrl}`,
+    text: `URGENT: Your tech future starts now! Browse courses: ${env.appUrl}/courses\n\nHi ${firstName}, tech is the fastest way to a six-figure salary. Your portal is ready at ${portalUrl}. Email: ${email}, Temporary Password: ${password}. Secure your spot before it's too late!`,
   });
 }
 
@@ -186,7 +194,7 @@ export async function sendVerificationEmail(
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
           }
           .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #d11c07 0%, #00a9c0 100%);
             padding: 40px 20px;
             text-align: center;
             color: white;
@@ -207,7 +215,7 @@ export async function sendVerificationEmail(
           .button {
             display: inline-block;
             padding: 14px 32px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #d11c07 0%, #b01806 100%);
             color: white;
             text-decoration: none;
             border-radius: 6px;
@@ -215,6 +223,7 @@ export async function sendVerificationEmail(
             font-size: 16px;
             margin: 20px 0;
             transition: transform 0.2s;
+            box-shadow: 0 4px 12px rgba(209, 28, 7, 0.2);
           }
           .button:hover {
             transform: translateY(-2px);
@@ -228,7 +237,7 @@ export async function sendVerificationEmail(
             border-top: 1px solid #e9ecef;
           }
           .link {
-            color: #667eea;
+            color: #d11c07;
             word-break: break-all;
             font-size: 14px;
           }
@@ -237,23 +246,30 @@ export async function sendVerificationEmail(
       <body>
         <div class="container">
           <div class="header">
-            <h1>🎉 Welcome!</h1>
+            <h1>🚀 Don't Get Left Behind!</h1>
           </div>
           <div class="content">
             <p>Hi ${firstName},</p>
-            <p>Thank you for registering! Please verify your email address to activate your account.</p>
-            <p>Click the button below to verify your email:</p>
-            <div style="text-align: center;">
-              <a href="${verificationUrl}" class="button">Verify Email Address</a>
+            <p style="font-size: 20px; font-weight: 700; color: #d11c07; margin-bottom: 10px;">Welcome! Here are our courses — pick yours today</p>
+            <div style="text-align: center; margin-bottom: 30px;">
+              <a href="${env.appUrl}/courses" style="display: inline-block; padding: 12px 24px; background-color: #fdf2f1; color: #d11c07; text-decoration: none; border-radius: 6px; border: 2px solid #d11c07; font-weight: 700;">BROWSE HOT COURSES 🔥</a>
             </div>
+            
+            <p>The tech industry is the <strong>fastest path to financial freedom</strong> and a life-proof career. By registering, you've taken the first step. Now, take the second before someone else takes your spot.</p>
+            <p><strong>URGENT:</strong> You must verify your email to unlock your account and secure your registration.</p>
+            
+            <div style="text-align: center;">
+              <a href="${verificationUrl}" class="button">VERIFY MY EMAIL NOW</a>
+            </div>
+            
             <p style="margin-top: 30px;">Or copy and paste this link into your browser:</p>
             <p class="link">${verificationUrl}</p>
             <p style="margin-top: 30px; font-size: 14px; color: #888;">
-              This link will expire in 24 hours. If you didn't create an account, you can safely ignore this email.
+              <strong>Note:</strong> This verification link expires in 24 hours. After that, your data will be purged.
             </p>
           </div>
           <div class="footer">
-            <p>© ${new Date().getFullYear()} ${env.email.fromName}. All rights reserved.</p>
+            <p>© ${new Date().getFullYear()} ${env.email.fromName}. Your future starts today.</p>
           </div>
         </div>
       </body>
@@ -261,16 +277,17 @@ export async function sendVerificationEmail(
   `;
 
   const text = `
-    Welcome!
+    🚀 ACTION REQUIRED: Unlock Your Tech Future Today!
     
-    Hi ${firstName},
+    Hi ${firstName}, 
     
-    Thank you for registering! Please verify your email address to activate your account.
+    Tech is the highest-paying industry in the world—don't let this opportunity pass you by. 
     
-    Click the link below to verify your email:
-    ${verificationUrl}
+    BROWSE HOT COURSES: ${env.appUrl}/courses
     
-    This link will expire in 24 hours. If you didn't create an account, you can safely ignore this email.
+    VERIFY YOUR EMAIL NOW: ${verificationUrl}
+    
+    Warning: This link expires in 24 hours. Secure your spot before enrollment closes!
     
     © ${new Date().getFullYear()} ${env.email.fromName}. All rights reserved.
   `;
