@@ -8805,3 +8805,18 @@
 2026-03-16 15:15:54:1554 [32minfo[39m: [32mDatabase connection established successfully[39m
 2026-03-16 15:15:54:1554 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
 2026-03-16 15:15:54:1554 [32minfo[39m: [32mUser 28 connected with socket IB7ClTfHr1vds8QrAAAB[39m
+2026-03-16 15:20:38:2038 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:20:38:2038 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:20:38:2038 [32minfo[39m: [32mUser 28 connected with socket pksapZPXU4catJSXAAAB[39m
+2026-03-16 15:20:47:2047 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:20:48:2048 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:20:48:2048 [32minfo[39m: [32mUser 28 connected with socket FAN14fd35l06O5-JAAAB[39m
+2026-03-16 15:21:20:2120 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:21:20:2120 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:21:23:2123 [32minfo[39m: [32mUser 28 connected with socket iGHHLdK86dO1WJaXAAAB[39m
+2026-03-16 15:25:36:2536 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 15:25:36:2536 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 15:25:37:2537 [32minfo[39m: [32mUser 28 connected with socket snA07543NzCc-3BLAAAB[39m
+2026-03-16 15:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 15:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 15:30:00:300 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m

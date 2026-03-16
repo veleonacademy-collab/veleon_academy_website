@@ -95,6 +95,63 @@ export class AcademyService {
     logger.info(`Locked portals for ${result.rowCount} students.`);
   }
 
+  /**
+   * Processes payment reminders for users who signed up but haven't enrolled
+   */
+  static async processPaymentReminders() {
+    logger.info("Processing payment reminders...");
+    
+    const now = new Date();
+    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+    const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+    const { sendPaymentReminderEmail } = await import("./emailService.js");
+
+    // 1. Check for 24h reminders first (higher priority if both are due)
+    const due24h = await pool.query(
+      `SELECT u.id, u.email, u.first_name, u.metadata FROM users u
+       LEFT JOIN enrollments e ON u.id = e.student_id
+       WHERE e.id IS NULL 
+         AND u.role = 'student'
+         AND u.created_at <= $1 
+         AND (u.metadata->>'reminder_24h_sent' IS NULL OR u.metadata->>'reminder_24h_sent' = 'false')`,
+      [twentyFourHoursAgo.toISOString()]
+    );
+
+    for (const user of due24h.rows) {
+      try {
+        await sendPaymentReminderEmail(user.email, user.first_name, true);
+        const newMetadata = { ...(user.metadata || {}), reminder_24h_sent: true, reminder_1h_sent: true };
+        await pool.query("UPDATE users SET metadata = $1 WHERE id = $2", [JSON.stringify(newMetadata), user.id]);
+        logger.info(`Sent 24h reminder to ${user.email}`);
+      } catch (err) {
+        logger.error(`Failed to send 24h reminder to ${user.email}`, err);
+      }
+    }
+
+    // 2. Check for 1h reminders
+    const due1h = await pool.query(
+      `SELECT u.id, u.email, u.first_name, u.metadata FROM users u
+       LEFT JOIN enrollments e ON u.id = e.student_id
+       WHERE e.id IS NULL
+         AND u.role = 'student'
+         AND u.created_at <= $1 
+         AND (u.metadata->>'reminder_1h_sent' IS NULL OR u.metadata->>'reminder_1h_sent' = 'false')`,
+      [oneHourAgo.toISOString()]
+    );
+
+    for (const user of due1h.rows) {
+      try {
+        await sendPaymentReminderEmail(user.email, user.first_name, false);
+        const newMetadata = { ...(user.metadata || {}), reminder_1h_sent: true };
+        await pool.query("UPDATE users SET metadata = $1 WHERE id = $2", [JSON.stringify(newMetadata), user.id]);
+        logger.info(`Sent 1h reminder to ${user.email}`);
+      } catch (err) {
+        logger.error(`Failed to send 1h reminder to ${user.email}`, err);
+      }
+    }
+  }
+
   static async getStudentDashboard(studentId: number) {
     // 1. Get Enrollments with progress stats + installment info
     const enrollmentsRes = await pool.query(

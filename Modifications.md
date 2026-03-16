@@ -18,12 +18,6 @@ Verification becomes a low-pressure reminder, not a blocker
 You still collect verified emails eventually
 
 
-Also add these two emails:
-
-
-
-
-
 .................................................
 
 After email verification → automatically log them in and skip the login step

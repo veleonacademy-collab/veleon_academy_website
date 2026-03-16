@@ -600,3 +600,89 @@ export async function sendAssignmentNotificationEmail(
     html,
   });
 }
+
+/**
+ * Send payment reminder email for users who haven't enrolled
+ */
+export async function sendPaymentReminderEmail(
+  email: string,
+  firstName: string,
+  is24h: boolean
+): Promise<void> {
+  const portalUrl = `${env.appUrl}/courses`;
+  const subject = "You're one step away — complete your enrollment today";
+  
+  const mainTitle = is24h ? "🚨 FINAL REMINDER: Your Spot is Expiring" : "🚀 Your Tech Journey Starts Here, " + firstName;
+  const subTitle = is24h ? "This is your last chance to secure current pricing and bonuses." : "You're just one step away from joining the next generation of tech leaders.";
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+          body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 0; color: #1e293b; }
+          .container { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+          .hero { background: linear-gradient(135deg, #d11c07 0%, #00a9c0 100%); padding: 60px 40px; text-align: center; color: white; }
+          .urgent-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.4); }
+          .content { padding: 40px; }
+          .benefit-item { display: flex; align-items: flex-start; margin-bottom: 20px; }
+          .benefit-icon { background: #fee2e2; color: #d11c07; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+          .cta-button { display: inline-block; width: 100%; padding: 20px 0; background-color: #d11c07; color: white; text-decoration: none; border-radius: 12px; font-weight: 800; font-size: 18px; text-align: center; box-shadow: 0 8px 20px rgba(209, 28, 7, 0.3); transition: all 0.3s ease; }
+          .footer { background: #f1f5f9; padding: 30px; text-align: center; color: #64748b; font-size: 13px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="hero">
+            <div class="urgent-badge">${is24h ? "Urgent: Action Required" : "Achievement Unlocked: Almost There"}</div>
+            <h1 style="margin: 0; font-size: 32px; font-weight: 800; line-height: 1.2;">${mainTitle}</h1>
+            <p style="margin-top: 15px; font-size: 18px; opacity: 0.9;">${subTitle}</p>
+          </div>
+          <div class="content">
+            <p style="font-size: 16px; line-height: 1.7;">
+              Hi ${firstName}, <br><br>
+              The most successful people in tech share one trait: **Speed.** <br><br>
+              While others are still dreaming about a career change, our students are already building their futures. Every hour you wait is an hour someone else is mastering the skills that command **six-figure salaries.**
+            </p>
+
+            <div style="background: #fff1f0; border-radius: 12px; padding: 25px; margin: 30px 0; border: 1px dashed #d11c07;">
+              <h3 style="margin-top: 0; color: #d11c07; font-size: 18px;">Why Veleon Academy?</h3>
+              <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <div><strong>Live Expert Training:</strong> Not just recorded videos. Real mentorship.</div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <div><strong>Portfolio Projects:</strong> Build real-world apps that recruiters love.</div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <div><strong>Career Support:</strong> We help you land your dream tech role.</div>
+              </div>
+            </div>
+
+            <p style="text-align: center; margin-bottom: 10px; font-weight: bold; color: #d11c07;">🔥 Enrollment for our flagship courses is closing soon.</p>
+            <a href="${portalUrl}" class="cta-button">COMPLETE MY ENROLLMENT NOW →</a>
+            
+            <p style="text-align: center; font-size: 14px; color: #64748b; margin-top: 20px;">
+              No credit card required to browse. Your future self will thank you.
+            </p>
+          </div>
+          <div class="footer">
+            <p>You received this because you recently created an account at Veleon Academy.</p>
+            <p>&copy; ${new Date().getFullYear()} Veleon Academy • 123 Tech Hub Street • Career Growth Division</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await sendEmail({
+    to: email,
+    subject,
+    html,
+    text: `Hi ${firstName}, you're one step away! Complete your enrollment today at ${portalUrl}. The tech world moves fast—don't let your spot be taken by someone else. Enroll now: ${portalUrl}`
+  });
+}

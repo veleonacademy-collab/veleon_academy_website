@@ -317,3 +317,4 @@
 2026-02-25 22:27:22:2722 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
 2026-03-06 13:57:55:5755 [31merror[39m: [31mMigration failed: column "tutor_id" of relation "enrollments" already exists[39m
 2026-03-13 16:58:12:5812 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 15:30:00:300 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m

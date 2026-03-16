@@ -178,7 +178,6 @@ async function bootstrap(): Promise<void> {
 
   // Schedule weekly fashion crawl (Every Sunday at midnight)
   // cron.schedule("0 0 * * 0", async () => { ... });
-
   // Schedule daily check for overdue installments (Academy)
   cron.schedule("0 0 * * *", async () => {
     logger.info("Running daily overdue installment check...");
@@ -186,6 +185,16 @@ async function bootstrap(): Promise<void> {
       await AcademyService.processOverdueInstallments();
     } catch (err) {
       logger.error("Daily installment check failed", err);
+    }
+  });
+
+  // Schedule every 30 minutes check for payment reminders
+  cron.schedule("*/30 * * * *", async () => {
+    logger.info("Running periodic payment reminder check...");
+    try {
+      await AcademyService.processPaymentReminders();
+    } catch (err) {
+      logger.error("Payment reminder check failed", err);
     }
   });
 
