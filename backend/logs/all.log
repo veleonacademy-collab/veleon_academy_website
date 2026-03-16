@@ -8940,3 +8940,95 @@
 2026-03-16 17:07:06:76 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
 2026-03-16 17:07:06:76 [37mdebug[39m: [37m[Request End] GET /courses took 163ms[39m
 2026-03-16 17:07:06:76 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 163.412 ms[39m
+2026-03-16 17:08:04:84 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/resend-verification | Origin: http://localhost:5173[39m
+2026-03-16 17:08:04:84 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/resend-verification took 1ms[39m
+2026-03-16 17:08:04:84 [37mdebug[39m: [37m[Request Start] POST /api/auth/resend-verification | Origin: http://localhost:5173[39m
+2026-03-16 17:08:05:85 [37mdebug[39m: [37m[Request End] POST /resend-verification took 337ms[39m
+2026-03-16 17:08:05:85 [35mhttp[39m: [35mPOST /api/auth/resend-verification 200 201 - 336.469 ms[39m
+2026-03-16 17:08:35:835 [32minfo[39m: [32mSocket kHsRf6S5XMSkits5AAAB disconnected[39m
+2026-03-16 17:19:03:193 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/register | Origin: http://localhost:5173[39m
+2026-03-16 17:19:03:193 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/register took 1ms[39m
+2026-03-16 17:19:03:193 [37mdebug[39m: [37m[Request Start] POST /api/auth/register | Origin: http://localhost:5173[39m
+2026-03-16 17:19:05:195 [33mwarn[39m: [33m[SLOW REQUEST] POST /register took 1377ms[39m
+2026-03-16 17:19:05:195 [35mhttp[39m: [35mPOST /api/auth/register 201 908 - 1377.873 ms[39m
+2026-03-16 17:19:05:195 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 17:19:05:195 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-03-16 17:19:05:195 [32minfo[39m: [32mUser 31 connected with socket ojRliGkHkoiQaW8eAAAD[39m
+2026-03-16 17:19:05:195 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 17:19:05:195 [37mdebug[39m: [37m[Request End] GET /courses took 169ms[39m
+2026-03-16 17:19:05:195 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 168.461 ms[39m
+2026-03-16 17:19:42:1942 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-16 17:19:42:1942 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 1ms[39m
+2026-03-16 17:19:42:1942 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-16 17:19:43:1943 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 879ms[39m
+2026-03-16 17:19:43:1943 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 878.433 ms[39m
+2026-03-16 17:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 17:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 17:30:00:300 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 18:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 18:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 18:00:00:00 [31merror[39m: [31mPayment reminder check failed getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 18:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 18:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 18:30:00:300 [31merror[39m: [31mPayment reminder check failed getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 19:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 19:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 19:00:00:00 [31merror[39m: [31mPayment reminder check failed getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 19:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 19:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 19:30:02:302 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 20:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-16 20:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-16 20:00:04:04 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 20:21:51:2151 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:22:36:2236 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 20:22:36:2236 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 20:22:36:2236 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 20:22:38:2238 [32minfo[39m: [32mTest counter updated to 1[39m
+2026-03-16 20:22:41:2241 [32minfo[39m: [32mUser 31 connected with socket KfuXxm2eb3WnrkxGAAAB[39m
+2026-03-16 20:24:00:240 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 20:24:02:242 [32minfo[39m: [32mTest counter updated to 2[39m
+2026-03-16 20:24:35:2435 [37mdebug[39m: [37m[Request Start] OPTIONS /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:24:35:2435 [37mdebug[39m: [37m[Request End] OPTIONS /api/settings/footer_test_counter took 3ms[39m
+2026-03-16 20:24:35:2435 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:24:35:2435 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:24:36:2436 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 798ms[39m
+2026-03-16 20:24:36:2436 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 796.887 ms[39m
+2026-03-16 20:24:40:2440 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-03-16 20:24:40:2440 [33mwarn[39m: [33m[SLOW REQUEST] GET /api/settings/footer_test_counter took 5023ms[39m
+2026-03-16 20:24:40:2440 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 500 61 - 5022.272 ms[39m
+2026-03-16 20:27:29:2729 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:27:52:2752 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:28:11:2811 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:29:19:2919 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:29:49:2949 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:32:08:328 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-16 20:32:08:328 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 20:32:08:328 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-16 20:32:08:328 [32minfo[39m: [32mTest counter updated to 3[39m
+2026-03-16 20:32:15:3215 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 20:32:15:3215 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 20:32:15:3215 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:32:15:3215 [37mdebug[39m: [37m[Request End] GET / took 208ms[39m
+2026-03-16 20:32:15:3215 [35mhttp[39m: [35mGET /api/ads 304 - - 206.736 ms[39m
+2026-03-16 20:32:18:3218 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 2631ms[39m
+2026-03-16 20:32:18:3218 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 2632.808 ms[39m
+2026-03-16 20:32:18:3218 [33mwarn[39m: [33m[SLOW REQUEST] GET /footer_test_counter took 3353ms[39m
+2026-03-16 20:32:18:3218 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 3351.043 ms[39m
+2026-03-16 20:32:18:3218 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:32:18:3218 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 176ms[39m
+2026-03-16 20:32:18:3218 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 175.558 ms[39m
+2026-03-16 20:33:00:330 [32minfo[39m: [32mRunning 3-minute test counter update...[39m
+2026-03-16 20:33:01:331 [32minfo[39m: [32mTest counter updated to 4[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request End] GET / took 166ms[39m
+2026-03-16 20:33:17:3317 [35mhttp[39m: [35mGET /api/ads 304 - - 165.638 ms[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request End] GET /courses took 191ms[39m
+2026-03-16 20:33:17:3317 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 190.744 ms[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 590ms[39m
+2026-03-16 20:33:17:3317 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 200 135 - 590.166 ms[39m
+2026-03-16 20:33:17:3317 [37mdebug[39m: [37m[Request Start] GET /api/settings/footer_test_counter | Origin: http://localhost:5173[39m
+2026-03-16 20:33:18:3318 [37mdebug[39m: [37m[Request End] GET /footer_test_counter took 177ms[39m
+2026-03-16 20:33:18:3318 [35mhttp[39m: [35mGET /api/settings/footer_test_counter 304 - - 176.880 ms[39m

@@ -30,6 +30,7 @@ import { crawlFashionTrends } from "./services/trendingService.js";
 import adRouter from "./routes/adRoutes.js";
 import { academyRouter } from "./routes/academyRoutes.js";
 import { AcademyService } from "./services/academyService.js";
+import { getSystemSetting, updateSystemSetting } from "./services/systemSettingsService.js";
 
 
 async function bootstrap(): Promise<void> {
@@ -176,7 +177,7 @@ async function bootstrap(): Promise<void> {
 
   app.use(errorHandler);
 
-  // Schedule weekly fashion crawl (Every Sunday at midnight)
+
   // cron.schedule("0 0 * * 0", async () => { ... });
   // Schedule daily check for overdue installments (Academy)
   cron.schedule("0 0 * * *", async () => {
@@ -197,6 +198,26 @@ async function bootstrap(): Promise<void> {
       logger.error("Payment reminder check failed", err);
     }
   });
+
+  // Schedule every 3 minutes a test counter update
+  const runTestCounterUpdate = async () => {
+    logger.info("Running 3-minute test counter update...");
+    try {
+      const setting = await getSystemSetting("footer_test_counter");
+      const currentValue = setting ? parseInt(setting.value) || 0 : 0;
+      await updateSystemSetting("footer_test_counter", { 
+        value: (currentValue + 1).toString(),
+        description: "A test counter updated every 3 minutes"
+      });
+      logger.info(`Test counter updated to ${currentValue + 1}`);
+    } catch (err) {
+      logger.error("Test counter update failed", err);
+    }
+  };
+
+  cron.schedule("*/3 * * * *", runTestCounterUpdate);
+  // Run once on startup
+  runTestCounterUpdate().catch(err => logger.error("Initial test counter update failed", err));
 
   httpServer.listen(env.port, () => {
     logger.info(`API server with Socket.io listening on http://localhost:${env.port}`);

@@ -321,3 +321,16 @@
 2026-03-16 16:00:00:00 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
 2026-03-16 16:30:00:300 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
 2026-03-16 17:00:00:00 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 17:30:00:300 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 18:00:00:00 [31merror[39m: [31mPayment reminder check failed getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 18:30:00:300 [31merror[39m: [31mPayment reminder check failed getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 19:00:00:00 [31merror[39m: [31mPayment reminder check failed getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-16 19:30:02:302 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 20:00:04:04 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
+2026-03-16 20:21:51:2151 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:24:40:2440 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-03-16 20:27:29:2729 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:27:52:2752 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:28:11:2811 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:29:19:2919 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-16 20:29:49:2949 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
