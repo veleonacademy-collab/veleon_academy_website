@@ -49,8 +49,8 @@ const LoginPage: React.FC = () => {
       const isAuthPage = from?.pathname === "/login" || from?.pathname === "/register" || from?.pathname?.includes("/verify-email") || from?.pathname?.includes("/reset-password");
       const redirectTo = from && !isAuthPage
         ? `${from.pathname ?? ""}${from.search ?? ""}${from.hash ?? ""}` 
-        : "/dashboard";
-      navigate(redirectTo || "/dashboard", { replace: true });
+        : "/courses";
+      navigate(redirectTo || "/courses", { replace: true });
     },
     onError: (err: any) => {
       // Check if error is related to email verification
@@ -96,8 +96,8 @@ const LoginPage: React.FC = () => {
       const isAuthPage = from?.pathname === "/login" || from?.pathname === "/register" || from?.pathname?.includes("/verify-email") || from?.pathname?.includes("/reset-password");
       const redirectTo = from && !isAuthPage
         ? `${from.pathname ?? ""}${from.search ?? ""}${from.hash ?? ""}` 
-        : "/dashboard";
-      navigate(redirectTo || "/dashboard", { replace: true });
+        : "/courses";
+      navigate(redirectTo || "/courses", { replace: true });
     },
     // Error handling is done globally in queryClient
   });

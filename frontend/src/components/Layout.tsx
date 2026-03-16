@@ -50,7 +50,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-4 text-sm">
-            <Link to="/" className="hover:text-primary font-bold">
+            <Link to="/courses" className="hover:text-primary font-bold">
               Courses
             </Link>
            
@@ -95,7 +95,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 bg-white">
             <nav className="flex flex-col p-4 space-y-4 text-sm">
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary font-bold py-2">
+              <Link to="/courses" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-primary font-bold py-2">
                 Courses
               </Link>
              
@@ -149,7 +149,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       </header>
       <main
         className={
-          isLandingPage
+          isLandingPage || location.pathname === "/courses"
             ? "w-full"
             : "mx-auto max-w-6xl px-6 py-10"
         }

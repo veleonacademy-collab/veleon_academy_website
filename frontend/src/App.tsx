@@ -19,6 +19,7 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import TrendingPage from "./pages/TrendingPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
 import PricingPage from "./pages/PricingPage";
+import CoursesPage from "./pages/CoursesPage";
 import { StripeProvider } from "./components/Payment/StripeProvider";
 import AdminLoginPage from "./pages/admin/auth/AdminLoginPage";
 import AdminRegisterPage from "./pages/admin/auth/AdminRegisterPage";
@@ -84,6 +85,7 @@ const App: React.FC = () => {
           <Route path="/style-me" element={<StyleMePage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
           <Route path="/enroll/:courseId" element={<EnrollPage />} />
         {/* Global auth routes */}
         <Route path="/login" element={<LoginPage />} />

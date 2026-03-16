@@ -105,12 +105,12 @@ const LandingPage: React.FC = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto text-center ">
              {user ? (
-               <a
-                  href="#courses"
+                <Link
+                  to="/courses"
                   className="w-full sm:w-auto rounded-xl bg-primary text-white px-10 py-5 font-bold text-sm tracking-widest hover:bg-primary/90 transition-all duration-300 shadow-2xl shadow-primary/20 hover:scale-105"
                >
                   REGISTER NOW
-               </a>
+               </Link>
              ) : (
                <Link
                   to="/register"
@@ -119,12 +119,12 @@ const LandingPage: React.FC = () => {
                   REGISTER NOW
                </Link>
              )}
-             <a
-                href="#courses"
+             <Link
+                to="/courses"
                 className="w-full sm:w-auto rounded-xl border border-slate-700 bg-slate-800/50 backdrop-blur-sm text-white px-10 py-5 font-bold text-sm tracking-widest hover:bg-slate-700 transition-all duration-300"
             >
                 EXPLORE COURSES
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -154,9 +154,14 @@ const LandingPage: React.FC = () => {
 
       {/* Courses Grid */}
       <section id="courses" className="mx-auto max-w-7xl px-4 space-y-8 sm:space-y-12">
-        <div className="text-center space-y-3 sm:space-y-4">
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Available <span className="text-primary italic">Programs</span></h2>
-            <p className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto">Choose from our curriculum designed by industry experts to get you hired.</p>
+        <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-100 text-red-600 text-[10px] font-bold tracking-widest uppercase mx-auto animate-pulse">
+                <div className="h-2 w-2 rounded-full bg-red-600" />
+                Enrollment Closing: Limited Spots Available
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">CHOOSE YOUR <span className="text-primary italic underline decoration-secondary/30">TRANSFORMATION</span></h2>
+            <p className="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto font-medium italic">"The best time to plant a tree was 20 years ago. The second best time is <span className="text-primary font-bold">NOW</span>."</p>
+            <p className="text-slate-600 text-sm sm:text-base max-w-3xl mx-auto">Stop dreaming about a tech career and start building it. Our intensive, industry-led programs are designed to take you from Zero to Senior. <b>Secure your seat before the next cohort fills up.</b></p>
         </div>
 
         {isLoading ? (
@@ -188,12 +193,15 @@ const LandingPage: React.FC = () => {
                             <Users className="h-4 w-4" />
                             Active Cohort
                         </div>
-                        <Link 
-                            to={`/enroll/${course.id}`}
-                            className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-xs tracking-widest hover:bg-primary transition-colors"
-                        >
-                            ENROLL NOW
-                        </Link>
+                        <div className="flex flex-col items-end gap-1">
+                            <span className="text-[10px] text-red-500 font-bold animate-pulse">Few seats left!</span>
+                            <Link 
+                                to={`/enroll/${course.id}`}
+                                className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
+                            >
+                                SECURE YOUR SPOT
+                            </Link>
+                        </div>
                     </div>
                 </div>
               </div>
@@ -223,12 +231,15 @@ const LandingPage: React.FC = () => {
                             <Users className="h-4 w-4" />
                             Active Cohort
                         </div>
-                        <Link 
-                            to="/register"
-                            className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-xs tracking-widest hover:bg-primary transition-colors"
-                        >
-                            ENROLL NOW
-                        </Link>
+                        <div className="flex flex-col items-end gap-1">
+                            <span className="text-[10px] text-red-500 font-bold animate-pulse">Enrollment closing!</span>
+                            <Link 
+                                to="/register"
+                                className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
+                            >
+                                SECURE YOUR SPOT
+                            </Link>
+                        </div>
                     </div>
                 </div>
               </div>

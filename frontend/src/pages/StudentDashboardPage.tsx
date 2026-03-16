@@ -6,7 +6,7 @@ import {
   Book, PlayCircle, FileText, Lock, Calendar,
   CreditCard, MessageSquare, TrendingUp, Clock,
   CheckCircle2, ChevronRight, ArrowRight, Loader2, X,
-  WalletCards,
+  WalletCards, Sparkles, Users,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import Modal from "../components/Modal";
@@ -64,18 +64,18 @@ const InstallmentModal: React.FC<PayModalProps> = ({ enrollment, onClose, onPay,
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-2 px-5 py-3 border-b border-slate-100">
-          <div className="bg-slate-50 rounded-xl p-3">
-            <p className="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Total</p>
-            <p className="text-sm font-black text-slate-900">{formatCurrency(coursePrice)}</p>
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-2 px-4 sm:px-5 py-3 border-b border-slate-100">
+          <div className="bg-slate-50 rounded-xl p-2.5 sm:p-3">
+            <p className="text-[7px] sm:text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Total</p>
+            <p className="text-xs sm:text-sm font-black text-slate-900 truncate">{formatCurrency(coursePrice)}</p>
           </div>
-          <div className="bg-approve/5 rounded-xl p-3 border border-approve/10">
-            <p className="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Paid</p>
-            <p className="text-sm font-black text-approve">{formatCurrency(totalPaid)}</p>
+          <div className="bg-approve/5 rounded-xl p-2.5 sm:p-3 border border-approve/10">
+            <p className="text-[7px] sm:text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Paid</p>
+            <p className="text-xs sm:text-sm font-black text-approve truncate">{formatCurrency(totalPaid)}</p>
           </div>
-          <div className={`rounded-xl p-3 border ${remaining > 0 ? "bg-secondary/5 border-secondary/10" : "bg-approve/5 border-approve/10"}`}>
-            <p className="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Left</p>
-            <p className={`text-sm font-black ${remaining > 0 ? "text-secondary" : "text-approve"}`}>{formatCurrency(remaining)}</p>
+          <div className={`rounded-xl p-2.5 sm:p-3 border ${remaining > 0 ? "bg-secondary/5 border-secondary/10" : "bg-approve/5 border-approve/10"}`}>
+            <p className="text-[7px] sm:text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Left</p>
+            <p className={`text-xs sm:text-sm font-black truncate ${remaining > 0 ? "text-secondary" : "text-approve"}`}>{formatCurrency(remaining)}</p>
           </div>
         </div>
 
@@ -199,71 +199,97 @@ const StudentDashboardPage: React.FC = () => {
   const hasEnrollments = enrollments.length > 0;
 
   return (
-    <div className="space-y-5 pb-10">
+    <div className="space-y-6 pb-10">
 
-      {/* ── Header ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Student <span className="text-primary italic">Portal</span>
-          </h1>
-          <p className="text-slate-500 text-sm">Welcome back, {user?.firstName}!</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsComplainModalOpen(true)}
-            className="flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 transition-all shadow-sm"
-          >
-            <MessageSquare className="h-3.5 w-3.5" /> Support
-          </button>
-          {/* <Link to="/" className="flex items-center gap-1.5 bg-primary text-white px-4 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:opacity-90 transition-all shadow-md shadow-primary/20">
-            Courses <ArrowRight className="h-3.5 w-3.5" />
-          </Link> */}
+      
+
+      {/* ── Sub-Header for Support ── */}
+      <div className="flex justify-end mb-0">
+        <button
+          onClick={() => setIsComplainModalOpen(true)}
+          className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-white border border-slate-200 text-slate-600 px-5 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 transition-all shadow-sm group"
+        >
+          <MessageSquare className="h-4 w-4 group-hover:text-primary transition-colors" /> Academic Support Portal
+        </button>
+      </div>
+      {/* ── Sales-Driven Hero Section ── */}
+      {
+        !hasEnrollments && 
+
+      <div className="relative overflow-hidden bg-slate-900 rounded-3xl sm:rounded-[2.5rem] p-4 sm:p-12 text-white shadow-2xl mb-8">
+        {/* Animated Background Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
+        
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10">
+          <div className="space-y-4 sm:space-y-6 max-w-2xl text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase tracking-[0.2em] animate-bounce">
+              <Sparkles className="h-3 w-3" /> Urgent: Next Cohort Enrollment Closing!
+            </div>
+            
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tighter leading-[0.9] uppercase italic">
+                Master <span className="text-primary not-italic">Tech.</span> <br />
+                Secure <span className="text-secondary not-italic">Wealth.</span>
+              </h1>
+              <p className="text-slate-400 font-medium text-base sm:text-lg leading-relaxed">
+                Welcome back, <span className="text-white font-bold">{user?.firstName}</span>! Your journey to the top 1% starts with the next skill. 
+                Don't get left behind. <b className="text-slate-200">Limited slots left for the Q2 cohort.</b>
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
+               <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Industry-Lead Certification
+               </div>
+            </div>
+          </div>
+          
+          <div className="flex-shrink-0 w-full lg:w-auto">
+            <Link to="/courses" className="group relative block w-full transform transition-all hover:scale-102 active:scale-98 duration-300">
+              <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl sm:rounded-[2.5rem] blur-lg opacity-40 group-hover:opacity-80 transition duration-1000 group-hover:duration-200"></div>
+              <div className="relative flex flex-col items-center justify-center bg-primary hover:bg-white text-white hover:text-primary px-6 py-8 sm:px-20 sm:py-14 rounded-2xl sm:rounded-[2rem] font-black text-2xl sm:text-5xl tracking-tighter shadow-2xl transition-all duration-300 border border-white/10">
+                <div className="flex items-center gap-3 sm:gap-4 text-center">
+                  BROWSE <span className="hidden sm:inline">ALL</span> COURSES <ArrowRight className="h-6 w-6 sm:h-14 sm:w-14 group-hover:translate-x-4 transition-transform hidden sm:block" />
+                </div>
+                <div className="text-[9px] sm:text-[13px] font-black opacity-90 uppercase tracking-[0.4em] mt-3 sm:mt-4">
+                   CLAIM YOUR FUTURE SEAT TODAY
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
+      }
 
-      {!hasEnrollments ? (
-        /* ── Empty state ── */
-        <div className="bg-white rounded-2xl p-10 text-center border border-slate-200 shadow-md max-w-lg mx-auto relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
-          <div className="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-5 text-primary">
-            <Book className="h-8 w-8" />
-          </div>
-          <h3 className="text-xl font-black text-slate-900 mb-2">Your Learning Journey Awaits!</h3>
-          <p className="text-slate-500 mb-6 text-sm leading-relaxed max-w-xs mx-auto">
-            Enrol in a course to access your student dashboard, materials, and tutor.
-          </p>
-          <Link to="/" className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl font-black text-xs tracking-widest hover:scale-105 transition-all shadow-lg shadow-primary/30">
-            BROWSE COURSES <ChevronRight className="h-4 w-4" />
-          </Link>
-        </div>
-      ) : (
-        <div className="space-y-5">
+      {hasEnrollments && (
+        <div className="space-y-6">
 
-          {/* ── Stats — 2×2 on mobile, 4-col on desktop ── */}
-          <div className="bg-slate-900 rounded-2xl p-px shadow-lg shadow-slate-200/50">
-            <div className="bg-white rounded-[calc(1rem-1px)] p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 sm:gap-10">
-                <div className="text-center md:text-left">
+          {/* ── Stats — Enhanced Grid ── */}
+          <div className="bg-slate-900 rounded-2xl p-px shadow-lg shadow-slate-200/50 overflow-hidden">
+            <div className="bg-white rounded-[calc(1rem-1px)] p-4 sm:p-5 flex flex-col items-stretch gap-6">
+              <div className="grid grid-cols-2 md:flex md:items-center md:justify-start gap-4 sm:gap-10">
+                <div className="p-3 sm:p-0 bg-slate-50 sm:bg-transparent rounded-xl sm:rounded-none">
                   <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Total Paid</p>
-                  <p className="text-lg font-black text-slate-900">{formatCurrency(stats?.totalPaid || 0)}</p>
+                  <p className="text-base sm:text-lg font-black text-slate-900">{formatCurrency(stats?.totalPaid || 0)}</p>
                 </div>
                 <div className="h-8 w-px bg-slate-100 hidden md:block" />
-                <div className="text-center md:text-left">
+                <div className="p-3 sm:p-0 bg-slate-50 sm:bg-transparent rounded-xl sm:rounded-none">
                   <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Remaining</p>
-                  <p className="text-lg font-black text-secondary">{formatCurrency(stats?.totalRemaining || 0)}</p>
+                  <p className="text-base sm:text-lg font-black text-secondary">{formatCurrency(stats?.totalRemaining || 0)}</p>
                 </div>
                 <div className="h-8 w-px bg-slate-100 hidden md:block" />
-                <div className="text-center md:text-left">
+                <div className="col-span-2 md:col-span-1 p-3 sm:p-0 bg-slate-50 sm:bg-transparent rounded-xl sm:rounded-none">
                   <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 mb-1">Next Settlement</p>
                   <div className="flex items-baseline gap-2">
-                    <p className="text-lg font-black text-slate-900">{formatCurrency(stats?.nextPaymentAmount || 0)}</p>
+                    <p className="text-base sm:text-lg font-black text-slate-900">{formatCurrency(stats?.nextPaymentAmount || 0)}</p>
                     <span className="text-[10px] font-bold text-slate-400 uppercase">
                       {stats?.nextPaymentDate ? `Due ${new Date(stats.nextPaymentDate).toLocaleDateString("en-GB", {day:"2-digit", month:"short"})}` : "Paid"}
                     </span>
                   </div>
                 </div>
               </div>
+              
               {stats?.totalRemaining > 0 && (
                 <button 
                   onClick={() => {
@@ -271,7 +297,7 @@ const StudentDashboardPage: React.FC = () => {
                     if (nextEnr) setPaymentModal(nextEnr);
                     else if (enrollments.length > 0) setPaymentModal(enrollments[0]);
                   }}
-                  className="w-full md:w-auto bg-slate-900 text-white px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-lg shadow-primary/10"
+                  className="w-full md:w-auto md:self-end bg-slate-900 text-white px-8 py-4 sm:py-3 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-lg shadow-primary/10"
                 >
                   SETTLE BALANCE
                 </button>
@@ -281,10 +307,10 @@ const StudentDashboardPage: React.FC = () => {
 
           {/* ── Course Cards ── */}
           <div>
-            <h2 className="text-base font-black text-slate-900 flex items-center gap-2 mb-3">
+            <h2 className="text-base font-black text-slate-900 flex items-center gap-2 mb-4">
               <TrendingUp className="h-4 w-4 text-primary" /> Active Enrollments
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {enrollments.map((enrollment: any) => {
                 const instTotal   = Math.max(1, Number(enrollment.installmentsTotal) || Number(enrollment.installments_total) || 1);
                 const instPaid    = Number(enrollment.installmentsPaid) || Number(enrollment.installments_paid) || 0;
@@ -294,7 +320,7 @@ const StudentDashboardPage: React.FC = () => {
                 const fullyPaid   = remaining <= 0 || instPaid >= instTotal;
 
                 return (
-                  <div key={enrollment.id} className="relative group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+                  <div key={enrollment.id} className="relative group bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
 
                     {/* Locked overlay */}
                     {enrollment.portalLocked && (
@@ -322,24 +348,24 @@ const StudentDashboardPage: React.FC = () => {
                         alt={enrollment.course_title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
-                      <div className={`absolute top-2 left-2 px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest shadow ${
+                      <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest shadow ${
                         fullyPaid ? "bg-approve text-white" : "bg-secondary text-white"
                       }`}>
                         {fullyPaid ? "✓ Paid" : `${instPaid}/${instTotal} paid`}
                       </div>
-                      <div className="absolute top-2 right-2 bg-white/90 backdrop-blur px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest text-primary shadow">
+                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest text-primary shadow">
                         {enrollment.paymentPlan}
                       </div>
                     </div>
 
                     {/* Body */}
-                    <div className="p-4 space-y-3 flex-1 flex flex-col">
-                      <h3 className="text-sm font-black text-slate-900 line-clamp-1">{enrollment.course_title}</h3>
+                    <div className="p-5 space-y-4 flex-1 flex flex-col">
+                      <h3 className="text-base font-black text-slate-900 line-clamp-1">{enrollment.course_title}</h3>
 
                       {/* Pay / View button */}
                       <button
                         onClick={() => setPaymentModal(enrollment)}
-                        className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all border ${
+                        className={`w-full flex items-center justify-center gap-1.5 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all border ${
                           fullyPaid
                             ? "bg-approve/5 border-approve/20 text-approve hover:bg-approve/10"
                             : "bg-secondary text-white border-secondary hover:opacity-90 shadow-md shadow-secondary/20"
@@ -350,34 +376,30 @@ const StudentDashboardPage: React.FC = () => {
                       </button>
 
                       {/* Nav buttons */}
-                      <div className="grid grid-cols-3 gap-1.5">
-                        {/* <Link to={`/academy/course/${enrollment.courseId}`}
-                          className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-primary hover:text-white transition-all font-black text-[8px] uppercase tracking-widest text-center">
-                          <PlayCircle className="h-3.5 w-3.5" /> Home
-                        </Link> */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         <Link to={`/academy/course/${enrollment.courseId}#assignments`}
-                          className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-secondary hover:text-white transition-all font-black text-[8px] uppercase  text-center">
-                          <FileText className="h-3.5 w-3.5" /> Class and Tasks
+                          className="col-span-1 flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-slate-50 text-slate-600 hover:bg-secondary hover:text-white transition-all font-black text-[8px] uppercase text-center border border-slate-100">
+                          <FileText className="h-4 w-4" /> Class / Tasks
                         </Link>
                         {enrollment.timetable_url ? (
                           <a href={enrollment.timetable_url.includes("cloudinary.com") && enrollment.timetable_url.includes("/upload/")
                               ? enrollment.timetable_url.replace("/upload/", "/upload/fl_attachment/")
                               : enrollment.timetable_url}
                             target="_blank" rel="noreferrer" download
-                            className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50 text-slate-600 hover:bg-slate-900 hover:text-white transition-all font-black text-[8px] uppercase tracking-widest text-center">
-                            <Calendar className="h-3.5 w-3.5" /> TimeTable
+                            className="col-span-1 flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-slate-50 text-slate-600 hover:bg-slate-900 hover:text-white transition-all font-black text-[8px] uppercase tracking-widest text-center border border-slate-100">
+                            <Calendar className="h-4 w-4" /> TimeTable
                           </a>
                         ) : (
-                          <div className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-slate-50/50 text-slate-300 font-black text-[8px] uppercase tracking-widest text-center">
-                            <Clock className="h-3.5 w-3.5" /> Soon
+                          <div className="col-span-1 flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-slate-50/50 text-slate-300 font-black text-[8px] uppercase tracking-widest text-center border border-dashed border-slate-200">
+                            <Clock className="h-4 w-4" /> Soon
                           </div>
                         )}
                       </div>
 
                       {/* Syllabus progress */}
                       {enrollment.total_topics > 0 && (
-                        <div className="space-y-1.5 pt-1 border-t border-slate-100">
-                          <div className="flex justify-between text-[9px] font-black uppercase tracking-widest text-slate-400">
+                        <div className="space-y-2 pt-2 border-t border-slate-100">
+                          <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-slate-400">
                             <span>Syllabus</span>
                             <span className="text-primary">{Math.round((enrollment.completed_topics / enrollment.total_topics) * 100)}%</span>
                           </div>
@@ -396,50 +418,80 @@ const StudentDashboardPage: React.FC = () => {
 
           {/* ── Payment History ── */}
           <div>
-            <h2 className="text-base font-black text-slate-900 flex items-center gap-2 mb-3">
+            <h2 className="text-base font-black text-slate-900 flex items-center gap-2 mb-4">
               <CreditCard className="h-4 w-4 text-primary" /> Payment Statement
             </h2>
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-              {transactions && transactions.length > 0 ? (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left min-w-[500px]">
-                    <thead>
-                      <tr className="bg-slate-50/70 border-b border-slate-100">
-                        <th className="px-5 py-3.5 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Description</th>
-                        <th className="px-5 py-3.5 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Amount</th>
-                        <th className="px-5 py-3.5 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Status</th>
-                        <th className="px-5 py-3.5 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-50">
-                      {transactions.map((t: any) => (
-                        <tr key={t.id} className="hover:bg-slate-50/40 transition-colors group">
-                          <td className="px-5 py-3.5">
-                            <div className="font-black text-slate-900 text-xs group-hover:text-primary transition-colors">{t.course_title || "Academy Tuition"}</div>
-                            <div className="text-[9px] text-slate-400 uppercase font-black tracking-widest">{t.type} · {t.provider}</div>
-                          </td>
-                          <td className="px-5 py-3.5 font-black text-slate-900 text-sm">{formatCurrency(t.amount)}</td>
-                          <td className="px-5 py-3.5">
-                            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest ${
-                              t.status === "succeeded" ? "bg-approve/10 text-approve" : "bg-secondary/10 text-secondary"
-                            }`}>
-                              {t.status === "succeeded" && <CheckCircle2 className="h-2.5 w-2.5" />}
-                              {t.status}
-                            </span>
-                          </td>
-                          <td className="px-5 py-3.5 text-xs font-bold text-slate-500">{new Date(t.created_at).toLocaleDateString("en-GB", {day:"2-digit",month:"short",year:"2-digit"})}</td>
+            
+            {transactions && transactions.length > 0 ? (
+              <>
+                {/* Desktop view: Table */}
+                <div className="hidden md:block bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left min-w-[500px]">
+                      <thead>
+                        <tr className="bg-slate-50/70 border-b border-slate-100">
+                          <th className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Description</th>
+                          <th className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Amount</th>
+                          <th className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Status</th>
+                          <th className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-[0.15em]">Date</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-slate-50">
+                        {transactions.map((t: any) => (
+                          <tr key={t.id} className="hover:bg-slate-50/40 transition-colors group">
+                            <td className="px-6 py-4">
+                              <div className="font-black text-slate-900 text-xs group-hover:text-primary transition-colors">{t.course_title || "Academy Tuition"}</div>
+                              <div className="text-[9px] text-slate-400 uppercase font-black tracking-widest">{t.type} · {t.provider}</div>
+                            </td>
+                            <td className="px-6 py-4 font-black text-slate-900 text-sm">{formatCurrency(t.amount)}</td>
+                            <td className="px-6 py-4">
+                              <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest ${
+                                t.status === "succeeded" ? "bg-approve/10 text-approve" : "bg-secondary/10 text-secondary"
+                              }`}>
+                                {t.status === "succeeded" && <CheckCircle2 className="h-2.5 w-2.5" />}
+                                {t.status}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 text-xs font-bold text-slate-500">{new Date(t.created_at).toLocaleDateString("en-GB", {day:"2-digit",month:"short",year:"2-digit"})}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              ) : (
-                <div className="py-12 text-center text-slate-400">
-                  <CreditCard className="h-8 w-8 text-slate-200 mx-auto mb-2" />
-                  <p className="font-bold text-xs uppercase tracking-widest">No transactions yet.</p>
+
+                {/* Mobile view: List of Cards */}
+                <div className="md:hidden space-y-3">
+                  {transactions.map((t: any) => (
+                    <div key={t.id} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm active:bg-slate-50 transition-colors">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <p className="font-black text-slate-900 text-xs leading-tight mb-0.5">{t.course_title || "Academy Tuition"}</p>
+                          <p className="text-[9px] text-slate-400 uppercase font-black tracking-widest">{t.type} · {t.provider}</p>
+                        </div>
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-widest ${
+                          t.status === "succeeded" ? "bg-approve/10 text-approve" : "bg-secondary/10 text-secondary"
+                        }`}>
+                          {t.status === "succeeded" && <CheckCircle2 className="h-2 w-2" />}
+                          {t.status}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <p className="font-black text-slate-900 text-base">{formatCurrency(t.amount)}</p>
+                        <p className="text-[10px] font-bold text-slate-500">
+                          {new Date(t.created_at).toLocaleDateString("en-GB", {day:"2-digit",month:"short",year:"2-digit"})}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
+              </>
+            ) : (
+              <div className="bg-white rounded-3xl border border-slate-200 py-12 text-center text-slate-400 shadow-sm">
+                <CreditCard className="h-8 w-8 text-slate-200 mx-auto mb-2" />
+                <p className="font-bold text-xs uppercase tracking-widest">No transactions yet.</p>
+              </div>
+            )}
           </div>
 
         </div>

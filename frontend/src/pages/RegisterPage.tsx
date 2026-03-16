@@ -42,7 +42,7 @@ const RegisterPage: React.FC = () => {
     onSuccess: (data) => {
       setAuth(data.user, data.tokens);
       toast.success(`Welcome, ${data.user.firstName}!`);
-      navigate("/dashboard", { replace: true });
+      navigate("/courses", { replace: true });
     },
   });
 
