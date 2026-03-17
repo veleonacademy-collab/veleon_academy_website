@@ -104,23 +104,52 @@ export class AcademyService {
     const now = new Date();
     const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
     const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const seventyTwoHoursAgo = new Date(now.getTime() - 72 * 60 * 60 * 1000); // 3 days (24h + 48h)
 
     const { sendPaymentReminderEmail } = await import("./emailService.js");
 
-    // 1. Check for 24h reminders first (higher priority if both are due)
+    // 1. Check for 72h reminders (Latest stage, highest priority)
+    const due72h = await pool.query(
+      `SELECT u.id, u.email, u.first_name, u.metadata FROM users u
+       LEFT JOIN enrollments e ON u.id = e.student_id
+       WHERE e.id IS NULL 
+         AND u.role = 'student'
+         AND u.created_at <= $1 
+         AND (u.metadata->>'reminder_72h_sent' IS NULL OR u.metadata->>'reminder_72h_sent' = 'false')`,
+      [seventyTwoHoursAgo.toISOString()]
+    );
+
+    for (const user of due72h.rows) {
+      try {
+        await sendPaymentReminderEmail(user.email, user.first_name, "72h");
+        const newMetadata = { 
+          ...(user.metadata || {}), 
+          reminder_72h_sent: true, 
+          reminder_24h_sent: true, 
+          reminder_1h_sent: true 
+        };
+        await pool.query("UPDATE users SET metadata = $1 WHERE id = $2", [JSON.stringify(newMetadata), user.id]);
+        logger.info(`Sent 72h ultra-urgent reminder to ${user.email}`);
+      } catch (err) {
+        logger.error(`Failed to send 72h reminder to ${user.email}`, err);
+      }
+    }
+
+    // 2. Check for 24h reminders
     const due24h = await pool.query(
       `SELECT u.id, u.email, u.first_name, u.metadata FROM users u
        LEFT JOIN enrollments e ON u.id = e.student_id
        WHERE e.id IS NULL 
          AND u.role = 'student'
          AND u.created_at <= $1 
-         AND (u.metadata->>'reminder_24h_sent' IS NULL OR u.metadata->>'reminder_24h_sent' = 'false')`,
+         AND (u.metadata->>'reminder_24h_sent' IS NULL OR u.metadata->>'reminder_24h_sent' = 'false')
+         AND (u.metadata->>'reminder_72h_sent' IS NULL OR u.metadata->>'reminder_72h_sent' = 'false')`,
       [twentyFourHoursAgo.toISOString()]
     );
 
     for (const user of due24h.rows) {
       try {
-        await sendPaymentReminderEmail(user.email, user.first_name, true);
+        await sendPaymentReminderEmail(user.email, user.first_name, "24h");
         const newMetadata = { ...(user.metadata || {}), reminder_24h_sent: true, reminder_1h_sent: true };
         await pool.query("UPDATE users SET metadata = $1 WHERE id = $2", [JSON.stringify(newMetadata), user.id]);
         logger.info(`Sent 24h reminder to ${user.email}`);
@@ -129,20 +158,21 @@ export class AcademyService {
       }
     }
 
-    // 2. Check for 1h reminders
+    // 3. Check for 1h reminders
     const due1h = await pool.query(
       `SELECT u.id, u.email, u.first_name, u.metadata FROM users u
        LEFT JOIN enrollments e ON u.id = e.student_id
        WHERE e.id IS NULL
          AND u.role = 'student'
          AND u.created_at <= $1 
-         AND (u.metadata->>'reminder_1h_sent' IS NULL OR u.metadata->>'reminder_1h_sent' = 'false')`,
+         AND (u.metadata->>'reminder_1h_sent' IS NULL OR u.metadata->>'reminder_1h_sent' = 'false')
+         AND (u.metadata->>'reminder_24h_sent' IS NULL OR u.metadata->>'reminder_24h_sent' = 'false')`,
       [oneHourAgo.toISOString()]
     );
 
     for (const user of due1h.rows) {
       try {
-        await sendPaymentReminderEmail(user.email, user.first_name, false);
+        await sendPaymentReminderEmail(user.email, user.first_name, "1h");
         const newMetadata = { ...(user.metadata || {}), reminder_1h_sent: true };
         await pool.query("UPDATE users SET metadata = $1 WHERE id = $2", [JSON.stringify(newMetadata), user.id]);
         logger.info(`Sent 1h reminder to ${user.email}`);

@@ -341,3 +341,4 @@
 2026-03-17 00:30:00:300 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
 2026-03-17 01:00:00:00 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
 2026-03-17 14:35:48:3548 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-17 15:23:53:2353 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m

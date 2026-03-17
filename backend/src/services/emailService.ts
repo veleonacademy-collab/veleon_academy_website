@@ -606,13 +606,29 @@ export async function sendAssignmentNotificationEmail(
 export async function sendPaymentReminderEmail(
   email: string,
   firstName: string,
-  is24h: boolean
+  type: "1h" | "24h" | "48h" | "72h" // Changed to support multiple stages
 ): Promise<void> {
   const portalUrl = `${env.appUrl}/courses`;
-  const subject = "You're one step away — complete your enrollment today";
   
-  const mainTitle = is24h ? "🚨 FINAL REMINDER: Your Spot is Expiring" : "🚀 Your Tech Journey Starts Here, " + firstName;
-  const subTitle = is24h ? "This is your last chance to secure flexible installment options and bonuses." : "You're just one step away from joining the next generation of tech leaders.";
+  let subject = "You're one step away — complete your enrollment today";
+  let mainTitle = "🚀 Your Tech Journey Starts Here, " + firstName;
+  let subTitle = "You're just one step away from joining the next generation of tech leaders.";
+  let urgentBadgeText = "Achievement Unlocked: Almost There";
+  let showUrgencyBox = false;
+
+  if (type === "24h") {
+    subject = "🚨 FINAL REMINDER: Your Spot is Expiring";
+    mainTitle = "Last Chance to Secure Your Spot";
+    subTitle = "This is your last chance to secure flexible installment options and bonuses.";
+    urgentBadgeText = "Urgent: Action Required";
+  } else if (type === "72h" || type === "48h") {
+    // 48h/72h is the ultra-urgent one (2 days after 24h = 72h)
+    subject = "⏳ URGENT: Cohort Filling Fast - Only 3 Spots Left!";
+    mainTitle = "Your Future is Waiting, " + firstName;
+    subTitle = "The current cohort is almost at 100% capacity. This is your FINAL CALL to join before we close enrollment.";
+    urgentBadgeText = "🚨 ALMOST FULL";
+    showUrgencyBox = true;
+  }
 
   const html = `
     <!DOCTYPE html>
@@ -623,29 +639,43 @@ export async function sendPaymentReminderEmail(
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
           body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 0; color: #1e293b; }
           .container { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-          .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 60px 40px; text-align: center; color: white; }
+          .hero { background: linear-gradient(135deg, ${type === '72h' ? '#450a0a' : '#0f172a'} 0%, ${type === '72h' ? '#7f1d1d' : '#1e293b'} 100%); padding: 60px 40px; text-align: center; color: white; }
           .urgent-badge { display: inline-block; background: #d11c07; padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: white; }
           .content { padding: 40px; }
           .benefit-item { display: flex; align-items: flex-start; margin-bottom: 20px; }
           .benefit-icon { background: #fee2e2; color: #d11c07; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
           .cta-button { display: inline-block; width: 100%; padding: 22px 0; background: linear-gradient(135deg, #ff4d00 0%, #d11c07 100%); color: #ffffff !important; text-decoration: none !important; border-radius: 12px; font-weight: 900; font-size: 20px; text-align: center; box-shadow: 0 12px 30px rgba(209, 28, 7, 0.5); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
+          .hero-cta { display: inline-block; margin-top: 25px; padding: 12px 30px; background: #ffffff; color: #0f172a !important; text-decoration: none !important; border-radius: 8px; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
           .footer { background: #f1f5f9; padding: 30px; text-align: center; color: #64748b; font-size: 13px; }
+          .urgency-box { background: #fffbeb; border: 2px solid #f59e0b; border-radius: 12px; padding: 20px; margin-bottom: 30px; text-align: center; }
+          .inline-cta { color: #d11c07; text-decoration: underline; font-weight: 700; }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="hero">
-            <div class="urgent-badge">${is24h ? "Urgent: Action Required" : "Achievement Unlocked: Almost There"}</div>
+            <div class="urgent-badge">${urgentBadgeText}</div>
             <h1 style="margin: 0; font-size: 32px; font-weight: 800; line-height: 1.2;">${mainTitle}</h1>
             <p style="margin-top: 15px; font-size: 18px; opacity: 0.9;">${subTitle}</p>
+            <a href="${portalUrl}" class="hero-cta">SECURE MY SPOT NOW →</a>
           </div>
           <div class="content">
+            ${showUrgencyBox ? `
+            <div class="urgency-box">
+              <p style="color: #92400e; font-weight: 800; font-size: 18px; margin: 0;">⚠️ STATUS: 92% FULL</p>
+              <p style="color: #b45309; font-size: 14px; margin: 5px 0 0 0;">We have more registered students than remaining seats. Access is granted on a first-come, first-served basis.</p>
+              <a href="${portalUrl}" style="display:inline-block; margin-top:10px; font-weight:800; color:#92400e; text-decoration:none; font-size:13px;">ENROLL BEFORE IT CLOSES →</a>
+            </div>
+            ` : ''}
+            
             <p style="font-size: 16px; line-height: 1.7;">
               Hi ${firstName}, <br><br>
-              The most successful people in tech share one trait: <strong>Speed.</strong> <br><br>
-              While others are still dreaming about a career change, our students are already building their futures. Every hour you wait is an hour someone else is mastering the skills that command <strong>six-figure salaries.</strong>
+              ${type === '72h' ? 
+                `This is a courtesy notification that our application window for the upcoming cohort is about to close. We noticed you've registered but haven't secured your spot yet. <br><br><strong>Waitlists are common at Veleon Academy</strong> because we limit our classes to just 10 students to ensure elite-level mentorship. <a href="${portalUrl}" class="inline-cta">Secure your place</a> now to avoid waiting months for the next opening.` :
+                `The most successful people in tech share one trait: <strong>Speed.</strong> <br><br>While others are still dreaming about a career change, our students are already building their futures. Every hour you wait is an hour someone else is mastering the skills that command <strong>six-figure salaries.</strong> <br><br><a href="${portalUrl}" class="inline-cta">Pick your course today</a> and start your transformation.`
+              }
             </p>
-
+ 
             <div style="background: #fff1f0; border-radius: 12px; padding: 25px; margin: 30px 0; border: 1px dashed #d11c07;">
               <h3 style="margin-top: 0; color: #d11c07; font-size: 18px;">Why Veleon Academy?</h3>
               <div class="benefit-item">
@@ -664,9 +694,12 @@ export async function sendPaymentReminderEmail(
                 <div class="benefit-icon">✓</div>
                 <div><strong>Career Outcomes:</strong> Build real-world apps that we help you turn into job offers.</div>
               </div>
+              <div style="text-align:center; margin-top:15px; border-top: 1px solid rgba(209, 28, 7, 0.1); padding-top: 15px;">
+                <a href="${portalUrl}" style="color:#d11c07; font-weight:800; text-decoration:none;">JOIN THE ELITE COHORT TODAY →</a>
+              </div>
             </div>
-
-            <p style="text-align: center; margin-bottom: 15px; font-weight: bold; color: #d11c07; font-size: 18px;">⌛ Only a few spots remaining for this cohort.</p>
+ 
+            <p style="text-align: center; margin-bottom: 15px; font-weight: bold; color: #d11c07; font-size: 18px;">⌛ ${type === '72h' ? 'ONLY 3 SPOTS LEFT FOR THIS COHORT' : 'Only a few spots remaining for this cohort.'}</p>
             <a href="${portalUrl}" class="cta-button">SECURE MY SPOT (INSTALLMENTS AVAILABLE) →</a>
             
             <p style="text-align: center; font-size: 14px; color: #64748b; margin-top: 20px;">
@@ -681,11 +714,13 @@ export async function sendPaymentReminderEmail(
       </body>
     </html>
   `;
-
+ 
   await sendEmail({
     to: email,
     subject,
     html,
-    text: `Hi ${firstName}, you're one step away! Complete your enrollment today at ${portalUrl}. The tech world moves fast—don't let your spot be taken by someone else. Enroll now: ${portalUrl}`
+    text: type === '72h' ? 
+      `Hi ${firstName}, URGENT: Our cohort is 92% full and only 3 spots remain. SECURE YOUR SPOT NOW: ${portalUrl}` : 
+      `Hi ${firstName}, you're one step away! Complete your enrollment today at ${portalUrl}. The tech world moves fast—don't let your spot be taken by someone else. Enroll now: ${portalUrl}`
   });
 }
