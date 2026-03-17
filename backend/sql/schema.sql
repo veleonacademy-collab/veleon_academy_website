@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
   reset_password_token VARCHAR(255),
   reset_password_expires_at TIMESTAMPTZ,
   refresh_token TEXT,
+  metadata JSONB DEFAULT '{}',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
