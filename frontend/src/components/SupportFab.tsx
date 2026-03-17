@@ -60,15 +60,30 @@ export const SupportFab = () => {
           </div>
         )}
 
-        <button
-          onClick={toggle}
-          className={`flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all duration-300 ${
-            isOpen ? "bg-red-500 hover:bg-red-600 rotate-90" : "bg-primary text-primary-foreground hover:bg-primary/90"
-          }`}
-          aria-label="Support options"
-        >
-          {isOpen ? <X size={24} /> : <MessageCircle size={28} />}
-        </button>
+        <div className="flex items-center gap-3">
+          {!isOpen && (
+            <div className="animate-bounce">
+              <div className="relative bg-white text-primary text-sm font-bold py-2.5 px-4 rounded-2xl shadow-xl border border-primary/10 whitespace-nowrap">
+                Have enquiries? Click me! ✨
+                <div className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-3 bg-white rotate-45 border-t border-r border-primary/10"></div>
+              </div>
+            </div>
+          )}
+          <div className="relative">
+            {!isOpen && (
+              <div className="absolute inset-0 rounded-full bg-primary/60 animate-ping"></div>
+            )}
+            <button
+              onClick={toggle}
+              className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all duration-300 ${
+                isOpen ? "bg-red-500 hover:bg-red-600 rotate-90" : "bg-primary text-primary-foreground hover:bg-primary/90"
+              }`}
+              aria-label="Support options"
+            >
+              {isOpen ? <X size={24} /> : <MessageCircle size={28} />}
+            </button>
+          </div>
+        </div>
       </div>
 
       <EnquiryModal 

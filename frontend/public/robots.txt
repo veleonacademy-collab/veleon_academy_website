@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-# Sitemaps (enable after generation)
-# Sitemap: https://veleonacademy.veleonex.com/sitemap.xml
+# Sitemap
+Sitemap: https://veleonacademy.veleonex.com/sitemap.xml
 
 # Disallow sensitive paths
 Disallow: /admin/
