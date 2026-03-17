@@ -18,23 +18,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isResending, setIsResending] = useState(false);
-  const [testCounter, setTestCounter] = useState<string | null>(null);
-
-  const fetchTestCounter = async () => {
-    try {
-      const response = await http.get("/settings/footer_test_counter");
-      setTestCounter(response.data.value);
-    } catch (err) {
-      // Ignore errors for this test counter
-    }
-  };
-
-  React.useEffect(() => {
-    fetchTestCounter();
-    // Poll every 3 minutes to match the cron job
-    const interval = setInterval(fetchTestCounter, 3 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleResend = async () => {
     if (!user?.email) return;
@@ -258,9 +241,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <div className="mx-auto max-w-6xl px-6 mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
           <div className="flex flex-col gap-1 items-center md:items-start">
             <p>© {new Date().getFullYear()} {APP_NAME}. All rights reserved.</p>
-            {testCounter !== null && (
-              <p className="text-[10px] opacity-70">Tech Pulsar: <span className="font-mono text-primary">{testCounter}</span> (updates every 3m)</p>
-            )}
           </div>
           <div className="flex gap-6 mt-4 md:mt-0">
              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#E4405F] transition-colors" title="Instagram">
