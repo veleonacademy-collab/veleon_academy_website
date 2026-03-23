@@ -16,7 +16,7 @@ const EnrollPage: React.FC = () => {
     const [firstName, setFirstName] = useState(user?.firstName || "");
     const [lastName, setLastName] = useState(user?.lastName || "");
     const [email, setEmail] = useState(user?.email || "");
-    const [paymentPlan, setPaymentPlan] = useState<"one-time" | "installment">("one-time");
+    const [paymentPlan, setPaymentPlan] = useState<"one-time" | "installment">("installment");
     const [installmentCount, setInstallmentCount] = useState<number>(3);
 
     const { data: courses, isLoading } = useQuery({
