@@ -67,7 +67,9 @@ import AdminEnrollmentsPage from "./pages/admin/enrollments/AdminEnrollmentsPage
 import AdminTutorsPage from "./pages/admin/tutors/AdminTutorsPage";
 import AdminTutorDetailsPage from "./pages/admin/tutors/AdminTutorDetailsPage";
 import AdminAcademySupportPage from "./pages/admin/AdminAcademySupportPage";
+import AdminBulkMessagingPage from "./pages/admin/AdminBulkMessagingPage";
 import TutorCurriculumPage from "./pages/tutor/TutorCurriculumPage";
+
 
 import EnrollPage from "./pages/EnrollPage";
 
@@ -147,6 +149,7 @@ const App: React.FC = () => {
           <Route path="/admin/tutors" element={<AdminTutorsPage />} />
           <Route path="/admin/tutor/:tutorId" element={<AdminTutorDetailsPage />} />
           <Route path="/admin/academy-support" element={<AdminAcademySupportPage />} />
+          <Route path="/admin/bulk-messaging" element={<AdminBulkMessagingPage />} />
 
         </Route>
 

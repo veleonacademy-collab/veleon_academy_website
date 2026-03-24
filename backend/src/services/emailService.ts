@@ -724,3 +724,34 @@ export async function sendPaymentReminderEmail(
       `Hi ${firstName}, you're one step away! Complete your enrollment today at ${portalUrl}. The tech world moves fast—don't let your spot be taken by someone else. Enroll now: ${portalUrl}`
   });
 }
+
+/**
+ * Send bulk messages
+ */
+export async function sendBulkMessage(
+  recipients: { email: string; name: string }[],
+  subject: string,
+  body: string
+): Promise<{ successCount: number; failedCount: number }> {
+  let successCount = 0;
+  let failedCount = 0;
+
+  for (const recipient of recipients) {
+    try {
+      const personalizedBody = body.replace(/{{name}}/gi, recipient.name || 'Student');
+      const personalizedSubject = subject.replace(/{{name}}/gi, recipient.name || 'Student');
+      
+      await sendEmail({
+        to: recipient.email,
+        subject: personalizedSubject,
+        html: personalizedBody,
+      });
+      successCount++;
+    } catch (err) {
+      console.error(`Failed to send email to ${recipient.email}`, err);
+      failedCount++;
+    }
+  }
+
+  return { successCount, failedCount };
+}

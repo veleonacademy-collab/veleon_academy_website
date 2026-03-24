@@ -60,3 +60,8 @@ export const updateTask = async (id: number, data: any) => {
   const response = await http.put(`/tasks/${id}`, data);
   return response.data;
 };
+
+export const sendBulkMessage = async (payload: { recipients: { email: string; name: string }[]; subject: string; body: string }) => {
+  const response = await http.post("/admin/bulk-email", payload);
+  return response.data;
+};
