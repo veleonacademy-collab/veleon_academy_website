@@ -36,6 +36,8 @@ export interface RegisterPayload {
   lastName: string;
   email: string;
   password: string;
+  phone?: string;
+  courseOfInterest?: number;
 }
 
 

@@ -15,6 +15,8 @@ import type { GoogleOAuthRequest } from "../types/oauth";
 import type { AuthTokens, User } from "../types/auth";
 import SEO from "../components/SEO";
 import { trackTikTokEvent } from "../utils/analytics";
+import { academyApi } from "../api/academy";
+import { useQuery } from "@tanstack/react-query";
 
 const RegisterPage: React.FC = () => {
   const { clearAuth, setAuth } = useAuth();
@@ -25,11 +27,18 @@ const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [courseOfInterest, setCourseOfInterest] = useState<number | "">("");
   const [validationError, setValidationError] = useState<string | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
   const [verificationLink, setVerificationLink] = useState("");
   const [showDevLink, setShowDevLink] = useState(false);
+
+  const { data: courses } = useQuery({
+    queryKey: ["courses"],
+    queryFn: academyApi.getCourses,
+  });
 
   const oauthMutation = useMutation({
     mutationFn: async (payload: GoogleOAuthRequest) => {
@@ -51,10 +60,14 @@ const RegisterPage: React.FC = () => {
       const { data } = await http.post<{ user: User; tokens: AuthTokens; verificationLink: string }>("/auth/register", payload);
       return data;
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       setAuth(data.user, data.tokens);
       toast.success(`Welcome, ${data.user.firstName}! Please check your email for verification.`);
-      navigate("/courses", { replace: true });
+      if (variables.courseOfInterest) {
+        navigate(`/enroll/${variables.courseOfInterest}`, { replace: true });
+      } else {
+        navigate("/courses", { replace: true });
+      }
       
       // Track TikTok registration
       trackTikTokEvent('CompleteRegistration');
@@ -84,6 +97,8 @@ const RegisterPage: React.FC = () => {
       email,
       password,
       confirmPassword,
+      phone: phone || undefined,
+      courseOfInterest: courseOfInterest !== "" ? Number(courseOfInterest) : undefined,
     });
 
     if (!parsed.success) {
@@ -156,6 +171,34 @@ const RegisterPage: React.FC = () => {
               autoComplete="email"
               required
             />
+          </div>
+          <div className="flex gap-2 sm:gap-3">
+            <div className="flex-1 space-y-1">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                autoComplete="tel"
+              />
+            </div>
+            <div className="flex-1 space-y-1">
+              <Label htmlFor="courseOfInterest">Course of Choice</Label>
+              <select
+                id="courseOfInterest"
+                value={courseOfInterest}
+                onChange={(e) => setCourseOfInterest(e.target.value ? Number(e.target.value) : "")}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="">Select a course (Optional)</option>
+                {courses?.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.title}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className="space-y-1">
             <Label htmlFor="password">Password</Label>

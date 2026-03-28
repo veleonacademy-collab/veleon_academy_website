@@ -30,6 +30,8 @@ const registerSchema = z.object({
   password: z
     .string()
     .min(8, "Password must be at least 8 characters long."),
+  phone: z.string().optional().nullable(),
+  courseOfInterest: z.number().optional().nullable(),
 });
 
 const loginSchema = z.object({
@@ -87,12 +89,22 @@ export async function registerUser(input: unknown): Promise<{ user: PublicUser; 
     user = result.rows[0];
     const userId = user.id;
 
-    // If customer existed, link it back to the user
+    // If customer existed, link it back to the user and update phone
     if (customerId) {
-      await client.query(
-        "UPDATE customers SET user_id = $1 WHERE id = $2",
-        [userId, customerId]
-      );
+      await updateCustomer(customerId, {
+        name: `${data.firstName} ${data.lastName}`,
+        phone: data.phone || undefined,
+        userId: userId,
+      }, client);
+    } else if (data.phone) {
+      // If no customer existed but phone is provided, create one
+      const customer = await createCustomer({
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        phone: data.phone || undefined,
+        userId: userId,
+      }, client);
+      user.customer_id = customer.id;
     }
 
     await client.query("COMMIT");

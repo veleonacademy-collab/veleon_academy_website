@@ -4,11 +4,13 @@ import { fetchUsers, sendBulkMessage } from "../../api/admin";
 import { BackButton } from "../../components/ui/BackButton";
 import toast from "react-hot-toast";
 import { Send, Search, Loader2, Users } from "lucide-react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function AdminBulkMessagingPage() {
   const [search, setSearch] = useState("");
   const [subject, setSubject] = useState("");
-  const [body, setBody] = useState(`Hi {{name}},\n\n...`);
+  const [body, setBody] = useState(`<p>Hi {{name}},</p><p><br></p><p>...</p>`);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
   const { data: users, isLoading } = useQuery({
@@ -47,7 +49,7 @@ export default function AdminBulkMessagingPage() {
     onSuccess: (data) => {
       toast.success(data.message || "Messages sent successfully");
       setSubject("");
-      setBody("Hi {{name}},\n\n");
+      setBody("<p>Hi {{name}},</p><p><br></p>");
       setSelectedIds(new Set());
     },
     onError: (err: any) => {
@@ -55,15 +57,17 @@ export default function AdminBulkMessagingPage() {
     },
   });
 
+  const [showPreview, setShowPreview] = useState(false);
+
   const handleSend = () => {
-    if (!subject.trim() || !body.trim()) {
+    if (!subject.trim() || !body.trim() || body === '<p><br></p>') {
       return toast.error("Subject and body are required");
     }
     if (selectedIds.size === 0) {
       return toast.error("Please select at least one recipient");
     }
 
-    const recipients = users
+    const recipients = (users as any[])
       .filter((u: any) => selectedIds.has(u.id))
       .map((u: any) => ({
         email: u.email,
@@ -73,8 +77,38 @@ export default function AdminBulkMessagingPage() {
     sendMutation.mutate({ recipients, subject, body });
   };
 
+  const previewContent = useMemo(() => {
+    return body.replace(/{{name}}/gi, 'Student');
+  }, [body]);
+
+  // Quill modules configuration
+  const modules = {
+     toolbar: [
+       [{ 'header': [1, 2, 3, false] }],
+       ['bold', 'italic', 'underline', 'strike'],
+       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+       ['link', 'clean']
+     ],
+  };
+
   return (
     <div className="space-y-6">
+      <style>{`
+        .quill-container .ql-container {
+          min-height: 300px;
+          font-size: 14px;
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+        }
+        .quill-container .ql-toolbar {
+          border-top-left-radius: 12px;
+          border-top-right-radius: 12px;
+          background: #f8fafc;
+        }
+        .quill-container .ql-editor {
+          min-height: 300px;
+        }
+      `}</style>
       <div className="flex flex-col gap-4">
         <BackButton />
         <div>
@@ -82,7 +116,7 @@ export default function AdminBulkMessagingPage() {
             <Send className="text-primary" size={24} />
             Bulk Messaging
           </h1>
-          <p className="text-sm text-gray-500">Send direct emails to selected users.</p>
+          <p className="text-sm text-gray-500">Send direct emails to selected users with rich formatting.</p>
         </div>
       </div>
 
@@ -101,7 +135,7 @@ export default function AdminBulkMessagingPage() {
               placeholder="Search users..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all focus:bg-white"
             />
           </div>
 
@@ -111,7 +145,7 @@ export default function AdminBulkMessagingPage() {
                   type="checkbox"
                   checked={filteredUsers.length > 0 && selectedIds.size === filteredUsers.length}
                   onChange={selectAll}
-                  className="rounded text-primary focus:ring-primary"
+                  className="rounded text-primary focus:ring-primary h-4 w-4"
                 />
                 Select All
              </label>
@@ -123,7 +157,7 @@ export default function AdminBulkMessagingPage() {
               <div className="flex justify-center py-10"><Loader2 className="animate-spin text-gray-400" /></div>
             ) : filteredUsers.length > 0 ? (
               filteredUsers.map((u: any) => (
-                <label key={u.id} className="flex items-center gap-3 p-3 border border-gray-100 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+                <label key={u.id} className="flex items-center gap-3 p-3 border border-gray-100 rounded-xl hover:bg-gray-50 cursor-pointer transition-all hover:border-primary/20 bg-white">
                   <input
                     type="checkbox"
                     checked={selectedIds.has(u.id)}
@@ -132,47 +166,68 @@ export default function AdminBulkMessagingPage() {
                   />
                   <div>
                     <p className="text-sm font-bold text-gray-900 capitalize">{u.firstName} {u.lastName}</p>
-                    <p className="text-xs text-gray-500">{u.email}</p>
+                    <p className="text-xs text-gray-500 font-medium">{u.email}</p>
                   </div>
                   <span className={`ml-auto text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : u.role === 'tutor' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}>{u.role}</span>
                 </label>
               ))
             ) : (
-              <div className="text-center text-sm text-gray-500 py-10">No users found.</div>
+              <div className="text-center text-sm text-gray-500 py-10 italic">No users found.</div>
             )}
           </div>
         </div>
 
         {/* Message Composition */}
         <div className="lg:col-span-2 border border-gray-200 bg-white rounded-2xl shadow-sm p-6 flex flex-col gap-6">
-          <div className="bg-blue-50/50 border border-blue-100 p-4 rounded-xl">
-             <h3 className="text-blue-800 font-bold text-sm mb-1">Formatting Tips</h3>
-             <ul className="text-xs text-blue-600 space-y-1 list-disc list-inside">
+          <div className="bg-primary/5 border border-primary/10 p-4 rounded-xl">
+             <h3 className="text-primary font-bold text-sm mb-1">Personalization Tips</h3>
+             <ul className="text-xs text-slate-600 space-y-1 list-disc list-inside">
                 <li>Use <code className="bg-white px-1 py-0.5 rounded font-bold text-primary">{"{{name}}"}</code> as a placeholder for the recipient's first name.</li>
-                <li>You can use standard HTML tags like <code className="bg-white px-1 py-0.5 rounded">&lt;b&gt;bold&lt;/b&gt;</code> or <code className="bg-white px-1 py-0.5 rounded">&lt;a href="..."&gt;Link&lt;/a&gt;</code> for styling.</li>
+                <li>Your formatting below (bold, lists, etc.) will be preserved in the final email.</li>
              </ul>
           </div>
 
           <div className="space-y-4 flex-1 flex flex-col">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-bold text-gray-700 uppercase tracking-wider">Email Composition</label>
+              <button 
+                onClick={() => setShowPreview(!showPreview)}
+                className="text-xs font-bold text-primary hover:text-primary/70 uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full transition-colors"
+              >
+                {showPreview ? "Back to Editor" : "See Final Look"}
+              </button>
+            </div>
+
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-1">Email Subject</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 ml-1">Subject</label>
               <input
                 type="text"
                 placeholder="e.g. Action Required: Your Account Update"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium"
+                className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold placeholder:font-normal"
               />
             </div>
             
             <div className="flex-1 flex flex-col">
-              <label className="block text-sm font-bold text-gray-700 mb-1">Email Body (HTML/Text)</label>
-              <textarea
-                placeholder="Write your message here..."
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all flex-1 min-h-[300px] resize-none font-mono"
-              />
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 ml-1">Body</label>
+              {showPreview ? (
+                <div 
+                  className="w-full p-8 bg-white border border-gray-200 rounded-xl text-[16px] overflow-auto max-h-[400px] flex-1 shadow-inner"
+                  style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", lineHeight: "1.7" }}
+                  dangerouslySetInnerHTML={{ __html: previewContent }}
+                />
+              ) : (
+                <div className="quill-container flex-1 flex flex-col">
+                  <ReactQuill
+                    theme="snow"
+                    value={body}
+                    onChange={setBody}
+                    modules={modules}
+                    className="flex-1 flex flex-col"
+                  />
+                </div>
+              )}
             </div>
           </div>
 

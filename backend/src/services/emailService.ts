@@ -738,13 +738,22 @@ export async function sendBulkMessage(
 
   for (const recipient of recipients) {
     try {
-      const personalizedBody = body.replace(/{{name}}/gi, recipient.name || 'Student');
       const personalizedSubject = subject.replace(/{{name}}/gi, recipient.name || 'Student');
+      const personalizedHtmlBody = body.replace(/{{name}}/gi, recipient.name || 'Student');
+      
+      const fullHtml = `
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.7; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+          ${personalizedHtmlBody}
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #888; text-align: center;">
+            <p>&copy; ${new Date().getFullYear()} ${env.email.fromName}. All rights reserved.</p>
+          </div>
+        </div>
+      `;
       
       await sendEmail({
         to: recipient.email,
         subject: personalizedSubject,
-        html: personalizedBody,
+        html: fullHtml,
       });
       successCount++;
     } catch (err) {
