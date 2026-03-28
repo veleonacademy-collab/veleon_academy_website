@@ -10454,3 +10454,11 @@
 2026-03-28 08:49:04:494 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
 2026-03-28 08:49:04:494 [37mdebug[39m: [37m[Request End] GET /courses took 234ms[39m
 2026-03-28 08:49:04:494 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 281.007 ms[39m
+2026-03-28 08:51:50:5150 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-28 08:51:50:5150 [37mdebug[39m: [37m[Request End] GET /courses took 483ms[39m
+2026-03-28 08:51:50:5150 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 482.278 ms[39m
+2026-03-28 08:52:57:5257 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-28 08:52:57:5257 [37mdebug[39m: [37m[Request End] GET /courses took 172ms[39m
+2026-03-28 08:52:57:5257 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 170.991 ms[39m
+2026-03-28 09:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 09:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
