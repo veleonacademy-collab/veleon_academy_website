@@ -224,7 +224,7 @@ const StudentDashboardPage: React.FC = () => {
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10">
           <div className="space-y-4 sm:space-y-6 max-w-2xl text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase tracking-[0.2em] animate-bounce">
-              <Sparkles className="h-3 w-3" /> Urgent: Next Cohort Enrollment Closing!
+              <Sparkles className="h-3 w-3" /> Urgent: Cohort Enrollment Closing!
             </div>
             
             <div className="space-y-2">

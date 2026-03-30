@@ -11,10 +11,19 @@ import { Instagram, Music2, MessageSquare, Mail, Send, Loader2 } from "lucide-re
 import { http } from "../api/http";
 import toast from "react-hot-toast";
 
+import { PromotionBanner } from "./PromotionBanner";
+
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, clearAuth } = useAuth();
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
+  const isDashboard = location.pathname.startsWith("/dashboard");
+  const isCoursePage = location.pathname.startsWith("/courses");
+  const isEnrollPage = location.pathname.startsWith("/enroll");
+
+  // Only show banner on these specific pages
+  const shouldShowBanner = isLandingPage || isDashboard || isCoursePage || isEnrollPage;
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isResending, setIsResending] = useState(false);
@@ -45,6 +54,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {shouldShowBanner && <PromotionBanner />}
       {user && !user.isEmailVerified && (
         <div className="bg-primary/5 border-b border-primary/10 text-slate-600 py-3 px-6">
           <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">

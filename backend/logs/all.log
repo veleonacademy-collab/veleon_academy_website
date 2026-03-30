@@ -10462,3 +10462,84 @@
 2026-03-28 08:52:57:5257 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 170.991 ms[39m
 2026-03-28 09:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
 2026-03-28 09:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 09:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 09:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 10:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 10:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 10:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 10:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 11:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 11:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 11:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 11:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 12:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 12:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 12:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 12:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 13:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 13:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 13:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 13:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 14:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 14:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 15:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 15:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 15:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 15:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 16:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 16:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 16:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 16:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-28 17:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-28 17:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-29 23:02:40:240 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:04:23:423 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:06:03:63 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-03-29 23:06:05:65 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-03-29 23:06:09:69 [33mwarn[39m: [33mDNS resolution failed (attempt 3/5), retrying in 8000ms...[39m
+2026-03-29 23:06:17:617 [33mwarn[39m: [33mDNS resolution failed (attempt 4/5), retrying in 10000ms...[39m
+2026-03-29 23:06:27:627 [31merror[39m: [31mDNS resolution failed after 5 attempts getaddrinfo ENOTFOUND aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-29 23:11:41:1141 [31merror[39m: [31mDatabase connection failed connect ECONNABORTED 18.202.64.2:6543[39m
+2026-03-29 23:13:12:1312 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:39:08:398 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:42:57:4257 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:43:31:4331 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:44:58:4458 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:57:26:5726 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-30 00:05:25:525 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-30 02:00:36:036 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-30 02:51:18:5118 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-30 02:51:18:5118 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-30 02:52:04:524 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-30 02:52:04:524 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-30 02:52:04:524 [37mdebug[39m: [37m[Request End] GET / took 255ms[39m
+2026-03-30 02:52:04:524 [35mhttp[39m: [35mGET /api/ads 304 - - 252.742 ms[39m
+2026-03-30 02:52:05:525 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1405ms[39m
+2026-03-30 02:52:05:525 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 1405.231 ms[39m
+2026-03-30 02:54:07:547 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-30 02:54:07:547 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-03-30 02:54:14:5414 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-03-30 02:54:14:5414 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/login took 3ms[39m
+2026-03-30 02:54:14:5414 [37mdebug[39m: [37m[Request Start] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-03-30 02:54:14:5414 [37mdebug[39m: [37m[Request End] POST /login took 856ms[39m
+2026-03-30 02:54:14:5414 [35mhttp[39m: [35mPOST /api/auth/login 200 778 - 854.224 ms[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 4ms[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-03-30 02:54:15:5415 [32minfo[39m: [32mUser 66 connected with socket O0wHFHUjsjuO8tLYAAAB[39m
+2026-03-30 02:54:15:5415 [37mdebug[39m: [37m[Request End] GET / took 217ms[39m
+2026-03-30 02:54:15:5415 [35mhttp[39m: [35mGET /api/ads 304 - - 227.699 ms[39m
+2026-03-30 02:54:16:5416 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1387ms[39m
+2026-03-30 02:54:16:5416 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 1385.601 ms[39m
+2026-03-30 02:54:32:5432 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-30 02:54:32:5432 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 1ms[39m
+2026-03-30 02:54:32:5432 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-03-30 02:54:33:5433 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 540ms[39m
+2026-03-30 02:54:33:5433 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 124 - 538.634 ms[39m
+2026-03-30 03:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-03-30 03:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-03-30 03:05:04:54 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-03-30 03:05:04:54 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m

@@ -342,3 +342,15 @@
 2026-03-17 01:00:00:00 [31merror[39m: [31mPayment reminder check failed column u.metadata does not exist[39m
 2026-03-17 14:35:48:3548 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
 2026-03-17 15:23:53:2353 [31merror[39m: [31mError handler caught: Connection terminated due to connection timeout[39m
+2026-03-29 23:02:40:240 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:04:23:423 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:06:27:627 [31merror[39m: [31mDNS resolution failed after 5 attempts getaddrinfo ENOTFOUND aws-1-eu-west-1.pooler.supabase.com[39m
+2026-03-29 23:11:41:1141 [31merror[39m: [31mDatabase connection failed connect ECONNABORTED 18.202.64.2:6543[39m
+2026-03-29 23:13:12:1312 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:39:08:398 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:42:57:4257 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:43:31:4331 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:44:58:4458 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-29 23:57:26:5726 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-30 00:05:25:525 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-03-30 02:00:36:036 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import AdSection from "../components/AdSection";
 import { TestimonialsSection } from "../components/TestimonialsSection";
-import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sparkles, Briefcase, CheckCircle, Target, BrainCircuit, CreditCard } from "lucide-react";
+import { Code, Database, LineChart, Cpu, BookOpen, Users, Award, ShieldCheck, Sparkles, Briefcase, CheckCircle, Target, BrainCircuit, CreditCard, Zap } from "lucide-react";
 import { academyApi } from "../api/academy";
 import { formatCurrency } from "../utils/formatUtils";
 import { useAuth } from "../state/AuthContext";
@@ -151,6 +151,63 @@ const LandingPage: React.FC = () => {
             ))}
         </div>
       </section>
+      {/* Urgent Webinar Spotlight */}
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <div className="relative rounded-[2.5rem] overflow-hidden bg-slate-950 p-8 sm:p-16 border border-white/10 shadow-3xl group">
+          {/* Background visuals */}
+          <div className="absolute top-0 right-0 w-[600px] h-full bg-primary/20 blur-[120px] -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-indigo-500/10" />
+          
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="space-y-8 max-w-xl text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-xs font-black tracking-widest uppercase animate-pulse">
+                <Zap className="h-4 w-4 fill-current" /> Breaking: Elite Webinar
+              </div>
+              
+              <div className="space-y-4">
+                <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter leading-[0.9]">
+                  THE <span className="text-primary italic">FUTURE</span> OF TECH IS MOVING FAST.
+                </h2>
+                <p className="text-slate-400 text-lg sm:text-xl font-medium">
+                  Join our exclusive webinar tomorrow at <span className="text-white font-bold">8:00 PM (WAT)</span>. Discover how to transition from zero to a job-ready tech career in weeks. 
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
+                  <div className="flex -space-x-3">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <img key={i} src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Student" className="h-12 w-12 rounded-full border-4 border-slate-950 bg-slate-800" />
+                    ))}
+                    <div className="h-12 w-12 rounded-full border-4 border-slate-950 bg-primary flex items-center justify-center text-[10px] font-black text-white">+500</div>
+                  </div>
+                  <p className="text-slate-400 text-sm font-bold uppercase tracking-widest"><span className="text-white">500+ Techies</span> already signed up</p>
+              </div>
+            </div>
+
+            <div className="w-full lg:w-auto">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 sm:p-12 text-center space-y-8 shadow-2xl relative overflow-hidden group/card hover:border-primary/50 transition-colors">
+                <div className="space-y-2">
+                   <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-2">Class Starts April 4th</p>
+                   <p className="text-3xl sm:text-5xl font-black text-white tracking-tighter italic">FINAL SPOTS <br/><span className="text-primary not-italic">CLOSING!</span></p>
+                </div>
+                
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                
+                <div className="space-y-4">
+                  <Link to="/courses" className="block w-full bg-white text-slate-900 px-10 py-5 rounded-2xl font-black text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-xl shadow-white/5">
+                    Register For Webinar Free
+                  </Link>
+                  <Link to="/courses" className="block w-full bg-primary/20 text-white border border-primary/30 px-10 py-5 rounded-2xl font-black text-sm tracking-[0.2em] uppercase hover:bg-primary transition-all shadow-xl shadow-primary/5">
+                    Secure Cohort Seat
+                  </Link>
+                </div>
+
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Limited to 20 spots per cohort for quality. No exceptions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Ads Banner */}
       <AdSection />
@@ -173,7 +230,7 @@ const LandingPage: React.FC = () => {
             </div>
 
             <p className="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto font-medium italic">"The best time to plant a tree was 20 years ago. The second best time is <span className="text-primary font-bold">NOW</span>."</p>
-            <p className="text-slate-600 text-sm sm:text-base max-w-3xl mx-auto">Stop dreaming about a tech career and start building it. Our intensive, industry-led programs are designed to take you from Zero to Senior. <b>Secure your seat before the next cohort fills up.</b></p>
+            <p className="text-slate-600 text-sm sm:text-base max-w-3xl mx-auto">Stop dreaming about a tech career and start building it. Our intensive, industry-led programs are designed to take you from Zero to Senior. <b>Secure your seat before the cohort fills up.</b></p>
         </div>
 
         {isLoading ? (
@@ -192,7 +249,10 @@ const LandingPage: React.FC = () => {
                         alt={course.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute top-2 left-2 flex flex-col gap-1">
+                        <span className="bg-primary text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Webinar Tomorrow</span>
+                        <span className="bg-white text-slate-900 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Starts April 4th</span>
+                    </div>
                 </div>
                 <div className="p-6 sm:p-8">
                     <div className="flex justify-between items-start mb-4">
@@ -231,7 +291,10 @@ const LandingPage: React.FC = () => {
                         alt={course.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute top-2 left-2 flex flex-col gap-1">
+                        <span className="bg-primary text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Webinar Tomorrow</span>
+                        <span className="bg-white text-slate-900 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Starts April 4th</span>
+                    </div>
                 </div>
                 <div className="p-6 sm:p-8">
                     <div className="flex justify-between items-start mb-4">
