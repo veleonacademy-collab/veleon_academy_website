@@ -59,7 +59,7 @@ export const PromotionBanner: React.FC = () => {
                 Elite Tech Webinar
               </p>
               <p className="text-[11px] font-bold text-white leading-tight whitespace-nowrap">
-                Tomorrow · 8 PM WAT
+                Today · 8 PM WAT
               </p>
               <p className="text-base font-black leading-tight whitespace-nowrap tracking-wide">
                 <span className="text-orange-400">🗓 Class starts April 4th</span>
@@ -116,7 +116,7 @@ export const PromotionBanner: React.FC = () => {
                 <span className="text-xs font-black uppercase tracking-widest text-primary leading-tight">
                   Elite Tech Webinar
                 </span>
-                <span className="text-sm font-bold text-white whitespace-nowrap">Tomorrow • 8:00 PM WAT</span>
+                <span className="text-sm font-bold text-white whitespace-nowrap">Today • 8:00 PM WAT</span>
               </div>
             </div>
 

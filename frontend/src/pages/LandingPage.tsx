@@ -169,7 +169,7 @@ const LandingPage: React.FC = () => {
                   THE <span className="text-primary italic">FUTURE</span> OF TECH IS MOVING FAST.
                 </h2>
                 <p className="text-slate-400 text-lg sm:text-xl font-medium">
-                  Join our exclusive webinar tomorrow at <span className="text-white font-bold">8:00 PM (WAT)</span>. Discover how to transition from zero to a job-ready tech career in weeks. 
+                  Join our exclusive webinar today at <span className="text-white font-bold">8:00 PM (WAT)</span>. Discover how to transition from zero to a job-ready tech career in weeks. 
                 </p>
               </div>
 
@@ -250,7 +250,7 @@ const LandingPage: React.FC = () => {
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute top-2 left-2 flex flex-col gap-1">
-                        <span className="bg-primary text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Webinar Tomorrow</span>
+                        <span className="bg-primary text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Webinar Today</span>
                         <span className="bg-white text-slate-900 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Starts April 4th</span>
                     </div>
                 </div>
@@ -292,7 +292,7 @@ const LandingPage: React.FC = () => {
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute top-2 left-2 flex flex-col gap-1">
-                        <span className="bg-primary text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Webinar Tomorrow</span>
+                        <span className="bg-primary text-white text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Webinar Today</span>
                         <span className="bg-white text-slate-900 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg shadow-lg">Starts April 4th</span>
                     </div>
                 </div>
