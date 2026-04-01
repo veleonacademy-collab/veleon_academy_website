@@ -55,12 +55,7 @@ export const PromotionBanner: React.FC = () => {
               <Zap className="h-3 w-3 fill-current" />
             </span>
             <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-widest text-primary leading-tight">
-                Elite Tech Webinar
-              </p>
-              <p className="text-[11px] font-bold text-white leading-tight whitespace-nowrap">
-                Today · 8 PM WAT
-              </p>
+              
               <p className="text-base font-black leading-tight whitespace-nowrap tracking-wide">
                 <span className="text-orange-400">🗓 Class starts April 4th</span>
               </p>
@@ -112,12 +107,7 @@ export const PromotionBanner: React.FC = () => {
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-primary animate-pulse">
                 <Zap className="h-4 w-4 fill-current text-primary" />
               </span>
-              <div className="flex flex-col">
-                <span className="text-xs font-black uppercase tracking-widest text-primary leading-tight">
-                  Elite Tech Webinar
-                </span>
-                <span className="text-sm font-bold text-white whitespace-nowrap">Today • 8:00 PM WAT</span>
-              </div>
+              
             </div>
 
             <div className="w-px h-8 bg-white/10" />

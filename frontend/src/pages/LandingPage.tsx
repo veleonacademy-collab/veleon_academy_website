@@ -160,27 +160,27 @@ const LandingPage: React.FC = () => {
           
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="space-y-8 max-w-xl text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-xs font-black tracking-widest uppercase animate-pulse">
+              {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-xs font-black tracking-widest uppercase animate-pulse">
                 <Zap className="h-4 w-4 fill-current" /> Breaking: Elite Webinar
-              </div>
+              </div> */}
               
               <div className="space-y-4">
                 <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tighter leading-[0.9]">
                   THE <span className="text-primary italic">FUTURE</span> OF TECH IS MOVING FAST.
                 </h2>
-                <p className="text-slate-400 text-lg sm:text-xl font-medium">
+                {/* <p className="text-slate-400 text-lg sm:text-xl font-medium">
                   Join our exclusive webinar today at <span className="text-white font-bold">8:00 PM (WAT)</span>. Discover how to transition from zero to a job-ready tech career in weeks. 
-                </p>
+                </p> */}
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
-                  <div className="flex -space-x-3">
+                  {/* <div className="flex -space-x-3">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <img key={i} src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Student" className="h-12 w-12 rounded-full border-4 border-slate-950 bg-slate-800" />
                     ))}
                     <div className="h-12 w-12 rounded-full border-4 border-slate-950 bg-primary flex items-center justify-center text-[10px] font-black text-white">+500</div>
-                  </div>
-                  <p className="text-slate-400 text-sm font-bold uppercase tracking-widest"><span className="text-white">500+ Techies</span> already signed up</p>
+                  </div> */}
+                  {/* <p className="text-slate-400 text-sm font-bold uppercase tracking-widest"><span className="text-white">500+ Techies</span> already signed up</p> */}
               </div>
             </div>
 
@@ -194,15 +194,15 @@ const LandingPage: React.FC = () => {
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                 
                 <div className="space-y-4">
-                  <Link to="/courses" className="block w-full bg-white text-slate-900 px-10 py-5 rounded-2xl font-black text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-xl shadow-white/5">
+                  {/* <Link to="/courses" className="block w-full bg-white text-slate-900 px-10 py-5 rounded-2xl font-black text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all transform hover:scale-105 active:scale-95 shadow-xl shadow-white/5">
                     Register For Webinar Free
-                  </Link>
+                  </Link> */}
                   <Link to="/courses" className="block w-full bg-primary/20 text-white border border-primary/30 px-10 py-5 rounded-2xl font-black text-sm tracking-[0.2em] uppercase hover:bg-primary transition-all shadow-xl shadow-primary/5">
                     Secure Cohort Seat
                   </Link>
                 </div>
 
-                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Limited to 20 spots per cohort for quality. No exceptions.</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Limited to 10 spots per cohort for quality. No exceptions.</p>
               </div>
             </div>
           </div>
