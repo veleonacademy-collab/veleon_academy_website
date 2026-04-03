@@ -88,7 +88,7 @@ const App: React.FC = () => {
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/payment/cancel" element={<PaymentCancelPage />} />
           <Route path="/courses" element={<CoursesPage />} />
-          <Route path="/enroll/:courseId" element={<EnrollPage />} />
+          <Route path="/enroll/:slug" element={<EnrollPage />} />
         {/* Global auth routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

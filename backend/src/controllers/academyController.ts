@@ -18,10 +18,14 @@ export class AcademyController {
   static async createCourse(req: Request, res: Response, next: NextFunction) {
     try {
       const { title, description, price, thumbnail_url } = req.body;
+      const slug = title.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)+/g, '');
+
       const result = await pool.query(
-        `INSERT INTO courses (title, description, price, thumbnail_url) 
-         VALUES ($1, $2, $3, $4) RETURNING *`,
-        [title, description, price, thumbnail_url]
+        `INSERT INTO courses (title, slug, description, price, thumbnail_url) 
+         VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [title, slug, description, price, thumbnail_url]
       );
       res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -33,11 +37,19 @@ export class AcademyController {
     try {
       const { id } = req.params;
       const { title, description, price, thumbnail_url, timetable_url } = req.body;
+      
+      let slug = undefined;
+      if (title) {
+        slug = title.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)+/g, '');
+      }
+
       const result = await pool.query(
         `UPDATE courses 
-         SET title = $1, description = $2, price = $3, thumbnail_url = $4, timetable_url = $5, updated_at = NOW()
-         WHERE id = $6 RETURNING *`,
-        [title, description, price, thumbnail_url, timetable_url, id]
+         SET title = $1, slug = COALESCE($2, slug), description = $3, price = $4, thumbnail_url = $5, timetable_url = $6, updated_at = NOW()
+         WHERE id = $7 RETURNING *`,
+        [title, slug, description, price, thumbnail_url, timetable_url, id]
       );
       if (result.rows.length === 0) {
         return res.status(404).json({ message: "Course not found" });

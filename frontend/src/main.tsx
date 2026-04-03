@@ -13,7 +13,9 @@ import { ScrollToTop } from "./components/ScrollToTop";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+const rootElement = document.getElementById("root") as HTMLElement;
+
+const rootContent = (
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
@@ -56,5 +58,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     </HelmetProvider>
   </React.StrictMode>
 );
+
+if (rootElement.hasChildNodes()) {
+  ReactDOM.hydrateRoot(rootElement, rootContent);
+} else {
+  ReactDOM.createRoot(rootElement).render(rootContent);
+}
 
 

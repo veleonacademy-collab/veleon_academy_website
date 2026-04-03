@@ -9,7 +9,7 @@ import { CheckoutButton } from "../components/Payment/CheckoutButton";
 import { CheckCircle, CreditCard, ShieldCheck, BrainCircuit, Target, Users } from "lucide-react";
 
 const EnrollPage: React.FC = () => {
-    const { courseId } = useParams();
+    const { slug } = useParams();
     const { user } = useAuth();
     const navigate = useNavigate();
     
@@ -24,7 +24,7 @@ const EnrollPage: React.FC = () => {
         queryFn: academyApi.getCourses,
     });
 
-    const course = courses?.find(c => c.id === parseInt(courseId || "0"));
+    const course = courses?.find(c => c.slug === slug);
 
     if (isLoading) return (
         <div className="flex flex-col items-center justify-center py-32 space-y-4">

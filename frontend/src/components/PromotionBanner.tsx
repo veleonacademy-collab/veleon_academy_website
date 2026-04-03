@@ -78,7 +78,7 @@ export const PromotionBanner: React.FC = () => {
 
         {/* Row 2: CTAs */}
         <div className="mt-2 flex flex-col gap-2">
-          <a
+          {/* <a
             href={WHATSAPP_WEBINAR_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -86,7 +86,7 @@ export const PromotionBanner: React.FC = () => {
           >
             Join Free Webinar
             <ArrowRight className="h-3 w-3" />
-          </a>
+          </a> */}
           <Link
             to="/courses"
             className="flex items-center justify-center gap-1.5 w-full bg-primary hover:bg-indigo-500 text-white px-4 py-2 rounded-lg font-black text-[10px] tracking-widest uppercase transition-all duration-300 active:scale-95 shadow-lg shadow-primary/20"

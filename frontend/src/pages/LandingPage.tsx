@@ -269,7 +269,7 @@ const LandingPage: React.FC = () => {
                             <span className="text-[10px] text-slate-600 font-bold italic bg-slate-100 px-2 py-0.5 rounded-full">Installment available ✅</span>
                             <span className="text-[10px] text-red-500 font-bold animate-pulse">Few seats left!</span>
                             <Link 
-                                to={`/enroll/${course.id}`}
+                                to={`/enroll/${course.slug}`}
                                 className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
                             >
                                 SECURE YOUR SPOT

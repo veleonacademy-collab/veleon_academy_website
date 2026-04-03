@@ -1,5 +1,6 @@
 export interface Course {
   id: number;
+  slug: string;
   title: string;
   description: string | null;
   price: number;
