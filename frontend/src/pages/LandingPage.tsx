@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/10" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         </div>
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto my-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in">
             <Sparkles className="h-3 w-3" />
             Empowering Tech Leaders
@@ -85,7 +85,7 @@ const LandingPage: React.FC = () => {
             Join Veleon Academy. Industry-led training in Software Engineering, Data Analytics, and Data Science. From Zero to Job-Ready.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-8 sm:mb-12 max-w-4xl animate-fade-in-up">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mb-6 sm:mb-12 max-w-4xl animate-fade-in-up">
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
               <div className="bg-primary/20 p-1 rounded-full"><BrainCircuit className="h-4 w-4 text-primary" /></div>
               <span className="text-white text-xs sm:text-sm font-semibold tracking-tight">AI Leverage</span>
@@ -134,25 +134,26 @@ const LandingPage: React.FC = () => {
       </section>
       
       {/* Featured Learning Path */}
-      <section className="mx-auto max-w-7xl px-4 -mt-10 sm:-mt-16 relative z-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <section className="mx-auto max-w-7xl px-4 -mt-6 sm:-mt-10 relative z-20 ">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
             {featuredCourses.map((fc) => (
                 <div
                     key={fc.name}
-                    className="flex flex-col p-6 sm:p-8 rounded-2xl border bg-white shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-primary/10 transition-all hover:-translate-y-2 group"
+                    className="flex items-center gap-2.5 p-2 sm:p-3 rounded-xl border bg-white shadow-sm hover:shadow-md transition-all group"
                 >
-                    <div className={`h-14 w-14 rounded-2xl ${fc.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                        <fc.icon className="h-7 w-7" />
+                    <div className={`flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10 rounded-lg ${fc.color} flex items-center justify-center transition-transform group-hover:scale-110`}>
+                        <fc.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">{fc.name}</h3>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-4">{fc.description}</p>
-                    <div className="mt-auto h-1 w-12 bg-gray-100 group-hover:bg-primary transition-colors" />
+                    <div className="min-w-0">
+                        <h3 className="text-[11px] sm:text-xs font-bold text-slate-900 leading-tight mb-0.5 whitespace-nowrap">{fc.name}</h3>
+                        <p className="text-slate-500 text-[9px] sm:text-[10px] leading-tight line-clamp-1">{fc.description}</p>
+                    </div>
                 </div>
             ))}
         </div>
       </section>
       {/* Urgent Webinar Spotlight */}
-      <section className="mx-auto max-w-7xl px-4 py-8">
+      <section className="mx-auto max-w-7xl px-4 md:py-8 ">
         <div className="relative rounded-[2.5rem] overflow-hidden bg-slate-950 p-8 sm:p-16 border border-white/10 shadow-3xl group">
           {/* Background visuals */}
           <div className="absolute top-0 right-0 w-[600px] h-full bg-primary/20 blur-[120px] -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
