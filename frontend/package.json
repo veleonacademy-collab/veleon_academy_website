@@ -6,7 +6,7 @@
     "dev": "vite",
     "sitemap": "node scripts/generate-sitemap.js",
     "build": "node scripts/generate-sitemap.js && vite build",
-    "postbuild": "react-snap",
+    "postbuild": "node scripts/postbuild.js",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
@@ -16,6 +16,12 @@
       "collapseWhitespace": true,
       "removeComments": true
     },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--single-process"
+    ],
     "inlineCss": true,
     "skipThirdPartyRequests": true
   },
