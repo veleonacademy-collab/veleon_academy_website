@@ -10622,3 +10622,92 @@
 2026-04-03 07:12:25:1225 [32minfo[39m: [32mAdding slug column and generating slugs...[39m
 2026-04-03 07:12:26:1226 [32minfo[39m: [32m✓ Column 'slug' added[39m
 2026-04-03 07:12:26:1226 [32minfo[39m: [32m✓ Slug migration completed[39m
+2026-04-03 07:22:47:2247 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-03 07:22:47:2247 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-03 07:23:25:2325 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: undefined[39m
+2026-04-03 07:23:25:2325 [37mdebug[39m: [37m[Request End] GET /courses took 195ms[39m
+2026-04-03 07:23:25:2325 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 193.236 ms[39m
+2026-04-03 07:23:25:2325 [37mdebug[39m: [37m[Request Start] GET /api/trending?limit=50 | Origin: undefined[39m
+2026-04-03 07:23:25:2325 [37mdebug[39m: [37m[Request End] GET /?limit=50 took 190ms[39m
+2026-04-03 07:23:25:2325 [35mhttp[39m: [35mGET /api/trending?limit=50 200 2 - 189.708 ms[39m
+2026-04-03 07:25:55:2555 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: undefined[39m
+2026-04-03 07:25:55:2555 [37mdebug[39m: [37m[Request End] GET /courses took 188ms[39m
+2026-04-03 07:25:55:2555 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 186.018 ms[39m
+2026-04-03 07:25:55:2555 [37mdebug[39m: [37m[Request Start] GET /api/trending?limit=50 | Origin: undefined[39m
+2026-04-03 07:25:55:2555 [37mdebug[39m: [37m[Request End] GET /?limit=50 took 227ms[39m
+2026-04-03 07:25:55:2555 [35mhttp[39m: [35mGET /api/trending?limit=50 200 2 - 226.285 ms[39m
+2026-04-03 07:29:55:2955 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-04-03 07:29:55:2955 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-03 07:29:55:2955 [37mdebug[39m: [37m[Request End] GET / took 161ms[39m
+2026-04-03 07:29:55:2955 [35mhttp[39m: [35mGET /api/ads 200 2 - 217.890 ms[39m
+2026-04-03 07:29:56:2956 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1052ms[39m
+2026-04-03 07:29:56:2956 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 1051.925 ms[39m
+2026-04-03 07:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-03 07:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-03 07:30:40:3040 [37mdebug[39m: [37m[Request Start] OPTIONS /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:30:40:3040 [37mdebug[39m: [37m[Request End] OPTIONS /api/payments/create-checkout-session took 1ms[39m
+2026-04-03 07:30:40:3040 [37mdebug[39m: [37m[Request Start] POST /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:30:40:3040 [37mdebug[39m: [37m[Request End] POST /create-checkout-session took 292ms[39m
+2026-04-03 07:30:40:3040 [35mhttp[39m: [35mPOST /api/payments/create-checkout-session 401 54 - 290.943 ms[39m
+2026-04-03 07:31:03:313 [37mdebug[39m: [37m[Request Start] OPTIONS /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:31:03:313 [37mdebug[39m: [37m[Request End] OPTIONS /api/payments/create-checkout-session took 1ms[39m
+2026-04-03 07:31:03:313 [37mdebug[39m: [37m[Request Start] POST /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:31:03:313 [37mdebug[39m: [37m[Request End] POST /create-checkout-session took 3ms[39m
+2026-04-03 07:31:03:313 [35mhttp[39m: [35mPOST /api/payments/create-checkout-session 401 54 - 3.071 ms[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/oauth/google took 1ms[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request Start] POST /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request End] POST /oauth/google took 793ms[39m
+2026-04-03 07:32:23:3223 [35mhttp[39m: [35mPOST /api/auth/oauth/google 200 741 - 792.470 ms[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-04-03 07:32:23:3223 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-03 07:32:23:3223 [32minfo[39m: [32mUser 1 connected with socket 0B8E0P8dSiebWtG3AAAB[39m
+2026-04-03 07:32:24:3224 [37mdebug[39m: [37m[Request End] GET /courses took 162ms[39m
+2026-04-03 07:32:24:3224 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 162.164 ms[39m
+2026-04-03 07:32:27:3227 [37mdebug[39m: [37m[Request Start] OPTIONS /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:32:27:3227 [37mdebug[39m: [37m[Request End] OPTIONS /api/payments/create-checkout-session took 1ms[39m
+2026-04-03 07:32:27:3227 [37mdebug[39m: [37m[Request Start] POST /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:32:27:3227 [32minfo[39m: [32mPayment Request Received: {"amount":"100000.00","currency":"NGN","type":"installment","itemId":2,"provider":"paystack","metadata":{"firstName":"Academy","lastName":"VeleonEX","email":"veleonacademy@gmail.com","courseId":2,"paymentPlan":"installment","installmentsTotal":"3"}}[39m
+2026-04-03 07:32:27:3227 [32minfo[39m: [32m[PAYMENT] New installment plan — total: 100000.00, periods: 3, per-instalment: 33333.333333333336[39m
+2026-04-03 07:32:27:3227 [32minfo[39m: [32mCreating installment plan for user 1: 100000.00 NGN over 3 months for item 2[39m
+2026-04-03 07:32:29:3229 [33mwarn[39m: [33m[SLOW REQUEST] POST /create-checkout-session took 1746ms[39m
+2026-04-03 07:32:29:3229 [35mhttp[39m: [35mPOST /api/payments/create-checkout-session 200 80 - 1745.580 ms[39m
+2026-04-03 07:32:30:3230 [32minfo[39m: [32mSocket 0B8E0P8dSiebWtG3AAAB disconnected[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 4ms[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-03 07:32:34:3234 [37mdebug[39m: [37m[Request End] GET /me took 148ms[39m
+2026-04-03 07:32:34:3234 [35mhttp[39m: [35mGET /api/auth/me 200 319 - 147.115 ms[39m
+2026-04-03 07:32:34:3234 [32minfo[39m: [32mUser 1 connected with socket FjynVq7h9zasbpivAAAD[39m
+2026-04-03 07:32:38:3238 [37mdebug[39m: [37m[Request Start] OPTIONS /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:32:38:3238 [37mdebug[39m: [37m[Request End] OPTIONS /api/payments/create-checkout-session took 1ms[39m
+2026-04-03 07:32:38:3238 [37mdebug[39m: [37m[Request Start] POST /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:32:38:3238 [32minfo[39m: [32mPayment Request Received: {"amount":"100000.00","currency":"NGN","type":"installment","itemId":2,"provider":"paystack","metadata":{"firstName":"","lastName":"","email":"","courseId":2,"paymentPlan":"installment","installmentsTotal":"3"}}[39m
+2026-04-03 07:32:38:3238 [32minfo[39m: [32m[PAYMENT] New installment plan — total: 100000.00, periods: 3, per-instalment: 33333.333333333336[39m
+2026-04-03 07:32:38:3238 [32minfo[39m: [32mCreating installment plan for user 1: 100000.00 NGN over 3 months for item 2[39m
+2026-04-03 07:32:40:3240 [33mwarn[39m: [33m[SLOW REQUEST] POST /create-checkout-session took 1704ms[39m
+2026-04-03 07:32:40:3240 [35mhttp[39m: [35mPOST /api/payments/create-checkout-session 200 80 - 1702.716 ms[39m
+2026-04-03 07:32:40:3240 [32minfo[39m: [32mSocket FjynVq7h9zasbpivAAAD disconnected[39m
+2026-04-03 07:32:42:3242 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-03 07:32:42:3242 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-04-03 07:32:42:3242 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-03 07:32:42:3242 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-03 07:32:42:3242 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-03 07:32:42:3242 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-03 07:32:42:3242 [32minfo[39m: [32mUser 1 connected with socket D6uzSbqxIBYpgHmNAAAF[39m
+2026-04-03 07:33:03:333 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-04-03 07:33:03:333 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 1ms[39m
+2026-04-03 07:33:03:333 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-04-03 07:33:03:333 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 347ms[39m
+2026-04-03 07:33:03:333 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 1629 - 345.479 ms[39m
+2026-04-03 07:33:59:3359 [32minfo[39m: [32mSocket D6uzSbqxIBYpgHmNAAAF disconnected[39m
+2026-04-03 07:34:02:342 [37mdebug[39m: [37m[Request Start] OPTIONS /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:34:02:342 [37mdebug[39m: [37m[Request End] OPTIONS /api/payments/create-checkout-session took 1ms[39m
+2026-04-03 07:34:02:342 [37mdebug[39m: [37m[Request Start] POST /api/payments/create-checkout-session | Origin: http://localhost:5173[39m
+2026-04-03 07:34:02:342 [37mdebug[39m: [37m[Request End] POST /create-checkout-session took 13ms[39m
+2026-04-03 07:34:02:342 [35mhttp[39m: [35mPOST /api/payments/create-checkout-session 401 54 - 5.089 ms[39m

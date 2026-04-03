@@ -140,7 +140,6 @@ const EnrollPage: React.FC = () => {
                         <div className="space-y-1.5 sm:space-y-2">
                              <label className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-slate-400">Institutional Email</label>
                              <Input disabled={!!user} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="john@example.com" />
-                             {!user && <p className="text-[9px] sm:text-[10px] text-primary font-bold italic mt-1">● Account will be auto-generated upon success.</p>}
                         </div>
                     </div>
 
@@ -223,7 +222,7 @@ const EnrollPage: React.FC = () => {
                             label={paymentPlan === "one-time" ? "AUTHORIZE FULL TUITION" : `AUTHORIZE ${formatCurrency(installmentPrice)} NOW`}
                             className={`h-16 sm:h-20 rounded-2xl sm:rounded-3xl font-black text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] shadow-xl sm:shadow-2xl ${paymentPlan === 'one-time' ? 'shadow-primary/30' : 'shadow-secondary/30'}`}
                             provider="paystack"
-                            guestCheckout={!user}
+                            guestCheckout={false}
                             metadata={{
                                 firstName,
                                 lastName,
