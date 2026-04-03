@@ -137,7 +137,7 @@ export const PromotionBanner: React.FC = () => {
               </div>
             </div>
 
-            <a
+            {/* <a
               href={WHATSAPP_WEBINAR_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -145,7 +145,7 @@ export const PromotionBanner: React.FC = () => {
             >
               Join Webinar
               <ArrowRight className="h-3 w-3" />
-            </a>
+            </a> */}
 
             <Link
               to="/courses"
