@@ -10748,3 +10748,5 @@
 2026-04-03 07:42:36:4236 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
 2026-04-03 07:42:36:4236 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
 2026-04-03 07:42:37:4237 [32minfo[39m: [32mUser 1 connected with socket VcGLIXqfYKGdBdXbAAAL[39m
+2026-04-03 08:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-03 08:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m

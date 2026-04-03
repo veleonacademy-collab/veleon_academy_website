@@ -64,8 +64,8 @@ const LandingPage: React.FC = () => {
   return (
     <div className="space-y-8 sm:space-y-12 pb-10 sm:pb-20">
       <SEO 
-        title="Home"
-        description="Master the future of technology with Veleon Academy. Industry-led training in Software Engineering, Data Analytics, and Data Science."
+        title="Veleon Academy – Learn Programming & Tech Skills in Nigeria" 
+        description="Join Veleon Academy to learn coding, software development, AI, and data science. Start your tech career today."
       />
       {/* Hero Section */}
       <section className="relative min-h-[70vh] sm:h-[80vh] w-full overflow-hidden flex items-center">

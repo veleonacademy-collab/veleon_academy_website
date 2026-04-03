@@ -19,7 +19,9 @@ const SEO: React.FC<SEOProps> = ({
   type = "website",
   keywords = "tech academy, software engineering, data science, coding bootcamp, tech training, mentor-led learning",
 }) => {
-  const fullTitle = title ? `${title} | ${APP_NAME}` : APP_NAME;
+  const fullTitle = title 
+    ? (title.includes("Veleon") ? title : `${title} | ${APP_NAME}`) 
+    : APP_NAME;
 
   return (
     <Helmet>
