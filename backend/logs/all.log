@@ -10782,3 +10782,57 @@
 2026-04-04 10:16:58:1658 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
 2026-04-04 10:17:02:172 [33mwarn[39m: [33mDNS resolution failed (attempt 3/5), retrying in 8000ms...[39m
 2026-04-04 10:17:10:1710 [33mwarn[39m: [33mDNS resolution failed (attempt 4/5), retrying in 10000ms...[39m
+2026-04-04 10:17:32:1732 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-04 10:17:32:1732 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-04 10:19:35:1935 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-04-04 10:19:35:1935 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/login took 3ms[39m
+2026-04-04 10:19:35:1935 [37mdebug[39m: [37m[Request Start] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-04-04 10:19:36:1936 [37mdebug[39m: [37m[Request End] POST /login took 843ms[39m
+2026-04-04 10:19:36:1936 [35mhttp[39m: [35mPOST /api/auth/login 200 755 - 842.716 ms[39m
+2026-04-04 10:19:36:1936 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:19:36:1936 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 3ms[39m
+2026-04-04 10:19:36:1936 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:19:36:1936 [32minfo[39m: [32mUser 72 connected with socket Z2rRxzbqjWWYMEHAAAAB[39m
+2026-04-04 10:19:36:1936 [37mdebug[39m: [37m[Request End] GET /courses took 177ms[39m
+2026-04-04 10:19:36:1936 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 176.377 ms[39m
+2026-04-04 10:20:12:2012 [32minfo[39m: [32mSocket Z2rRxzbqjWWYMEHAAAAB disconnected[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:20:14:2014 [37mdebug[39m: [37m[Request End] GET /courses took 165ms[39m
+2026-04-04 10:20:14:2014 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 164.966 ms[39m
+2026-04-04 10:20:18:2018 [33mwarn[39m: [33m[SLOW REQUEST] GET /me took 4269ms[39m
+2026-04-04 10:20:18:2018 [35mhttp[39m: [35mGET /api/auth/me 200 331 - 4268.179 ms[39m
+2026-04-04 10:20:18:2018 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:20:18:2018 [32minfo[39m: [32mUser 72 connected with socket 1afY-qBRjm6hPcS9AAAD[39m
+2026-04-04 10:20:18:2018 [37mdebug[39m: [37m[Request End] GET /me took 151ms[39m
+2026-04-04 10:20:18:2018 [35mhttp[39m: [35mGET /api/auth/me 304 - - 151.588 ms[39m
+2026-04-04 10:25:09:259 [32minfo[39m: [32mSocket 1afY-qBRjm6hPcS9AAAD disconnected[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request End] GET /courses took 156ms[39m
+2026-04-04 10:25:12:2512 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 155.975 ms[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request End] GET /me took 166ms[39m
+2026-04-04 10:25:12:2512 [35mhttp[39m: [35mGET /api/auth/me 200 331 - 166.533 ms[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-04-04 10:25:12:2512 [32minfo[39m: [32mUser 72 connected with socket 7-gwqOZEoeKywnuwAAAF[39m
+2026-04-04 10:25:12:2512 [37mdebug[39m: [37m[Request End] GET /me took 161ms[39m
+2026-04-04 10:25:12:2512 [35mhttp[39m: [35mGET /api/auth/me 304 - - 160.895 ms[39m
+2026-04-04 10:28:50:2850 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:28:50:2850 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-04-04 10:28:50:2850 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-04 10:28:51:2851 [37mdebug[39m: [37m[Request End] GET /courses took 158ms[39m
+2026-04-04 10:28:51:2851 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 157.975 ms[39m
+2026-04-04 10:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 10:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m

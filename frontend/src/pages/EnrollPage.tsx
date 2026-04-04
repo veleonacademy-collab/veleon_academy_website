@@ -24,7 +24,14 @@ const EnrollPage: React.FC = () => {
         queryFn: academyApi.getCourses,
     });
 
-    const course = courses?.find(c => c.slug === slug);
+    const course = courses?.find(c => c.slug === slug || c.id.toString() === slug);
+
+    // Redirect to slug-based URL if an ID was used (helps with old cached links)
+    React.useEffect(() => {
+        if (course && course.slug !== slug && slug === course.id.toString()) {
+            navigate(`/enroll/${course.slug}`, { replace: true });
+        }
+    }, [course, slug, navigate]);
 
     if (isLoading) return (
         <div className="flex flex-col items-center justify-center py-32 space-y-4">

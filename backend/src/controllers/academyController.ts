@@ -9,6 +9,7 @@ export class AcademyController {
   static async getCourses(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await pool.query("SELECT * FROM courses ORDER BY created_at DESC");
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
       res.json(result.rows);
     } catch (error) {
       next(error);

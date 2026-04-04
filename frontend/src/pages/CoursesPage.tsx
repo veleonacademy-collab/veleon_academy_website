@@ -113,7 +113,7 @@ const CoursesPage: React.FC = () => {
                         <span className="text-[10px] text-red-500 font-bold animate-pulse text-right">Limited Seats Available</span>
                       </div>
                       <Link 
-                        to={`/enroll/${course.slug}`}
+                        to={`/enroll/${course.slug || course.id}`}
                         className="bg-primary text-white px-6 py-3 rounded-xl font-black text-xs tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-primary/20"
                       >
                         SECURE YOUR SPOT
