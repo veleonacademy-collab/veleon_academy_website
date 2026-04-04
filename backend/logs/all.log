@@ -10770,3 +10770,15 @@
 2026-04-03 08:34:32:3432 [37mdebug[39m: [37m[Request End] GET /me took 145ms[39m
 2026-04-03 08:34:32:3432 [35mhttp[39m: [35mGET /api/auth/me 304 - - 145.517 ms[39m
 2026-04-03 08:40:42:4042 [32minfo[39m: [32mSocket 9I8Q23rlf_VXlvzgAAAN disconnected[39m
+2026-04-04 10:10:10:1010 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-04-04 10:11:30:1130 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-04-04 10:12:07:127 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-04-04 10:16:20:1620 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-04-04 10:16:22:1622 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-04-04 10:16:26:1626 [33mwarn[39m: [33mDNS resolution failed (attempt 3/5), retrying in 8000ms...[39m
+2026-04-04 10:16:34:1634 [33mwarn[39m: [33mDNS resolution failed (attempt 4/5), retrying in 10000ms...[39m
+2026-04-04 10:16:44:1644 [31merror[39m: [31mDNS resolution failed after 5 attempts getaddrinfo ENOTFOUND aws-1-eu-west-1.pooler.supabase.com[39m
+2026-04-04 10:16:56:1656 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-04-04 10:16:58:1658 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-04-04 10:17:02:172 [33mwarn[39m: [33mDNS resolution failed (attempt 3/5), retrying in 8000ms...[39m
+2026-04-04 10:17:10:1710 [33mwarn[39m: [33mDNS resolution failed (attempt 4/5), retrying in 10000ms...[39m
