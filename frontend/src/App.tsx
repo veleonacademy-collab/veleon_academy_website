@@ -71,108 +71,81 @@ import AdminBulkMessagingPage from "./pages/admin/AdminBulkMessagingPage";
 import TutorCurriculumPage from "./pages/tutor/TutorCurriculumPage";
 
 
+import WebinarPage from "./pages/WebinarPage";
 import EnrollPage from "./pages/EnrollPage";
 
 const App: React.FC = () => {
   return (
     <StripeProvider>
-      <Layout>
-        <Analytics />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/trending" element={<TrendingPage />} />
-          <Route path="/categories" element={<CategoriesPage />} />
-          <Route path="/item/:id" element={<ItemDetailsPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/style-me" element={<StyleMePage />} />
-          <Route path="/payment/success" element={<PaymentSuccessPage />} />
-          <Route path="/payment/cancel" element={<PaymentCancelPage />} />
-          <Route path="/courses" element={<CoursesPage />} />
-          <Route path="/enroll/:slug" element={<EnrollPage />} />
-        {/* Global auth routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/verify-email" element={<VerifyEmailPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        
-        {/* Public pages */}
-        <Route path="/privacy" element={<PrivacyPolicyPage />} />
-        <Route path="/terms" element={<TermsOfServicePage />} />
-
-        {/* Generic protected routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/chat" element={<ChatPage />} />
-        </Route>
-
-        {/* Admin-specific auth & profile */}
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin/register" element={<AdminRegisterPage />} />
-        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-          <Route path="/admin/profile" element={<AdminProfilePage />} />
-        </Route>
-
-        {/* Tutor-specific auth & profile */}
-        <Route path="/tutor/login" element={<StaffLoginPage />} />
-        <Route path="/tutor/register" element={<StaffRegisterPage />} />
-        <Route element={<ProtectedRoute allowedRoles={["tutor"]} />}>
-          <Route path="/tutor/profile" element={<StaffProfilePage />} />
-        </Route>
- 
-        {/* Student-specific auth & profile */}
-        <Route path="/student/login" element={<UserLoginPage />} />
-        <Route path="/student/register" element={<UserRegisterPage />} />
-        <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
-          <Route path="/student/profile" element={<UserProfilePage />} />
-        </Route>
-
-        {/* Role-specific dashboards */}
-        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="/admin/items" element={<AdminListItemsPage />} />
-          <Route path="/admin/items/new" element={<AdminAddItemPage />} />
-          <Route path="/admin/items/:id" element={<AdminViewItemPage />} />
-          <Route path="/admin/items/:id/edit" element={<AdminEditItemPage />} />
-          <Route path="/admin/customers" element={<AdminCustomersPage />} />
-          <Route path="/admin/tasks" element={<AdminTasksPage />} />
-          <Route path="/admin/users" element={<AdminUsersPage />} />
-          <Route path="/admin/categories" element={<AdminCategoriesPage />} />
-          <Route path="/admin/support" element={<AdminSupportPage />} />
-          <Route path="/admin/finance" element={<AdminFinancePage />} />
-          <Route path="/admin/settings" element={<AdminSettingsPage />} />
-          <Route path="/admin/ads" element={<AdminAdsPage />} />
-          <Route path="/admin/courses" element={<AdminCoursesPage />} />
-          <Route path="/admin/courses/:courseId/curriculum" element={<AdminCurriculumPage />} />
-          <Route path="/admin/enrollments" element={<AdminEnrollmentsPage />} />
-          <Route path="/admin/tutors" element={<AdminTutorsPage />} />
-          <Route path="/admin/tutor/:tutorId" element={<AdminTutorDetailsPage />} />
-          <Route path="/admin/academy-support" element={<AdminAcademySupportPage />} />
-          <Route path="/admin/bulk-messaging" element={<AdminBulkMessagingPage />} />
-
-        </Route>
-
-        <Route element={<ProtectedRoute allowedRoles={["tutor"]} />}>
-          <Route path="/tutor/dashboard" element={<TutorDashboardPage />} />
-          <Route path="/tutor/portal" element={<StaffPortalPage />} />
-          <Route path="/tutor/support" element={<StaffSupportPage />} />
-          <Route path="/tutor/course/:courseId/curriculum" element={<TutorCurriculumPage />} />
-        </Route>
- 
-        <Route element={<ProtectedRoute allowedRoles={["student", "user"]} />}>
-          <Route path="/student/dashboard" element={<StudentDashboardPage />} />
-        </Route>
-        <Route element={<ProtectedRoute allowedRoles={["student", "user"]} />}>
-          <Route path="/student/dashboard" element={<StudentDashboardPage />} />
-        </Route>
-
-        {/* Course detail — accessible to both students and tutors */}
-        <Route element={<ProtectedRoute allowedRoles={["student", "tutor"]} />}>
-          <Route path="/academy/course/:courseId" element={<CourseDetailPage />} />
-        </Route>
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/free-training" element={<WebinarPage />} />
+        <Route path="*" element={
+          <Layout>
+            <Analytics />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/trending" element={<TrendingPage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/item/:id" element={<ItemDetailsPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/style-me" element={<StyleMePage />} />
+              <Route path="/payment/success" element={<PaymentSuccessPage />} />
+              <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/enroll/:slug" element={<EnrollPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/verify-email" element={<VerifyEmailPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsOfServicePage />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/chat" element={<ChatPage />} />
+              </Route>
+              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/admin/register" element={<AdminRegisterPage />} />
+              <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+                <Route path="/admin/profile" element={<AdminProfilePage />} />
+                <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+                <Route path="/admin/items" element={<AdminListItemsPage />} />
+                <Route path="/admin/items/new" element={<AdminAddItemPage />} />
+                <Route path="/admin/items/:id" element={<AdminViewItemPage />} />
+                <Route path="/admin/items/:id/edit" element={<AdminEditItemPage />} />
+                <Route path="/admin/customers" element={<AdminCustomersPage />} />
+                <Route path="/admin/tasks" element={<AdminTasksPage />} />
+                <Route path="/admin/users" element={<AdminUsersPage />} />
+                <Route path="/admin/categories" element={<AdminCategoriesPage />} />
+                <Route path="/admin/support" element={<AdminSupportPage />} />
+                <Route path="/admin/finance" element={<AdminFinancePage />} />
+                <Route path="/admin/settings" element={<AdminSettingsPage />} />
+                <Route path="/admin/ads" element={<AdminAdsPage />} />
+                <Route path="/admin/courses" element={<AdminCoursesPage />} />
+                <Route path="/admin/courses/:courseId/curriculum" element={<AdminCurriculumPage />} />
+                <Route path="/admin/enrollments" element={<AdminEnrollmentsPage />} />
+                <Route path="/admin/tutors" element={<AdminTutorsPage />} />
+                <Route path="/admin/tutor/:tutorId" element={<AdminTutorDetailsPage />} />
+                <Route path="/admin/academy-support" element={<AdminAcademySupportPage />} />
+                <Route path="/admin/bulk-messaging" element={<AdminBulkMessagingPage />} />
+              </Route>
+              <Route element={<ProtectedRoute allowedRoles={["tutor"]} />}>
+                <Route path="/tutor/dashboard" element={<TutorDashboardPage />} />
+                <Route path="/tutor/portal" element={<StaffPortalPage />} />
+                <Route path="/tutor/support" element={<StaffSupportPage />} />
+                <Route path="/tutor/course/:courseId/curriculum" element={<TutorCurriculumPage />} />
+              </Route>
+              <Route element={<ProtectedRoute allowedRoles={["student", "user"]} />}>
+                <Route path="/student/dashboard" element={<StudentDashboardPage />} />
+              </Route>
+              <Route element={<ProtectedRoute allowedRoles={["student", "tutor"]} />}>
+                <Route path="/academy/course/:courseId" element={<CourseDetailPage />} />
+              </Route>
+            </Routes>
+          </Layout>
+        } />
+      </Routes>
     </StripeProvider>
   );
 };

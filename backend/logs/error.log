@@ -359,3 +359,4 @@
 2026-04-04 10:11:30:1130 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
 2026-04-04 10:12:07:127 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
 2026-04-04 10:16:44:1644 [31merror[39m: [31mDNS resolution failed after 5 attempts getaddrinfo ENOTFOUND aws-1-eu-west-1.pooler.supabase.com[39m
+2026-04-08 20:40:28:4028 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m

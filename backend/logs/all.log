@@ -10836,3 +10836,93 @@
 2026-04-04 10:28:51:2851 [35mhttp[39m: [35mGET /api/academy/courses 304 - - 157.975 ms[39m
 2026-04-04 10:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
 2026-04-04 10:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 10:30:54:3054 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-04 10:30:54:3054 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-04 10:30:55:3055 [32minfo[39m: [32mUser 72 connected with socket cV11oM2XTmNu3zY4AAAB[39m
+2026-04-04 11:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 11:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 11:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 11:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 12:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 12:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 12:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 12:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 13:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 13:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 13:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 13:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 14:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 14:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 14:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 14:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 15:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 15:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 15:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 15:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 16:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 16:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 16:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 16:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 17:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 17:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 17:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 17:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 18:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 18:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 18:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 18:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 19:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 19:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 19:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 19:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 20:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 20:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 20:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 20:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 21:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 21:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 21:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 21:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 22:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-04 22:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-04 22:20:06:206 [32minfo[39m: [32mSocket cV11oM2XTmNu3zY4AAAB disconnected[39m
+2026-04-08 20:40:09:409 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-04-08 20:40:11:4011 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-04-08 20:40:15:4015 [33mwarn[39m: [33mDNS resolution failed (attempt 3/5), retrying in 8000ms...[39m
+2026-04-08 20:40:28:4028 [31merror[39m: [31mDatabase connection failed Connection terminated due to connection timeout[39m
+2026-04-09 09:40:15:4015 [33mwarn[39m: [33mDNS resolution failed (attempt 1/5), retrying in 2000ms...[39m
+2026-04-09 09:40:17:4017 [33mwarn[39m: [33mDNS resolution failed (attempt 2/5), retrying in 4000ms...[39m
+2026-04-09 09:40:25:4025 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 09:40:25:4025 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 09:40:36:4036 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 09:40:36:4036 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 09:40:52:4052 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 09:40:52:4052 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 09:41:02:412 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 09:41:02:412 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 09:45:52:4552 [37mdebug[39m: [37m[Request Start] OPTIONS /api/webinar/leads | Origin: http://localhost:5173[39m
+2026-04-09 09:45:52:4552 [37mdebug[39m: [37m[Request End] OPTIONS /api/webinar/leads took 4ms[39m
+2026-04-09 09:45:52:4552 [37mdebug[39m: [37m[Request Start] POST /api/webinar/leads | Origin: http://localhost:5173[39m
+2026-04-09 09:45:53:4553 [32minfo[39m: [32mNew webinar lead captured: ayodeji@mailinator.com for Data Analytics (April 2026)[39m
+2026-04-09 09:45:53:4553 [37mdebug[39m: [37m[Request End] POST /leads took 431ms[39m
+2026-04-09 09:45:53:4553 [35mhttp[39m: [35mPOST /api/webinar/leads 201 66 - 431.240 ms[39m
+2026-04-09 09:47:40:4740 [37mdebug[39m: [37m[Request Start] OPTIONS /api/webinar/leads | Origin: http://localhost:5173[39m
+2026-04-09 09:47:40:4740 [37mdebug[39m: [37m[Request End] OPTIONS /api/webinar/leads took 1ms[39m
+2026-04-09 09:47:40:4740 [37mdebug[39m: [37m[Request Start] POST /api/webinar/leads | Origin: http://localhost:5173[39m
+2026-04-09 09:47:40:4740 [32minfo[39m: [32mNew webinar lead captured: ayodeji@mailinator.com for Data Analytics (April 2026)[39m
+2026-04-09 09:47:40:4740 [37mdebug[39m: [37m[Request End] POST /leads took 157ms[39m
+2026-04-09 09:47:40:4740 [35mhttp[39m: [35mPOST /api/webinar/leads 201 66 - 158.535 ms[39m
+2026-04-09 09:52:11:5211 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 09:52:11:5211 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 09:52:22:5222 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 09:52:22:5222 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 10:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 10:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 10:12:10:1210 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 10:12:10:1210 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 10:12:54:1254 [37mdebug[39m: [37m[Request Start] OPTIONS /api/webinar/leads | Origin: http://localhost:5173[39m
+2026-04-09 10:12:54:1254 [37mdebug[39m: [37m[Request End] OPTIONS /api/webinar/leads took 4ms[39m
+2026-04-09 10:12:54:1254 [37mdebug[39m: [37m[Request Start] POST /api/webinar/leads | Origin: http://localhost:5173[39m
+2026-04-09 10:12:54:1254 [32minfo[39m: [32mNew webinar lead captured: veleonacademy@gmail.com for Data Analytics (April 2026)[39m
+2026-04-09 10:12:54:1254 [37mdebug[39m: [37m[Request End] POST /leads took 246ms[39m
+2026-04-09 10:12:54:1254 [35mhttp[39m: [35mPOST /api/webinar/leads 201 66 - 244.440 ms[39m

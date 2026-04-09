@@ -726,6 +726,86 @@ export async function sendPaymentReminderEmail(
 }
 
 /**
+ * Send webinar confirmation email
+ */
+export async function sendWebinarConfirmationEmail(
+  email: string,
+  firstName: string,
+  topic: string,
+  whatsappLink: string
+): Promise<void> {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+          body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background-color: #050505; margin: 0; padding: 0; color: #ffffff; }
+          .container { max-width: 600px; margin: 40px auto; background: #0f172a; border-radius: 20px; overflow: hidden; border: 1px solid #1e293b; }
+          .hero { background: linear-gradient(135deg, #0f172a 0%, #007d8f 100%); padding: 60px 40px; text-align: center; color: white; }
+          .content { padding: 40px; background: #0f172a; color: #94a3b8; }
+          .highlight { color: #2dd4bf; font-weight: 800; }
+          .cta-button { display: inline-block; width: 100%; padding: 20px 0; background: #14b8a6; color: #020617 !important; text-decoration: none !important; border-radius: 12px; font-weight: 800; font-size: 18px; text-align: center; box-shadow: 0 10px 20px rgba(20, 184, 166, 0.2); text-transform: uppercase; letter-spacing: 1px; }
+          .footer { background: #020617; padding: 30px; text-align: center; color: #475569; font-size: 12px; }
+          .step-box { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 12px; padding: 20px; margin: 25px 0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="hero">
+            <h1 style="margin: 0; font-size: 32px; font-weight: 800; line-height: 1.2;">You're Registered, ${firstName}! 🚀</h1>
+            <p style="margin-top: 15px; font-size: 18px; opacity: 0.9;">Free 2-Day Data Analytics Intensive</p>
+          </div>
+          <div class="content">
+            <p style="font-size: 16px; line-height: 1.7; margin-bottom: 25px;">
+              Hi ${firstName}, <br><br>
+              Congratulations! You have successfully reserved your seat for our upcoming <span class="highlight">Free 2-Day Data Analytics Training</span>. 
+              <br><br>
+              In this intensive live session, we are going to show you exactly how beginners are breaking into tech and building $2,000+ per month careers without previous experience.
+            </p>
+ 
+            <div class="step-box" style="border-left: 4px solid #14b8a6;">
+              <h3 style="margin-top: 0; color: #ffffff; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">📅 Event Details</h3>
+              <p style="font-size: 14px; margin-bottom: 5px;"><strong>Day 1:</strong> April 18, 2:00 PM</p>
+              <p style="font-size: 14px; margin-bottom: 10px;"><strong>Day 2:</strong> April 19, 7:00 PM</p>
+              <p style="font-size: 13px; color: #2dd4bf;"><em>*Training links will be shared in the WhatsApp group.</em></p>
+            </div>
+ 
+            <div class="step-box">
+              <h3 style="margin-top: 0; color: #ffffff; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">🚨 Mandatory Next Step</h3>
+              <p style="font-size: 14px; margin-bottom: 0;">To receive the live class links, dashboard templates, and the "Job-Ready Road Map," you must join the private WhatsApp group below.</p>
+            </div>
+ 
+            <a href="${whatsappLink}" class="cta-button">Join Training Group Now</a>
+            
+            <p style="text-align: center; font-size: 14px; margin-top: 30px; color: #64748b;">
+              <em>Warning: We only allow 10 spots per cohort for this free session. Join the group now to secure your access.</em>
+            </p>
+ 
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #1e293b; font-size: 14px;">
+              <p>Prepare to change your career,</p>
+              <p><strong>The Veleon Academy Team</strong></p>
+            </div>
+          </div>
+          <div class="footer">
+            <p>You received this because you registered for the Free 2-Day Data Analytics Training.</p>
+            <p>&copy; ${new Date().getFullYear()} Veleon Academy • All Rights Reserved</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+ 
+  await sendEmail({
+    to: email,
+    subject: `You're In! 🚀 Confirmation: Free 2-Day Data Analytics Training`,
+    html,
+    text: `Hi ${firstName}, you're registered for the FREE 2-Day Data Analytics Intensive! Please join the training group here for access: ${whatsappLink}\n\nSchedule: April 18 (2PM) & April 19 (7PM). See you there! - Veleon Academy`
+  });
+}
+
+/**
  * Send bulk messages
  */
 export async function sendBulkMessage(
