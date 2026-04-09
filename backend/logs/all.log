@@ -10926,3 +10926,19 @@
 2026-04-09 10:12:54:1254 [32minfo[39m: [32mNew webinar lead captured: veleonacademy@gmail.com for Data Analytics (April 2026)[39m
 2026-04-09 10:12:54:1254 [37mdebug[39m: [37m[Request End] POST /leads took 246ms[39m
 2026-04-09 10:12:54:1254 [35mhttp[39m: [35mPOST /api/webinar/leads 201 66 - 244.440 ms[39m
+2026-04-09 10:17:04:174 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-04-09 10:17:04:174 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-04-09 10:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 10:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 10:40:12:4012 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-04-09 10:40:12:4012 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-09 10:40:12:4012 [37mdebug[39m: [37m[Request End] GET / took 253ms[39m
+2026-04-09 10:40:12:4012 [35mhttp[39m: [35mGET /api/ads 200 2 - 250.915 ms[39m
+2026-04-09 10:40:13:4013 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1667ms[39m
+2026-04-09 10:40:13:4013 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 1666.292 ms[39m
+2026-04-09 10:40:45:4045 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-04-09 10:40:45:4045 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-09 10:40:46:4046 [37mdebug[39m: [37m[Request End] GET / took 213ms[39m
+2026-04-09 10:40:46:4046 [35mhttp[39m: [35mGET /api/ads 200 2 - 212.152 ms[39m
+2026-04-09 10:40:46:4046 [37mdebug[39m: [37m[Request End] GET /courses took 218ms[39m
+2026-04-09 10:40:46:4046 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 217.396 ms[39m
