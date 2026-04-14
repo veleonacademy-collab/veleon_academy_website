@@ -10942,3 +10942,29 @@
 2026-04-09 10:40:46:4046 [35mhttp[39m: [35mGET /api/ads 200 2 - 212.152 ms[39m
 2026-04-09 10:40:46:4046 [37mdebug[39m: [37m[Request End] GET /courses took 218ms[39m
 2026-04-09 10:40:46:4046 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 217.396 ms[39m
+2026-04-09 10:46:11:4611 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-04-09 10:46:11:4611 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-04-09 10:46:11:4611 [37mdebug[39m: [37m[Request End] GET / took 223ms[39m
+2026-04-09 10:46:11:4611 [35mhttp[39m: [35mGET /api/ads 304 - - 218.560 ms[39m
+2026-04-09 10:46:11:4611 [37mdebug[39m: [37m[Request End] GET /courses took 247ms[39m
+2026-04-09 10:46:11:4611 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 247.035 ms[39m
+2026-04-09 11:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 11:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 11:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 11:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 12:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 12:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 12:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 12:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 13:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 13:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 13:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 13:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 14:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 14:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 14:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 14:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 15:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 15:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-04-09 15:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-04-09 15:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m

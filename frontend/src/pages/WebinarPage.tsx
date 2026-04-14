@@ -116,7 +116,7 @@ const WebinarPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
 
-  const webinarDate = "2026-04-18T14:00:00"; // Updated to April 18, 2PM
+  const webinarDate = "2026-04-25T14:00:00"; // Updated to April 25, 2PM
   const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/DDZgPPNTfKE0yvlAD3WQOD"; 
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -295,7 +295,7 @@ const WebinarPage: React.FC = () => {
           <div className="relative order-1 md:order-2">
             <div className="absolute inset-0 bg-teal-500/10 blur-[80px] rounded-full" />
             <img 
-              src="/data_analytics_dashboard_screenshot_1775722091744.png" 
+              src="/data_analytics_screenshot.jpg" 
               alt="Data Analytics Dashboard Screenshot" 
               className="rounded-[2rem] sm:rounded-[3rem] border border-slate-800 shadow-2xl relative w-full aspect-video object-cover"
             />
@@ -419,7 +419,7 @@ const WebinarPage: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black">Day 1</p>
-                    <p className="text-base sm:text-lg font-bold">April 18, 2:00 PM</p>
+                    <p className="text-base sm:text-lg font-bold">April 25, 2:00 PM</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 sm:gap-4 justify-center md:justify-start bg-black/30 p-3 rounded-2xl md:bg-transparent md:p-0">
@@ -428,7 +428,7 @@ const WebinarPage: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black">Day 2</p>
-                    <p className="text-base sm:text-lg font-bold">April 19, 7:00 PM</p>
+                    <p className="text-base sm:text-lg font-bold">April 26, 7:00 PM</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 sm:gap-4 justify-center md:justify-start sm:col-span-2 lg:col-span-1 bg-black/30 p-3 rounded-2xl md:bg-transparent md:p-0">
@@ -462,7 +462,7 @@ const WebinarPage: React.FC = () => {
             <TestimonialCard 
               name="Tunde A."
               role="Junior Data Analyst"
-              content="I was lost for 6 months after graduation. This roadmap simplified everything. I built 3 projects in 2 months and got my first remote gig!"
+              content="I was lost for 6 months after graduation. This roadmap simplified everything."
             />
             <TestimonialCard 
               name="Sarah O."
@@ -472,7 +472,7 @@ const WebinarPage: React.FC = () => {
             <TestimonialCard 
               name="David K."
               role="Tech Newcomer"
-              content="Zero tech background. But the live training showed me exactly what was wrong with my approach. The WhatsApp group is super helpful."
+              content="Zero tech background. But the live training showed me exactly what was wrong with my approach."
             />
           </div>
         </div>
@@ -486,7 +486,7 @@ const WebinarPage: React.FC = () => {
             Limited Slots Available
           </h2>
           <p className="text-slate-300 font-medium">
-            We only allow a limited number of participants to ensure quality interaction and effective mentorship. Once the slots are filled, registration will be closed. <span className="text-white font-bold">Only 10% seats left!</span>
+            {/* We only allow a limited number of participants to ensure quality interaction and effective mentorship. Once the slots are filled, registration will be closed. <span className="text-white font-bold">Only 10% seats left!</span> */}
           </p>
         </div>
       </section>
