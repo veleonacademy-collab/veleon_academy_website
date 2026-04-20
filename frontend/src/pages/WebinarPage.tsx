@@ -116,7 +116,7 @@ const WebinarPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
 
-  const webinarDate = "2026-04-25T14:00:00"; // Updated to April 25, 2PM
+  const webinarDate = "2026-04-25T16:00:00"; // Updated to April 25, 4PM
   const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/DDZgPPNTfKE0yvlAD3WQOD"; 
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -419,7 +419,7 @@ const WebinarPage: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black">Day 1</p>
-                    <p className="text-base sm:text-lg font-bold">April 25, 2:00 PM</p>
+                    <p className="text-base sm:text-lg font-bold">April 25, 4:00 PM</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 sm:gap-4 justify-center md:justify-start bg-black/30 p-3 rounded-2xl md:bg-transparent md:p-0">
