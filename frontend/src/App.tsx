@@ -72,6 +72,9 @@ import TutorCurriculumPage from "./pages/tutor/TutorCurriculumPage";
 
 
 import WebinarPage from "./pages/WebinarPage";
+import SalesLandingPage from "./pages/SalesLandingPage";
+import PaymentPage from "./pages/PaymentPage";
+import ReviewsPage from "./pages/ReviewsPage";
 import EnrollPage from "./pages/EnrollPage";
 
 const App: React.FC = () => {
@@ -79,6 +82,9 @@ const App: React.FC = () => {
     <StripeProvider>
       <Routes>
         <Route path="/free-training" element={<WebinarPage />} />
+        <Route path="/landing-page" element={<SalesLandingPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
+        <Route path="/checkout" element={<PaymentPage />} />
         <Route path="*" element={
           <Layout>
             <Analytics />
