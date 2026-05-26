@@ -120,6 +120,10 @@ module.exports = {
         lg: "var(--font-size-lg)",
         xl: "var(--font-size-xl)",
         "2xl": "var(--font-size-2xl)"
+      },
+      fontFamily: {
+        serif: ["var(--font-family-heading)", "serif"],
+        sans: ["var(--font-family-body)", "sans-serif"],
       }
     }
   },

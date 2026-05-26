@@ -1,82 +1,140 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Shield, Eye, Lock, FileText, Mail, Globe, Calendar, CheckCircle2 } from "lucide-react";
 import { APP_NAME, PRIVACY_EMAIL } from "../utils/constants";
+import SEO from "../components/SEO";
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-16">
-        <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-          Privacy Policy
+    <div className="max-w-4xl mx-auto py-8 sm:py-16 px-4">
+      <SEO 
+        title={`Privacy Policy | ${APP_NAME}`}
+        description={`Learn how we handle, protect, and use your personal information at ${APP_NAME}.`}
+      />
+
+      {/* Header section with gradient glow */}
+      <div className="relative text-center mb-12 sm:mb-16">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/10 rounded-full blur-3xl -z-10" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest mb-4">
+          <Shield className="h-3.5 w-3.5" />
+          Security & Trust
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-none mb-4">
+          PRIVACY POLICY
         </h1>
-        <p className="mt-4 text-lg text-gray-400">
-          Last updated: {new Date().toLocaleDateString()}
+        <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-wider">
+          <Calendar className="h-4 w-4 text-primary" />
+          <span>Last Updated: {new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
+      </div>
+
+      {/* Overview Intro Card */}
+      <div className="bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 rounded-3xl p-6 sm:p-8 mb-10 shadow-sm">
+        <h2 className="text-lg font-black text-slate-900 uppercase tracking-tight mb-3 flex items-center gap-2">
+          <Globe className="h-5 w-5 text-primary" /> Welcome to {APP_NAME}
+        </h2>
+        <p className="text-slate-600 text-sm leading-relaxed">
+          At <strong className="text-slate-900">{APP_NAME}</strong>, we respect your privacy and are committed to protecting your personal data. 
+          This policy details how we look after your information when you enroll in our programs, browse our platform, or chat with our training advisors, 
+          as well as your privacy rights and standard legal protections.
         </p>
       </div>
 
-      <div className="prose prose-invert prose-lg max-w-none space-y-12">
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">1. Introduction</h2>
-          <p className="text-gray-300">
-            Welcome to {APP_NAME}. We respect your privacy and are committed to protecting your personal data. 
-            This privacy policy will inform you as to how we look after your personal data when you visit our website 
-            and tell you about your privacy rights and how the law protects you.
-          </p>
-        </section>
+      {/* Detailed Section Grid */}
+      <div className="space-y-6">
+        {/* Section 1 */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm transition-all hover:border-slate-300">
+          <div className="flex gap-4 items-start">
+            <div className="h-10 w-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 text-orange-600">
+              <Eye className="h-5 w-5" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-base font-black text-slate-900 uppercase tracking-wider">1. The Data We Collect</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                To process your enrollment and provide a personalized cohort experience, we may collect and store:
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-xs">
+                <li className="flex items-center gap-2 font-bold text-slate-700">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                  Identity: Name, Avatar
+                </li>
+                <li className="flex items-center gap-2 font-bold text-slate-700">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                  Contact: Email, WhatsApp Number
+                </li>
+                <li className="flex items-center gap-2 font-bold text-slate-700">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                  Technical: IP Address, Browser cookies
+                </li>
+                <li className="flex items-center gap-2 font-bold text-slate-700">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                  Usage: Lesson progress, feedback
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">2. The Data We Collect</h2>
-          <p className="text-gray-300 mb-4">
-            We may collect, use, store and transfer different kinds of personal data about you which we have grouped together follows:
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
-            <li><strong className="text-white">Identity Data</strong> includes first name, last name, username or similar identifier.</li>
-            <li><strong className="text-white">Contact Data</strong> includes email address and telephone numbers.</li>
-            <li><strong className="text-white">Technical Data</strong> includes internet protocol (IP) address, your login data, browser type and version.</li>
-            <li><strong className="text-white">Usage Data</strong> includes information about how you use our website, products and services.</li>
-          </ul>
-        </section>
+        {/* Section 2 */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm transition-all hover:border-slate-300">
+          <div className="flex gap-4 items-start">
+            <div className="h-10 w-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 text-orange-600">
+              <Lock className="h-5 w-5" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-base font-black text-slate-900 uppercase tracking-wider">2. How We Protect & Use Your Data</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                We only use your personal data when authorized by law. The primary use cases include:
+              </p>
+              <ul className="list-disc pl-5 space-y-1 text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <li>Setting up your student dashboard and delivering cohort curricula.</li>
+                <li>Providing customized tutor feedback, capstone monitoring, and technical certificates.</li>
+                <li>Securing payments securely via Paystack without storing credit card details on our servers.</li>
+                <li>Updating you via WhatsApp or Email on class updates and resource changes.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">3. How We Use Your Data</h2>
-          <p className="text-gray-300 mb-4">
-            We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
-            <li>Where we need to perform the contract we are about to enter into or have entered into with you.</li>
-            <li>Where it is necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override those interests.</li>
-            <li>Where we need to comply with a legal or regulatory obligation.</li>
-          </ul>
-        </section>
+        {/* Section 3 */}
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm transition-all hover:border-slate-300">
+          <div className="flex gap-4 items-start">
+            <div className="h-10 w-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 text-orange-600">
+              <FileText className="h-5 w-5" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-base font-black text-slate-900 uppercase tracking-wider">3. Cookies & Analytics</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                We use tracking tools to study student interaction and improve page speeds:
+              </p>
+              <ul className="space-y-2 text-slate-600 text-xs sm:text-sm">
+                <li>
+                  <strong className="text-slate-900">Google Analytics:</strong> Helps us trace page hits and navigation dropoffs to fix user experience bugs.
+                </li>
+                <li>
+                  <strong className="text-slate-900">Microsoft Clarity:</strong> Helps us watch session replays and click heatmaps to improve user layout logic.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">4. Cookies and Tracking Technologies</h2>
-          <p className="text-gray-300 mb-4">
-            We use cookies and similar tracking technologies to track activity on our service and hold certain information. 
-            Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze our service.
-          </p>
-          <p className="text-gray-300 mb-4">
-            We use the following third-party analytics providers:
-          </p>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
-            <li><strong className="text-white">Google Analytics:</strong> We use Google Analytics to monitor and analyze the use of our service. Google uses the data collected to track and monitor the use of our service. This data is shared with other Google services.</li>
-            <li><strong className="text-white">Microsoft Clarity:</strong> We use Microsoft Clarity to understand how you interact with our website through heatmaps and session recordings. This helps us improve our user experience and identify technical issues.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">5. Data Security</h2>
-          <p className="text-gray-300">
-            We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-4">6. Contact Us</h2>
-          <p className="text-gray-300">
-            If you have any questions about this privacy policy or our privacy practices, please contact us at:{" "}
-            <a href={`mailto:${PRIVACY_EMAIL}`} className="text-primary hover:underline">{PRIVACY_EMAIL}</a>
-          </p>
-        </section>
+      {/* Contact Section Box */}
+      <div className="mt-12 text-center bg-slate-900 text-white rounded-3xl p-8 space-y-4 shadow-xl">
+        <Mail className="h-8 w-8 text-primary mx-auto animate-bounce" />
+        <h3 className="text-lg font-black uppercase tracking-wider">Have Questions?</h3>
+        <p className="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+          If you have any questions regarding this Privacy Policy, your personal data options, or want to request account deletion, contact our support desk directly:
+        </p>
+        <div className="pt-2">
+          <a 
+            href={`mailto:${PRIVACY_EMAIL}`} 
+            className="inline-flex bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-primary/20"
+          >
+            Email Support: {PRIVACY_EMAIL}
+          </a>
+        </div>
       </div>
     </div>
   );
