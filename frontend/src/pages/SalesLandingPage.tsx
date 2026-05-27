@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { WHATSAPP_NUMBER } from '../utils/constants';
+import { http } from '../api/http';
 
 const SalesLandingPage: React.FC = () => {
   const [selectedTrack, setSelectedTrack] = useState<'full' | 'excel_only'>('full');
@@ -31,6 +32,7 @@ const SalesLandingPage: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 9, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -73,17 +75,44 @@ const SalesLandingPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Calculate the amount due based on selections
+  const getAmountDue = (): number => {
+    if (isInstallment) return 10000;
+    return selectedTrack === 'full' ? 25000 : 15000;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !whatsapp) {
       alert('Please fill out all fields to secure your spot.');
       return;
     }
+
+    setIsSubmitting(true);
+
+    // Save lead to database (fire-and-forget — don't block Paystack redirect)
+    try {
+      http.post('/sales-leads', {
+        name,
+        email,
+        whatsapp,
+        selectedTrack,
+        paymentTerm: isInstallment ? 'installment' : 'full',
+        amountDue: getAmountDue()
+      }).catch(() => {
+        // Silently fail — we don't want to block the payment flow
+      });
+    } catch {
+      // Silently fail
+    }
+
     // Open Paystack storefront based on selected package track
     const targetLink = selectedTrack === 'full' 
       ? 'https://paystack.shop/pay/veleon-data' 
       : 'https://paystack.shop/pay/veleon-data2';
     window.open(targetLink, '_blank', 'noopener,noreferrer');
+    
+    setIsSubmitting(false);
   };
 
   return (

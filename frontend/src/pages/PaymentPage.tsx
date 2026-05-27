@@ -5,7 +5,7 @@ const PaymentPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate('/landing-page#enroll-section', { replace: true });
+    navigate('/data#enroll-section', { replace: true });
     
     // Smooth scroll down to the enrollment section after redirect
     setTimeout(() => {

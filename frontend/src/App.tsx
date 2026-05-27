@@ -82,7 +82,7 @@ const App: React.FC = () => {
     <StripeProvider>
       <Routes>
         <Route path="/free-training" element={<WebinarPage />} />
-        <Route path="/landing-page" element={<SalesLandingPage />} />
+        <Route path="/data" element={<SalesLandingPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/checkout" element={<PaymentPage />} />
         <Route path="*" element={

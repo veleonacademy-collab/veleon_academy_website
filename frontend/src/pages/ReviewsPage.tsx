@@ -80,13 +80,13 @@ const ReviewsPage: React.FC = () => {
       {/* Header */}
       <header className="py-5 px-4 border-b border-white/5 bg-white/5 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link to="/landing-page" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+          <Link to="/data" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
             <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest hidden sm:inline">Back</span>
           </Link>
           <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-8 sm:h-10" />
           <Link 
-            to="/landing-page#enroll-section" 
+            to="/data#enroll-section" 
             className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-2.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2 active:scale-95"
           >
             ENROLL NOW <ArrowRight className="h-3 w-3" />
@@ -216,7 +216,7 @@ const ReviewsPage: React.FC = () => {
                DO YOU WANT TO BE THE NEXT SUCCESS STORY?
             </h4>
             <Link 
-              to="/landing-page#enroll-section" 
+              to="/data#enroll-section" 
               className="w-full sm:w-auto bg-white text-orange-600 px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2"
             >
                ENROLL NOW FOR JUNE BATCH <ArrowRight className="h-4.5 w-4.5" />
@@ -347,7 +347,7 @@ const ReviewsPage: React.FC = () => {
             
             <div className="pt-6">
                <Link 
-                 to="/landing-page#enroll-section" 
+                 to="/data#enroll-section" 
                  className="inline-flex bg-orange-600 text-white px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-orange-600/30 hover:scale-[1.02] active:scale-95 transition-all items-center gap-3"
                >
                   SECURE MY SPOT FOR JUNE BATCH <ArrowRight className="h-5 w-5" />
@@ -394,7 +394,7 @@ const ReviewsPage: React.FC = () => {
                      This is a simulator placeholder. When user clicks, we load the student's actual video recording.
                    </p>
                    <Link 
-                     to="/landing-page#enroll-section"
+                     to="/data#enroll-section"
                      className="inline-flex bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all"
                    >
                      Enroll Now & Get Results
@@ -410,7 +410,7 @@ const ReviewsPage: React.FC = () => {
          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
             <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-8 opacity-40" />
             <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-600">
-               <Link to="/landing-page" className="hover:text-white transition-colors">Sales Page</Link>
+               <Link to="/data" className="hover:text-white transition-colors">Sales Page</Link>
                <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             </div>
