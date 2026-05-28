@@ -1,8 +1,8 @@
 -- Update Enrollments to add assigned tutor and installment details
 ALTER TABLE enrollments 
-ADD COLUMN tutor_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
-ADD COLUMN installments_total INTEGER DEFAULT 1,
-ADD COLUMN installments_paid INTEGER DEFAULT 0;
+ADD COLUMN IF NOT EXISTS tutor_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
+ADD COLUMN IF NOT EXISTS installments_total INTEGER DEFAULT 1,
+ADD COLUMN IF NOT EXISTS installments_paid INTEGER DEFAULT 0;
 
 -- Comments / Complains Table
 CREATE TABLE IF NOT EXISTS complains (

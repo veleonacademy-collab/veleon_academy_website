@@ -126,9 +126,9 @@ const SalesLandingPage: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Track checkout initiated event with Meta Pixel
+    // Track checkout CompleteRegistration event with Meta Pixel
     if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'InitiateCheckout', {
+      window.fbq('track', 'CompleteRegistration', {
         content_name: 'Data Analysis Course',
         content_category: selectedTrack === 'full' ? 'Full Stack Track' : 'Excel Only Track',
         value: getAmountDue(),
