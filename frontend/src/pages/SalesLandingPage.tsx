@@ -26,6 +26,13 @@ import { motion } from 'framer-motion';
 import { WHATSAPP_NUMBER } from '../utils/constants';
 import { http } from '../api/http';
 
+declare global {
+  interface Window {
+    fbq?: any;
+    _fbq?: any;
+  }
+}
+
 const SalesLandingPage: React.FC = () => {
   const [selectedTrack, setSelectedTrack] = useState<'full' | 'excel_only'>('full');
   const [isInstallment, setIsInstallment] = useState<boolean>(false);
@@ -34,6 +41,35 @@ const SalesLandingPage: React.FC = () => {
   const [whatsapp, setWhatsapp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 9, hours: 0, minutes: 0, seconds: 0 });
+
+  // Initialize and track Facebook Pixel ONLY for the Sales Landing Page
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (!window.fbq) {
+        (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
+          if (f.fbq) return;
+          n = f.fbq = function() {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = '2.0';
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+        window.fbq('init', '1016761340778813');
+      }
+
+      // Track PageView specifically on landing page mount
+      window.fbq('track', 'PageView');
+    }
+  }, []);
 
   useEffect(() => {
     const target = new Date("2026-06-04T23:59:59").getTime();
@@ -89,6 +125,16 @@ const SalesLandingPage: React.FC = () => {
     }
 
     setIsSubmitting(true);
+
+    // Track checkout initiated event with Meta Pixel
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'InitiateCheckout', {
+        content_name: 'Data Analysis Course',
+        content_category: selectedTrack === 'full' ? 'Full Stack Track' : 'Excel Only Track',
+        value: getAmountDue(),
+        currency: 'NGN'
+      });
+    }
 
     // Save lead to database (fire-and-forget — don't block Paystack redirect)
     try {
