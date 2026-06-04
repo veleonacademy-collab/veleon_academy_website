@@ -11,8 +11,20 @@ export class AcademyService {
     paymentPlan: "one-time" | "installment";
     amountPaid: number;
     installmentsTotal?: number;
+    customPrice?: number;
+    cohort?: string;
+    nextPaymentDue?: string;
   }) {
-    const { studentId, courseId, paymentPlan, amountPaid, installmentsTotal = 1 } = payload;
+    const { 
+      studentId, 
+      courseId, 
+      paymentPlan, 
+      amountPaid, 
+      installmentsTotal = 1,
+      customPrice,
+      cohort,
+      nextPaymentDue: passedNextPaymentDue
+    } = payload;
 
     // Upgrade role to student if they are currently just a base 'user'
     await pool.query(
@@ -31,8 +43,8 @@ export class AcademyService {
       const newTotalPaid = Number(enrollment.total_paid) + amountPaid;
       
       // Calculate next payment due based on 3-month (90 day) cap
-      let nextPaymentDue = enrollment.next_payment_due;
-      if (paymentPlan === "installment") {
+      let nextPaymentDue = passedNextPaymentDue || enrollment.next_payment_due;
+      if (!passedNextPaymentDue && paymentPlan === "installment") {
         const totalInstallments = Number(enrollment.installments_total) || 3;
         const daysPerInstallment = Math.floor(90 / totalInstallments);
         
@@ -44,16 +56,18 @@ export class AcademyService {
       await pool.query(
         `UPDATE enrollments 
          SET total_paid = $1, next_payment_due = $2, portal_locked = false, updated_at = NOW(),
-             installments_paid = installments_paid + 1 
+             installments_paid = installments_paid + 1,
+             custom_price = COALESCE($4, custom_price),
+             cohort = COALESCE($5, cohort)
          WHERE id = $3`,
-        [newTotalPaid, nextPaymentDue, enrollment.id]
+        [newTotalPaid, nextPaymentDue, enrollment.id, customPrice, cohort]
       );
       
       return enrollment.id;
     } else {
       // Create new enrollment
-      let nextPaymentDue: string | null = null;
-      if (paymentPlan === "installment") {
+      let nextPaymentDue: string | null = passedNextPaymentDue || null;
+      if (!passedNextPaymentDue && paymentPlan === "installment") {
         const totalInstallments = Number(installmentsTotal) || 3;
         const daysPerInstallment = Math.floor(90 / totalInstallments);
         
@@ -63,9 +77,9 @@ export class AcademyService {
       }
 
       const result = await pool.query(
-        `INSERT INTO enrollments (student_id, course_id, payment_plan, total_paid, next_payment_due, installments_total, installments_paid)
-         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
-        [studentId, courseId, paymentPlan, amountPaid, nextPaymentDue, installmentsTotal, paymentPlan === "installment" ? 1 : 1]
+        `INSERT INTO enrollments (student_id, course_id, payment_plan, total_paid, next_payment_due, installments_total, installments_paid, custom_price, cohort)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
+        [studentId, courseId, paymentPlan, amountPaid, nextPaymentDue, installmentsTotal, paymentPlan === "installment" ? 1 : 1, customPrice, cohort]
       );
       
       return result.rows[0].id;
@@ -197,9 +211,10 @@ export class AcademyService {
         e.tutor_id as "tutorId",
         e.installments_total as "installmentsTotal",
         e.installments_paid as "installmentsPaid",
+        e.cohort as "cohort",
         c.title as course_title, 
         c.thumbnail_url,
-        c.price as course_price,
+        COALESCE(e.custom_price, c.price) as course_price,
         c.timetable_url,
         (SELECT COUNT(*) FROM curriculum WHERE course_id = c.id) as total_topics,
         (SELECT COUNT(*) FROM curriculum_progress cp 
@@ -249,22 +264,26 @@ export class AcademyService {
   /**
    * Get recordings for a course
    */
-  static async getCourseRecordings(courseId: number) {
-    const result = await pool.query(
-      "SELECT * FROM class_recordings WHERE course_id = $1 ORDER BY recording_date DESC",
-      [courseId]
-    );
+  static async getCourseRecordings(courseId: number, cohort?: string) {
+    const query = cohort
+      ? "SELECT * FROM class_recordings WHERE course_id = $1 AND (cohort IS NULL OR cohort = $2) ORDER BY recording_date DESC"
+      : "SELECT * FROM class_recordings WHERE course_id = $1 ORDER BY recording_date DESC";
+    const params = cohort ? [courseId, cohort] : [courseId];
+
+    const result = await pool.query(query, params);
     return result.rows;
   }
 
   /**
    * Get assignments for a course
    */
-  static async getCourseAssignments(courseId: number) {
-    const result = await pool.query(
-      "SELECT * FROM assignments WHERE course_id = $1 ORDER BY created_at DESC",
-      [courseId]
-    );
+  static async getCourseAssignments(courseId: number, cohort?: string) {
+    const query = cohort
+      ? "SELECT * FROM assignments WHERE course_id = $1 AND (cohort IS NULL OR cohort = $2) ORDER BY created_at DESC"
+      : "SELECT * FROM assignments WHERE course_id = $1 ORDER BY created_at DESC";
+    const params = cohort ? [courseId, cohort] : [courseId];
+
+    const result = await pool.query(query, params);
     return result.rows;
   }
 }

@@ -19,8 +19,8 @@ const AdminCoursesPage: React.FC = () => {
   const [formData, setFormData] = useState({ title: "", description: "", price: "", thumbnail_url: "", timetable_url: "" });
 
   const { data: courses, isLoading } = useQuery({
-    queryKey: ["admin-courses"],
-    queryFn: academyApi.getCourses,
+    queryKey: ["admin-courses", { all: true }],
+    queryFn: () => academyApi.getCourses({ all: true }),
   });
 
   const createMutation = useMutation({

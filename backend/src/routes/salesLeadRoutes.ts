@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { captureSalesLead, getSalesLeads } from "../controllers/salesLeadController.js";
+import { captureSalesLead, getSalesLeads, onboardSalesLead } from "../controllers/salesLeadController.js";
 import { authenticate } from "../middleware/authMiddleware.js";
 import { requireRole } from "../middleware/roleMiddleware.js";
 
@@ -10,3 +10,6 @@ salesLeadRouter.post("/", captureSalesLead);
 
 // Admin route to view all sales leads
 salesLeadRouter.get("/", authenticate, requireRole(["admin"]), getSalesLeads);
+
+// Admin route to manually onboard a lead
+salesLeadRouter.post("/:id/onboard", authenticate, requireRole(["admin"]), onboardSalesLead);

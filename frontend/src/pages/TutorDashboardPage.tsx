@@ -15,8 +15,8 @@ const TutorDashboardPage: React.FC = () => {
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<{ studentId: number; courseId: number; name: string } | null>(null);
 
-  const [recordingData, setRecordingData] = useState({ title: "", videoUrl: "" });
-  const [assignmentData, setAssignmentData] = useState({ title: "", description: "", dueDate: "" });
+  const [recordingData, setRecordingData] = useState({ title: "", videoUrl: "", cohort: "Cohort 3" });
+  const [assignmentData, setAssignmentData] = useState({ title: "", description: "", dueDate: "", cohort: "Cohort 3" });
   const [remarkText, setRemarkText] = useState("");
 
   const { data: courses, isLoading } = useQuery({
@@ -38,11 +38,11 @@ const TutorDashboardPage: React.FC = () => {
   });
 
   const recordingMutation = useMutation({
-    mutationFn: (data: { courseId: number; title: string; videoUrl: string }) => academyApi.addRecording(data),
+    mutationFn: (data: { courseId: number; title: string; videoUrl: string; cohort?: string }) => academyApi.addRecording(data),
     onSuccess: () => {
       toast.success("Recording added and students notified!");
       setIsRecordingModalOpen(false);
-      setRecordingData({ title: "", videoUrl: "" });
+      setRecordingData({ title: "", videoUrl: "", cohort: "Cohort 3" });
     },
     onError: () => toast.error("Failed to add recording"),
   });
@@ -52,7 +52,7 @@ const TutorDashboardPage: React.FC = () => {
     onSuccess: () => {
       toast.success("Assignment posted!");
       setIsAssignmentModalOpen(false);
-      setAssignmentData({ title: "", description: "", dueDate: "" });
+      setAssignmentData({ title: "", description: "", dueDate: "", cohort: "Cohort 3" });
     },
     onError: () => toast.error("Failed to post assignment"),
   });
@@ -276,6 +276,14 @@ const TutorDashboardPage: React.FC = () => {
                     onChange={(e) => setRecordingData({...recordingData, videoUrl: e.target.value})}
                 />
             </div>
+            <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort Group (Optional)</label>
+                <Input 
+                    placeholder="e.g. Cohort 2 (leave empty for all)" 
+                    value={recordingData.cohort}
+                    onChange={(e) => setRecordingData({...recordingData, cohort: e.target.value})}
+                />
+            </div>
             <button 
                 onClick={() => recordingMutation.mutate({ courseId: selectedCourseId!, ...recordingData })}
                 disabled={recordingMutation.isPending}
@@ -317,6 +325,14 @@ const TutorDashboardPage: React.FC = () => {
                     type="date"
                     value={assignmentData.dueDate}
                     onChange={(e) => setAssignmentData({...assignmentData, dueDate: e.target.value})}
+                />
+            </div>
+            <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort Group (Optional)</label>
+                <Input 
+                    placeholder="e.g. Cohort 2 (leave empty for all)" 
+                    value={assignmentData.cohort}
+                    onChange={(e) => setAssignmentData({...assignmentData, cohort: e.target.value})}
                 />
             </div>
             <button 

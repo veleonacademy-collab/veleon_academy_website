@@ -6,11 +6,13 @@ export async function getAllUsers(): Promise<PublicUser[]> {
   const result = await pool.query<User>(`
     SELECT 
       u.*,
+      e.cohort as cohort,
       COUNT(t.id) as tasks_assigned,
       COUNT(CASE WHEN t.status = 'completed' THEN 1 END) as tasks_completed
     FROM users u
     LEFT JOIN tasks t ON u.id = t.assigned_to
-    GROUP BY u.id
+    LEFT JOIN enrollments e ON u.id = e.student_id
+    GROUP BY u.id, e.cohort
     ORDER BY u.created_at DESC
   `);
   return result.rows.map(toPublicUser);

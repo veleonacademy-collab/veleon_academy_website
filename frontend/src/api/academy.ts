@@ -3,7 +3,10 @@ import { Course, Enrollment, ClassRecording, Assignment } from "../types/academy
 
 export const academyApi = {
   // Courses
-  getCourses: () => http.get<Course[]>("/academy/courses").then(r => r.data),
+  getCourses: (params?: { all?: boolean } | Record<string, any>) => {
+    const actualParams = params && "all" in params ? { all: params.all } : undefined;
+    return http.get<Course[]>("/academy/courses", { params: actualParams }).then(r => r.data);
+  },
   
   createCourse: (data: Partial<Course>) => http.post<Course>("/academy/admin/courses", data).then(r => r.data),
   
@@ -100,4 +103,17 @@ export const academyApi = {
 
   getAdminTransactions: (params?: { studentId?: number; enrollmentId?: number }) =>
     http.get<any[]>("/academy/admin/transactions", { params }).then(r => r.data),
+
+  // Sales Leads
+  getSalesLeads: () => http.get<any[]>("/sales-leads").then(r => r.data),
+
+  onboardSalesLead: (leadId: number, data: {
+    courseId: number;
+    paymentPlan: 'one-time' | 'installment';
+    customPrice: number;
+    amountPaid: number;
+    installmentsTotal?: number;
+    cohort?: string;
+    nextPaymentDue?: string;
+  }) => http.post(`/sales-leads/${leadId}/onboard`, data).then(r => r.data),
 };

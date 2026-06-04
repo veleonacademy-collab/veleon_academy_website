@@ -64,6 +64,7 @@ import Analytics from "./components/Analytics";
 import AdminCoursesPage from "./pages/admin/courses/AdminCoursesPage";
 import AdminCurriculumPage from "./pages/admin/courses/AdminCurriculumPage";
 import AdminEnrollmentsPage from "./pages/admin/enrollments/AdminEnrollmentsPage";
+import AdminSalesLeadsPage from "./pages/admin/AdminSalesLeadsPage";
 import AdminTutorsPage from "./pages/admin/tutors/AdminTutorsPage";
 import AdminTutorDetailsPage from "./pages/admin/tutors/AdminTutorDetailsPage";
 import AdminAcademySupportPage from "./pages/admin/AdminAcademySupportPage";
@@ -131,6 +132,7 @@ const App: React.FC = () => {
                 <Route path="/admin/courses" element={<AdminCoursesPage />} />
                 <Route path="/admin/courses/:courseId/curriculum" element={<AdminCurriculumPage />} />
                 <Route path="/admin/enrollments" element={<AdminEnrollmentsPage />} />
+                <Route path="/admin/sales-leads" element={<AdminSalesLeadsPage />} />
                 <Route path="/admin/tutors" element={<AdminTutorsPage />} />
                 <Route path="/admin/tutor/:tutorId" element={<AdminTutorDetailsPage />} />
                 <Route path="/admin/academy-support" element={<AdminAcademySupportPage />} />

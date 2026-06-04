@@ -103,19 +103,7 @@ const UserViewItemPage: React.FC = () => {
           </p>
         </div>
 
-        <div>
-          <p className="text-xs text-muted-foreground">Role Access</p>
-          <div className="mt-1 flex gap-2">
-            {item.roleAccess.map((role) => (
-              <span
-                key={role}
-                className="rounded bg-primary/20 px-2 py-1 text-xs text-primary"
-              >
-                {role}
-              </span>
-            ))}
-          </div>
-        </div>
+
       </div>
     </div>
   );

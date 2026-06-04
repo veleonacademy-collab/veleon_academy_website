@@ -80,6 +80,13 @@ const AdminDashboardPage: React.FC = () => {
           <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">Students</h3>
           <p className="text-xs text-muted-foreground mt-2">Track enrollments and payment status.</p>
         </Link>
+        <Link to="/admin/sales-leads" className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
+          <div className="flex items-start justify-between mb-4">
+            <div className="text-3xl">🎯</div>
+          </div>
+          <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">Sales Leads</h3>
+          <p className="text-xs text-muted-foreground mt-2">Onboard students from the sales landing page.</p>
+        </Link>
         <Link to="/admin/tutors" className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
           <div className="flex items-start justify-between mb-4">
             <div className="text-3xl">👨‍🏫</div>

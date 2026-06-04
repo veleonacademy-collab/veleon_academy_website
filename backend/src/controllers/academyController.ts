@@ -8,7 +8,12 @@ export class AcademyController {
   
   static async getCourses(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await pool.query("SELECT * FROM courses ORDER BY created_at DESC");
+      const { all } = req.query;
+      const queryStr = all === "true" 
+        ? "SELECT * FROM courses ORDER BY created_at DESC" 
+        : "SELECT * FROM courses WHERE COALESCE(is_hidden, false) = false ORDER BY created_at DESC";
+      
+      const result = await pool.query(queryStr);
       res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
       res.json(result.rows);
     } catch (error) {
@@ -65,13 +70,13 @@ export class AcademyController {
 
   static async addRecording(req: Request, res: Response, next: NextFunction) {
     try {
-      const { courseId, title, videoUrl } = req.body;
+      const { courseId, title, videoUrl, cohort } = req.body;
       const tutorId = req.user?.id;
 
       const result = await pool.query(
-        `INSERT INTO class_recordings (course_id, tutor_id, title, video_url) 
-         VALUES ($1, $2, $3, $4) RETURNING *`,
-        [courseId, tutorId, title, videoUrl]
+        `INSERT INTO class_recordings (course_id, tutor_id, title, video_url, cohort) 
+         VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [courseId, tutorId, title, videoUrl, cohort || null]
       );
 
       const recording = result.rows[0];
@@ -108,13 +113,13 @@ export class AcademyController {
 
   static async createAssignment(req: Request, res: Response, next: NextFunction) {
     try {
-      const { courseId, title, description, fileUrl, dueDate } = req.body;
+      const { courseId, title, description, fileUrl, dueDate, cohort } = req.body;
       const tutorId = req.user?.id;
 
       const result = await pool.query(
-        `INSERT INTO assignments (course_id, tutor_id, title, description, file_url, due_date) 
-         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [courseId, tutorId, title, description, fileUrl, dueDate]
+        `INSERT INTO assignments (course_id, tutor_id, title, description, file_url, due_date, cohort) 
+         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+        [courseId, tutorId, title, description, fileUrl, dueDate, cohort || null]
       );
       const assignment = result.rows[0];
 
@@ -199,8 +204,13 @@ export class AcademyController {
         };
       }
 
-      const recordings = await AcademyService.getCourseRecordings(parseInt(courseId));
-      const assignments = await AcademyService.getCourseAssignments(parseInt(courseId));
+      let cohortFilter: string | undefined = undefined;
+      if (role === 'student' || role === 'user') {
+        cohortFilter = enrollment?.cohort || undefined;
+      }
+
+      const recordings = await AcademyService.getCourseRecordings(parseInt(courseId), cohortFilter);
+      const assignments = await AcademyService.getCourseAssignments(parseInt(courseId), cohortFilter);
 
       // Get curriculum with progress
       let curriculum: any[] = [];

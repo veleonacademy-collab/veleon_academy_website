@@ -12,20 +12,35 @@ export default function AdminBulkMessagingPage() {
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState(`<p>Hi {{name}},</p><p><br></p><p>...</p>`);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+  const [cohortFilter, setCohortFilter] = useState("all");
 
   const { data: users, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
 
+  const uniqueCohorts = useMemo(() => {
+    if (!users) return [];
+    const set = new Set<string>();
+    users.forEach((u: any) => {
+      if (u.cohort) set.add(u.cohort);
+    });
+    return Array.from(set).sort();
+  }, [users]);
+
   const filteredUsers = useMemo(() => {
     if (!users) return [];
-    return users.filter((u: any) =>
-      u.email.toLowerCase().includes(search.toLowerCase()) ||
-      u.firstName.toLowerCase().includes(search.toLowerCase()) ||
-      u.lastName.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [users, search]);
+    return users.filter((u: any) => {
+      const matchesSearch =
+        u.email.toLowerCase().includes(search.toLowerCase()) ||
+        u.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        u.lastName.toLowerCase().includes(search.toLowerCase());
+      
+      const matchesCohort = cohortFilter === "all" || u.cohort === cohortFilter;
+      
+      return matchesSearch && matchesCohort;
+    });
+  }, [users, search, cohortFilter]);
 
   const toggleUser = (id: number) => {
     const newSet = new Set(selectedIds);
@@ -128,15 +143,29 @@ export default function AdminBulkMessagingPage() {
             <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">{selectedIds.size} Selected</span>
           </h2>
 
-          <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-            <input
-              type="text"
-              placeholder="Search users..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all focus:bg-white"
-            />
+          <div className="space-y-2 mb-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+              <input
+                type="text"
+                placeholder="Search users..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all focus:bg-white"
+              />
+            </div>
+            <div>
+              <select
+                value={cohortFilter}
+                onChange={(e) => setCohortFilter(e.target.value)}
+                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/20 bg-white"
+              >
+                <option value="all">All Cohorts / Groups</option>
+                {uniqueCohorts.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className="flex items-center justify-between mb-3 px-1">
@@ -168,7 +197,12 @@ export default function AdminBulkMessagingPage() {
                     <p className="text-sm font-bold text-gray-900 capitalize">{u.firstName} {u.lastName}</p>
                     <p className="text-xs text-gray-500 font-medium">{u.email}</p>
                   </div>
-                  <span className={`ml-auto text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : u.role === 'tutor' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}>{u.role}</span>
+                  <div className="ml-auto flex flex-col items-end gap-1 shrink-0 text-right">
+                    <span className={`text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : u.role === 'tutor' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'}`}>{u.role}</span>
+                    {u.cohort && (
+                      <span className="text-[8px] bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded font-black uppercase tracking-wider">{u.cohort}</span>
+                    )}
+                  </div>
                 </label>
               ))
             ) : (

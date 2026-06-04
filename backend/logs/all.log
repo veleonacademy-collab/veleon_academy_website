@@ -11077,3 +11077,228 @@
 2026-05-28 06:13:04:134 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
 2026-05-28 06:13:04:134 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
 2026-05-28 06:13:04:134 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-05-28 06:15:52:1552 [37mdebug[39m: [37m[Request Start] OPTIONS /api/sales-leads | Origin: http://localhost:5173[39m
+2026-05-28 06:15:52:1552 [37mdebug[39m: [37m[Request End] OPTIONS /api/sales-leads took 1ms[39m
+2026-05-28 06:15:52:1552 [37mdebug[39m: [37m[Request Start] POST /api/sales-leads | Origin: http://localhost:5173[39m
+2026-05-28 06:15:54:1554 [32minfo[39m: [32mNew sales lead captured: relationshipgoals.ng@gmail.com | Track: full | Term: full | Amount: 25000[39m
+2026-05-28 06:15:54:1554 [33mwarn[39m: [33m[SLOW REQUEST] POST / took 1336ms[39m
+2026-05-28 06:15:54:1554 [35mhttp[39m: [35mPOST /api/sales-leads 201 72 - 1332.776 ms[39m
+2026-05-28 06:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-05-28 06:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-05-28 07:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-05-28 07:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-05-28 07:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-05-28 07:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 13:12:28:1228 [32minfo[39m: [32mStarting database migrations...[39m
+2026-06-04 13:12:28:1228 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-06-04 13:12:30:1230 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32mExecuting migration 001_add_course_slug.sql...[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32m✓ 001_add_course_slug.sql executed successfully[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-06-04 13:12:31:1231 [32minfo[39m: [32mExecuting migration add_metadata_to_users.sql...[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32m✓ add_metadata_to_users.sql executed successfully[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-06-04 13:12:32:1232 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32mExecuting migration create_webinar_leads_table.sql...[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32m✓ create_webinar_leads_table.sql executed successfully[39m
+2026-06-04 13:12:33:1233 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32mExecuting migration fix_tasks_and_indexes.sql...[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32m✓ fix_tasks_and_indexes.sql executed successfully[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32mExecuting migration rename_user_role_to_student.sql...[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32m✓ rename_user_role_to_student.sql executed successfully[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32mExecuting migration sales_leads.sql...[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32m✓ sales_leads.sql executed successfully[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32mExecuting migration update_sales_leads_and_enrollments_price.sql...[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
+2026-06-04 13:12:34:1234 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
+2026-06-04 13:12:35:1235 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-06-04 14:03:07:37 [32minfo[39m: [32mStarting database migrations...[39m
+2026-06-04 14:03:07:37 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-06-04 14:03:08:38 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-06-04 14:03:08:38 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-06-04 14:03:08:38 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-06-04 14:03:08:38 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32mExecuting migration 001_add_course_slug.sql...[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32m✓ 001_add_course_slug.sql executed successfully[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-06-04 14:03:09:39 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32mExecuting migration add_metadata_to_users.sql...[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32m✓ add_metadata_to_users.sql executed successfully[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-06-04 14:03:10:310 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32mExecuting migration create_webinar_leads_table.sql...[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32m✓ create_webinar_leads_table.sql executed successfully[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-06-04 14:03:11:311 [32minfo[39m: [32mExecuting migration fix_tasks_and_indexes.sql...[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32m✓ fix_tasks_and_indexes.sql executed successfully[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32mExecuting migration rename_user_role_to_student.sql...[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32m✓ rename_user_role_to_student.sql executed successfully[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32mExecuting migration sales_leads.sql...[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32m✓ sales_leads.sql executed successfully[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32mExecuting migration update_sales_leads_and_enrollments_price.sql...[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
+2026-06-04 14:03:12:312 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-06-04 14:16:01:161 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-04 14:16:01:161 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-04 14:26:08:268 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-06-04 14:26:08:268 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:26:08:268 [37mdebug[39m: [37m[Request End] GET / took 248ms[39m
+2026-06-04 14:26:08:268 [35mhttp[39m: [35mGET /api/ads 200 2 - 246.201 ms[39m
+2026-06-04 14:26:09:269 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1362ms[39m
+2026-06-04 14:26:09:269 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 1358.472 ms[39m
+2026-06-04 14:26:26:2626 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-06-04 14:26:26:2626 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/oauth/google took 2ms[39m
+2026-06-04 14:26:26:2626 [37mdebug[39m: [37m[Request Start] POST /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-06-04 14:26:28:2628 [33mwarn[39m: [33m[SLOW REQUEST] POST /oauth/google took 1979ms[39m
+2026-06-04 14:26:28:2628 [35mhttp[39m: [35mPOST /api/auth/oauth/google 200 749 - 1978.672 ms[39m
+2026-06-04 14:26:28:2628 [32minfo[39m: [32mUser 2 connected with socket AbWkzxqvr9A4Tl50AAAB[39m
+2026-06-04 14:26:42:2642 [37mdebug[39m: [37m[Request Start] OPTIONS /api/admin/stats | Origin: http://localhost:5173[39m
+2026-06-04 14:26:42:2642 [37mdebug[39m: [37m[Request End] OPTIONS /api/admin/stats took 1ms[39m
+2026-06-04 14:26:42:2642 [37mdebug[39m: [37m[Request Start] GET /api/admin/stats | Origin: http://localhost:5173[39m
+2026-06-04 14:26:42:2642 [37mdebug[39m: [37m[Request End] GET /stats took 819ms[39m
+2026-06-04 14:26:42:2642 [35mhttp[39m: [35mGET /api/admin/stats 200 158 - 818.072 ms[39m
+2026-06-04 14:27:13:2713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/users | Origin: http://localhost:5173[39m
+2026-06-04 14:27:13:2713 [37mdebug[39m: [37m[Request End] OPTIONS /api/users took 2ms[39m
+2026-06-04 14:27:13:2713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:27:13:2713 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-06-04 14:27:13:2713 [37mdebug[39m: [37m[Request Start] GET /api/users | Origin: http://localhost:5173[39m
+2026-06-04 14:27:13:2713 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:27:14:2714 [37mdebug[39m: [37m[Request End] GET /courses took 195ms[39m
+2026-06-04 14:27:14:2714 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 193.834 ms[39m
+2026-06-04 14:27:14:2714 [37mdebug[39m: [37m[Request End] GET / took 378ms[39m
+2026-06-04 14:27:14:2714 [35mhttp[39m: [35mGET /api/users 200 18477 - 371.743 ms[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/admin/tutors | Origin: http://localhost:5173[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/admin/tutors took 1ms[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request Start] GET /api/academy/admin/tutors | Origin: http://localhost:5173[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request End] GET /courses took 176ms[39m
+2026-06-04 14:27:37:2737 [35mhttp[39m: [35mGET /api/academy/courses 200 2825 - 176.782 ms[39m
+2026-06-04 14:27:37:2737 [37mdebug[39m: [37m[Request End] GET /admin/tutors took 178ms[39m
+2026-06-04 14:27:37:2737 [35mhttp[39m: [35mGET /api/academy/admin/tutors 200 84 - 179.408 ms[39m
+2026-06-04 14:27:47:2747 [37mdebug[39m: [37m[Request Start] OPTIONS /api/sales-leads | Origin: http://localhost:5173[39m
+2026-06-04 14:27:47:2747 [37mdebug[39m: [37m[Request End] OPTIONS /api/sales-leads took 1ms[39m
+2026-06-04 14:27:47:2747 [37mdebug[39m: [37m[Request Start] GET /api/sales-leads | Origin: http://localhost:5173[39m
+2026-06-04 14:27:47:2747 [37mdebug[39m: [37m[Request End] GET / took 230ms[39m
+2026-06-04 14:27:47:2747 [35mhttp[39m: [35mGET /api/sales-leads 200 2052 - 231.315 ms[39m
+2026-06-04 14:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 14:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 14:33:34:3334 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-04 14:33:35:3335 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-04 14:33:35:3335 [32minfo[39m: [32mUser 2 connected with socket Y7ht5WAZDV7E8l8pAAAB[39m
+2026-06-04 14:34:34:3434 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-04 14:34:34:3434 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-04 14:34:34:3434 [32minfo[39m: [32mUser 2 connected with socket nqkpMI0JcSpKO0Y5AAAB[39m
+2026-06-04 14:37:59:3759 [32minfo[39m: [32mStarting database migrations...[39m
+2026-06-04 14:37:59:3759 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-06-04 14:38:00:380 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-06-04 14:38:00:380 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-06-04 14:38:01:381 [32minfo[39m: [32mExecuting migration 001_add_course_slug.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ 001_add_course_slug.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_metadata_to_users.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ add_metadata_to_users.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-06-04 14:38:02:382 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-06-04 14:38:03:383 [32minfo[39m: [32mExecuting migration create_webinar_leads_table.sql...[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32m✓ create_webinar_leads_table.sql executed successfully[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32mExecuting migration fix_tasks_and_indexes.sql...[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32m✓ fix_tasks_and_indexes.sql executed successfully[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32mExecuting migration rename_user_role_to_student.sql...[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32m✓ rename_user_role_to_student.sql executed successfully[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32mExecuting migration sales_leads.sql...[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32m✓ sales_leads.sql executed successfully[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
+2026-06-04 14:38:04:384 [32minfo[39m: [32mExecuting migration update_courses_is_hidden_and_seed.sql...[39m
+2026-06-04 14:38:05:385 [32minfo[39m: [32m✓ update_courses_is_hidden_and_seed.sql executed successfully[39m
+2026-06-04 14:38:05:385 [32minfo[39m: [32mExecuting migration update_sales_leads_and_enrollments_price.sql...[39m
+2026-06-04 14:38:05:385 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
+2026-06-04 14:38:05:385 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
+2026-06-04 14:38:05:385 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
