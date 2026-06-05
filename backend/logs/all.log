@@ -11302,3 +11302,101 @@
 2026-06-04 14:38:05:385 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
 2026-06-04 14:38:05:385 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
 2026-06-04 14:38:05:385 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-06-04 14:38:17:3817 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-04 14:38:18:3818 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request Start] OPTIONS /api/sales-leads | Origin: http://localhost:5173[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request End] OPTIONS /api/sales-leads took 6ms[39m
+2026-06-04 14:38:18:3818 [32minfo[39m: [32mUser 2 connected with socket b7UzUr4GnjICjJ8GAAAB[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request Start] GET /api/sales-leads | Origin: http://localhost:5173[39m
+2026-06-04 14:38:18:3818 [37mdebug[39m: [37m[Request End] GET /courses took 172ms[39m
+2026-06-04 14:38:18:3818 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 170.975 ms[39m
+2026-06-04 14:38:19:3819 [33mwarn[39m: [33m[SLOW REQUEST] GET / took 1125ms[39m
+2026-06-04 14:38:19:3819 [35mhttp[39m: [35mGET /api/sales-leads 304 - - 1124.736 ms[39m
+2026-06-04 14:38:33:3833 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-06-04 14:38:33:3833 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 2ms[39m
+2026-06-04 14:38:33:3833 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-06-04 14:38:33:3833 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 166ms[39m
+2026-06-04 14:38:33:3833 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 166.360 ms[39m
+2026-06-04 15:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 15:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 15:18:22:1822 [37mdebug[39m: [37m[Request Start] OPTIONS /api/sales-leads/1/onboard | Origin: http://localhost:5173[39m
+2026-06-04 15:18:22:1822 [37mdebug[39m: [37m[Request End] OPTIONS /api/sales-leads/1/onboard took 2ms[39m
+2026-06-04 15:18:22:1822 [37mdebug[39m: [37m[Request Start] POST /api/sales-leads/1/onboard | Origin: http://localhost:5173[39m
+2026-06-04 15:18:22:1822 [32minfo[39m: [32mOnboarding sales lead 1 with courseId: 6, plan: one-time, price: 25000, paid: 25000[39m
+2026-06-04 15:18:22:1822 [32minfo[39m: [32mCreating student account for relationshipgoals.ng@gmail.com during manual onboarding...[39m
+2026-06-04 15:18:24:1824 [32minfo[39m: [32mSuccessfully onboarded lead 1 (Student ID: 73, Enrollment ID: 8)[39m
+2026-06-04 15:18:24:1824 [33mwarn[39m: [33m[SLOW REQUEST] POST /1/onboard took 1859ms[39m
+2026-06-04 15:18:24:1824 [35mhttp[39m: [35mPOST /api/sales-leads/1/onboard 200 85 - 1858.722 ms[39m
+2026-06-04 15:18:24:1824 [37mdebug[39m: [37m[Request Start] OPTIONS /api/sales-leads | Origin: http://localhost:5173[39m
+2026-06-04 15:18:24:1824 [37mdebug[39m: [37m[Request End] OPTIONS /api/sales-leads took 1ms[39m
+2026-06-04 15:18:24:1824 [37mdebug[39m: [37m[Request Start] GET /api/sales-leads | Origin: http://localhost:5173[39m
+2026-06-04 15:18:24:1824 [37mdebug[39m: [37m[Request End] GET / took 194ms[39m
+2026-06-04 15:18:24:1824 [35mhttp[39m: [35mGET /api/sales-leads 200 2051 - 193.254 ms[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/login took 2ms[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request Start] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request End] POST /login took 586ms[39m
+2026-06-04 15:28:47:2847 [35mhttp[39m: [35mPOST /api/auth/login 200 762 - 588.203 ms[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-06-04 15:28:47:2847 [32minfo[39m: [32mUser 73 connected with socket grAgNsdPbIsqwskyAAAD[39m
+2026-06-04 15:28:47:2847 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 15:28:48:2848 [37mdebug[39m: [37m[Request End] GET /courses took 150ms[39m
+2026-06-04 15:28:48:2848 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 149.426 ms[39m
+2026-06-04 15:29:04:294 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-06-04 15:29:04:294 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 1ms[39m
+2026-06-04 15:29:04:294 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-06-04 15:29:04:294 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 366ms[39m
+2026-06-04 15:29:04:294 [35mhttp[39m: [35mGET /api/academy/student/dashboard 200 1001 - 367.469 ms[39m
+2026-06-04 15:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 15:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 1ms[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request End] GET /courses took 188ms[39m
+2026-06-04 15:30:01:301 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 181.417 ms[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request End] GET /me took 234ms[39m
+2026-06-04 15:30:01:301 [35mhttp[39m: [35mGET /api/auth/me 200 338 - 233.348 ms[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-06-04 15:30:01:301 [37mdebug[39m: [37m[Request End] GET /me took 162ms[39m
+2026-06-04 15:30:01:301 [35mhttp[39m: [35mGET /api/auth/me 304 - - 161.728 ms[39m
+2026-06-04 15:30:01:301 [32minfo[39m: [32mUser 73 connected with socket wVuXnyNlDU8w2mzeAAAF[39m
+2026-06-04 15:31:00:310 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6 | Origin: http://localhost:5173[39m
+2026-06-04 15:31:00:310 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6 took 2ms[39m
+2026-06-04 15:31:00:310 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6 | Origin: http://localhost:5173[39m
+2026-06-04 15:31:01:311 [37mdebug[39m: [37m[Request End] GET /student/course/6 took 800ms[39m
+2026-06-04 15:31:01:311 [35mhttp[39m: [35mGET /api/academy/student/course/6 200 870 - 799.712 ms[39m
+2026-06-04 15:31:16:3116 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-06-04 15:31:16:3116 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/dashboard took 1ms[39m
+2026-06-04 15:31:16:3116 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/dashboard | Origin: http://localhost:5173[39m
+2026-06-04 15:31:17:3117 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 331ms[39m
+2026-06-04 15:31:17:3117 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 329.850 ms[39m
+2026-06-04 15:31:29:3129 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 15:31:29:3129 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 2ms[39m
+2026-06-04 15:31:29:3129 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-04 15:31:29:3129 [37mdebug[39m: [37m[Request End] GET /courses took 168ms[39m
+2026-06-04 15:31:29:3129 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 205.856 ms[39m
+2026-06-04 16:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 16:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 16:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 16:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 17:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 17:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 17:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 17:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 18:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 18:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 18:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 18:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 19:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 19:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-04 19:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-04 19:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m

@@ -72,7 +72,7 @@ const SalesLandingPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const target = new Date("2026-06-04T23:59:59").getTime();
+    const target = new Date("2026-06-06T23:59:59").getTime();
     const updateCountdown = () => {
       const now = new Date().getTime();
       const difference = target - now;
