@@ -11400,3 +11400,13 @@
 2026-06-04 19:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
 2026-06-04 19:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
 2026-06-04 19:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-06 12:16:02:162 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-06 12:16:02:162 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-06 12:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-06 12:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-06 12:31:48:3148 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-06-06 12:31:48:3148 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-06-06 12:31:48:3148 [37mdebug[39m: [37m[Request End] GET / took 158ms[39m
+2026-06-06 12:31:48:3148 [35mhttp[39m: [35mGET /api/ads 200 2 - 155.776 ms[39m
+2026-06-06 12:31:49:3149 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1169ms[39m
+2026-06-06 12:31:49:3149 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 1167.021 ms[39m

@@ -671,10 +671,13 @@ const SalesLandingPage: React.FC = () => {
                    <span className="text-white font-black text-sm sm:text-base uppercase tracking-wider">Your Grand Slam Price Today:</span>
                    <div className="text-right">
                       <span className="text-3xl font-serif font-black text-orange-500 tracking-tighter">₦25,000</span>
-                      <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">(Full Stack. Installments Available)</p>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">( <span className="text-[10px] font-serif font-black text-orange-500 ">Installments</span>  Available) </p>
                    </div>
                 </div>
              </div>
+              <div className="text-xs font-black text-orange-600  text-center">
+                      PAY ₦10,000 NOW AND PAY THE REST BY WEEK 6
+              </div>
 
              <div className="text-center">
                 <a 
@@ -959,9 +962,23 @@ const SalesLandingPage: React.FC = () => {
             {[
                { n: 1, t: "Pick Your Plan", d: "Choose how you want to pay to lock in your June 2026 slot." },
                { n: 2, t: "Fill Details", d: "Entry takes 60 seconds. We need your WhatsApp to add you to the group." },
-               { n: 3, t: "Secure Spot", d: "Complete payment to guarantee your seat before they're gone!" }
+               { n: 3, t: "Secure Spot", d: "Complete payment to guarantee your seat before they're gone!" },
+               { 
+                  n: 4, 
+                  t: "Join the Cohort", 
+                  d: "Secure your spot by joining the private cohort group or send your payment screenshot to this WhatsApp number! (08105281572)" 
+                }
             ].map((step, i) => (
-               <div key={i} className="bg-white/5 p-4 sm:p-5 rounded-2xl border border-white/10 flex items-start gap-4 hover:border-orange-500/30 transition-all">
+               <div 
+                  key={i} 
+                  onClick={() => {
+                     const element = document.getElementById('checkout-panel');
+                     if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                     }
+                  }}
+                  className="bg-white/5 p-4 sm:p-5 rounded-2xl border border-white/10 flex items-start gap-4 hover:border-orange-500/30 hover:bg-white/10 hover:scale-[1.02] cursor-pointer transition-all active:scale-[0.98] select-none"
+               >
                   <div className="h-8 w-8 rounded-lg bg-orange-500 text-white flex items-center justify-center font-black text-sm shrink-0 shadow-lg shadow-orange-500/10">{step.n}</div>
                   <div className="space-y-0.5">
                      <h4 className="text-xs font-black uppercase tracking-tight text-white">{step.t}</h4>
@@ -998,7 +1015,7 @@ const SalesLandingPage: React.FC = () => {
           </div>
 
           {/* Checkout Core Form Panel */}
-          <div className="bg-white text-slate-900 rounded-[2.5rem] border-t-8 border-orange-600 shadow-2xl overflow-hidden max-w-3xl mx-auto p-6 sm:p-8 text-left grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div id="checkout-panel" className="bg-white text-slate-900 rounded-[2.5rem] border-t-8 border-orange-600 shadow-2xl overflow-hidden max-w-3xl mx-auto p-6 sm:p-8 text-left grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
              {/* Left Column: Plan selection and benefits */}
              <div className="space-y-6">
                 <div className="space-y-2">
@@ -1019,6 +1036,12 @@ const SalesLandingPage: React.FC = () => {
                          Pay Small Small
                       </button>
                    </div>
+                   {
+                    isInstallment &&
+                    <div className="text-xs font-black text-orange-600 text-center">
+                      PAY ₦10,000 NOW AND PAY THE REST BY WEEK 6
+                    </div>
+                   }
                 </div>
 
                 <div className="space-y-1">
@@ -1044,9 +1067,9 @@ const SalesLandingPage: React.FC = () => {
                          </span>
                          <span className="text-slate-400 line-through text-xs font-semibold">₦50,000</span>
                       </div>
-                      <p className="text-slate-500 text-[9px] font-medium mt-1 leading-tight italic">
+                      <p className="text-slate-500 text-[10px] font-medium mt-1 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦15,000 DUE BY WEEK 3. INCLUDES ALL 5 BONUSES)" 
+                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦15,000 DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)" 
                            : "(INCLUDES EXCEL + SQL + POWER BI + AI + MONETIZATION + ALL 5 BONUSES)"}
                       </p>
                    </button>
@@ -1065,9 +1088,9 @@ const SalesLandingPage: React.FC = () => {
                          </span>
                          <span className="text-slate-400 line-through text-xs font-semibold">₦30,000</span>
                       </div>
-                      <p className="text-slate-500 text-[9px] font-medium mt-1 leading-tight italic">
+                      <p className="text-slate-500 text-[10px] font-medium mt-1 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦5,000 DUE BY WEEK 3. NO SQL / POWER BI / LINKEDIN SPRINT)" 
+                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦5,000 DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)" 
                            : "(INCLUDES DATASETS + EXCEL + AI MODULES ONLY. NO SQL / POWER BI / LINKEDIN SPRINT)"}
                       </p>
                    </button>
