@@ -215,6 +215,8 @@ export class AcademyService {
         c.title as course_title, 
         c.thumbnail_url,
         COALESCE(e.custom_price, c.price) as course_price,
+        c.price as base_price,
+        e.custom_price as custom_price,
         c.timetable_url,
         (SELECT COUNT(*) FROM curriculum WHERE course_id = c.id) as total_topics,
         (SELECT COUNT(*) FROM curriculum_progress cp 

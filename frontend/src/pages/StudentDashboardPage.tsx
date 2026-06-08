@@ -6,7 +6,7 @@ import {
   Book, PlayCircle, FileText, Lock, Calendar,
   CreditCard, MessageSquare, TrendingUp, Clock,
   CheckCircle2, ChevronRight, ArrowRight, Loader2, X,
-  WalletCards, Sparkles, Users,
+  WalletCards, Sparkles, Users, GraduationCap,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import Modal from "../components/Modal";
@@ -319,6 +319,14 @@ const StudentDashboardPage: React.FC = () => {
                 const remaining   = Math.max(0, coursePrice - totalPaid);
                 const fullyPaid   = remaining <= 0 || instPaid >= instTotal;
 
+                // Scholarship detection
+                const basePrice   = Number(enrollment.base_price) || 0;
+                const customPrice = enrollment.custom_price !== null && enrollment.custom_price !== undefined ? Number(enrollment.custom_price) : null;
+                const hasScholarship = customPrice !== null && basePrice > 0 && customPrice < basePrice;
+                const scholarshipSavings = hasScholarship ? basePrice - customPrice! : 0;
+                const scholarshipPct = hasScholarship && basePrice > 0 ? Math.round((scholarshipSavings / basePrice) * 100) : 0;
+                const isFullScholarship = hasScholarship && customPrice === 0;
+
                 return (
                   <div key={enrollment.id} className="relative group bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
 
@@ -337,6 +345,30 @@ const StudentDashboardPage: React.FC = () => {
                           >
                             <WalletCards className="h-3.5 w-3.5" /> PAY NOW
                           </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Scholarship Banner */}
+                    {hasScholarship && (
+                      <div className={`flex items-center gap-2 px-4 py-2.5 ${
+                        isFullScholarship
+                          ? "bg-gradient-to-r from-violet-600 to-indigo-600"
+                          : "bg-gradient-to-r from-amber-500 to-orange-500"
+                      } text-white`}>
+                        <GraduationCap className="h-4 w-4 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[9px] font-black uppercase tracking-[0.2em] opacity-80">
+                            {isFullScholarship ? "Full Scholarship" : `${scholarshipPct}% Scholarship`}
+                          </p>
+                          {!isFullScholarship && (
+                            <p className="text-[10px] font-black">
+                              Saving {formatCurrency(scholarshipSavings)} · You pay {formatCurrency(customPrice!)}
+                            </p>
+                          )}
+                          {isFullScholarship && (
+                            <p className="text-[10px] font-black">100% covered — No payment required</p>
+                          )}
                         </div>
                       </div>
                     )}

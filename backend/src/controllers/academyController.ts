@@ -410,7 +410,9 @@ export class AcademyController {
         `SELECT e.id as enrollment_id, u.id as student_id, u.first_name as student_first_name, u.last_name as student_last_name, 
                 c.id as course_id, c.title as course_title, e.status, e.payment_plan, 
                 t.id as tutor_id, t.first_name as tutor_first_name, t.last_name as tutor_last_name,
-                e.next_payment_due, e.created_at, e.total_paid
+                e.next_payment_due, e.created_at, e.total_paid,
+                e.custom_price, c.price as base_price, e.portal_locked, e.cohort,
+                u.email as student_email
          FROM enrollments e
          JOIN users u ON e.student_id = u.id
          JOIN courses c ON e.course_id = c.id

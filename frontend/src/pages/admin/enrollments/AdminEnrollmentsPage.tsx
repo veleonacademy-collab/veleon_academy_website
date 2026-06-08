@@ -4,7 +4,7 @@ import { academyApi } from "../../../api/academy";
 import { BackButton } from "../../../components/ui/BackButton";
 import { formatCurrency, formatDate } from "../../../utils/formatUtils";
 import toast from "react-hot-toast";
-import { Calendar, Filter, ArrowUpDown, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Calendar, Filter, ArrowUpDown, AlertCircle, CheckCircle2, GraduationCap } from "lucide-react";
 
 const AdminEnrollmentsPage: React.FC = () => {
   const [selectedCourseId, setSelectedCourseId] = useState<number | undefined>();
@@ -12,6 +12,7 @@ const AdminEnrollmentsPage: React.FC = () => {
   const [dueFilter, setDueFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"date" | "due">("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [scholarshipFilter, setScholarshipFilter] = useState<string>("all");
 
   const queryClient = useQueryClient();
 
@@ -45,6 +46,17 @@ const AdminEnrollmentsPage: React.FC = () => {
     .filter((s: any) => {
       const planMatch = planFilter === "all" || s.payment_plan === planFilter;
       
+      // Scholarship filter
+      const basePrice   = Number(s.base_price) || 0;
+      const customPrice = s.custom_price !== null && s.custom_price !== undefined ? Number(s.custom_price) : null;
+      const hasScholarship = customPrice !== null && basePrice > 0 && customPrice < basePrice;
+      const isFullScholarship = hasScholarship && customPrice === 0;
+      let scholarshipMatch = true;
+      if (scholarshipFilter === "full") scholarshipMatch = isFullScholarship;
+      else if (scholarshipFilter === "partial") scholarshipMatch = hasScholarship && !isFullScholarship;
+      else if (scholarshipFilter === "scholarship") scholarshipMatch = hasScholarship;
+      else if (scholarshipFilter === "none") scholarshipMatch = !hasScholarship;
+
       let dueMatch = true;
       if (dueFilter !== "all" && s.payment_plan === 'installment') {
         const dueDate = s.next_payment_due ? new Date(s.next_payment_due) : null;
@@ -63,7 +75,7 @@ const AdminEnrollmentsPage: React.FC = () => {
         dueMatch = false; // Only installments have due dates
       }
 
-      return planMatch && dueMatch;
+      return planMatch && dueMatch && scholarshipMatch;
     })
     .sort((a: any, b: any) => {
       if (sortBy === "date") {
@@ -151,6 +163,21 @@ const AdminEnrollmentsPage: React.FC = () => {
             </select>
           </div>
 
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Scholarship</label>
+            <select 
+              className="w-full rounded-2xl border border-gray-200 px-4 py-3 text-sm font-bold focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all bg-white"
+              value={scholarshipFilter}
+              onChange={(e) => setScholarshipFilter(e.target.value)}
+            >
+              <option value="all">All Students</option>
+              <option value="scholarship">On Scholarship</option>
+              <option value="full">Full Scholarship</option>
+              <option value="partial">Partial Scholarship</option>
+              <option value="none">No Scholarship</option>
+            </select>
+          </div>
+
           <div className="flex items-end">
              <button 
                 onClick={() => toggleSort("date")}
@@ -171,6 +198,7 @@ const AdminEnrollmentsPage: React.FC = () => {
                 <th className="px-6 py-4">Student</th>
                 <th className="px-6 py-4">Course</th>
                 <th className="px-6 py-4">Plan & Status</th>
+                <th className="px-6 py-4">Scholarship</th>
                 <th className="px-6 py-4">Portal</th>
                 <th className="px-6 py-4">Tutor</th>
                 <th className="px-6 py-4 text-right">Total Paid</th>
@@ -180,7 +208,7 @@ const AdminEnrollmentsPage: React.FC = () => {
             <tbody className="divide-y divide-gray-100">
               {isLoading && (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">Loading students...</td>
+                  <td colSpan={8} className="px-6 py-8 text-center text-gray-500">Loading students...</td>
                 </tr>
               )}
               {filteredAndSortedStudents.map((s: any) => {
@@ -208,6 +236,31 @@ const AdminEnrollmentsPage: React.FC = () => {
                              </span>
                           )}
                        </div>
+                    </td>
+                    {/* Scholarship cell */}
+                    <td className="px-6 py-5">
+                      {(() => {
+                        const bp = Number(s.base_price) || 0;
+                        const cp = s.custom_price !== null && s.custom_price !== undefined ? Number(s.custom_price) : null;
+                        const isFull = cp !== null && cp === 0 && bp > 0;
+                        const isPartial = cp !== null && bp > 0 && cp > 0 && cp < bp;
+                        const pct = isPartial ? Math.round(((bp - cp!) / bp) * 100) : 0;
+                        const savings = isPartial ? bp - cp! : 0;
+                        if (isFull) return (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest bg-violet-50 text-violet-600 border border-violet-200">
+                            <GraduationCap className="h-3 w-3" /> Full
+                          </span>
+                        );
+                        if (isPartial) return (
+                          <div className="flex flex-col gap-0.5">
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-amber-50 text-amber-600 border border-amber-200">
+                              <GraduationCap className="h-3 w-3" /> {pct}% Off
+                            </span>
+                            <span className="text-[9px] text-gray-400 font-bold px-1">Saves {formatCurrency(savings)}</span>
+                          </div>
+                        );
+                        return <span className="text-gray-300 text-xs font-bold">—</span>;
+                      })()}
                     </td>
                     <td className="px-6 py-5">
                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
@@ -244,7 +297,7 @@ const AdminEnrollmentsPage: React.FC = () => {
               })}
               {filteredAndSortedStudents.length === 0 && !isLoading && (
                  <tr>
-                    <td colSpan={6} className="px-6 py-8 text-center text-gray-500">No enrollments found.</td>
+                    <td colSpan={8} className="px-6 py-8 text-center text-gray-500">No enrollments found.</td>
                  </tr>
               )}
             </tbody>
