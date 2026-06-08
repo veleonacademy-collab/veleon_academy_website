@@ -9,6 +9,7 @@ export interface Course {
   createdAt: string;
   updatedAt: string;
   timetable_url?: string;
+  cohort?: string | null;
 }
 
 export interface Enrollment {

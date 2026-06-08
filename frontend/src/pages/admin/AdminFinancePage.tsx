@@ -160,7 +160,7 @@ const AdminFinancePage: React.FC = () => {
 
         <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full min-w-[800px] text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50/50 border-b border-gray-100">
                   <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">Student & Course</th>

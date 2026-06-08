@@ -5,7 +5,7 @@ import { BackButton } from "../../components/ui/BackButton";
 import toast from "react-hot-toast";
 import { academyApi } from "../../api/academy";
 import Modal from "../../components/Modal";
-import { Book, Plus, Trash2 } from "lucide-react";
+import { Book, Plus, Trash2, UserPlus } from "lucide-react";
 
 const AdminUsersPage: React.FC = () => {
   const queryClient = useQueryClient();
@@ -13,6 +13,11 @@ const AdminUsersPage: React.FC = () => {
   const { data: users, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsers,
+  });
+
+  const { data: allCourses } = useQuery({
+    queryKey: ["all-courses"],
+    queryFn: () => academyApi.getCourses({ all: true }),
   });
 
   const roleMutation = useMutation({
@@ -26,15 +31,98 @@ const AdminUsersPage: React.FC = () => {
   const [selectedTutor, setSelectedTutor] = React.useState<{ id: number; name: string } | null>(null);
   const [isCourseModalOpen, setIsCourseModalOpen] = React.useState(false);
 
+  // States for manual enrollment
+  const [selectedUserForEnroll, setSelectedUserForEnroll] = React.useState<{ id: number; name: string } | null>(null);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = React.useState(false);
+  const [enrollCourseId, setEnrollCourseId] = React.useState<string>("");
+  const [enrollCohort, setEnrollCohort] = React.useState<string>("");
+  const [enrollPaymentPlan, setEnrollPaymentPlan] = React.useState<'one-time' | 'installment'>("one-time");
+  const [enrollScholarshipType, setEnrollScholarshipType] = React.useState<"none" | "full" | "percent" | "custom">("none");
+  const [enrollDiscountPercent, setEnrollDiscountPercent] = React.useState<number>(50);
+  const [enrollCustomPrice, setEnrollCustomPrice] = React.useState<string>("");
+  const [enrollAmountPaid, setEnrollAmountPaid] = React.useState<string>("");
+  const [enrollNextPaymentDue, setEnrollNextPaymentDue] = React.useState<string>("");
+  const [enrollInstallmentsTotal, setEnrollInstallmentsTotal] = React.useState<number>(3);
+
+  const resetEnrollForm = () => {
+    setSelectedUserForEnroll(null);
+    setEnrollCourseId("");
+    setEnrollCohort("");
+    setEnrollPaymentPlan("one-time");
+    setEnrollScholarshipType("none");
+    setEnrollDiscountPercent(50);
+    setEnrollCustomPrice("");
+    setEnrollAmountPaid("");
+    setEnrollNextPaymentDue("");
+    setEnrollInstallmentsTotal(3);
+  };
+
+  const enrollUserMutation = useMutation({
+    mutationFn: (payload: {
+      userId: number;
+      courseId: number;
+      cohort?: string;
+      paymentPlan: 'one-time' | 'installment';
+      customPrice?: number;
+      amountPaid?: number;
+      nextPaymentDue?: string;
+      installmentsTotal?: number;
+    }) => academyApi.adminEnrollUser(payload),
+    onSuccess: () => {
+      toast.success("User successfully enrolled in course");
+      setIsEnrollModalOpen(false);
+      resetEnrollForm();
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to enroll user");
+    }
+  });
+
+  const selectedCourseDetails = allCourses?.find((c: any) => c.id.toString() === enrollCourseId);
+
+  const handleEnrollSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedUserForEnroll || !enrollCourseId) {
+      toast.error("Please select a course");
+      return;
+    }
+
+    const coursePrice = selectedCourseDetails ? Number(selectedCourseDetails.price) : 0;
+    let finalCustomPrice = coursePrice;
+    let finalAmountPaid = enrollAmountPaid !== "" ? Number(enrollAmountPaid) : coursePrice;
+
+    if (enrollScholarshipType === "full") {
+      finalCustomPrice = 0;
+      finalAmountPaid = 0;
+    } else if (enrollScholarshipType === "percent") {
+      finalCustomPrice = coursePrice * (1 - enrollDiscountPercent / 100);
+      if (enrollAmountPaid === "") {
+        finalAmountPaid = enrollPaymentPlan === "installment" ? finalCustomPrice / enrollInstallmentsTotal : finalCustomPrice;
+      }
+    } else if (enrollScholarshipType === "custom") {
+      finalCustomPrice = enrollCustomPrice !== "" ? Number(enrollCustomPrice) : coursePrice;
+      if (enrollAmountPaid === "") {
+        finalAmountPaid = enrollPaymentPlan === "installment" ? finalCustomPrice / enrollInstallmentsTotal : finalCustomPrice;
+      }
+    }
+
+    enrollUserMutation.mutate({
+      userId: selectedUserForEnroll.id,
+      courseId: Number(enrollCourseId),
+      cohort: enrollCohort || undefined,
+      paymentPlan: enrollScholarshipType === "full" ? "one-time" : enrollPaymentPlan,
+      customPrice: finalCustomPrice,
+      amountPaid: finalAmountPaid,
+      nextPaymentDue: enrollPaymentPlan === "installment" && enrollNextPaymentDue ? enrollNextPaymentDue : undefined,
+      installmentsTotal: enrollPaymentPlan === "installment" ? enrollInstallmentsTotal : undefined,
+    });
+  };
+
   const { data: tutorCourses, refetch: refetchTutorCourses } = useQuery({
     queryKey: ["tutor-courses-admin", selectedTutor?.id],
     queryFn: () => selectedTutor ? academyApi.adminGetTutorCourses(selectedTutor.id) : Promise.resolve([]),
     enabled: !!selectedTutor,
-  });
-
-  const { data: allCourses } = useQuery({
-    queryKey: ["all-courses"],
-    queryFn: () => academyApi.getCourses({ all: true }),
   });
 
   const assignCourseMutation = useMutation({
@@ -73,8 +161,9 @@ const AdminUsersPage: React.FC = () => {
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[1000px] text-left text-sm">
+            <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
             <tr>
               <th className="px-6 py-4">User</th>
               <th className="px-6 py-4">Email</th>
@@ -153,11 +242,24 @@ const AdminUsersPage: React.FC = () => {
                         <Book className="h-4 w-4" />
                       </button>
                     )}
+                     {u.role !== 'tutor' && (
+                       <button
+                         onClick={() => {
+                           setSelectedUserForEnroll({ id: u.id, name: `${u.firstName} ${u.lastName}` });
+                           setIsEnrollModalOpen(true);
+                         }}
+                         className="p-2 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors"
+                         title="Enroll in Course"
+                       >
+                         <UserPlus className="h-4 w-4" />
+                       </button>
+                     )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
         {isLoading && <div className="p-8 text-center text-gray-400">Loading users...</div>}
       </div>
 
@@ -203,7 +305,7 @@ const AdminUsersPage: React.FC = () => {
                       {u.status === 'active' ? 'DISABLE' : 'ENABLE'}
                    </button>
                </div>
-               {u.role === 'tutor' && (
+                {u.role === 'tutor' && (
                   <button
                     onClick={() => {
                       setSelectedTutor({ id: u.id, name: `${u.firstName} ${u.lastName}` });
@@ -212,6 +314,17 @@ const AdminUsersPage: React.FC = () => {
                     className="w-full mt-2 flex items-center justify-center gap-2 py-2 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-blue-100 transition-colors"
                   >
                     <Book className="h-4 w-4" /> Manage Courses
+                  </button>
+                )}
+                {u.role !== 'tutor' && (
+                  <button
+                    onClick={() => {
+                      setSelectedUserForEnroll({ id: u.id, name: `${u.firstName} ${u.lastName}` });
+                      setIsEnrollModalOpen(true);
+                    }}
+                    className="w-full mt-2 flex items-center justify-center gap-2 py-2 bg-emerald-50 text-emerald-600 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-emerald-100 transition-colors"
+                  >
+                    <UserPlus className="h-4 w-4" /> Enroll in Course
                   </button>
                 )}
                <div className="pt-3 border-t border-gray-50 flex items-center justify-between">
@@ -277,6 +390,291 @@ const AdminUsersPage: React.FC = () => {
             </div>
           </div>
         </div>
+      </Modal>
+
+      {/* Enroll User in Course Modal */}
+      <Modal
+        isOpen={isEnrollModalOpen}
+        onClose={() => {
+          setIsEnrollModalOpen(false);
+          resetEnrollForm();
+        }}
+        title={`Enroll Student in Course: ${selectedUserForEnroll?.name}`}
+      >
+        <form onSubmit={handleEnrollSubmit} className="space-y-5 py-4">
+          {/* Select Course */}
+          <div className="space-y-1">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Select Course</label>
+            <select
+              value={enrollCourseId}
+              onChange={(e) => {
+                setEnrollCourseId(e.target.value);
+                setEnrollCustomPrice("");
+                setEnrollAmountPaid("");
+              }}
+              required
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none"
+            >
+              <option value="">-- Select Course --</option>
+              {allCourses?.map((course: any) => (
+                <option key={course.id} value={course.id}>
+                  {course.title} ({Number(course.price).toLocaleString()} NGN)
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {enrollCourseId && selectedCourseDetails && (
+            <>
+              {/* Cohort input */}
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Cohort Name</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Cohort A, Jan 2026"
+                  value={enrollCohort}
+                  onChange={(e) => setEnrollCohort(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none"
+                />
+              </div>
+
+              {/* Scholarship selection */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Scholarship / Price Option</label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEnrollScholarshipType("none");
+                      setEnrollPaymentPlan("one-time");
+                    }}
+                    className={`rounded-xl border p-2.5 text-center text-xs font-semibold transition-colors ${
+                      enrollScholarshipType === "none"
+                        ? "border-primary bg-primary/5 text-primary"
+                        : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    No Scholarship (Full Price)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEnrollScholarshipType("full");
+                      setEnrollPaymentPlan("one-time");
+                    }}
+                    className={`rounded-xl border p-2.5 text-center text-xs font-semibold transition-colors ${
+                      enrollScholarshipType === "full"
+                        ? "border-emerald-500 bg-emerald-50 text-emerald-700"
+                        : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    Full Scholarship (100% Free)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEnrollScholarshipType("percent");
+                    }}
+                    className={`rounded-xl border p-2.5 text-center text-xs font-semibold transition-colors ${
+                      enrollScholarshipType === "percent"
+                        ? "border-blue-500 bg-blue-50 text-blue-700"
+                        : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    Percentage Scholarship
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEnrollScholarshipType("custom");
+                    }}
+                    className={`rounded-xl border p-2.5 text-center text-xs font-semibold transition-colors ${
+                      enrollScholarshipType === "custom"
+                        ? "border-purple-500 bg-purple-50 text-purple-700"
+                        : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    Custom Pricing
+                  </button>
+                </div>
+              </div>
+
+              {/* Conditionally show percentage discount options */}
+              {enrollScholarshipType === "percent" && (
+                <div className="space-y-1 rounded-xl bg-slate-50 p-3 border border-slate-100">
+                  <label className="text-xs font-bold text-slate-600">Discount Percentage (%)</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      max="99"
+                      value={enrollDiscountPercent}
+                      onChange={(e) => setEnrollDiscountPercent(Number(e.target.value) || 0)}
+                      className="w-24 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm focus:outline-none"
+                    />
+                    <div className="flex items-center text-xs text-slate-500">
+                      Original: {Number(selectedCourseDetails.price).toLocaleString()} NGN → 
+                      <span className="font-bold text-blue-600 ml-1">
+                        {(Number(selectedCourseDetails.price) * (1 - enrollDiscountPercent / 100)).toLocaleString()} NGN
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Conditionally show custom price options */}
+              {enrollScholarshipType === "custom" && (
+                <div className="space-y-1 rounded-xl bg-slate-50 p-3 border border-slate-100">
+                  <label className="text-xs font-bold text-slate-600">Custom Course Price (NGN)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={enrollCustomPrice}
+                    onChange={(e) => setEnrollCustomPrice(e.target.value)}
+                    placeholder={Number(selectedCourseDetails.price).toString()}
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm focus:outline-none"
+                  />
+                </div>
+              )}
+
+              {/* Display Computed Price & Payment Plan / Paid Upfront configuration (for non-full scholarship) */}
+              {enrollScholarshipType !== "full" && (
+                <>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Payment Plan</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setEnrollPaymentPlan("one-time")}
+                        className={`rounded-xl border p-2 text-center text-xs font-semibold transition-colors ${
+                          enrollPaymentPlan === "one-time"
+                            ? "border-primary bg-primary/5 text-primary"
+                            : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                        }`}
+                      >
+                        One-Time Payment
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setEnrollPaymentPlan("installment")}
+                        className={`rounded-xl border p-2 text-center text-xs font-semibold transition-colors ${
+                          enrollPaymentPlan === "installment"
+                            ? "border-primary bg-primary/5 text-primary"
+                            : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+                        }`}
+                      >
+                        Installment Plan
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 rounded-xl bg-slate-50 p-4 border border-slate-100">
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-slate-600">Upfront Amount Paid (NGN)</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={enrollAmountPaid}
+                        onChange={(e) => setEnrollAmountPaid(e.target.value)}
+                        placeholder="Leave blank for full upfront payment"
+                        className="w-full rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm focus:outline-none"
+                      />
+                      <span className="text-[10px] text-slate-400 block">
+                        How much payment should be manually logged as already received right now.
+                      </span>
+                    </div>
+
+                    {enrollPaymentPlan === "installment" && (
+                      <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-200/60">
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold text-slate-600">Total Installments</label>
+                          <select
+                            value={enrollInstallmentsTotal}
+                            onChange={(e) => setEnrollInstallmentsTotal(Number(e.target.value))}
+                            className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm focus:outline-none"
+                          >
+                            <option value={2}>2 Installments</option>
+                            <option value={3}>3 Installments</option>
+                            <option value={4}>4 Installments</option>
+                          </select>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-bold text-slate-600">Next Installment Due</label>
+                          <input
+                            type="date"
+                            value={enrollNextPaymentDue}
+                            onChange={(e) => setEnrollNextPaymentDue(e.target.value)}
+                            className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm focus:outline-none"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {/* Information Summary */}
+              <div className="rounded-xl bg-emerald-50/50 border border-emerald-100 p-3 text-xs text-emerald-800 space-y-1">
+                <span className="font-bold uppercase tracking-wider block text-[10px]">Enrollment Summary:</span>
+                <div>
+                  Student: <span className="font-semibold text-slate-900">{selectedUserForEnroll?.name}</span>
+                </div>
+                <div>
+                  Course: <span className="font-semibold text-slate-900">{selectedCourseDetails.title}</span>
+                </div>
+                <div>
+                  Final Cost: <span className="font-semibold text-slate-900">
+                    {enrollScholarshipType === "full"
+                      ? "0 NGN (100% Scholarship)"
+                      : `${(enrollScholarshipType === "percent"
+                          ? Number(selectedCourseDetails.price) * (1 - enrollDiscountPercent / 100)
+                          : enrollScholarshipType === "custom" && enrollCustomPrice !== ""
+                          ? Number(enrollCustomPrice)
+                          : Number(selectedCourseDetails.price)
+                        ).toLocaleString()} NGN`}
+                  </span>
+                </div>
+                <div>
+                  Plan: <span className="font-semibold text-slate-900">{enrollScholarshipType === "full" ? "one-time" : enrollPaymentPlan}</span>
+                </div>
+                <div>
+                  Paid Upfront: <span className="font-semibold text-slate-900">
+                    {enrollScholarshipType === "full"
+                      ? "0 NGN"
+                      : `${(enrollAmountPaid !== ""
+                          ? Number(enrollAmountPaid)
+                          : enrollScholarshipType === "percent"
+                          ? Number(selectedCourseDetails.price) * (1 - enrollDiscountPercent / 100)
+                          : enrollScholarshipType === "custom" && enrollCustomPrice !== ""
+                          ? Number(enrollCustomPrice)
+                          : Number(selectedCourseDetails.price)
+                        ).toLocaleString()} NGN`}
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() => {
+                setIsEnrollModalOpen(false);
+                resetEnrollForm();
+              }}
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:bg-slate-50 rounded-xl"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={enrollUserMutation.isPending || !enrollCourseId}
+              className="px-5 py-2 text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary/90 disabled:opacity-50 rounded-xl"
+            >
+              {enrollUserMutation.isPending ? "Enrolling..." : "Enroll Student"}
+            </button>
+          </div>
+        </form>
       </Modal>
     </div>
   );

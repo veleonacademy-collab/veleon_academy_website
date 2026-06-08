@@ -295,7 +295,8 @@ const AdminCustomersPage: React.FC = () => {
 
       {/* Desktop Table */}
       <div className="hidden md:block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <table className="w-full text-left text-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[900px] text-left text-sm">
           <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
             <tr>
               <th className="px-6 py-4">Name</th>
@@ -345,6 +346,7 @@ const AdminCustomersPage: React.FC = () => {
             ))}
           </tbody>
         </table>
+        </div>
         {isLoading && <div className="p-8 text-center text-gray-400">Loading customers...</div>}
         {customers?.length === 0 && !isLoading && <div className="p-8 text-center text-gray-400">No customers found.</div>}
       </div>

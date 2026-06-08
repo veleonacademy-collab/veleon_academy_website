@@ -391,63 +391,65 @@ const AdminCategoriesPage: React.FC = () => {
 
         {/* Desktop Table */}
         <div className="hidden md:block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
-              <tr>
-                <th className="px-6 py-4">Field Name</th>
-                <th className="px-6 py-4">Display Name</th>
-                <th className="px-6 py-4">Unit</th>
-                <th className="px-6 py-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {fieldsLoading ? (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[700px] text-left text-sm">
+              <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
                 <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-gray-400">
-                    Loading measurement fields...
-                  </td>
+                  <th className="px-6 py-4">Field Name</th>
+                  <th className="px-6 py-4">Display Name</th>
+                  <th className="px-6 py-4">Unit</th>
+                  <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
-              ) : measurementFields.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-gray-400">
-                    No measurement fields yet. Add one to get started.
-                  </td>
-                </tr>
-              ) : (
-                measurementFields.map((field: MeasurementField) => (
-                  <tr key={field.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 font-mono text-xs text-gray-600">
-                      {field.fieldName}
-                    </td>
-                    <td className="px-6 py-4 font-bold text-gray-900">
-                      {field.displayName}
-                    </td>
-                    <td className="px-6 py-4 text-gray-600">{field.unit}</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="flex justify-end gap-3">
-                        <button
-                          onClick={() => handleEditField(field)}
-                          className="text-primary hover:text-primary/80 text-sm font-medium"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => {
-                            if (confirm(`Delete field "${field.displayName}"?`)) {
-                              deleteFieldMutation.mutate(field.id);
-                            }
-                          }}
-                          className="text-red-600 hover:text-red-800 text-sm font-medium"
-                        >
-                          Delete
-                        </button>
-                      </div>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {fieldsLoading ? (
+                  <tr>
+                    <td colSpan={4} className="px-6 py-8 text-center text-gray-400">
+                      Loading measurement fields...
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : measurementFields.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="px-6 py-8 text-center text-gray-400">
+                      No measurement fields yet. Add one to get started.
+                    </td>
+                  </tr>
+                ) : (
+                  measurementFields.map((field: MeasurementField) => (
+                    <tr key={field.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4 font-mono text-xs text-gray-600">
+                        {field.fieldName}
+                      </td>
+                      <td className="px-6 py-4 font-bold text-gray-900">
+                        {field.displayName}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600">{field.unit}</td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex justify-end gap-3">
+                          <button
+                            onClick={() => handleEditField(field)}
+                            className="text-primary hover:text-primary/80 text-sm font-medium"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (confirm(`Delete field "${field.displayName}"?`)) {
+                                deleteFieldMutation.mutate(field.id);
+                              }
+                            }}
+                            className="text-red-600 hover:text-red-800 text-sm font-medium"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* Mobile View */}

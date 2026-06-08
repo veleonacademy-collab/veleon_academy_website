@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
 import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail } from "lucide-react";
@@ -57,10 +57,12 @@ const renderDescriptionWithLinks = (text: string) => {
 const CourseDetailPage: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const id = parseInt(courseId || "0");
+  const [searchParams] = useSearchParams();
+  const cohort = searchParams.get("cohort") || undefined;
 
   const { data: details, isLoading } = useQuery({
-    queryKey: ["course-details", id],
-    queryFn: () => academyApi.getCourseDetails(id),
+    queryKey: ["course-details", id, cohort],
+    queryFn: () => academyApi.getCourseDetails(id, cohort),
     enabled: !!id,
   });
 
@@ -76,13 +78,19 @@ const CourseDetailPage: React.FC = () => {
 
   const isVerified = user?.isEmailVerified;
 
+  const backPath = user?.role === 'tutor' 
+    ? "/tutor/dashboard" 
+    : user?.role === 'admin' 
+    ? "/admin/dashboard" 
+    : "/student/dashboard";
+
   if (isLoading) return <div className="py-20 text-center font-bold text-slate-400">Loading course...</div>;
 
   if (!details && !isLoading) {
     return (
       <div className="py-20 text-center text-slate-500">
         <p className="text-xl font-bold">Course access denied or not found.</p>
-        <Link to="/student/dashboard" className="text-primary hover:underline text-sm mt-4 inline-block">
+        <Link to={backPath} className="text-primary hover:underline text-sm mt-4 inline-block">
           ← Back to Dashboard
         </Link>
       </div>
@@ -99,7 +107,7 @@ const CourseDetailPage: React.FC = () => {
       />
       {/* Back */}
       <Link
-        to="/student/dashboard"
+        to={backPath}
         className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -119,7 +127,7 @@ const CourseDetailPage: React.FC = () => {
         <div className="flex-1 flex flex-col md:flex-row justify-between items-start gap-6 w-full">
           <div className="space-y-3">
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">
-              {course?.title}
+              {course?.title} {cohort ? `(${cohort})` : ""}
             </h1>
             <p className="text-slate-500 max-w-xl">{course?.description}</p>
             {enrollment?.paymentPlan && (

@@ -116,6 +116,13 @@ academyRouter.post(
   AcademyController.adminAssignTutorCourse
 );
 
+academyRouter.post(
+  "/admin/enroll-user",
+  authenticate,
+  requireRole(["admin"]),
+  AcademyController.adminEnrollUser
+);
+
 academyRouter.get(
   "/admin/tutor-courses/:tutorId",
   authenticate,

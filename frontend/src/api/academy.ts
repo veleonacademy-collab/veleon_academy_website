@@ -32,19 +32,19 @@ export const academyApi = {
   createComplaint: (data: { courseId?: number; subject: string; message: string }) => 
     http.post("/academy/student/complaints", data).then(r => r.data),
 
-  getCourseDetails: (courseId: number) => http.get<{
+  getCourseDetails: (courseId: number, cohort?: string) => http.get<{
     enrollment: Enrollment;
     course: Course;
     recordings: ClassRecording[];
     assignments: Assignment[];
     curriculum: any[];
-  }>(`/academy/student/course/${courseId}`).then(r => r.data),
+  }>(`/academy/student/course/${courseId}`, { params: cohort ? { cohort } : undefined }).then(r => r.data),
 
   // Tutor
-  addRecording: (data: { courseId: number; title: string; videoUrl: string }) => 
+  addRecording: (data: { courseId: number; title: string; videoUrl: string; cohort?: string }) => 
     http.post<ClassRecording>("/academy/tutor/recordings", data).then(r => r.data),
 
-  createAssignment: (data: { courseId: number; title: string; description: string; fileUrl?: string; dueDate?: string }) => 
+  createAssignment: (data: { courseId: number; title: string; description: string; fileUrl?: string; dueDate?: string; cohort?: string }) => 
     http.post<Assignment>("/academy/tutor/assignments", data).then(r => r.data),
 
   getTutorStudents: () => http.get<any[]>("/academy/tutor/students").then(r => r.data),
@@ -116,4 +116,15 @@ export const academyApi = {
     cohort?: string;
     nextPaymentDue?: string;
   }) => http.post(`/sales-leads/${leadId}/onboard`, data).then(r => r.data),
+
+  adminEnrollUser: (data: {
+    userId: number;
+    courseId: number;
+    cohort?: string;
+    paymentPlan: 'one-time' | 'installment';
+    customPrice?: number;
+    amountPaid?: number;
+    nextPaymentDue?: string;
+    installmentsTotal?: number;
+  }) => http.post("/academy/admin/enroll-user", data).then(r => r.data),
 };

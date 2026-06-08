@@ -143,7 +143,7 @@ const AdminSalesLeadsPage: React.FC = () => {
 
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+          <table className="w-full min-w-[1100px] text-left text-sm">
             <thead className="bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500">
               <tr>
                 <th className="px-6 py-4">Lead Name</th>

@@ -204,8 +204,11 @@ export class AcademyController {
         };
       }
 
-      let cohortFilter: string | undefined = undefined;
-      if (role === 'student' || role === 'user') {
+      let cohortFilter: any = req.query.cohort || undefined;
+      if (cohortFilter === "null" || cohortFilter === "undefined" || cohortFilter === "") {
+        cohortFilter = undefined;
+      }
+      if (!cohortFilter && (role === 'student' || role === 'user')) {
         cohortFilter = enrollment?.cohort || undefined;
       }
 
@@ -276,7 +279,7 @@ export class AcademyController {
     try {
       const tutorId = req.user?.id;
       const result = await pool.query(
-        `SELECT e.id as enrollment_id, e.course_id, c.title as course_title,
+        `SELECT e.id as enrollment_id, e.course_id, c.title as course_title, e.cohort,
                 u.id as student_id, u.first_name, u.last_name, u.email
          FROM enrollments e
          JOIN courses c ON e.course_id = c.id
@@ -294,16 +297,63 @@ export class AcademyController {
     try {
       const tutorId = req.user?.id;
       const result = await pool.query(
-        `SELECT c.*,
-                (SELECT COUNT(*) FROM enrollments e WHERE e.course_id = c.id AND e.tutor_id = $1) as student_count,
-                (SELECT COUNT(*) FROM class_recordings r WHERE r.course_id = c.id AND r.tutor_id = $1) as recording_count,
-                (SELECT COUNT(*) FROM curriculum WHERE course_id = c.id) as total_topics,
-                (SELECT COUNT(*) FROM curriculum_progress cp 
-                 JOIN curriculum curr ON cp.curriculum_id = curr.id
-                 WHERE curr.course_id = c.id AND cp.tutor_id = $1 AND cp.is_completed = true) as completed_topics
-         FROM courses c
-         JOIN tutor_courses tc ON c.id = tc.course_id
-         WHERE tc.tutor_id = $1`,
+        `WITH tutor_course_cohorts AS (
+           SELECT DISTINCT 
+             e.course_id, 
+             e.cohort
+           FROM enrollments e
+           WHERE e.tutor_id = $1
+           
+           UNION
+           
+           SELECT 
+             tc.course_id, 
+             NULL as cohort
+           FROM tutor_courses tc
+           WHERE tc.tutor_id = $1
+         )
+         SELECT 
+           c.id,
+           c.title,
+           c.description,
+           c.price,
+           c.thumbnail_url,
+           c.timetable_url,
+           tcc.cohort,
+           (
+             SELECT COUNT(*) 
+             FROM enrollments e 
+             WHERE e.course_id = c.id 
+               AND e.tutor_id = $1 
+               AND (
+                 (tcc.cohort IS NULL AND e.cohort IS NULL) 
+                 OR (tcc.cohort IS NOT NULL AND e.cohort = tcc.cohort)
+               )
+           ) as student_count,
+           (
+             SELECT COUNT(*) 
+             FROM class_recordings r 
+             WHERE r.course_id = c.id 
+               AND (
+                 (r.tutor_id = $1 AND (r.cohort IS NULL OR r.cohort = tcc.cohort))
+               )
+           ) as recording_count,
+           (
+             SELECT COUNT(*) 
+             FROM curriculum 
+             WHERE course_id = c.id
+           ) as total_topics,
+           (
+             SELECT COUNT(*) 
+             FROM curriculum_progress cp 
+             JOIN curriculum curr ON cp.curriculum_id = curr.id
+             WHERE curr.course_id = c.id 
+               AND cp.tutor_id = $1 
+               AND cp.is_completed = true
+           ) as completed_topics
+         FROM tutor_course_cohorts tcc
+         JOIN courses c ON tcc.course_id = c.id
+         ORDER BY c.title ASC, tcc.cohort ASC`,
         [tutorId]
       );
       res.json(result.rows);
@@ -646,6 +696,106 @@ export class AcademyController {
       
       const result = await pool.query(query, params);
       res.json(result.rows);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async adminEnrollUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { 
+        userId, 
+        courseId, 
+        cohort, 
+        paymentPlan, 
+        customPrice, 
+        amountPaid, 
+        nextPaymentDue,
+        installmentsTotal = 3
+      } = req.body;
+      
+      if (!userId || !courseId) {
+        return res.status(400).json({ message: "userId and courseId are required" });
+      }
+
+      // Check if user exists
+      const userRes = await pool.query("SELECT * FROM users WHERE id = $1", [userId]);
+      if (userRes.rows.length === 0) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Check if course exists
+      const courseRes = await pool.query("SELECT * FROM courses WHERE id = $1", [courseId]);
+      if (courseRes.rows.length === 0) {
+        return res.status(404).json({ message: "Course not found" });
+      }
+      const course = courseRes.rows[0];
+
+      // Final price override
+      const finalPrice = customPrice !== undefined ? Number(customPrice) : Number(course.price);
+
+      // Log manual transaction
+      const providerPaymentId = `manual-admin-${userId}-${Date.now()}`;
+      const txResult = await pool.query(
+        `INSERT INTO transactions (user_id, amount, currency, status, type, provider, provider_payment_id, provider_checkout_id)
+         VALUES ($1, $2, 'NGN', 'succeeded', $3, 'manual', $4, $4) RETURNING id`,
+        [userId, Number(amountPaid) || 0, paymentPlan || 'one-time', providerPaymentId]
+      );
+      const transactionId = txResult.rows[0].id;
+
+      // Enroll student
+      const enrollmentId = await AcademyService.enrollStudent({
+        studentId: userId,
+        courseId,
+        paymentPlan: paymentPlan || 'one-time',
+        amountPaid: Number(amountPaid) || 0,
+        customPrice: finalPrice,
+        cohort: cohort || null,
+        nextPaymentDue: nextPaymentDue || null,
+        installmentsTotal
+      });
+
+      // Link enrollment_id to transaction
+      await pool.query(
+        `UPDATE transactions SET enrollment_id = $1 WHERE id = $2`,
+        [enrollmentId, transactionId]
+      );
+
+      // If installment plan, set up installments
+      if (paymentPlan === "installment") {
+        // Mark first installment as paid
+        await pool.query(
+          `INSERT INTO installments (transaction_id, installment_number, total_installments, amount, due_date, status, provider_payment_id)
+           VALUES ($1, 1, $2, $3, NOW(), 'paid', $4)`,
+          [transactionId, installmentsTotal, Number(amountPaid) || 0, providerPaymentId]
+        );
+
+        // Create remaining pending installments
+        const remainingInstallments = installmentsTotal - 1;
+        if (remainingInstallments > 0) {
+          let remainingAmount = finalPrice - (Number(amountPaid) || 0);
+          if (remainingAmount < 0) remainingAmount = 0;
+          const perInstallmentAmount = remainingAmount / remainingInstallments;
+          const daysPerInstallment = Math.floor(90 / installmentsTotal);
+
+          for (let i = 2; i <= installmentsTotal; i++) {
+            const dueDate = new Date();
+            if (i === 2 && nextPaymentDue) {
+              dueDate.setTime(Date.parse(nextPaymentDue));
+            } else {
+              dueDate.setDate(dueDate.getDate() + (daysPerInstallment * (i - 1)));
+            }
+
+            await pool.query(
+              `INSERT INTO installments (transaction_id, installment_number, total_installments, amount, due_date, status)
+               VALUES ($1, $2, $3, $4, $5, 'pending')`,
+              [transactionId, i, installmentsTotal, perInstallmentAmount, dueDate]
+            );
+          }
+        }
+      }
+
+      res.status(200).json({ message: "User enrolled successfully", enrollmentId });
     } catch (error) {
       next(error);
     }
