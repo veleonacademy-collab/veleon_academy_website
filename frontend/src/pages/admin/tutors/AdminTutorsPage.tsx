@@ -8,8 +8,8 @@ const AdminTutorsPage: React.FC = () => {
   const [selectedCourseId, setSelectedCourseId] = useState<number | undefined>();
 
   const { data: courses } = useQuery({
-    queryKey: ["courses"],
-    queryFn: academyApi.getCourses,
+    queryKey: ["courses", { all: true }],
+    queryFn: () => academyApi.getCourses({ all: true }),
   });
 
   const { data: tutors, isLoading } = useQuery({

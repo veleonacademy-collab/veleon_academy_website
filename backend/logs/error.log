@@ -363,3 +363,15 @@
 2026-05-28 06:04:32:432 [31merror[39m: [31mError capturing sales lead: relation "sales_leads" does not exist[39m
 2026-05-28 06:04:32:432 [31merror[39m: [31mError handler caught: relation "sales_leads" does not exist[39m
 2026-05-28 06:11:23:1123 [31merror[39m: [31mMigration failed: column "tutor_id" of relation "enrollments" already exists[39m
+2026-06-06 20:34:30:3430 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-06-07 20:24:12:2412 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:25:04:254 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:25:12:2512 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:25:26:2526 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:25:47:2547 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:25:54:2554 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:26:13:2613 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:28:17:2817 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:29:40:2940 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
+2026-06-07 20:30:44:3044 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-06-07 20:30:45:3045 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m

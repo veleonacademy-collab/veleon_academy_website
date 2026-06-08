@@ -16,8 +16,8 @@ const AdminEnrollmentsPage: React.FC = () => {
   const queryClient = useQueryClient();
 
   const { data: courses } = useQuery({
-    queryKey: ["courses"],
-    queryFn: academyApi.getCourses,
+    queryKey: ["courses", { all: true }],
+    queryFn: () => academyApi.getCourses({ all: true }),
   });
 
   const { data: studentsData, isLoading } = useQuery({

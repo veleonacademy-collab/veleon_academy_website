@@ -20,8 +20,8 @@ const EnrollPage: React.FC = () => {
     const [installmentCount, setInstallmentCount] = useState<number>(3);
 
     const { data: courses, isLoading } = useQuery({
-        queryKey: ["courses"],
-        queryFn: academyApi.getCourses,
+        queryKey: ["courses", { all: true }],
+        queryFn: () => academyApi.getCourses({ all: true }),
     });
 
     const course = courses?.find(c => c.slug === slug || c.id.toString() === slug);

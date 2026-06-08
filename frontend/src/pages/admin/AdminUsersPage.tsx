@@ -34,7 +34,7 @@ const AdminUsersPage: React.FC = () => {
 
   const { data: allCourses } = useQuery({
     queryKey: ["all-courses"],
-    queryFn: academyApi.getCourses,
+    queryFn: () => academyApi.getCourses({ all: true }),
   });
 
   const assignCourseMutation = useMutation({

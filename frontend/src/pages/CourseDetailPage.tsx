@@ -6,6 +6,54 @@ import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail } from "luc
 import SEO from "../components/SEO";
 import { useAuth } from "../state/AuthContext";
 
+const renderDescriptionWithLinks = (text: string) => {
+  if (!text) return null;
+
+  // Split by URLs (both http/https and www.)
+  const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/gi;
+  const parts = text.split(urlRegex);
+
+  return parts.map((part, index) => {
+    if (part.match(urlRegex)) {
+      let href = part;
+      if (href.toLowerCase().startsWith("www.")) {
+        href = "https://" + href;
+      }
+      
+      let displayUrl = part;
+      let trailingPunctuation = "";
+      
+      // Strip trailing punctuation from href and displayUrl (e.g. period at the end of sentence)
+      const trailingMatch = part.match(/([.,?!;:]+)$/);
+      if (trailingMatch) {
+        const punctuation = trailingMatch[1];
+        displayUrl = part.slice(0, -punctuation.length);
+        if (part.toLowerCase().startsWith("www.")) {
+          href = "https://" + displayUrl;
+        } else {
+          href = displayUrl;
+        }
+        trailingPunctuation = punctuation;
+      }
+
+      return (
+        <React.Fragment key={index}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline font-semibold break-all"
+          >
+            {displayUrl}
+          </a>
+          {trailingPunctuation}
+        </React.Fragment>
+      );
+    }
+    return part;
+  });
+};
+
 const CourseDetailPage: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const id = parseInt(courseId || "0");
@@ -245,7 +293,7 @@ const CourseDetailPage: React.FC = () => {
                                     </div>
                                  </div>
                              </div>
-                             <p className="text-slate-500 text-xs mb-5 leading-relaxed">{a.description}</p>
+                             <p className="text-slate-500 text-xs mb-5 leading-relaxed whitespace-pre-wrap">{renderDescriptionWithLinks(a.description)}</p>
                              {a.file_url && (
                                 <a href={a.file_url} className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-50 text-slate-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors border border-slate-100">
                                     <FileText className="h-3.5 w-3.5" /> Resource
