@@ -85,11 +85,20 @@ export class AcademyController {
       const courseRes = await pool.query("SELECT title FROM courses WHERE id = $1", [courseId]);
       const courseTitle = courseRes.rows[0]?.title;
 
-      // Notify all enrolled students
-      const studentsRes = await pool.query(
-        "SELECT u.email, u.first_name FROM enrollments e JOIN users u ON e.student_id = u.id WHERE e.course_id = $1",
-        [courseId]
-      );
+      // Notify enrolled students (filter by cohort if provided)
+      const cohortVal = (cohort && cohort !== "null" && cohort !== "undefined" && cohort !== "") ? cohort : null;
+      const studentsQuery = cohortVal
+        ? `SELECT u.email, u.first_name 
+           FROM enrollments e 
+           JOIN users u ON e.student_id = u.id 
+           WHERE e.course_id = $1 AND e.cohort = $2`
+        : `SELECT u.email, u.first_name 
+           FROM enrollments e 
+           JOIN users u ON e.student_id = u.id 
+           WHERE e.course_id = $1`;
+      const studentsParams = cohortVal ? [courseId, cohortVal] : [courseId];
+
+      const studentsRes = await pool.query(studentsQuery, studentsParams);
 
       // Notify all enrolled students (Non-blocking)
       const notifyStudents = async () => {
@@ -128,10 +137,19 @@ export class AcademyController {
         const courseRes = await pool.query("SELECT title FROM courses WHERE id = $1", [courseId]);
         const courseTitle = courseRes.rows[0]?.title || "Course";
 
-        const studentsRes = await pool.query(
-          "SELECT u.email, u.first_name FROM enrollments e JOIN users u ON e.student_id = u.id WHERE e.course_id = $1",
-          [courseId]
-        );
+        const cohortVal = (cohort && cohort !== "null" && cohort !== "undefined" && cohort !== "") ? cohort : null;
+        const studentsQuery = cohortVal
+          ? `SELECT u.email, u.first_name 
+             FROM enrollments e 
+             JOIN users u ON e.student_id = u.id 
+             WHERE e.course_id = $1 AND e.cohort = $2`
+          : `SELECT u.email, u.first_name 
+             FROM enrollments e 
+             JOIN users u ON e.student_id = u.id 
+             WHERE e.course_id = $1`;
+        const studentsParams = cohortVal ? [courseId, cohortVal] : [courseId];
+
+        const studentsRes = await pool.query(studentsQuery, studentsParams);
 
         // Notify all enrolled students (Non-blocking)
         const notifyStudents = async () => {
