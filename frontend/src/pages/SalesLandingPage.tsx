@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { 
@@ -22,16 +22,27 @@ import {
   ArrowDown,
   Wallet
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { WHATSAPP_NUMBER } from '../utils/constants';
 import { http } from '../api/http';
+
 
 declare global {
   interface Window {
     fbq?: any;
     _fbq?: any;
+    clarity?: (...args: any[]) => void;
   }
 }
+
+// Helper: fire a Microsoft Clarity custom event (safe — no-op if Clarity not loaded yet)
+const clarityEvent = (name: string, value?: string) => {
+  try {
+    if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
+      window.clarity('event', name, value);
+    }
+  } catch { /* noop */ }
+};
+
 
 const SalesLandingPage: React.FC = () => {
   const [selectedTrack, setSelectedTrack] = useState<'full' | 'excel_only'>('full');
@@ -42,9 +53,10 @@ const SalesLandingPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 9, hours: 0, minutes: 0, seconds: 0 });
 
-  // Initialize and track Facebook Pixel ONLY for the Sales Landing Page
+  // Load Facebook Pixel deferred (non-blocking) — ONLY for the Sales Landing Page
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    const loadFbPixel = () => {
+      if (typeof window === 'undefined') return;
       if (!window.fbq) {
         (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
           if (f.fbq) return;
@@ -62,14 +74,20 @@ const SalesLandingPage: React.FC = () => {
           s = b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t, s);
         })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
         window.fbq('init', '1016761340778813');
       }
-
-      // Track PageView specifically on landing page mount
       window.fbq('track', 'PageView');
+      clarityEvent('sales_page_view');
+    };
+
+    // Defer to idle time so it doesn't block First Contentful Paint
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(loadFbPixel, { timeout: 3000 });
+    } else {
+      setTimeout(loadFbPixel, 1500);
     }
   }, []);
+
 
   useEffect(() => {
     const target = new Date("2026-06-06T23:59:59").getTime();
@@ -103,13 +121,15 @@ const SalesLandingPage: React.FC = () => {
     }
   }, []);
 
-  const scrollToEnroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+  const scrollToEnroll = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     e.preventDefault();
+    clarityEvent('cta_click_enroll');
     const element = document.getElementById('enroll-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
+  }, []);
+
 
   // Calculate the amount due based on selections
   const getAmountDue = (): number => {
@@ -125,6 +145,9 @@ const SalesLandingPage: React.FC = () => {
     }
 
     setIsSubmitting(true);
+
+    // Track form submission events
+    clarityEvent('lead_form_submit', `${selectedTrack}_${isInstallment ? 'installment' : 'full'}`);
 
     // Track checkout CompleteRegistration event with Meta Pixel
     if (typeof window !== 'undefined' && window.fbq) {
@@ -162,13 +185,32 @@ const SalesLandingPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white selection:bg-orange-500 selection:text-white font-sans overflow-x-hidden">
-      <SEO 
-        title="Master Data Analysis with Excel + SQL + AI: Graduate Job-Ready in 6 Weeks | Veleon Academy" 
-        description="Graduate job-ready in 6 weeks. Master Advanced Excel, SQL database querying, Power BI dashboards, AI analytics tools, and our absolute skill monetization blueprint under Coach Omidoyin Ayodeji."
-      />
+      <div className="min-h-screen bg-[#020617] text-white selection:bg-orange-500 selection:text-white font-sans overflow-x-hidden">
+        <SEO 
+          title="Master Data Analysis with Excel + SQL + AI: Graduate Job-Ready in 6 Weeks | Veleon Academy" 
+          description="Graduate job-ready in 6 weeks. Master Advanced Excel, SQL database querying, Power BI dashboards, AI analytics tools, and our absolute skill monetization blueprint under Coach Omidoyin Ayodeji."
+        />
 
-      {/* Top Banner Urgency & Scarcity */}
+        {/* Inline CSS animations replacing Framer Motion for speed */}
+        <style>{`
+          @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+          @keyframes fadeInUp   { from { opacity: 0; transform: translateY( 20px); } to { opacity: 1; transform: translateY(0); } }
+          @keyframes scaleIn    { from { opacity: 0; transform: scale(0.95);       } to { opacity: 1; transform: scale(1);    } }
+          @keyframes fadeInRight{ from { opacity: 0; transform: translateX(20px);  } to { opacity: 1; transform: translateX(0); } }
+          .anim-fade-down  { animation: fadeInDown  0.6s ease both; }
+          .anim-scale-in   { animation: scaleIn     0.6s ease both; }
+          .anim-fade-up    { animation: fadeInUp    0.6s ease both; }
+          .anim-fade-up-d2 { animation: fadeInUp    0.6s 0.2s ease both; }
+          .anim-fade-up-d3 { animation: fadeInUp    0.6s 0.3s ease both; }
+          .anim-fade-up-d5 { animation: fadeInUp    0.6s 0.5s ease both; }
+          .anim-right-0    { animation: fadeInRight 0.5s ease both; }
+          .anim-right-1    { animation: fadeInRight 0.5s 0.08s ease both; }
+          .anim-right-2    { animation: fadeInRight 0.5s 0.16s ease both; }
+          .anim-right-3    { animation: fadeInRight 0.5s 0.24s ease both; }
+          .anim-right-4    { animation: fadeInRight 0.5s 0.32s ease both; }
+        `}</style>
+
+        {/* Top Banner Urgency & Scarcity */}
       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-2.5 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] relative z-50 flex flex-wrap justify-center items-center gap-2">
         <span>⚠️ June Batch Enrollment Capped to 30 Spots: 23 Secured — Only 7 Seats Left!</span>
         <span className="hidden sm:inline">•</span>
@@ -177,118 +219,96 @@ const SalesLandingPage: React.FC = () => {
         </span>
       </div>
 
-      {/* 1. HERO SECTION (Dream Outcome & Value Equation) */}
-      <section className="relative pt-12 sm:pt-24 pb-16 sm:pb-32 px-4 sm:px-6 overflow-hidden">
-        {/* Background glow highlights */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[300px] sm:h-[600px] bg-orange-500/10 blur-[100px] sm:blur-[150px] rounded-full -z-10" />
-        <div className="absolute top-[20%] right-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-600/10 blur-[100px] rounded-full -z-10" />
+        {/* 1. HERO SECTION (Dream Outcome & Value Equation) */}
+        <section className="relative pt-12 sm:pt-24 pb-16 sm:pb-32 px-4 sm:px-6 overflow-hidden">
+          {/* Background glow highlights */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[300px] sm:h-[600px] bg-orange-500/10 blur-[100px] sm:blur-[150px] rounded-full -z-10" />
+          <div className="absolute top-[20%] right-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-600/10 blur-[100px] rounded-full -z-10" />
 
-        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex justify-center mb-4 sm:mb-8"
-          >
-            <div className="p-1 rounded-2xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-xl border border-white/10">
-              <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-10 sm:h-14 px-4 py-2" />
-            </div>
-          </motion.div>
-
-          <div className="space-y-2">
-            {/* <span className="text-orange-500 text-xs sm:text-sm font-black uppercase tracking-[0.35em] block">
-              M-A-G-I-C PROGRAM ACCELERATOR
-            </span> */}
-            <motion.h1 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight leading-[1.15] text-white"
-              id="hero-heading"
-            >
-              Master Data Analysis: Become a <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500 italic">Job-Ready</span> Pro In 6 Weeks
-            </motion.h1>
-          </div>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-300 text-base sm:text-2xl max-w-3xl mx-auto leading-relaxed font-medium px-2"
-          >
-            Get the technical power of <span className="text-white font-extrabold relative inline-block mx-1">
-              <span className="relative z-10 font-bold italic">Excel + SQL + Power BI + AI</span>
-              <span className="absolute bottom-1 left-0 w-full h-2 bg-orange-500/30 -z-10 rounded-full" />
-            </span> + the Saturday monetization roadmap to turn your skills into freelance client retainers. No tech background required.
-          </motion.p>
-
-          {/* Urgent Ticking Visual Board */}
-          <div className="bg-slate-900/60 border border-white/10 rounded-3xl p-6 max-w-2xl mx-auto backdrop-blur-sm grid grid-cols-4 gap-2 text-center shadow-xl">
-            {[
-              { val: timeLeft.days, label: "Days" },
-              { val: timeLeft.hours, label: "Hours" },
-              { val: timeLeft.minutes, label: "Minutes" },
-              { val: timeLeft.seconds, label: "Seconds" }
-            ].map((unit, idx) => (
-              <div key={idx} className="bg-slate-950/80 p-3 rounded-2xl border border-white/5">
-                <div className="text-2xl sm:text-4xl font-serif font-black text-orange-500">{String(unit.val).padStart(2, '0')}</div>
-                <div className="text-[8px] sm:text-[10px] uppercase font-bold text-slate-500 tracking-wider mt-1">{unit.label}</div>
+          <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
+            <div className="flex justify-center mb-4 sm:mb-8 anim-fade-down">
+              <div className="p-1 rounded-2xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-xl border border-white/10">
+                <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-10 sm:h-14 px-4 py-2" fetchPriority="high" />
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Flyer Badges */}
-          <div className="flex flex-wrap gap-2 justify-center max-w-xl mx-auto pt-2">
-            {["6 WEEKS", "100% ONLINE", "SATURDAY REVENUE CLASSES", "DOUBLE MONEY-BACK GUARANTEE"].map((b, i) => (
-              <span key={i} className="px-3.5 py-1 text-[9px] font-black tracking-widest text-orange-400 border border-orange-500/20 bg-orange-500/5 rounded-full uppercase">
-                {b}
-              </span>
-            ))}
-          </div>
+            <div className="space-y-2">
+              <h1 
+                className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight leading-[1.15] text-white anim-scale-in"
+                id="hero-heading"
+              >
+                Master Data Analysis: Become a <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500 italic">Job-Ready</span> Pro In 6 Weeks
+              </h1>
+            </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col items-center pt-2 sm:pt-6"
-          >
-            <a 
-              href="#enroll-section" 
-              onClick={scrollToEnroll}
-              id="cta-hero-enroll"
-              className="w-full sm:w-auto bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-[length:200%_auto] hover:bg-right transition-all duration-500 text-white px-8 sm:px-16 py-5 sm:py-7 rounded-2xl font-black text-lg sm:text-xl uppercase tracking-widest shadow-[0_20px_50px_-10px_rgba(249,115,22,0.4)] active:scale-95 flex items-center justify-center gap-3"
+            <p 
+              className="text-slate-300 text-base sm:text-2xl max-w-3xl mx-auto leading-relaxed font-medium px-2 anim-fade-up-d2"
             >
-              Claim My Grand Slam Offer Now <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
-            </a>
-            <p className="mt-4 text-slate-500 text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-1.5">
-              <Clock className="h-4 w-4 text-orange-500" /> Only 7 of 30 Seats Remaining for June Batch!
+              Get the technical power of <span className="text-white font-extrabold relative inline-block mx-1">
+                <span className="relative z-10 font-bold italic">Excel + SQL + Power BI + AI</span>
+                <span className="absolute bottom-1 left-0 w-full h-2 bg-orange-500/30 -z-10 rounded-full" />
+              </span> + the Saturday monetization roadmap to turn your skills into freelance client retainers. No tech background required.
             </p>
-          </motion.div>
 
-          {/* Social Proof Intro Card */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-10 sm:mt-16 bg-white text-slate-900 p-6 sm:p-10 rounded-[2rem] shadow-2xl text-left relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 p-4 opacity-5">
-              <Users className="h-16 w-16 sm:h-24 sm:w-24 text-orange-500" />
+            {/* Urgent Ticking Visual Board */}
+            <div className="bg-slate-900/60 border border-white/10 rounded-3xl p-6 max-w-2xl mx-auto backdrop-blur-sm grid grid-cols-4 gap-2 text-center shadow-xl">
+              {[
+                { val: timeLeft.days, label: "Days" },
+                { val: timeLeft.hours, label: "Hours" },
+                { val: timeLeft.minutes, label: "Minutes" },
+                { val: timeLeft.seconds, label: "Seconds" }
+              ].map((unit, idx) => (
+                <div key={idx} className="bg-slate-950/80 p-3 rounded-2xl border border-white/5">
+                  <div className="text-2xl sm:text-4xl font-serif font-black text-orange-500">{String(unit.val).padStart(2, '0')}</div>
+                  <div className="text-[8px] sm:text-[10px] uppercase font-bold text-slate-500 tracking-wider mt-1">{unit.label}</div>
+                </div>
+              ))}
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 relative z-10">
-              <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-slate-100 shadow-lg bg-slate-100">
-                 <img src="/ayodeji_trainer.png" alt="Coach Omidoyin Ayodeji" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+
+            {/* Flyer Badges */}
+            <div className="flex flex-wrap gap-2 justify-center max-w-xl mx-auto pt-2">
+              {["6 WEEKS", "100% ONLINE", "SATURDAY REVENUE CLASSES", "DOUBLE MONEY-BACK GUARANTEE"].map((b, i) => (
+                <span key={i} className="px-3.5 py-1 text-[9px] font-black tracking-widest text-orange-400 border border-orange-500/20 bg-orange-500/5 rounded-full uppercase">
+                  {b}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex flex-col items-center pt-2 sm:pt-6 anim-fade-up-d3">
+              <a 
+                href="#enroll-section" 
+                onClick={scrollToEnroll}
+                id="cta-hero-enroll"
+                className="w-full sm:w-auto bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-[length:200%_auto] hover:bg-right transition-all duration-500 text-white px-8 sm:px-16 py-5 sm:py-7 rounded-2xl font-black text-lg sm:text-xl uppercase tracking-widest shadow-[0_20px_50px_-10px_rgba(249,115,22,0.4)] active:scale-95 flex items-center justify-center gap-3"
+              >
+                Claim My Grand Slam Offer Now <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
+              </a>
+              <p className="mt-4 text-slate-500 text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-1.5">
+                <Clock className="h-4 w-4 text-orange-500" /> Only 7 of 30 Seats Remaining for June Batch!
+              </p>
+            </div>
+
+            {/* Social Proof Intro Card */}
+            <div className="mt-10 sm:mt-16 bg-white text-slate-900 p-6 sm:p-10 rounded-[2rem] shadow-2xl text-left relative overflow-hidden anim-fade-up-d5">
+              <div className="absolute top-0 right-0 p-4 opacity-5">
+                <Users className="h-16 w-16 sm:h-24 sm:w-24 text-orange-500" />
               </div>
-              <div className="space-y-2 text-center sm:text-left">
-                <h3 className="text-lg sm:text-2xl font-serif font-black tracking-tight leading-tight uppercase">
-                  "I don't just teach data analytics. I install a system that enables you to build high-paying dashboard services."
-                </h3>
-                <p className="text-orange-600 font-black uppercase tracking-widest text-[10px] sm:text-xs flex items-center justify-center sm:justify-start gap-1">
-                   Omidoyin Ayodeji • CEO, Veleon Academy Technologies <CheckCircle2 className="h-3.5 w-3.5" />
-                </p>
+              <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 relative z-10">
+                <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-slate-100 shadow-lg bg-slate-100">
+                   <img src="/ayodeji_trainer.png" alt="Coach Omidoyin Ayodeji" className="w-full h-full object-cover" loading="lazy" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+                </div>
+                <div className="space-y-2 text-center sm:text-left">
+                  <h3 className="text-lg sm:text-2xl font-serif font-black tracking-tight leading-tight uppercase">
+                    "I don't just teach data analytics. I install a system that enables you to build high-paying dashboard services."
+                  </h3>
+                  <p className="text-orange-600 font-black uppercase tracking-widest text-[10px] sm:text-xs flex items-center justify-center sm:justify-start gap-1">
+                     Omidoyin Ayodeji • CEO, Veleon Academy Technologies <CheckCircle2 className="h-3.5 w-3.5" />
+                  </p>
+                </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       {/* 2. WELCOME SECTION (Identifying the Avatar) */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative">
@@ -425,59 +445,58 @@ const SalesLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. OUTCOMES SECTION (Minimizing Effort & Time Delay) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 overflow-hidden relative">
-        <div className="max-w-4xl mx-auto space-y-10">
-          <div className="text-center">
-             <span className="text-orange-500 text-[10px] font-black uppercase tracking-widest block mb-2">MAXIMUM VALUE • MINIMUM FRICTION</span>
-             <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase leading-tight">BY THE END OF THIS ACCELERATOR, YOU WILL BE ABLE TO:</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="relative aspect-video sm:aspect-square md:aspect-auto rounded-[2rem] overflow-hidden group shadow-xl">
-               <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" alt="Job Ready Professional" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-               <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-orange-500/90 backdrop-blur-md p-4 rounded-xl">
-                    <p className="text-white font-black text-sm uppercase tracking-wider text-center">BECOME THE HIGH-STATUS TECH ASSET BUSINESSES PAY RETAINERS FOR</p>
-                  </div>
-               </div>
+        {/* 5. OUTCOMES SECTION (Minimizing Effort & Time Delay) */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 overflow-hidden relative">
+          <div className="max-w-4xl mx-auto space-y-10">
+            <div className="text-center">
+               <span className="text-orange-500 text-[10px] font-black uppercase tracking-widest block mb-2">MAXIMUM VALUE • MINIMUM FRICTION</span>
+               <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase leading-tight">BY THE END OF THIS ACCELERATOR, YOU WILL BE ABLE TO:</h2>
             </div>
 
-            <div className="space-y-4">
-              {[
-                "Clean messy databases in Excel using expert techniques, cutting manual effort by 90%",
-                "Query live SQL servers confidently using joins and CTEs without getting code errors",
-                "Construct executive dashboard portals in Power BI from raw data within hours",
-                "Deploy advanced AI prompts to summarize analytical findings instantly for management",
-                "Confidently pitch SME business owners and bill ₦50,000–₦250,000 per dashboard setup"
-              ].map((item, i) => (
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  key={i} 
-                  className="flex gap-3 items-center p-4 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition-colors group"
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              {/* Replaced heavy Unsplash external image with a local gradient card for speed */}
+              <div className="relative aspect-video sm:aspect-square md:aspect-auto rounded-[2rem] overflow-hidden group shadow-xl bg-gradient-to-br from-slate-900 via-orange-950/40 to-slate-900 flex items-end">
+                 <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                   <svg viewBox="0 0 100 100" className="w-48 h-48 text-orange-500" fill="currentColor"><path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z"/></svg>
+                 </div>
+                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                 <div className="absolute bottom-4 left-4 right-4">
+                    <div className="bg-orange-500/90 backdrop-blur-md p-4 rounded-xl">
+                      <p className="text-white font-black text-sm uppercase tracking-wider text-center">BECOME THE HIGH-STATUS TECH ASSET BUSINESSES PAY RETAINERS FOR</p>
+                    </div>
+                 </div>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  "Clean messy databases in Excel using expert techniques, cutting manual effort by 90%",
+                  "Query live SQL servers confidently using joins and CTEs without getting code errors",
+                  "Construct executive dashboard portals in Power BI from raw data within hours",
+                  "Deploy advanced AI prompts to summarize analytical findings instantly for management",
+                  "Confidently pitch SME business owners and bill ₦50,000–₦250,000 per dashboard setup"
+                ].map((item, i) => (
+                  <div 
+                    key={i} 
+                    className={`flex gap-3 items-center p-4 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition-colors group anim-right-${i}`}
+                  >
+                    <div className="h-7 w-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                      <CheckCircle2 className="h-4.5 w-4.5" />
+                    </div>
+                    <p className="text-sm font-bold text-slate-100">{item}</p>
+                  </div>
+                ))}
+                
+                <a 
+                  href="#enroll-section" 
+                  onClick={scrollToEnroll}
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md"
                 >
-                  <div className="h-7 w-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
-                    <CheckCircle2 className="h-4.5 w-4.5" />
-                  </div>
-                  <p className="text-sm font-bold text-slate-100">{item}</p>
-                </motion.div>
-              ))}
-              
-              <a 
-                href="#enroll-section" 
-                onClick={scrollToEnroll}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md"
-              >
-                Yes, I Want to Secure These Skills <ArrowRight className="h-4 w-4" />
-              </a>
+                  Yes, I Want to Secure These Skills <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       <section className="px-4 sm:px-6">
          <div className="md:w-1/2 relative bg-slate-100 h-full">

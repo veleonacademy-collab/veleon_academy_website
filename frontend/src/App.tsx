@@ -82,10 +82,11 @@ const App: React.FC = () => {
   return (
     <StripeProvider>
       <Routes>
-        <Route path="/free-training" element={<WebinarPage />} />
-        <Route path="/data" element={<SalesLandingPage />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
-        <Route path="/checkout" element={<PaymentPage />} />
+        {/* Standalone pages: Analytics injected individually since they are outside the Layout wrapper */}
+        <Route path="/free-training" element={<><Analytics /><WebinarPage /></>} />
+        <Route path="/data" element={<><Analytics /><SalesLandingPage /></>} />
+        <Route path="/reviews" element={<><Analytics /><ReviewsPage /></>} />
+        <Route path="/checkout" element={<><Analytics /><PaymentPage /></>} />
         <Route path="*" element={
           <Layout>
             <Analytics />
