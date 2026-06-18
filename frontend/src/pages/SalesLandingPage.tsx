@@ -34,10 +34,13 @@ declare global {
   }
 }
 
-// Helper: fire a Microsoft Clarity custom event (safe — no-op if Clarity not loaded yet)
+// Helper: fire a Microsoft Clarity custom event (safe — queues if Clarity not loaded yet)
 const clarityEvent = (name: string, value?: string) => {
   try {
-    if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
+    if (typeof window !== 'undefined') {
+      window.clarity = window.clarity || function() {
+        (window.clarity.q = window.clarity.q || []).push(arguments);
+      };
       window.clarity('event', name, value);
     }
   } catch { /* noop */ }
@@ -55,8 +58,14 @@ const SalesLandingPage: React.FC = () => {
 
   // Load Facebook Pixel deferred (non-blocking) — ONLY for the Sales Landing Page
   useEffect(() => {
+    let loaded = false;
     const loadFbPixel = () => {
-      if (typeof window === 'undefined') return;
+      if (loaded || typeof window === 'undefined') return;
+      loaded = true;
+
+      // Clean up event listeners immediately
+      removeListeners();
+
       if (!window.fbq) {
         (function(f: any, b: any, e: any, v: any, n?: any, t?: any, s?: any) {
           if (f.fbq) return;
@@ -80,12 +89,33 @@ const SalesLandingPage: React.FC = () => {
       clarityEvent('sales_page_view');
     };
 
-    // Defer to idle time so it doesn't block First Contentful Paint
-    if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(loadFbPixel, { timeout: 3000 });
-    } else {
-      setTimeout(loadFbPixel, 1500);
-    }
+    const handleScroll = () => {
+      loadFbPixel();
+    };
+
+    const addListeners = () => {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    };
+
+    const removeListeners = () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    // Load Facebook Pixel after 3 seconds (using idle callback if supported) or on first scroll
+    const timeoutId = setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(loadFbPixel, { timeout: 2000 });
+      } else {
+        loadFbPixel();
+      }
+    }, 3000);
+
+    addListeners();
+
+    return () => {
+      clearTimeout(timeoutId);
+      removeListeners();
+    };
   }, []);
 
 
