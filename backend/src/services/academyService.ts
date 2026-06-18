@@ -288,4 +288,97 @@ export class AcademyService {
     const result = await pool.query(query, params);
     return result.rows;
   }
+
+  /**
+   * Get nested course folders, classes, recordings, and assignments
+   */
+  static async getCourseFoldersAndClasses(courseId: number, cohort?: string) {
+    // 1. Get all folders for the course (filtered by cohort if provided)
+    const foldersQuery = cohort
+      ? "SELECT * FROM folders WHERE course_id = $1 AND (cohort = '' OR cohort = $2) ORDER BY name ASC"
+      : "SELECT * FROM folders WHERE course_id = $1 ORDER BY name ASC";
+    const foldersParams = cohort ? [courseId, cohort] : [courseId];
+    
+    const foldersRes = await pool.query(foldersQuery, foldersParams);
+    const folders = foldersRes.rows;
+
+    // 2. Get all classes for these folders
+    let classes: any[] = [];
+    if (folders.length > 0) {
+      const folderIds = folders.map((f: any) => f.id);
+      const classesRes = await pool.query(
+        "SELECT * FROM classes WHERE folder_id = ANY($1) ORDER BY name ASC",
+        [folderIds]
+      );
+      classes = classesRes.rows;
+    }
+
+    // 3. Get all recordings and assignments for the course (filtered by cohort)
+    const recordings = await this.getCourseRecordings(courseId, cohort);
+    const assignments = await this.getCourseAssignments(courseId, cohort);
+
+    // 4. Map recordings and assignments to classes
+    const classMap = new Map<number, any>();
+    for (const cls of classes) {
+      cls.recordings = [];
+      cls.assignments = [];
+      classMap.set(cls.id, cls);
+    }
+
+    const unassignedRecordings: any[] = [];
+    const unassignedAssignments: any[] = [];
+
+    for (const rec of recordings) {
+      if (rec.class_id && classMap.has(rec.class_id)) {
+        classMap.get(rec.class_id).recordings.push(rec);
+      } else {
+        unassignedRecordings.push(rec);
+      }
+    }
+
+    for (const assign of assignments) {
+      if (assign.class_id && classMap.has(assign.class_id)) {
+        classMap.get(assign.class_id).assignments.push(assign);
+      } else {
+        unassignedAssignments.push(assign);
+      }
+    }
+
+    // 5. Map classes to folders
+    const folderMap = new Map<number, any>();
+    for (const f of folders) {
+      f.classes = [];
+      folderMap.set(f.id, f);
+    }
+
+    for (const cls of classes) {
+      if (folderMap.has(cls.folder_id)) {
+        folderMap.get(cls.folder_id).classes.push(cls);
+      }
+    }
+
+    const structuredFolders = [...folders];
+
+    // 6. Handle unassigned resources as a virtual folder/class for backward compatibility
+    if (unassignedRecordings.length > 0 || unassignedAssignments.length > 0) {
+      structuredFolders.push({
+        id: -1,
+        course_id: courseId,
+        name: "General Materials",
+        classes: [
+          {
+            id: -1,
+            folder_id: -1,
+            name: "General Class Resources",
+            description: "General course materials and recordings",
+            recordings: unassignedRecordings,
+            assignments: unassignedAssignments
+          }
+        ]
+      });
+    }
+
+    return structuredFolders;
+  }
 }
+

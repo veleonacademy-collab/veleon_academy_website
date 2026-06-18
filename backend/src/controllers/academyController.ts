@@ -264,12 +264,16 @@ export class AcademyController {
       // Get course info (for timetable)
       const courseRes = await pool.query("SELECT * FROM courses WHERE id = $1", [courseId]);
 
+      // Get structured folders and classes
+      const folders = await AcademyService.getCourseFoldersAndClasses(parseInt(courseId), cohortFilter);
+
       res.json({
         enrollment,
         course: courseRes.rows[0],
         recordings,
         assignments,
-        curriculum
+        curriculum,
+        folders
       });
     } catch (error) {
       next(error);
@@ -820,4 +824,227 @@ export class AcademyController {
       next(error);
     }
   }
+
+  static async getCourseFolders(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { courseId } = req.params;
+      const { cohort } = req.query;
+
+      const query = cohort
+        ? "SELECT * FROM folders WHERE course_id = $1 AND (cohort = '' OR cohort = $2) ORDER BY name ASC"
+        : "SELECT * FROM folders WHERE course_id = $1 ORDER BY name ASC";
+      const params = cohort ? [courseId, cohort] : [courseId];
+
+      const result = await pool.query(query, params);
+      res.json(result.rows);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async createFolder(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { courseId, name, cohort } = req.body;
+      const result = await pool.query(
+        `INSERT INTO folders (course_id, name, cohort)
+         VALUES ($1, $2, $3)
+         ON CONFLICT (course_id, cohort, name) DO UPDATE SET name = EXCLUDED.name
+         RETURNING *`,
+        [courseId, name, cohort || '']
+      );
+      res.status(201).json(result.rows[0]);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async updateFolder(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { name, cohort } = req.body;
+
+      const result = await pool.query(
+        `UPDATE folders
+         SET name = COALESCE($1, name), cohort = COALESCE($2, cohort), updated_at = NOW()
+         WHERE id = $3 RETURNING *`,
+        [name, cohort !== undefined ? cohort : '', id]
+      );
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "Folder not found" });
+      }
+      res.json(result.rows[0]);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteFolder(req: Request, res: Response, next: NextFunction) {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const { id } = req.params;
+      const { deleteContent } = req.query;
+
+      if (deleteContent === "true") {
+        // Delete all recordings associated with classes in this folder
+        await client.query(
+          `DELETE FROM class_recordings 
+           WHERE class_id IN (SELECT id FROM classes WHERE folder_id = $1)`,
+          [id]
+        );
+
+        // Delete all assignments associated with classes in this folder
+        await client.query(
+          `DELETE FROM assignments 
+           WHERE class_id IN (SELECT id FROM classes WHERE folder_id = $1)`,
+          [id]
+        );
+      }
+
+      // Delete the folder itself. This will cascade-delete classes inside it.
+      // Recordings/assignments not deleted (if deleteContent is false) will have class_id set to NULL automatically.
+      const result = await client.query(
+        "DELETE FROM folders WHERE id = $1 RETURNING *",
+        [id]
+      );
+
+      if (result.rows.length === 0) {
+        await client.query("ROLLBACK");
+        return res.status(404).json({ message: "Folder not found" });
+      }
+
+      await client.query("COMMIT");
+      res.json({ message: "Folder deleted successfully" });
+    } catch (error) {
+      await client.query("ROLLBACK");
+      next(error);
+    } finally {
+      client.release();
+    }
+  }
+
+  static async uploadClassMaterial(req: Request, res: Response, next: NextFunction) {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      const {
+        courseId,
+        folderId: passedFolderId,
+        newFolderName,
+        className,
+        classDescription,
+        lessons,
+        assignment,
+        cohort
+      } = req.body;
+
+      const tutorId = req.user?.id;
+
+      // 1. Resolve or create folder
+      let folderId = passedFolderId;
+      if (!folderId && newFolderName) {
+        const folderRes = await client.query(
+          `INSERT INTO folders (course_id, name, cohort)
+           VALUES ($1, $2, $3)
+           ON CONFLICT (course_id, cohort, name) DO UPDATE SET name = EXCLUDED.name
+           RETURNING id`,
+          [courseId, newFolderName, cohort || '']
+        );
+        folderId = folderRes.rows[0].id;
+      }
+
+      if (!folderId) {
+        throw new Error("Folder ID or Folder Name must be provided");
+      }
+
+      // 2. Resolve or create class
+      const classRes = await client.query(
+        `INSERT INTO classes (folder_id, name, description)
+         VALUES ($1, $2, $3)
+         ON CONFLICT (folder_id, name) DO UPDATE SET description = COALESCE(EXCLUDED.description, classes.description)
+         RETURNING id`,
+        [folderId, className, classDescription || null]
+      );
+      const classId = classRes.rows[0].id;
+
+      const insertedRecordings: any[] = [];
+      // 3. Insert class recordings
+      if (Array.isArray(lessons)) {
+        for (const lesson of lessons) {
+          if (lesson.title && lesson.videoUrl) {
+            const recordingRes = await client.query(
+              `INSERT INTO class_recordings (course_id, tutor_id, title, video_url, cohort, class_id)
+               VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+              [courseId, tutorId, lesson.title, lesson.videoUrl, cohort || null, classId]
+            );
+            insertedRecordings.push(recordingRes.rows[0]);
+          }
+        }
+      }
+
+      // 4. Insert assignment
+      let insertedAssignment = null;
+      if (assignment && assignment.title) {
+        const assignmentRes = await client.query(
+          `INSERT INTO assignments (course_id, tutor_id, title, description, file_url, due_date, cohort, class_id)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+          [courseId, tutorId, assignment.title, assignment.description || null, assignment.fileUrl || null, assignment.dueDate || null, cohort || null, classId]
+        );
+        insertedAssignment = assignmentRes.rows[0];
+      }
+
+      await client.query("COMMIT");
+
+      // 5. Notify enrolled students (Non-blocking)
+      try {
+        const courseRes = await client.query("SELECT title FROM courses WHERE id = $1", [courseId]);
+        const courseTitle = courseRes.rows[0]?.title || "Course";
+
+        const cohortVal = (cohort && cohort !== "null" && cohort !== "undefined" && cohort !== "") ? cohort : null;
+        const studentsQuery = cohortVal
+          ? `SELECT u.email, u.first_name 
+             FROM enrollments e 
+             JOIN users u ON e.student_id = u.id 
+             WHERE e.course_id = $1 AND e.cohort = $2`
+          : `SELECT u.email, u.first_name 
+             FROM enrollments e 
+             JOIN users u ON e.student_id = u.id 
+             WHERE e.course_id = $1`;
+        const studentsParams = cohortVal ? [courseId, cohortVal] : [courseId];
+        const studentsRes = await client.query(studentsQuery, studentsParams);
+
+        const notifyStudents = async () => {
+          for (const student of studentsRes.rows) {
+            try {
+              if (insertedAssignment) {
+                await sendAssignmentNotificationEmail(student.email, student.first_name, courseTitle, insertedAssignment.title, insertedAssignment.due_date);
+              }
+              for (const recording of insertedRecordings) {
+                await sendRecordingNotificationEmail(student.email, student.first_name, courseTitle, recording.title, recording.video_url);
+              }
+            } catch (err) {
+              console.error(`Failed to send email to ${student.email}:`, err);
+            }
+          }
+        };
+        notifyStudents();
+      } catch (err) {
+        console.error("Failed to send upload notification emails:", err);
+      }
+
+      res.status(201).json({
+        message: "Material uploaded successfully",
+        classId,
+        recordings: insertedRecordings,
+        assignment: insertedAssignment
+      });
+    } catch (error) {
+      await client.query("ROLLBACK");
+      next(error);
+    } finally {
+      client.release();
+    }
+  }
 }
+

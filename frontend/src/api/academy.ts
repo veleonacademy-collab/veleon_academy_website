@@ -38,6 +38,7 @@ export const academyApi = {
     recordings: ClassRecording[];
     assignments: Assignment[];
     curriculum: any[];
+    folders: any[];
   }>(`/academy/student/course/${courseId}`, { params: cohort ? { cohort } : undefined }).then(r => r.data),
 
   // Tutor
@@ -127,4 +128,33 @@ export const academyApi = {
     nextPaymentDue?: string;
     installmentsTotal?: number;
   }) => http.post("/academy/admin/enroll-user", data).then(r => r.data),
+
+  getCourseFolders: (courseId: number, cohort?: string) => 
+    http.get<any[]>(`/academy/courses/${courseId}/folders`, { params: cohort ? { cohort } : undefined }).then(r => r.data),
+
+  createFolder: (data: { courseId: number; name: string; cohort?: string }) => 
+    http.post<any>("/academy/tutor/folders", data).then(r => r.data),
+
+  updateFolder: (id: number, data: { name?: string; cohort?: string }) =>
+    http.put<any>(`/academy/tutor/folders/${id}`, data).then(r => r.data),
+
+  deleteFolder: (id: number, deleteContent: boolean) =>
+    http.delete<any>(`/academy/tutor/folders/${id}`, { params: { deleteContent: deleteContent.toString() } }).then(r => r.data),
+
+  uploadClassMaterial: (data: {
+    courseId: number;
+    folderId?: number | null;
+    newFolderName?: string | null;
+    className: string;
+    classDescription?: string | null;
+    lessons: Array<{ title: string; videoUrl: string }>;
+    assignment?: {
+      title: string;
+      description?: string;
+      fileUrl?: string;
+      dueDate?: string;
+    } | null;
+    cohort?: string;
+  }) => http.post<any>("/academy/tutor/upload-class-material", data).then(r => r.data),
 };
+

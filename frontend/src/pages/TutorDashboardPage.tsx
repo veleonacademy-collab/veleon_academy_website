@@ -2,22 +2,41 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
 import { Link } from "react-router-dom";
-import { Plus, Video, ClipboardList, Book, Users, ExternalLink, MessageSquare } from "lucide-react";
+import { Plus, Video, ClipboardList, Book, Users, ExternalLink, MessageSquare, Folder, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Input } from "../components/forms/Input";
 import Modal from "../components/Modal";
 
 const TutorDashboardPage: React.FC = () => {
   const queryClient = useQueryClient();
-  const [isRecordingModalOpen, setIsRecordingModalOpen] = useState(false);
-  const [isAssignmentModalOpen, setIsAssignmentModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isRemarkModalOpen, setIsRemarkModalOpen] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<{ studentId: number; courseId: number; name: string } | null>(null);
 
-  const [recordingData, setRecordingData] = useState({ title: "", videoUrl: "", cohort: "Cohort 3" });
-  const [assignmentData, setAssignmentData] = useState({ title: "", description: "", dueDate: "", cohort: "Cohort 3" });
+  const [folderName, setFolderName] = useState("");
+  const [folderCohort, setFolderCohort] = useState("");
+  const [isManageFoldersOpen, setIsManageFoldersOpen] = useState(false);
+  const [editingFolderId, setEditingFolderId] = useState<number | null>(null);
+  const [editFolderName, setEditFolderName] = useState("");
+  const [editFolderCohort, setEditFolderCohort] = useState("");
+  const [deletingFolder, setDeletingFolder] = useState<any | null>(null);
   const [remarkText, setRemarkText] = useState("");
+
+  const [uploadData, setUploadData] = useState({
+    folderId: "",
+    newFolderName: "",
+    className: "",
+    classDescription: "",
+    lessons: [{ title: "", videoUrl: "" }],
+    hasAssignment: false,
+    assignmentTitle: "",
+    assignmentDescription: "",
+    assignmentFileUrl: "",
+    assignmentDueDate: "",
+    cohort: "Cohort 3"
+  });
 
   const { data: courses, isLoading } = useQuery({
     queryKey: ["tutor-courses"],
@@ -37,24 +56,67 @@ const TutorDashboardPage: React.FC = () => {
     queryFn: academyApi.getTutorStudents,
   });
 
-  const recordingMutation = useMutation({
-    mutationFn: (data: { courseId: number; title: string; videoUrl: string; cohort?: string }) => academyApi.addRecording(data),
-    onSuccess: () => {
-      toast.success("Recording added and students notified!");
-      setIsRecordingModalOpen(false);
-      setRecordingData({ title: "", videoUrl: "", cohort: "Cohort 3" });
-    },
-    onError: () => toast.error("Failed to add recording"),
+  const { data: currentFolders, refetch: refetchFolders } = useQuery({
+    queryKey: ["course-folders", selectedCourseId],
+    queryFn: () => selectedCourseId ? academyApi.getCourseFolders(selectedCourseId) : Promise.resolve([]),
+    enabled: !!selectedCourseId,
   });
 
-  const assignmentMutation = useMutation({
-    mutationFn: (data: any) => academyApi.createAssignment(data),
+  const folderMutation = useMutation({
+    mutationFn: (data: { courseId: number; name: string; cohort?: string }) => academyApi.createFolder(data),
     onSuccess: () => {
-      toast.success("Assignment posted!");
-      setIsAssignmentModalOpen(false);
-      setAssignmentData({ title: "", description: "", dueDate: "", cohort: "Cohort 3" });
+      toast.success("Folder created successfully!");
+      setIsFolderModalOpen(false);
+      setFolderName("");
+      setFolderCohort("");
+      refetchFolders();
     },
-    onError: () => toast.error("Failed to post assignment"),
+    onError: () => toast.error("Failed to create folder"),
+  });
+
+  const updateFolderMutation = useMutation({
+    mutationFn: (data: { id: number; name: string; cohort?: string }) => academyApi.updateFolder(data.id, { name: data.name, cohort: data.cohort }),
+    onSuccess: () => {
+      toast.success("Folder updated successfully!");
+      setEditingFolderId(null);
+      refetchFolders();
+      queryClient.invalidateQueries({ queryKey: ["tutor-courses"] });
+    },
+    onError: () => toast.error("Failed to update folder"),
+  });
+
+  const deleteFolderMutation = useMutation({
+    mutationFn: (data: { id: number; deleteContent: boolean }) => academyApi.deleteFolder(data.id, data.deleteContent),
+    onSuccess: () => {
+      toast.success("Folder deleted successfully!");
+      setDeletingFolder(null);
+      refetchFolders();
+      queryClient.invalidateQueries({ queryKey: ["tutor-courses"] });
+    },
+    onError: () => toast.error("Failed to delete folder"),
+  });
+
+  const uploadMutation = useMutation({
+    mutationFn: (data: any) => academyApi.uploadClassMaterial(data),
+    onSuccess: () => {
+      toast.success("Class material uploaded and students notified!");
+      setIsUploadModalOpen(false);
+      setUploadData({
+        folderId: "",
+        newFolderName: "",
+        className: "",
+        classDescription: "",
+        lessons: [{ title: "", videoUrl: "" }],
+        hasAssignment: false,
+        assignmentTitle: "",
+        assignmentDescription: "",
+        assignmentFileUrl: "",
+        assignmentDueDate: "",
+        cohort: "Cohort 3"
+      });
+      queryClient.invalidateQueries({ queryKey: ["tutor-courses"] });
+    },
+    onError: () => toast.error("Failed to upload class material"),
   });
 
   const remarkMutation = useMutation({
@@ -74,8 +136,29 @@ const TutorDashboardPage: React.FC = () => {
       setIsCourseSelectModalOpen(false);
       queryClient.invalidateQueries({ queryKey: ["tutor-courses"] });
     },
-    onError: () => toast.error("Failed to add course"),
   });
+
+  const addLesson = () => {
+    setUploadData(prev => ({
+      ...prev,
+      lessons: [...prev.lessons, { title: "", videoUrl: "" }]
+    }));
+  };
+
+  const removeLesson = (index: number) => {
+    setUploadData(prev => ({
+      ...prev,
+      lessons: prev.lessons.filter((_, idx) => idx !== index)
+    }));
+  };
+
+  const handleLessonChange = (index: number, field: "title" | "videoUrl", value: string) => {
+    setUploadData(prev => {
+      const updated = [...prev.lessons];
+      updated[index] = { ...updated[index], [field]: value };
+      return { ...prev, lessons: updated };
+    });
+  };
 
   return (
     <div className="space-y-12">
@@ -146,28 +229,40 @@ const TutorDashboardPage: React.FC = () => {
                   <button 
                     onClick={() => {
                         setSelectedCourseId(course.id);
-                        setRecordingData({ title: "", videoUrl: "", cohort: course.cohort || "" });
-                        setIsRecordingModalOpen(true);
+                        setUploadData({
+                            folderId: "",
+                            newFolderName: "",
+                            className: "",
+                            classDescription: "",
+                            lessons: [{ title: "", videoUrl: "" }],
+                            hasAssignment: false,
+                            assignmentTitle: "",
+                            assignmentDescription: "",
+                            assignmentFileUrl: "",
+                            assignmentDueDate: "",
+                            cohort: course.cohort || "Cohort 3"
+                        });
+                        setIsUploadModalOpen(true);
                     }}
                     className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary hover:bg-white transition-all gap-2 group/btn"
                   >
                       <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-600 group-hover/btn:text-primary transition-colors">
-                          <Video className="h-4 w-4" />
+                          <Plus className="h-4 w-4" />
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Record</span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Upload</span>
                   </button>
                   <button 
                      onClick={() => {
                           setSelectedCourseId(course.id);
-                          setAssignmentData({ title: "", description: "", dueDate: "", cohort: course.cohort || "" });
-                          setIsAssignmentModalOpen(true);
+                          setFolderName("");
+                          setIsFolderModalOpen(true);
                      }}
                      className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-secondary hover:bg-white transition-all gap-2 group/btn"
                   >
                       <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-600 group-hover/btn:text-secondary transition-colors">
-                          <ClipboardList className="h-4 w-4" />
+                          <Folder className="h-4 w-4" />
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Task</span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Folder</span>
                   </button>
                   {course.timetable_url ? (
                     <a 
@@ -209,12 +304,23 @@ const TutorDashboardPage: React.FC = () => {
                 </div>
               )}
               
-              <Link 
-                to={`/tutor/course/${course.id}/curriculum`}
-                className="mt-4 block w-full text-center py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg shadow-slate-200"
-              >
-                Mark Curriculum Progress
-              </Link>
+              <div className="flex gap-2 mt-4">
+                <Link 
+                  to={`/tutor/course/${course.id}/curriculum`}
+                  className="flex-1 text-center py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg shadow-slate-200"
+                >
+                  Mark Curriculum Progress
+                </Link>
+                <button 
+                  onClick={() => {
+                    setSelectedCourseId(course.id);
+                    setIsManageFoldersOpen(true);
+                  }}
+                  className="px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all"
+                >
+                  Manage Folders
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -257,95 +363,363 @@ const TutorDashboardPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Recording Modal */}
-      <Modal 
-        isOpen={isRecordingModalOpen} 
-        onClose={() => setIsRecordingModalOpen(false)}
-        title="Upload Class Recording"
+      {/* Folder Modal */}
+      <Modal
+        isOpen={isFolderModalOpen}
+        onClose={() => setIsFolderModalOpen(false)}
+        title="Create Skill Set Folder"
       >
         <div className="space-y-4 py-4">
-            <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Recording Title</label>
-                <Input 
-                    placeholder="e.g. Introduction to React Hooks" 
-                    value={recordingData.title}
-                    onChange={(e) => setRecordingData({...recordingData, title: e.target.value})}
-                />
-            </div>
-            <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Video URL (YouTube/Vimeo/Loom)</label>
-                <Input 
-                    placeholder="https://..." 
-                    value={recordingData.videoUrl}
-                    onChange={(e) => setRecordingData({...recordingData, videoUrl: e.target.value})}
-                />
-            </div>
-            <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort Group (Optional)</label>
-                <Input 
-                    placeholder="e.g. Cohort 2 (leave empty for all)" 
-                    value={recordingData.cohort}
-                    onChange={(e) => setRecordingData({...recordingData, cohort: e.target.value})}
-                />
-            </div>
-            <button 
-                onClick={() => recordingMutation.mutate({ courseId: selectedCourseId!, ...recordingData })}
-                disabled={recordingMutation.isPending}
-                className="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6"
-            >
-                {recordingMutation.isPending ? "PUBLISHING..." : "PUBLISH RECORDING"}
-            </button>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Folder Name</label>
+            <Input
+              placeholder="e.g. Excel Classes, SQL Classes"
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort (Optional)</label>
+            <Input
+              placeholder="e.g. Cohort 3 (leave blank for all cohorts)"
+              value={folderCohort}
+              onChange={(e) => setFolderCohort(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={() => folderMutation.mutate({ courseId: selectedCourseId!, name: folderName, cohort: folderCohort })}
+            disabled={folderMutation.isPending || !folderName.trim()}
+            className="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
+          >
+            {folderMutation.isPending ? "Creating..." : "Create Folder"}
+          </button>
         </div>
       </Modal>
 
-      {/* Assignment Modal */}
-      <Modal 
-        isOpen={isAssignmentModalOpen} 
-        onClose={() => setIsAssignmentModalOpen(false)}
-        title="Post New Assignment"
+      {/* Manage Folders Modal */}
+      <Modal
+        isOpen={isManageFoldersOpen}
+        onClose={() => {
+          setIsManageFoldersOpen(false);
+          setEditingFolderId(null);
+          setDeletingFolder(null);
+        }}
+        title="Manage Folders"
       >
-        <div className="space-y-4 py-4">
-             <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Task Title</label>
-                <Input 
-                    placeholder="e.g. Build a Todo App with State" 
-                    value={assignmentData.title}
-                    onChange={(e) => setAssignmentData({...assignmentData, title: e.target.value})}
-                />
+        <div className="space-y-4 py-4 max-h-[60vh] overflow-y-auto pr-2">
+          {currentFolders && currentFolders.length > 0 ? (
+            <div className="divide-y divide-slate-100">
+              {currentFolders.map((folder: any) => {
+                const isEditing = editingFolderId === folder.id;
+                return (
+                  <div key={folder.id} className="py-4 flex flex-col gap-3">
+                    {isEditing ? (
+                      <div className="space-y-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Folder Name</label>
+                          <Input
+                            value={editFolderName}
+                            onChange={(e) => setEditFolderName(e.target.value)}
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Cohort (Optional)</label>
+                          <Input
+                            placeholder="Leave blank for all cohorts"
+                            value={editFolderCohort}
+                            onChange={(e) => setEditFolderCohort(e.target.value)}
+                          />
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              updateFolderMutation.mutate({
+                                id: folder.id,
+                                name: editFolderName,
+                                cohort: editFolderCohort
+                              });
+                            }}
+                            disabled={updateFolderMutation.isPending || !editFolderName.trim()}
+                            className="px-4 py-2 bg-primary text-white text-xs font-bold uppercase rounded-lg hover:opacity-90 transition-all"
+                          >
+                            {updateFolderMutation.isPending ? "Saving..." : "Save"}
+                          </button>
+                          <button
+                            onClick={() => setEditingFolderId(null)}
+                            className="px-4 py-2 bg-slate-200 text-slate-700 text-xs font-bold uppercase rounded-lg hover:bg-slate-300 transition-all"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-bold text-slate-900">{folder.name}</div>
+                          <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
+                            {folder.cohort ? `Cohort: ${folder.cohort}` : "All Cohorts"}
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setEditingFolderId(folder.id);
+                              setEditFolderName(folder.name);
+                              setEditFolderCohort(folder.cohort || "");
+                            }}
+                            className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold uppercase rounded-lg transition-colors"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => setDeletingFolder(folder)}
+                            className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 text-[10px] font-bold uppercase rounded-lg transition-colors"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-            <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Description</label>
-                <textarea 
-                    className="w-full rounded-xl border border-slate-200 p-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    rows={4}
-                    placeholder="Instructions for the students..."
-                    value={assignmentData.description}
-                    onChange={(e) => setAssignmentData({...assignmentData, description: e.target.value})}
-                />
-            </div>
-             <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Due Date</label>
-                <Input 
-                    type="date"
-                    value={assignmentData.dueDate}
-                    onChange={(e) => setAssignmentData({...assignmentData, dueDate: e.target.value})}
-                />
-            </div>
-            <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort Group (Optional)</label>
-                <Input 
-                    placeholder="e.g. Cohort 2 (leave empty for all)" 
-                    value={assignmentData.cohort}
-                    onChange={(e) => setAssignmentData({...assignmentData, cohort: e.target.value})}
-                />
-            </div>
-            <button 
-                onClick={() => assignmentMutation.mutate({ courseId: selectedCourseId!, ...assignmentData })}
-                disabled={assignmentMutation.isPending}
-                className="w-full bg-secondary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6"
+          ) : (
+            <p className="text-sm text-slate-400 text-center py-6">No folders created for this course yet.</p>
+          )}
+        </div>
+      </Modal>
+
+      {/* Delete Folder Confirmation Modal */}
+      <Modal
+        isOpen={!!deletingFolder}
+        onClose={() => setDeletingFolder(null)}
+        title="Delete Folder"
+      >
+        <div className="space-y-6 py-4">
+          <div className="p-4 bg-red-50 border border-red-100 text-red-800 rounded-2xl text-sm leading-relaxed">
+            <span className="font-bold">Warning:</span> You are about to delete the folder <strong>{deletingFolder?.name}</strong> ({deletingFolder?.cohort ? `Cohort: ${deletingFolder?.cohort}` : "All Cohorts"}).
+            <p className="mt-2 text-xs text-red-600">
+              Please choose if you also want to delete all classes, lessons (recordings), and assignments inside this folder.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={() => {
+                deleteFolderMutation.mutate({ id: deletingFolder.id, deleteContent: true });
+              }}
+              disabled={deleteFolderMutation.isPending}
+              className="w-full py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all disabled:opacity-50"
             >
-                {assignmentMutation.isPending ? "POSTING..." : "POST ASSIGNMENT"}
+              {deleteFolderMutation.isPending ? "DELETING EVERYTHING..." : "YES, DELETE EVERYTHING INSIDE"}
             </button>
+            
+            <button
+              onClick={() => {
+                deleteFolderMutation.mutate({ id: deletingFolder.id, deleteContent: false });
+              }}
+              disabled={deleteFolderMutation.isPending}
+              className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all disabled:opacity-50"
+            >
+              {deleteFolderMutation.isPending ? "DELETING FOLDER..." : "NO, KEEP ITEMS (MOVE TO GENERAL MATERIALS)"}
+            </button>
+
+            <button
+              onClick={() => setDeletingFolder(null)}
+              className="w-full py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-widest rounded-xl transition-all"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Upload Class Material Modal */}
+      <Modal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        title="Upload Class Materials"
+      >
+        <div className="space-y-4 py-4 max-h-[80vh] overflow-y-auto pr-2">
+          {/* Folder selection */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Folder</label>
+            <select
+              value={uploadData.folderId}
+              onChange={(e) => setUploadData({ ...uploadData, folderId: e.target.value, newFolderName: e.target.value === "new" ? "" : uploadData.newFolderName })}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="">Select an existing folder</option>
+              {currentFolders?.map((f: any) => (
+                <option key={f.id} value={f.id}>{f.name}</option>
+              ))}
+              <option value="new">+ Create New Folder inline</option>
+            </select>
+          </div>
+
+          {/* New folder inline name */}
+          {uploadData.folderId === "new" && (
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">New Folder Name</label>
+              <Input
+                placeholder="e.g. Excel Intermediate Classes"
+                value={uploadData.newFolderName}
+                onChange={(e) => setUploadData({ ...uploadData, newFolderName: e.target.value })}
+              />
+            </div>
+          )}
+
+          {/* Class details */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Class Title</label>
+            <Input
+              placeholder="e.g. Class 1: Introduction to Functions"
+              value={uploadData.className}
+              onChange={(e) => setUploadData({ ...uploadData, className: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Class Description (Optional)</label>
+            <textarea
+              className="w-full rounded-xl border border-slate-200 p-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+              rows={3}
+              placeholder="Provide a description for this class..."
+              value={uploadData.classDescription}
+              onChange={(e) => setUploadData({ ...uploadData, classDescription: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort Group</label>
+            <Input
+              placeholder="e.g. Cohort 3 (optional)"
+              value={uploadData.cohort}
+              onChange={(e) => setUploadData({ ...uploadData, cohort: e.target.value })}
+            />
+          </div>
+
+          {/* Dynamic lessons list */}
+          <div className="space-y-4 pt-4 border-t border-slate-100">
+            <label className="text-xs font-black uppercase tracking-widest text-slate-900 block">Lessons (Video Recordings)</label>
+            {uploadData.lessons.map((lesson, idx) => (
+              <div key={idx} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 relative space-y-3">
+                {idx > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => removeLesson(idx)}
+                    className="absolute right-3 top-3 text-red-500 hover:text-red-700"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                )}
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Lesson #{idx + 1} Title</label>
+                  <Input
+                    placeholder="e.g. Lesson 1a: Basic Math operations"
+                    value={lesson.title}
+                    onChange={(e) => handleLessonChange(idx, "title", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Lesson #{idx + 1} Video URL</label>
+                  <Input
+                    placeholder="https://youtube.com/watch?v=..."
+                    value={lesson.videoUrl}
+                    onChange={(e) => handleLessonChange(idx, "videoUrl", e.target.value)}
+                  />
+                </div>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addLesson}
+              className="w-full py-2 bg-slate-100 hover:bg-slate-200 border border-dashed border-slate-300 text-slate-700 text-xs font-bold uppercase tracking-widest rounded-xl transition-all"
+            >
+              + Add Another Lesson
+            </button>
+          </div>
+
+          {/* Assignment toggle */}
+          <div className="pt-4 border-t border-slate-100 space-y-4">
+            <div className="flex items-center gap-3">
+              <input
+                id="hasAssignment"
+                type="checkbox"
+                checked={uploadData.hasAssignment}
+                onChange={(e) => setUploadData({ ...uploadData, hasAssignment: e.target.checked })}
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+              />
+              <label htmlFor="hasAssignment" className="text-xs font-black uppercase tracking-widest text-slate-900 cursor-pointer">
+                Include Class Assignment?
+              </label>
+            </div>
+
+            {uploadData.hasAssignment && (
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Assignment Title</label>
+                  <Input
+                    placeholder="e.g. Homework: Formulas Practice"
+                    value={uploadData.assignmentTitle}
+                    onChange={(e) => setUploadData({ ...uploadData, assignmentTitle: e.target.value })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Description / Instructions</label>
+                  <textarea
+                    className="w-full rounded-xl border border-slate-200 p-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    rows={3}
+                    placeholder="Write instructions here..."
+                    value={uploadData.assignmentDescription}
+                    onChange={(e) => setUploadData({ ...uploadData, assignmentDescription: e.target.value })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Resource File URL (Optional)</label>
+                  <Input
+                    placeholder="https://..."
+                    value={uploadData.assignmentFileUrl}
+                    onChange={(e) => setUploadData({ ...uploadData, assignmentFileUrl: e.target.value })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Due Date</label>
+                  <Input
+                    type="date"
+                    value={uploadData.assignmentDueDate}
+                    onChange={(e) => setUploadData({ ...uploadData, assignmentDueDate: e.target.value })}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={() => {
+              const payload = {
+                courseId: selectedCourseId,
+                folderId: uploadData.folderId === "new" || !uploadData.folderId ? null : parseInt(uploadData.folderId),
+                newFolderName: uploadData.folderId === "new" ? uploadData.newFolderName : null,
+                className: uploadData.className,
+                classDescription: uploadData.classDescription || null,
+                lessons: uploadData.lessons.filter(l => l.title && l.videoUrl),
+                assignment: uploadData.hasAssignment && uploadData.assignmentTitle ? {
+                  title: uploadData.assignmentTitle,
+                  description: uploadData.assignmentDescription,
+                  fileUrl: uploadData.assignmentFileUrl,
+                  dueDate: uploadData.assignmentDueDate
+                } : null,
+                cohort: uploadData.cohort
+              };
+              uploadMutation.mutate(payload);
+            }}
+            disabled={uploadMutation.isPending || !uploadData.className.trim() || (uploadData.folderId === "new" && !uploadData.newFolderName.trim())}
+            className="w-full bg-secondary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
+          >
+            {uploadMutation.isPending ? "Uploading..." : "Publish Class Material"}
+          </button>
         </div>
       </Modal>
 

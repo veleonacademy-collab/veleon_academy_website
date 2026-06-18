@@ -45,6 +45,41 @@ academyRouter.post(
   AcademyController.createAssignment
 );
 
+academyRouter.post(
+  "/tutor/folders",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.createFolder
+);
+
+academyRouter.put(
+  "/tutor/folders/:id",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.updateFolder
+);
+
+academyRouter.delete(
+  "/tutor/folders/:id",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.deleteFolder
+);
+
+academyRouter.post(
+  "/tutor/upload-class-material",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.uploadClassMaterial
+);
+
+academyRouter.get(
+  "/courses/:courseId/folders",
+  authenticate,
+  requireRole(["student", "tutor", "admin"]),
+  AcademyController.getCourseFolders
+);
+
 academyRouter.get(
   "/tutor/students",
   authenticate,

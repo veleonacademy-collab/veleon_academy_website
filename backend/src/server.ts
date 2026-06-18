@@ -69,7 +69,7 @@ async function bootstrap(): Promise<void> {
 
   const allowedOrigins = [
     "http://localhost:5173",
-    "https://fashionharth.vercel.app",
+    "http://localhost:5174",
     "http://localhost:5175",
     env.appUrl
   ].filter(Boolean) as string[];

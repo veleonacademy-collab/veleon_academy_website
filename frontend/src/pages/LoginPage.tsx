@@ -45,8 +45,8 @@ const LoginPage: React.FC = () => {
       const isAuthPage = from?.pathname === "/login" || from?.pathname === "/register" || from?.pathname?.includes("/verify-email") || from?.pathname?.includes("/reset-password");
       const redirectTo = from && !isAuthPage
         ? `${from.pathname ?? ""}${from.search ?? ""}${from.hash ?? ""}` 
-        : "/courses";
-      navigate(redirectTo || "/courses", { replace: true });
+        : "/dashboard";
+      navigate(redirectTo || "/dashboard", { replace: true });
     },
     onError: (err: any) => {
       setError(err?.response?.data?.message || err.message);
@@ -68,8 +68,8 @@ const LoginPage: React.FC = () => {
       const isAuthPage = from?.pathname === "/login" || from?.pathname === "/register" || from?.pathname?.includes("/verify-email") || from?.pathname?.includes("/reset-password");
       const redirectTo = from && !isAuthPage
         ? `${from.pathname ?? ""}${from.search ?? ""}${from.hash ?? ""}` 
-        : "/courses";
-      navigate(redirectTo || "/courses", { replace: true });
+        : "/dashboard";
+      navigate(redirectTo || "/dashboard", { replace: true });
     },
   });
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
-import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail } from "lucide-react";
+import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail, Folder, ChevronDown, ChevronUp, Video } from "lucide-react";
 import SEO from "../components/SEO";
 import { useAuth } from "../state/AuthContext";
 
@@ -66,15 +66,32 @@ const CourseDetailPage: React.FC = () => {
     enabled: !!id,
   });
 
-  const [activeTab, setActiveTab] = useState<"recordings" | "assignments" | "curriculum">("recordings");
+  const [activeTab, setActiveTab] = useState<"folders" | "curriculum">("folders");
+  const [expandedFolders, setExpandedFolders] = useState<Record<number, boolean>>({ [-1]: true });
+
+  React.useEffect(() => {
+    if (details?.folders) {
+      const initial: Record<number, boolean> = { [-1]: true };
+      details.folders.forEach((f: any) => {
+        initial[f.id] = true;
+      });
+      setExpandedFolders(initial);
+    }
+  }, [details?.folders]);
+
+  const toggleFolder = (folderId: number) => {
+    setExpandedFolders(prev => ({
+      ...prev,
+      [folderId]: !prev[folderId]
+    }));
+  };
   
   const { user } = useAuth();
   
   const course = details?.course;
   const enrollment = details?.enrollment;
-  const recordings = details?.recordings || [];
-  const assignments = details?.assignments || [];
   const curriculum = details?.curriculum || [];
+  const folders = details?.folders || [];
 
   const isVerified = user?.isEmailVerified;
 
@@ -159,14 +176,14 @@ const CourseDetailPage: React.FC = () => {
 
       <div className="border-b border-slate-200 flex flex-wrap gap-8">
         <button
-          onClick={() => setActiveTab("recordings")}
+          onClick={() => setActiveTab("folders")}
           className={`pb-4 text-sm font-bold uppercase tracking-widest border-b-2 transition-colors flex items-center gap-2 ${
-            activeTab === "recordings"
+            activeTab === "folders"
               ? "border-primary text-primary"
               : "border-transparent text-slate-500 hover:text-slate-700"
           }`}
         >
-          <PlayCircle className="h-4 w-4" /> Recordings
+          <Folder className="h-4 w-4" /> Class Folders
         </button>
         <button
           onClick={() => setActiveTab("curriculum")}
@@ -176,17 +193,7 @@ const CourseDetailPage: React.FC = () => {
               : "border-transparent text-slate-500 hover:text-slate-700"
           }`}
         >
-          <Book className="h-4 w-4" /> Curriculum
-        </button>
-        <button
-          onClick={() => setActiveTab("assignments")}
-          className={`pb-4 text-sm font-bold uppercase tracking-widest border-b-2 transition-colors flex items-center gap-2 ${
-            activeTab === "assignments"
-              ? "border-primary text-primary"
-              : "border-transparent text-slate-500 hover:text-slate-700"
-          }`}
-        >
-          <FileText className="h-4 w-4" /> Assignments
+          <Book className="h-4 w-4" /> Curriculum Progress
         </button>
       </div>
 
@@ -226,96 +233,163 @@ const CourseDetailPage: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-6">
-           {activeTab === "recordings" && (
-              <div className="grid gap-4">
-                  {recordings.length > 0 ? (
-                      recordings.map((r: any) => (
-                          <div key={r.id} className="bg-white p-6 rounded-2xl border border-slate-100 flex items-center justify-between group hover:border-primary transition-all">
-                              <div className="flex items-center gap-4">
-                                  <div className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                                      <PlayCircle className="h-5 w-5" />
+          {activeTab === "folders" && (
+            <div className="space-y-6">
+              {folders.length > 0 ? (
+                folders.map((folder: any) => {
+                  const isExpanded = !!expandedFolders[folder.id];
+                  const classesCount = folder.classes?.length || 0;
+                  return (
+                    <div key={folder.id} className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300">
+                      {/* Folder Header */}
+                      <button
+                        onClick={() => toggleFolder(folder.id)}
+                        className="w-full flex items-center justify-between p-6 bg-slate-50/60 hover:bg-slate-50 transition-colors text-left"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="h-12 w-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                            <Folder className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-black text-slate-950 uppercase tracking-tight">{folder.name}</h3>
+                            <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">{classesCount} {classesCount === 1 ? "Class" : "Classes"}</p>
+                          </div>
+                        </div>
+                        <div>
+                          {isExpanded ? (
+                            <ChevronUp className="h-5 w-5 text-slate-400" />
+                          ) : (
+                            <ChevronDown className="h-5 w-5 text-slate-400" />
+                          )}
+                        </div>
+                      </button>
+
+                      {/* Folder Classes List */}
+                      {isExpanded && (
+                        <div className="p-6 space-y-6 border-t border-slate-100 divide-y divide-slate-100">
+                          {folder.classes && folder.classes.length > 0 ? (
+                            folder.classes.map((cls: any, idx: number) => (
+                              <div key={cls.id} className={`pt-6 ${idx === 0 ? "pt-0" : ""}`}>
+                                <div className="mb-4">
+                                  <h4 className="text-base font-black text-slate-900 uppercase tracking-tight">{cls.name}</h4>
+                                  {cls.description && <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">{cls.description}</p>}
+                                </div>
+
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                  {/* Recordings (Lessons) */}
+                                  <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
+                                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
+                                      <Video className="h-4 w-4 text-primary" />
+                                      <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-950">Lessons & Recordings</h5>
+                                    </div>
+                                    {cls.recordings && cls.recordings.length > 0 ? (
+                                      <div className="space-y-2.5">
+                                        {cls.recordings.map((r: any) => (
+                                          <div key={r.id} className="bg-white p-4 rounded-xl border border-slate-100 flex items-center justify-between group hover:border-primary transition-all">
+                                            <div className="flex items-center gap-3">
+                                              <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                                <PlayCircle className="h-4 w-4" />
+                                              </div>
+                                              <div>
+                                                <h6 className="font-bold text-slate-900 text-xs">{r.title}</h6>
+                                                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Published on {new Date(r.recording_date).toLocaleDateString()}</p>
+                                              </div>
+                                            </div>
+                                            <a href={r.video_url} target="_blank" rel="noreferrer" className="text-[10px] font-black text-primary uppercase tracking-widest transition-all hover:underline flex items-center gap-1">
+                                              Watch →
+                                            </a>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : (
+                                      <p className="text-xs text-slate-400 py-4 text-center font-medium">Class recordings will appear here as your tutor uploads them.</p>
+                                    )}
                                   </div>
-                                  <div>
-                                      <h4 className="font-bold text-slate-900">{r.title}</h4>
-                                      <p className="text-xs text-slate-400">Published on {new Date(r.recording_date).toLocaleDateString()}</p>
+
+                                  {/* Assignments */}
+                                  <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
+                                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
+                                      <FileText className="h-4 w-4 text-secondary" />
+                                      <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-950">Class Tasks & Assignments</h5>
+                                    </div>
+                                    {cls.assignments && cls.assignments.length > 0 ? (
+                                      <div className="space-y-3">
+                                        {cls.assignments.map((a: any) => (
+                                          <div key={a.id} className="bg-white p-4 rounded-xl border border-slate-100 space-y-3">
+                                            <div className="flex justify-between items-start">
+                                              <div>
+                                                <h6 className="font-bold text-slate-900 text-xs mb-1">{a.title}</h6>
+                                                <div className="flex items-center gap-1">
+                                                  <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Due:</span>
+                                                  <span className="text-[10px] font-bold text-secondary">{new Date(a.due_date).toLocaleDateString()}</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <p className="text-slate-500 text-[11px] leading-relaxed whitespace-pre-wrap">{renderDescriptionWithLinks(a.description)}</p>
+                                            {a.file_url && (
+                                              <a href={a.file_url} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-900 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors border border-slate-100">
+                                                <FileText className="h-3 w-3" /> Resource
+                                              </a>
+                                            )}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : (
+                                      <p className="text-xs text-slate-400 py-4 text-center font-medium">No tasks assigned for this class yet.</p>
+                                    )}
                                   </div>
+                                </div>
                               </div>
-                              <a href={r.video_url} target="_blank" rel="noreferrer" className="text-xs font-bold text-primary uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
-                                  Watch Now →
-                              </a>
+                            ))
+                          ) : (
+                            <div className="py-6 text-center text-slate-400 text-xs">No classes uploaded in this folder yet.</div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="py-16 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 text-center">
+                  <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Class materials will appear here once uploaded.</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === "curriculum" && (
+            <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+               <div className="divide-y divide-slate-100">
+                  {curriculum.length > 0 ? (
+                      curriculum.map((item: any) => (
+                          <div key={item.id} className="p-4 sm:p-5 flex items-start gap-4 hover:bg-slate-50 transition-colors group">
+                              <div className={`mt-1 h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                  item.is_completed 
+                                      ? "bg-approve text-white" 
+                                      : "bg-slate-100 text-slate-300"
+                              }`}>
+                                  <svg className="h-3 w-3 fill-current" viewBox="0 0 20 20">
+                                      <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                                  </svg>
+                              </div>
+                              <div className="flex-1">
+                                  <div className="flex items-center gap-3 mb-0.5">
+                                      <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Topic #{item.order_index}</span>
+                                      {item.is_completed && <span className="text-[10px] font-black text-approve uppercase tracking-widest">Completed</span>}
+                                  </div>
+                                  <h4 className={`text-base font-bold mb-1 ${item.is_completed ? "text-slate-400" : "text-slate-900"} transition-all`}>
+                                      {item.title}
+                                  </h4>
+                                  <p className="text-slate-400 text-xs leading-relaxed max-w-2xl">{item.content}</p>
+                              </div>
                           </div>
                       ))
                   ) : (
-                      <div className="py-12 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 text-center">
-                          <p className="text-slate-400 font-medium">Class recordings will appear here as your tutor uploads them.</p>
-                      </div>
+                      <div className="p-12 text-center text-slate-400">No curriculum defined for this course yet.</div>
                   )}
-              </div>
-           )}
-
-           {activeTab === "curriculum" && (
-              <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
-                 <div className="divide-y divide-slate-100">
-                    {curriculum.length > 0 ? (
-                        curriculum.map((item: any) => (
-                            <div key={item.id} className="p-4 sm:p-5 flex items-start gap-4 hover:bg-slate-50 transition-colors group">
-                                <div className={`mt-1 h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0 ${
-                                    item.is_completed 
-                                        ? "bg-approve text-white" 
-                                        : "bg-slate-100 text-slate-300"
-                                }`}>
-                                    <svg className="h-3 w-3 fill-current" viewBox="0 0 20 20">
-                                        <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                    </svg>
-                                </div>
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-0.5">
-                                        <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Topic #{item.order_index}</span>
-                                        {item.is_completed && <span className="text-[10px] font-black text-approve uppercase tracking-widest">Completed</span>}
-                                    </div>
-                                    <h4 className={`text-base font-bold mb-1 ${item.is_completed ? "text-slate-400" : "text-slate-900"} transition-all`}>
-                                        {item.title}
-                                    </h4>
-                                    <p className="text-slate-400 text-xs leading-relaxed max-w-2xl">{item.content}</p>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="p-12 text-center text-slate-400">No curriculum defined for this course yet.</div>
-                    )}
-                 </div>
-              </div>
-           )}
-
-           {activeTab === "assignments" && (
-              <div className="grid gap-4">
-                  {assignments.length > 0 ? (
-                      assignments.map((a: any) => (
-                        <div key={a.id} className="bg-white p-5 rounded-2xl border border-slate-100 hover:border-secondary transition-all">
-                             <div className="flex justify-between items-start mb-3">
-                                 <div>
-                                    <h4 className="text-lg font-bold text-slate-900 mb-1">{a.title}</h4>
-                                    <div className="flex items-center gap-2">
-                                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Due Date:</span>
-                                       <span className="text-xs font-bold text-secondary">{new Date(a.due_date).toLocaleDateString()}</span>
-                                    </div>
-                                 </div>
-                             </div>
-                             <p className="text-slate-500 text-xs mb-5 leading-relaxed whitespace-pre-wrap">{renderDescriptionWithLinks(a.description)}</p>
-                             {a.file_url && (
-                                <a href={a.file_url} className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-50 text-slate-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-slate-100 transition-colors border border-slate-100">
-                                    <FileText className="h-3.5 w-3.5" /> Resource
-                                </a>
-                             )}
-                        </div>
-                      ))
-                  ) : (
-                      <div className="py-12 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 text-center">
-                          <p className="text-slate-400 font-medium">Assignments will appear here once your tutor posts them.</p>
-                      </div>
-                  )}
-              </div>
-           )}
+               </div>
+            </div>
+          )}
         </div>
       )}
     </div>

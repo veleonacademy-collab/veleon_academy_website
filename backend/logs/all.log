@@ -12583,3 +12583,332 @@
 2026-06-08 10:05:22:522 [32minfo[39m: [32mUser 77 connected with socket hApSOXAboX-H2db9AAAN[39m
 2026-06-08 10:05:22:522 [37mdebug[39m: [37m[Request End] GET /student/dashboard took 318ms[39m
 2026-06-08 10:05:22:522 [35mhttp[39m: [35mGET /api/academy/student/dashboard 304 - - 317.716 ms[39m
+2026-06-18 12:01:32:132 [32minfo[39m: [32mStarting database migrations...[39m
+2026-06-18 12:01:32:132 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-06-18 12:01:33:133 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-06-18 12:01:33:133 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-06-18 12:01:33:133 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-06-18 12:01:33:133 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-06-18 12:01:33:133 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-06-18 12:01:33:133 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32mExecuting migration 001_add_course_slug.sql...[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32m✓ 001_add_course_slug.sql executed successfully[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-06-18 12:01:34:134 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32mExecuting migration add_metadata_to_users.sql...[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32m✓ add_metadata_to_users.sql executed successfully[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-06-18 12:01:35:135 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32mExecuting migration create_webinar_leads_table.sql...[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32m✓ create_webinar_leads_table.sql executed successfully[39m
+2026-06-18 12:01:36:136 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration fix_tasks_and_indexes.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ fix_tasks_and_indexes.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration rename_user_role_to_student.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ rename_user_role_to_student.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration sales_leads.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ sales_leads.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration update_courses_is_hidden_and_seed.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ update_courses_is_hidden_and_seed.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration update_sales_leads_and_enrollments_price.sql...[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
+2026-06-18 12:01:37:137 [32minfo[39m: [32mExecuting migration zz_folders_and_classes.sql...[39m
+2026-06-18 12:01:38:138 [32minfo[39m: [32m✓ zz_folders_and_classes.sql executed successfully[39m
+2026-06-18 12:01:38:138 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
+2026-06-18 12:01:38:138 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-06-18 12:14:52:1452 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 12:14:52:1452 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 12:15:21:1521 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5174[39m
+2026-06-18 12:15:21:1521 [33mwarn[39m: [33m[CORS] Rejected origin: http://localhost:5174[39m
+2026-06-18 12:15:21:1521 [37mdebug[39m: [37m[Request End] OPTIONS /login took 12ms[39m
+2026-06-18 12:15:21:1521 [35mhttp[39m: [35mOPTIONS /api/auth/login 200 4 - 9.298 ms[39m
+2026-06-18 12:15:51:1551 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5174[39m
+2026-06-18 12:15:51:1551 [33mwarn[39m: [33m[CORS] Rejected origin: http://localhost:5174[39m
+2026-06-18 12:15:51:1551 [37mdebug[39m: [37m[Request End] OPTIONS /login took 6ms[39m
+2026-06-18 12:15:51:1551 [35mhttp[39m: [35mOPTIONS /api/auth/login 200 4 - 4.002 ms[39m
+2026-06-18 12:15:52:1552 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5174[39m
+2026-06-18 12:15:52:1552 [33mwarn[39m: [33m[CORS] Rejected origin: http://localhost:5174[39m
+2026-06-18 12:15:52:1552 [37mdebug[39m: [37m[Request End] OPTIONS /login took 3ms[39m
+2026-06-18 12:15:52:1552 [35mhttp[39m: [35mOPTIONS /api/auth/login 200 4 - 1.812 ms[39m
+2026-06-18 12:16:45:1645 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 12:16:45:1645 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 12:17:07:177 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5174[39m
+2026-06-18 12:17:07:177 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/login took 3ms[39m
+2026-06-18 12:17:07:177 [37mdebug[39m: [37m[Request Start] POST /api/auth/login | Origin: http://localhost:5174[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request End] POST /login took 838ms[39m
+2026-06-18 12:17:08:178 [35mhttp[39m: [35mPOST /api/auth/login 200 741 - 837.054 ms[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5174[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 2ms[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5174[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 3ms[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5174[39m
+2026-06-18 12:17:08:178 [32minfo[39m: [32mUser 3 connected with socket EU81u-5NyVDq4KYoAAAB[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5174[39m
+2026-06-18 12:17:08:178 [37mdebug[39m: [37m[Request End] GET / took 162ms[39m
+2026-06-18 12:17:08:178 [35mhttp[39m: [35mGET /api/ads 200 2 - 161.667 ms[39m
+2026-06-18 12:17:09:179 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 1150ms[39m
+2026-06-18 12:17:09:179 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 1149.494 ms[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 1ms[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 200ms[39m
+2026-06-18 12:17:13:1713 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 197.740 ms[39m
+2026-06-18 12:17:13:1713 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 291ms[39m
+2026-06-18 12:17:13:1713 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 200 2612 - 290.762 ms[39m
+2026-06-18 12:17:14:1714 [33mwarn[39m: [33m[SLOW REQUEST] GET /tutor/students took 1469ms[39m
+2026-06-18 12:17:14:1714 [35mhttp[39m: [35mGET /api/academy/tutor/students 200 2693 - 1468.092 ms[39m
+2026-06-18 12:17:33:1733 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:17:33:1733 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders took 1ms[39m
+2026-06-18 12:17:33:1733 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:17:33:1733 [37mdebug[39m: [37m[Request End] GET /courses/6/folders took 728ms[39m
+2026-06-18 12:17:33:1733 [35mhttp[39m: [35mGET /api/academy/courses/6/folders 200 2 - 729.159 ms[39m
+2026-06-18 12:18:47:1847 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+3 | Origin: http://localhost:5174[39m
+2026-06-18 12:18:47:1847 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+3 took 1ms[39m
+2026-06-18 12:18:47:1847 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+3 | Origin: http://localhost:5174[39m
+2026-06-18 12:18:48:1848 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+3 took 1084ms[39m
+2026-06-18 12:18:48:1848 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+3 200 10777 - 1083.010 ms[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 165ms[39m
+2026-06-18 12:20:14:2014 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 164.926 ms[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 179ms[39m
+2026-06-18 12:20:14:2014 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 177.784 ms[39m
+2026-06-18 12:20:14:2014 [37mdebug[39m: [37m[Request End] GET /tutor/students took 176ms[39m
+2026-06-18 12:20:14:2014 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 176.676 ms[39m
+2026-06-18 12:20:23:2023 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:20:23:2023 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders took 1ms[39m
+2026-06-18 12:20:23:2023 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:20:23:2023 [37mdebug[39m: [37m[Request End] GET /courses/6/folders took 160ms[39m
+2026-06-18 12:20:23:2023 [35mhttp[39m: [35mGET /api/academy/courses/6/folders 304 - - 159.285 ms[39m
+2026-06-18 12:20:39:2039 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:20:39:2039 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/folders took 1ms[39m
+2026-06-18 12:20:39:2039 [37mdebug[39m: [37m[Request Start] POST /api/academy/tutor/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:20:40:2040 [37mdebug[39m: [37m[Request End] POST /tutor/folders took 170ms[39m
+2026-06-18 12:20:40:2040 [35mhttp[39m: [35mPOST /api/academy/tutor/folders 201 125 - 168.796 ms[39m
+2026-06-18 12:20:40:2040 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:20:40:2040 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders took 1ms[39m
+2026-06-18 12:20:40:2040 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 12:20:40:2040 [37mdebug[39m: [37m[Request End] GET /courses/6/folders took 151ms[39m
+2026-06-18 12:20:40:2040 [35mhttp[39m: [35mGET /api/academy/courses/6/folders 200 127 - 150.679 ms[39m
+2026-06-18 12:20:51:2051 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+2 | Origin: http://localhost:5174[39m
+2026-06-18 12:20:51:2051 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+2 took 1ms[39m
+2026-06-18 12:20:51:2051 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+2 | Origin: http://localhost:5174[39m
+2026-06-18 12:20:52:2052 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+2 took 1240ms[39m
+2026-06-18 12:20:52:2052 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+2 200 10914 - 1239.173 ms[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 1ms[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 198ms[39m
+2026-06-18 12:22:51:2251 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 197.308 ms[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request End] GET /tutor/students took 237ms[39m
+2026-06-18 12:22:51:2251 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 237.427 ms[39m
+2026-06-18 12:22:51:2251 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 327ms[39m
+2026-06-18 12:22:51:2251 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 326.459 ms[39m
+2026-06-18 12:22:54:2254 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+1 | Origin: http://localhost:5174[39m
+2026-06-18 12:22:54:2254 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+1 took 1ms[39m
+2026-06-18 12:22:54:2254 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+1 | Origin: http://localhost:5174[39m
+2026-06-18 12:22:56:2256 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+1 took 1279ms[39m
+2026-06-18 12:22:56:2256 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+1 200 11364 - 1279.436 ms[39m
+2026-06-18 12:23:24:2324 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-06-18 12:23:24:2324 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 1ms[39m
+2026-06-18 12:23:24:2324 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-06-18 12:23:25:2325 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 1226ms[39m
+2026-06-18 12:23:25:2325 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 200 10928 - 1224.954 ms[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 1ms[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 7ms[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 165ms[39m
+2026-06-18 12:24:32:2432 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 164.066 ms[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request End] GET /tutor/students took 165ms[39m
+2026-06-18 12:24:32:2432 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 163.314 ms[39m
+2026-06-18 12:24:32:2432 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 265ms[39m
+2026-06-18 12:24:32:2432 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 260.293 ms[39m
+2026-06-18 12:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 12:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 13:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 13:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 13:08:18:818 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+2 | Origin: http://localhost:5174[39m
+2026-06-18 13:08:18:818 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+2 took 1ms[39m
+2026-06-18 13:08:18:818 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+2 | Origin: http://localhost:5174[39m
+2026-06-18 13:08:20:820 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+2 took 1355ms[39m
+2026-06-18 13:08:20:820 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+2 304 - - 1353.263 ms[39m
+2026-06-18 13:25:11:2511 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 13:25:11:2511 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 13:25:12:2512 [32minfo[39m: [32mUser 3 connected with socket cLLjtn_-s1GJsWkTAAAB[39m
+2026-06-18 13:25:35:2535 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 13:25:35:2535 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 13:25:39:2539 [32minfo[39m: [32mUser 3 connected with socket MZyzGPAV4P5_VU99AAAB[39m
+2026-06-18 13:26:04:264 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 13:26:04:264 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 13:26:04:264 [32minfo[39m: [32mUser 3 connected with socket qRmA5cjWrKlQnG1HAAAB[39m
+2026-06-18 13:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 13:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 13:49:54:4954 [32minfo[39m: [32mStarting database migrations...[39m
+2026-06-18 13:49:54:4954 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-06-18 13:49:56:4956 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32mExecuting migration 001_add_course_slug.sql...[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32m✓ 001_add_course_slug.sql executed successfully[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-06-18 13:49:57:4957 [32minfo[39m: [32mExecuting migration add_folder_cohort_and_cleanup.sql...[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32m✓ add_folder_cohort_and_cleanup.sql executed successfully[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32mExecuting migration add_metadata_to_users.sql...[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32m✓ add_metadata_to_users.sql executed successfully[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-06-18 13:49:58:4958 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32mExecuting migration create_webinar_leads_table.sql...[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32m✓ create_webinar_leads_table.sql executed successfully[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-06-18 13:49:59:4959 [32minfo[39m: [32mExecuting migration fix_tasks_and_indexes.sql...[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32m✓ fix_tasks_and_indexes.sql executed successfully[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32mExecuting migration rename_user_role_to_student.sql...[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32m✓ rename_user_role_to_student.sql executed successfully[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32mExecuting migration sales_leads.sql...[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32m✓ sales_leads.sql executed successfully[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32mExecuting migration update_courses_is_hidden_and_seed.sql...[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32m✓ update_courses_is_hidden_and_seed.sql executed successfully[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32mExecuting migration update_sales_leads_and_enrollments_price.sql...[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
+2026-06-18 13:50:00:500 [32minfo[39m: [32mExecuting migration zz_folders_and_classes.sql...[39m
+2026-06-18 13:50:01:501 [32minfo[39m: [32m✓ zz_folders_and_classes.sql executed successfully[39m
+2026-06-18 13:50:01:501 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
+2026-06-18 13:50:01:501 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-06-18 13:50:19:5019 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 13:50:19:5019 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 13:50:19:5019 [32minfo[39m: [32mUser 3 connected with socket 1Qbzq7968XmYHVxnAAAB[39m
+2026-06-18 13:57:30:5730 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 13:57:30:5730 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 13:57:30:5730 [32minfo[39m: [32mUser 3 connected with socket zHWtc4UhLjQl5LxzAAAB[39m
+2026-06-18 13:57:45:5745 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-18 13:57:45:5745 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-06-18 13:57:46:5746 [32minfo[39m: [32mUser 3 connected with socket MZwqm3lRacqOxrItAAAB[39m
+2026-06-18 13:57:59:5759 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+2 | Origin: http://localhost:5174[39m
+2026-06-18 13:57:59:5759 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+2 took 3ms[39m
+2026-06-18 13:57:59:5759 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+2 | Origin: http://localhost:5174[39m
+2026-06-18 13:58:00:580 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+2 took 1402ms[39m
+2026-06-18 13:58:00:580 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+2 200 12314 - 1398.523 ms[39m
+2026-06-18 14:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 14:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 3ms[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5174[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5174[39m
+2026-06-18 14:06:28:628 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 223ms[39m
+2026-06-18 14:06:28:628 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 222.522 ms[39m
+2026-06-18 14:06:29:629 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses?all=true took 1237ms[39m
+2026-06-18 14:06:29:629 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 1234.729 ms[39m
+2026-06-18 14:06:29:629 [33mwarn[39m: [33m[SLOW REQUEST] GET /tutor/students took 1248ms[39m
+2026-06-18 14:06:29:629 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 1247.171 ms[39m
+2026-06-18 14:06:39:639 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-06-18 14:06:39:639 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 3ms[39m
+2026-06-18 14:06:39:639 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-06-18 14:06:41:641 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 1316ms[39m
+2026-06-18 14:06:41:641 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 200 12338 - 1315.553 ms[39m
+2026-06-18 14:07:00:70 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 14:07:00:70 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders took 1ms[39m
+2026-06-18 14:07:00:70 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 14:07:00:70 [37mdebug[39m: [37m[Request End] GET /courses/6/folders took 159ms[39m
+2026-06-18 14:07:00:70 [35mhttp[39m: [35mGET /api/academy/courses/6/folders 200 723 - 159.771 ms[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/folders/1 | Origin: http://localhost:5174[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/folders/1 took 1ms[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request Start] PUT /api/academy/tutor/folders/1 | Origin: http://localhost:5174[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request End] PUT /tutor/folders/1 took 225ms[39m
+2026-06-18 14:07:46:746 [35mhttp[39m: [35mPUT /api/academy/tutor/folders/1 200 139 - 225.025 ms[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders took 1ms[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders | Origin: http://localhost:5174[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5174[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request End] GET /courses/6/folders took 154ms[39m
+2026-06-18 14:07:46:746 [35mhttp[39m: [35mGET /api/academy/courses/6/folders 200 725 - 153.161 ms[39m
+2026-06-18 14:07:46:746 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 179ms[39m
+2026-06-18 14:07:46:746 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 178.792 ms[39m
+2026-06-18 14:07:51:751 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-06-18 14:07:51:751 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 1ms[39m
+2026-06-18 14:07:51:751 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-06-18 14:07:52:752 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 1358ms[39m
+2026-06-18 14:07:52:752 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 200 12340 - 1357.611 ms[39m

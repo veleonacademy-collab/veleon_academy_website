@@ -51,7 +51,7 @@ const RegisterPage: React.FC = () => {
     onSuccess: (data) => {
       setAuth(data.user, data.tokens);
       toast.success(`Welcome, ${data.user.firstName}!`);
-      navigate("/courses", { replace: true });
+      navigate("/dashboard", { replace: true });
     },
   });
 
@@ -66,7 +66,7 @@ const RegisterPage: React.FC = () => {
       if (variables.courseOfInterest) {
         navigate(`/enroll/${variables.courseOfInterest}`, { replace: true });
       } else {
-        navigate("/courses", { replace: true });
+        navigate("/dashboard", { replace: true });
       }
       
       // Track TikTok registration
