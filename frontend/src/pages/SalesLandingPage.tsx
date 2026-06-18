@@ -295,7 +295,7 @@ const SalesLandingPage: React.FC = () => {
               </div>
               <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 relative z-10">
                 <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-4 border-slate-100 shadow-lg bg-slate-100">
-                   <img src="/ayodeji_trainer.png" alt="Coach Omidoyin Ayodeji" className="w-full h-full object-cover" loading="lazy" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+                   <img src="/ayodeji_trainer.jpg" alt="Coach Omidoyin Ayodeji" className="w-full h-full object-cover" loading="lazy"  />
                 </div>
                 <div className="space-y-2 text-center sm:text-left">
                   <h3 className="text-lg sm:text-2xl font-serif font-black tracking-tight leading-tight uppercase">
@@ -422,7 +422,7 @@ const SalesLandingPage: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row gap-6 items-center text-center sm:text-left">
               <div className="shrink-0 w-24 h-24 sm:w-36 sm:h-36 bg-slate-100 rounded-2xl overflow-hidden shadow-inner border border-slate-200">
-                <img src="/cornelius.jpeg" alt="Data Analyst Trainee - CS" className="w-full h-full object-cover" />
+                <img src="/cornelius.jpg" alt="Data Analyst Trainee - CS" className="w-full h-full object-cover" />
               </div>
               <div className="space-y-3 flex-1">
                 <div>
@@ -500,7 +500,7 @@ const SalesLandingPage: React.FC = () => {
 
       <section className="px-4 sm:px-6">
          <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_segun.jpeg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/Testimonial_segun.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"   />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Segun</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
@@ -838,7 +838,7 @@ const SalesLandingPage: React.FC = () => {
       <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
         <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row">
            <div className="md:w-1/2 relative bg-slate-100 min-h-[250px] sm:min-h-[400px]">
-              <img src="/ayodeji_trainer.png" alt="Lead Trainer Omidoyin Ayodeji" className="absolute inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/ayodeji_trainer.jpg" alt="Lead Trainer Omidoyin Ayodeji" className="absolute inset-0 w-full h-full object-cover"   />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Omidoyin Ayodeji</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">CEO & Lead Data Analyst Trainer</p>
@@ -936,7 +936,7 @@ const SalesLandingPage: React.FC = () => {
 
        <section className="px-4 sm:px-6">
          <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_Barry.jpeg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/Testimonial_Barry.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"   />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Barry</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>

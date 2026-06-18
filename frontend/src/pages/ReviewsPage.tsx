@@ -274,7 +274,7 @@ const ReviewsPage: React.FC = () => {
             </div>
 
               <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_Cornelius.jpeg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/Testimonial_Cornelius.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"  />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Cornelius</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
@@ -282,7 +282,7 @@ const ReviewsPage: React.FC = () => {
            </div>
 
             <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_segun.jpeg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/Testimonial_segun.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"  />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Segun</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
@@ -290,7 +290,7 @@ const ReviewsPage: React.FC = () => {
            </div>
 
             <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_Rita.jpeg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/Testimonial_Rita.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"   />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Rita</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
@@ -298,7 +298,7 @@ const ReviewsPage: React.FC = () => {
            </div>
 
             <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_Barry.jpeg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?u=ayodeji" }} />
+              <img src="/Testimonial_Barry.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"   />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Barry</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>

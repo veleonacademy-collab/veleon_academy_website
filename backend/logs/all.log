@@ -12912,3 +12912,40 @@
 2026-06-18 14:07:51:751 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
 2026-06-18 14:07:52:752 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 1358ms[39m
 2026-06-18 14:07:52:752 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 200 12340 - 1357.611 ms[39m
+2026-06-18 14:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 14:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 15:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 15:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 15:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 15:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 16:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 16:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 16:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 16:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 17:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 17:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 17:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 17:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 17:42:51:4251 [32minfo[39m: [32mSocket MZwqm3lRacqOxrItAAAB disconnected[39m
+2026-06-18 18:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 18:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 18:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 18:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 19:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 19:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 19:16:45:1645 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5174[39m
+2026-06-18 19:16:45:1645 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5174[39m
+2026-06-18 19:16:45:1645 [37mdebug[39m: [37m[Request End] GET /courses took 230ms[39m
+2026-06-18 19:16:45:1645 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 230.517 ms[39m
+2026-06-18 19:16:45:1645 [37mdebug[39m: [37m[Request End] GET / took 311ms[39m
+2026-06-18 19:16:45:1645 [35mhttp[39m: [35mGET /api/ads 200 2 - 293.538 ms[39m
+2026-06-18 19:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 19:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 20:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 20:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 20:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 20:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 21:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 21:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 21:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 21:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
