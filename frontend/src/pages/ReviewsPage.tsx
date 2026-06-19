@@ -84,7 +84,7 @@ const ReviewsPage: React.FC = () => {
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
             <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest hidden sm:inline">Back</span>
           </Link>
-          <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-8 sm:h-10" />
+          <img src="/veleonacademy_logo.jpg" alt="Veleon Academy Logo" className="h-8 sm:h-10" />
           <Link 
             to="/data#enroll-section" 
             className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-2.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all shadow-lg shadow-orange-600/20 flex items-center gap-2 active:scale-95"
@@ -408,7 +408,7 @@ const ReviewsPage: React.FC = () => {
       {/* Trust Footer */}
       <footer className="py-12 bg-slate-950 border-t border-white/5 text-center px-4">
          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
-            <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-8 opacity-40" />
+            <img src="/veleonacademy_logo.jpg" alt="Veleon Academy Logo" className="h-8 opacity-40" />
             <div className="flex gap-6 text-[10px] font-black uppercase tracking-widest text-slate-600">
                <Link to="/data" className="hover:text-white transition-colors">Sales Page</Link>
                <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

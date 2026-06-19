@@ -258,7 +258,7 @@ const SalesLandingPage: React.FC = () => {
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
             <div className="flex justify-center mb-4 sm:mb-8 anim-fade-down">
               <div className="p-1 rounded-2xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-xl border border-white/10">
-                <img src="/veleonacademy_logo.png" alt="Veleon Academy Logo" className="h-10 sm:h-14 px-4 py-2" fetchPriority="high" />
+                <img src="/veleonacademy_logo.jpg" alt="Veleon Academy Logo" className="h-16 sm:h-14 px-4 py-2" fetchPriority="high" />
               </div>
             </div>
 
@@ -1329,7 +1329,7 @@ const SalesLandingPage: React.FC = () => {
 
       {/* Footer minimal */}
       <footer className="py-12 sm:py-20 border-t border-white/5 text-center space-y-6 px-4 pb-24 md:pb-20">
-        <img src="/veleonacademy_logo.png" alt="Logo" className="h-8 sm:h-10 mx-auto grayscale opacity-40 hover:opacity-100 transition-opacity" />
+        <img src="/veleonacademy_logo.jpg" alt="Logo" className="h-8 sm:h-10 mx-auto grayscale opacity-40 hover:opacity-100 transition-opacity" />
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-slate-600 text-[9px] sm:text-[10px] font-black uppercase tracking-widest">
            <Link to="/privacy" className="hover:text-orange-500 transition-colors">Privacy Policy</Link>
            <Link to="/terms" className="hover:text-orange-500 transition-colors">Terms of Service</Link>

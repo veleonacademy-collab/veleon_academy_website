@@ -14,7 +14,7 @@ interface SEOProps {
 const SEO: React.FC<SEOProps> = ({
   title,
   description = "Empowering the next generation of tech leaders through hands-on learning and mentorship. Start your journey today.",
-  image = "/veleonacademy_logo.png",
+  image = "/veleonacademy_logo.jpg",
   url = "https://veleonacademy.veleonex.com",
   type = "website",
   keywords = "tech academy, software engineering, data science, coding bootcamp, tech training, mentor-led learning",

@@ -101,7 +101,7 @@ const LoginPage: React.FC = () => {
       />
       <div className="flex justify-center mb-4">
         <Link to="/">
-          <img src="/veleonacademy_logo.png" alt="VeleonAcademy" className="h-16 w-auto" />
+          <img src="/veleonacademy_logo.jpg" alt="VeleonAcademy" className="h-16 w-auto" />
         </Link>
       </div>
       <h1 className="mb-3 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Login</h1>

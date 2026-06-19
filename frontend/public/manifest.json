@@ -8,13 +8,13 @@
   "theme_color": "#00a9c0",
   "icons": [
     {
-      "src": "/veleonacademy_logo.png",
+      "src": "/veleonacademy_logo.jpg",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/veleonacademy_logo.png",
+      "src": "/veleonacademy_logo.jpg",
       "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"

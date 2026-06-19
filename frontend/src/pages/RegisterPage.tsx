@@ -133,7 +133,7 @@ const RegisterPage: React.FC = () => {
       <div className="mx-auto max-w-md rounded-2xl border border-border bg-card p-4 sm:p-6 shadow-xl md:mt-0 -mt-8">
         <div className="flex justify-center mb-4">
           <Link to="/">
-            <img src="/veleonacademy_logo.png" alt="VeleonAcademy" className="h-16 w-auto" />
+            <img src="/veleonacademy_logo.jpg" alt="VeleonAcademy" className="h-16 w-auto" />
           </Link>
         </div>
         <h1 className="mb-3 text-center text-lg sm:text-2xl font-black text-slate-900 tracking-tight uppercase">Create an account</h1>

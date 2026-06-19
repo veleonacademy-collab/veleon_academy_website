@@ -87,7 +87,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link to="/" className="text-lg font-semibold text-primary">
             {/* {APP_NAME} */}
-            <img src="/veleonacademy_logo.png" alt="Logo" className="h-12" />
+            <img src="/veleonacademy_logo.jpg" alt="Logo" className="h-12" />
           </Link>
 
           {/* Mobile Menu Button */}
@@ -215,7 +215,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <div className="mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="block mb-4">
-              <img src="/veleonacademy_logo.png" alt={APP_NAME} className="h-10" />
+              <img src="/veleonacademy_logo.jpg" alt={APP_NAME} className="h-10" />
             </Link>
             <p className="text-gray-600 text-sm max-w-sm">
               Empowering the next generation of tech leaders through hands-on learning and mentorship.

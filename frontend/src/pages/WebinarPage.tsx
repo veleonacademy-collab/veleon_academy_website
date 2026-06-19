@@ -548,7 +548,7 @@ const WebinarPage: React.FC = () => {
 
       {/* Footer minimal */}
       <footer className="py-12 border-t border-slate-900 text-center space-y-4">
-        <img src="/veleonacademy_logo.png" alt="Logo" className="h-8 mx-auto grayscale opacity-40" />
+        <img src="/veleonacademy_logo.jpg" alt="Logo" className="h-8 mx-auto grayscale opacity-40" />
         <p className="text-[9px] uppercase tracking-widest text-slate-600 font-bold">© {new Date().getFullYear()} Veleon Academy. All Rights Reserved.</p>
       </footer>
     </div>
