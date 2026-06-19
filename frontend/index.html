@@ -12,10 +12,11 @@
     <meta name="author" content="Veleon Academy" />
     <link rel="canonical" href="https://veleonacademy.veleonex.com/" />
     
-    <!-- Google Fonts: Lora (Serif) & Plus Jakarta Sans / Outfit / Inter (Sans) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Local Font Preloads to eliminate layout shifts (CLS) and LCP render-blocking delays -->
+    <link rel="preload" href="/fonts/lora-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/lora-normal-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/plus-jakarta-sans-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/plus-jakarta-sans-normal-700.woff2" as="font" type="font/woff2" crossorigin>
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Veleon Academy | Tech Courses &amp; Coding Bootcamp Online" />

@@ -12951,3 +12951,44 @@
 2026-06-18 21:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
 2026-06-18 22:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
 2026-06-18 22:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 22:13:19:1319 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: undefined[39m
+2026-06-18 22:13:20:1320 [37mdebug[39m: [37m[Request End] GET /courses took 289ms[39m
+2026-06-18 22:13:20:1320 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 278.902 ms[39m
+2026-06-18 22:13:20:1320 [37mdebug[39m: [37m[Request Start] GET /api/trending?limit=50 | Origin: undefined[39m
+2026-06-18 22:13:20:1320 [37mdebug[39m: [37m[Request End] GET /?limit=50 took 211ms[39m
+2026-06-18 22:13:20:1320 [35mhttp[39m: [35mGET /api/trending?limit=50 200 2 - 210.879 ms[39m
+2026-06-18 22:14:41:1441 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: undefined[39m
+2026-06-18 22:14:42:1442 [37mdebug[39m: [37m[Request End] GET /courses took 176ms[39m
+2026-06-18 22:14:42:1442 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 171.191 ms[39m
+2026-06-18 22:14:42:1442 [37mdebug[39m: [37m[Request Start] GET /api/trending?limit=50 | Origin: undefined[39m
+2026-06-18 22:14:42:1442 [37mdebug[39m: [37m[Request End] GET /?limit=50 took 157ms[39m
+2026-06-18 22:14:42:1442 [35mhttp[39m: [35mGET /api/trending?limit=50 200 2 - 156.479 ms[39m
+2026-06-18 22:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 22:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 23:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 23:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-18 23:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-18 23:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 00:00:00:00 [32minfo[39m: [32mRunning daily overdue installment check...[39m
+2026-06-19 00:00:00:00 [32minfo[39m: [32mProcessing overdue installments...[39m
+2026-06-19 00:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 00:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 00:00:00:00 [32minfo[39m: [32mLocked portals for 0 students.[39m
+2026-06-19 00:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 00:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 01:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 01:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 02:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 02:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 02:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 02:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 03:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 03:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 03:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 03:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 04:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 04:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 04:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 04:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-19 05:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-06-19 05:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m

@@ -20,7 +20,7 @@ import TrendingPage from "./pages/TrendingPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage";
 import PricingPage from "./pages/PricingPage";
 import CoursesPage from "./pages/CoursesPage";
-import { StripeProvider } from "./components/Payment/StripeProvider";
+// StripeProvider omitted - Stripe elements not used on frontend routes (hosted session redirects handled on backend)
 import AdminLoginPage from "./pages/admin/auth/AdminLoginPage";
 import AdminRegisterPage from "./pages/admin/auth/AdminRegisterPage";
 import AdminProfilePage from "./pages/admin/profile/AdminProfilePage";
@@ -80,8 +80,7 @@ import EnrollPage from "./pages/EnrollPage";
 
 const App: React.FC = () => {
   return (
-    <StripeProvider>
-      <Routes>
+    <Routes>
         {/* Standalone pages: Analytics injected individually since they are outside the Layout wrapper */}
         <Route path="/free-training" element={<><Analytics /><WebinarPage /></>} />
         <Route path="/data" element={<><Analytics /><SalesLandingPage /></>} />
@@ -155,7 +154,6 @@ const App: React.FC = () => {
           </Layout>
         } />
       </Routes>
-    </StripeProvider>
   );
 };
 
