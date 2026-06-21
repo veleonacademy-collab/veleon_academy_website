@@ -118,6 +118,7 @@ const SalesLandingPage: React.FC = () => {
     };
   }, []);
 
+  const month = "July"
 
   useEffect(() => {
     const target = new Date("2026-06-06T23:59:59").getTime();
@@ -242,7 +243,7 @@ const SalesLandingPage: React.FC = () => {
 
         {/* Top Banner Urgency & Scarcity */}
       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-2.5 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] relative z-50 flex flex-wrap justify-center items-center gap-2">
-        <span>⚠️ June Batch Enrollment Capped to 30 Spots: 23 Secured — Only 7 Seats Left!</span>
+        <span>⚠️ {month} Batch Enrollment Capped to 30 Spots: 23 Secured — Only 7 Seats Left!</span>
         <span className="hidden sm:inline">•</span>
         <span className="bg-black/20 px-2 py-0.5 rounded animate-pulse">
           Closes in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s ⏳
@@ -314,7 +315,7 @@ const SalesLandingPage: React.FC = () => {
                 Claim My Grand Slam Offer Now <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
               </a>
               <p className="mt-4 text-slate-500 text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-orange-500" /> Only 7 of 30 Seats Remaining for June Batch!
+                <Clock className="h-4 w-4 text-orange-500" /> Only 7 of 30 Seats Remaining for {month} Batch!
               </p>
             </div>
 
@@ -795,7 +796,7 @@ const SalesLandingPage: React.FC = () => {
               <div className="space-y-2 relative z-10">
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Direct Risk-Reversal</p>
                  <h3 className="text-xl sm:text-2xl text-white font-serif font-black uppercase leading-tight">LIMITED TO ONLY 30 SEATS</h3>
-                 <p className="text-slate-400 text-xs font-medium">23/30 spots secured. Only 7 spots remaining for the June 6th class.</p>
+                 <p className="text-slate-400 text-xs font-medium">23/30 spots secured. Only 7 spots remaining for the {month} 6th class.</p>
               </div>
               <a 
                 href="#enroll-section" 
@@ -904,7 +905,7 @@ const SalesLandingPage: React.FC = () => {
                 onClick={scrollToEnroll}
                 className="w-full bg-orange-600 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-all shadow-md text-center block mt-4"
               >
-                 Enroll in the June Batch
+                 Enroll in the {month} Batch
               </a>
            </div>
         </div>
@@ -999,7 +1000,7 @@ const SalesLandingPage: React.FC = () => {
              </div>
              <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-none uppercase">
                SECURE YOUR SPOT <br/>
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 italic">FOR JUNE 2026 NOW</span>
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 italic">FOR {month} 2026 NOW</span>
              </h2>
              <p className="text-orange-500 text-[11px] sm:text-sm font-black uppercase tracking-widest max-w-md mx-auto animate-pulse">
                ⚡️ FINAL SPOTS REMAINING - REGISTRATION CLOSING SOON
@@ -1009,7 +1010,7 @@ const SalesLandingPage: React.FC = () => {
           {/* Simple 3-Step Process Indicator */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
             {[
-               { n: 1, t: "Pick Your Plan", d: "Choose how you want to pay to lock in your June 2026 slot." },
+               { n: 1, t: "Pick Your Plan", d: `Choose how you want to pay to lock in your ${month} 2026 slot.` },
                { n: 2, t: "Fill Details", d: "Entry takes 60 seconds. We need your WhatsApp to add you to the group." },
                { n: 3, t: "Secure Spot", d: "Complete payment to guarantee your seat before they're gone!" },
                { 
@@ -1157,7 +1158,7 @@ const SalesLandingPage: React.FC = () => {
              <div className="bg-slate-50 p-5 sm:p-6 rounded-3xl border border-slate-200 space-y-5">
                 <div className="space-y-0.5">
                   <h4 className="text-sm font-black uppercase tracking-tight text-slate-900 flex items-center gap-1.5">
-                    <Lock className="h-4.5 w-4.5 text-orange-600" /> Secure June Batch Entry
+                    <Lock className="h-4.5 w-4.5 text-orange-600" /> Secure {month} Batch Entry
                   </h4>
                   <p className="text-slate-400 text-[10px] font-medium leading-tight">Your data is safe and encrypted.</p>
                 </div>
@@ -1212,7 +1213,7 @@ const SalesLandingPage: React.FC = () => {
                    
                    {/* Direct WhatsApp Help Button */}
                    <a 
-                     href={`https://wa.me/2348149517851?text=Hello%20Coach%20Omidoyin,%20I%20have%20a%20question%20about%20the%20June%20cohort%20Data%20Analysis%20Accelerator...`}
+                     href={`https://wa.me/2348149517851?text=Hello%20Coach%20Omidoyin,%20I%20have%20a%20question%20about%20the%20${month}%20cohort%20Data%20Analysis%20Accelerator...`}
                      target="_blank" 
                      rel="noopener noreferrer"
                      className="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-widest text-center flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
@@ -1308,7 +1309,7 @@ const SalesLandingPage: React.FC = () => {
       {/* Floating/Sticky Mobile CTA Footer (TSA inspired) */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#020617]/90 backdrop-blur-md border-t border-white/10 px-4 py-3.5 flex items-center justify-between shadow-2xl">
         <div className="space-y-0.5">
-           <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider">June Batch Enrollment</p>
+           <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider">{month} Batch Enrollment</p>
            <div className="flex items-baseline gap-1">
               <span className="text-lg font-black text-orange-500">
                  {isInstallment ? '₦10,000' : selectedTrack === 'full' ? '₦25,000' : '₦15,000'}
