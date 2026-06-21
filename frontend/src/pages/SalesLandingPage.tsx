@@ -30,7 +30,7 @@ declare global {
   interface Window {
     fbq?: any;
     _fbq?: any;
-    clarity?: (...args: any[]) => void;
+    clarity?: any;
   }
 }
 
@@ -119,9 +119,22 @@ const SalesLandingPage: React.FC = () => {
   }, []);
 
   const month = "July"
+  const cap = 30;
+  const secured = 15;
+  const remaining = cap - secured;
+  const targetDate = "2026-07-02T23:59:59"
+
+  const price1 = "₦25,999"
+  const price2 = "₦15,999"
+  const installment1 = "₦10,999"
+  const installment2 = "₦10,999"
+  const priceremaining1 = "₦15,000"
+  const priceremaining2 = "₦5,000"
+  
+  
 
   useEffect(() => {
-    const target = new Date("2026-06-06T23:59:59").getTime();
+    const target = new Date(targetDate).getTime();
     const updateCountdown = () => {
       const now = new Date().getTime();
       const difference = target - now;
@@ -243,7 +256,7 @@ const SalesLandingPage: React.FC = () => {
 
         {/* Top Banner Urgency & Scarcity */}
       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-2.5 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] relative z-50 flex flex-wrap justify-center items-center gap-2">
-        <span>⚠️ {month} Batch Enrollment Capped to 30 Spots: 23 Secured — Only 7 Seats Left!</span>
+        <span>⚠️ {month} Batch Enrollment Capped to {cap} Spots: {secured} Secured — Only {remaining} Seats Left!</span>
         <span className="hidden sm:inline">•</span>
         <span className="bg-black/20 px-2 py-0.5 rounded animate-pulse">
           Closes in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s ⏳
@@ -263,23 +276,36 @@ const SalesLandingPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 anim-scale-in">
               <h1 
-                className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight leading-[1.15] text-white anim-scale-in"
+                className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight leading-[1.15] text-white uppercase animate-pulse"
                 id="hero-heading"
               >
-                Master Data Analysis: Become a <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-500 italic">Job-Ready</span> Pro In 6 Weeks
+                STOP GUESSING WHAT TO LEARN TO BECOME A DATA ANALYST
               </h1>
             </div>
 
             <p 
               className="text-slate-300 text-base sm:text-2xl max-w-3xl mx-auto leading-relaxed font-medium px-2 anim-fade-up-d2"
             >
-              Get the technical power of <span className="text-white font-extrabold relative inline-block mx-1">
-                <span className="relative z-10 font-bold italic">Excel + SQL + Power BI + AI</span>
-                <span className="absolute bottom-1 left-0 w-full h-2 bg-orange-500/30 -z-10 rounded-full" />
-              </span> + the Saturday monetization roadmap to turn your skills into freelance client retainers. No tech background required.
+              Build real portfolio projects, master Excel + SQL + Power BI + AI, and become job-ready in 6 weeks—even if you're starting from scratch.
             </p>
+
+            {/* Bullet list of benefits */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto anim-fade-up-d3 pt-2">
+              {[
+                "Beginner-Friendly Roadmap",
+                "Real Business Projects",
+                "CV + LinkedIn Career Toolkit",
+                "Freelancing & Client Acquisition Training",
+                "Direct Mentor Support"
+              ].map((bullet, idx) => (
+                <div key={idx} className="flex items-center gap-2.5 text-slate-300 text-sm sm:text-base font-bold bg-white/5 border border-white/10 px-4 py-3 rounded-2xl">
+                  <CheckCircle2 className="h-5 w-5 text-orange-500 shrink-0" />
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
 
             {/* Urgent Ticking Visual Board */}
             <div className="bg-slate-900/60 border border-white/10 rounded-3xl p-6 max-w-2xl mx-auto backdrop-blur-sm grid grid-cols-4 gap-2 text-center shadow-xl">
@@ -314,8 +340,8 @@ const SalesLandingPage: React.FC = () => {
               >
                 Claim My Grand Slam Offer Now <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
               </a>
-              <p className="mt-4 text-slate-500 text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-orange-500" /> Only 7 of 30 Seats Remaining for {month} Batch!
+              <p className="mt-4 text-slate-400 text-sm font-black uppercase tracking-wider flex items-center gap-1.5 bg-orange-500/10 border border-orange-500/20 px-4 py-2 rounded-xl">
+                <Clock className="h-4 w-4 text-orange-500 animate-pulse" /> Only {remaining} Seats Remaining For The {month} Cohort
               </p>
             </div>
 
@@ -341,27 +367,127 @@ const SalesLandingPage: React.FC = () => {
           </div>
         </section>
 
-      {/* 2. WELCOME SECTION (Identifying the Avatar) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative">
-        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-[10px] font-black uppercase tracking-widest">
-            A System Tailored for Career Pivots
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase">
-            WHO IS THIS COHORT DESIGNED FOR?<br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-400 italic">VELEON ELITE ACCELERATOR</span>
-          </h2>
-          
-          <div className="space-y-5 sm:space-y-6 text-slate-300 text-sm sm:text-lg font-medium max-w-2xl mx-auto text-center px-2">
-            <p className="leading-relaxed">
-              If you are a <span className="text-white font-bold">Graduate, Job Seeker, Young Professional, or Tech Transitioner</span> looking to bypass the low-income trap, this is designed explicitly for you.
-            </p>
-            <p className="leading-relaxed">
-              We cut out all the academic bloat and focus 100% on **practical skills and direct monetization**. You get the corporate technical skills of a professional analyst plus the exact business playbook to package and sell your expertise.
-            </p>
+      {/* 2. PROBLEM SECTION (Why Most Aspiring Data Analysts Never Get Hired) */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-slate-950 border-t border-b border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-red-500/5 blur-[100px] rounded-full -z-10" />
+        
+        <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
+          <div className="text-center space-y-4">
+            <span className="text-red-500 text-xs font-black uppercase tracking-[0.2em]">The Hard Reality</span>
+            <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase text-white">
+              WHY MOST ASPIRING DATA ANALYSTS <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 italic">NEVER GET HIRED</span>
+            </h2>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6 sm:mt-10 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+            {/* Left side: The Problem */}
+            <div className="bg-red-950/20 border border-red-500/20 p-6 sm:p-8 rounded-[2rem] space-y-4 sm:space-y-6 flex flex-col justify-between">
+              <div className="space-y-3 sm:space-y-4 text-left">
+                <p className="text-slate-200 text-base sm:text-lg font-bold">
+                  Most people think they need more certificates.
+                </p>
+                <p className="text-red-400 text-xl font-black uppercase tracking-wider font-bold">
+                  They don't.
+                </p>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
+                  The real problem is they never build projects that prove they can solve business problems. That's why they spend months learning... yet still don't feel ready for interviews.
+                </p>
+              </div>
+
+              {/* Red crosses */}
+              <div className="space-y-2.5 sm:space-y-3 pt-4 border-t border-red-500/10 text-left">
+                {[
+                  "Collecting certificates",
+                  "Watching endless tutorials",
+                  "Learning random tools",
+                  "Applying without a portfolio"
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-2 items-center text-slate-300 font-bold text-sm">
+                    <span className="text-red-500 shrink-0">❌</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right side: The Climax & Solution */}
+            <div className="bg-gradient-to-br from-slate-900 to-slate-950 border border-white/10 p-6 sm:p-8 rounded-[2rem] space-y-6 flex flex-col justify-center text-center">
+              <div className="space-y-2">
+                <p className="text-slate-400 text-xs sm:text-sm font-black uppercase tracking-widest">The Hiring Filter</p>
+                <h3 className="text-2xl sm:text-3xl font-serif font-black uppercase text-white leading-tight">
+                  Employers don't pay for certificates.
+                </h3>
+                <div className="py-2 inline-block">
+                  <span className="text-4xl sm:text-5xl font-serif font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 italic">
+                    They pay for proof.
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-4 sm:p-5 bg-orange-500/10 border border-orange-500/20 rounded-2xl">
+                <p className="text-slate-200 text-xs sm:text-sm font-semibold leading-relaxed">
+                  That's why every student inside the <span className="text-white font-extrabold">Veleon Elite Accelerator</span> builds practical portfolio projects using real-world datasets before graduation.
+                </p>
+              </div>
+
+              <a 
+                href="#enroll-section" 
+                onClick={scrollToEnroll}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Enroll Risk-Free Now <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. WHO THIS IS PERFECT FOR SECTION */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative border-b border-white/5">
+        <div className="max-w-4xl mx-auto text-center space-y-10">
+          <div className="space-y-4">
+            <span className="text-orange-500 text-xs font-black uppercase tracking-[0.2em]">Targeted Audience</span>
+            <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase text-white">
+              WHO THIS IS PERFECT FOR
+            </h2>
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-semibold">
+              This program was built for people who want a clear path into Data Analysis without wasting months figuring everything out themselves.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+            {[
+              { 
+                cat: "Students", 
+                desc: "Gain a head start and prepare for the job market by learning real corporate data analytics skills early." 
+              },
+              { 
+                cat: "Graduates", 
+                desc: "Equip yourself with SQL querying, Excel reporting, and Power BI skills that recruiter bot filters prioritize." 
+              },
+              { 
+                cat: "Job Seekers", 
+                desc: "Gain raw capstone portfolio project assets and SQL expertise to outshine candidates in corporate interviews." 
+              },
+              { 
+                cat: "Career Transitioners", 
+                desc: "Successfully pivot into high-paying corporate data roles, even starting with zero prior technical code experience." 
+              }
+            ].map((item, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 p-6 rounded-[2rem] group hover:border-orange-500/50 hover:bg-white/10 transition-all flex flex-col gap-3 text-left">
+                <div className="h-10 w-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                  <Users className="h-5 w-5" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-base sm:text-lg font-serif font-black tracking-tight uppercase text-white group-hover:text-orange-400 transition-colors">{item.cat}</h3>
+                  <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
             <a 
               href="#enroll-section" 
               onClick={scrollToEnroll}
@@ -376,500 +502,11 @@ const SalesLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. REALITY CHECK SECTION (Busting Sacrifices & Effort) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-secondary/5 blur-[100px] rounded-full -z-10" />
-        
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-4 sm:space-y-6">
-             <div className="bg-secondary/10 border-l-4 border-secondary p-5 sm:p-6 rounded-r-2xl space-y-3">
-                <h3 className="text-secondary text-sm font-black uppercase tracking-widest">THE BRUTAL TRUTH...</h3>
-                <div className="space-y-2 sm:space-y-3">
-                  {[
-                    "99% of free YouTube tutorials teach you syntax, not business solutions",
-                    "Certificates without real portfolio projects get thrown in the recruiter trash",
-                    "Pitching yourself as a generic 'Data Analyst' leads to price wars",
-                    "Spending years in 'tutorial purgatory' without building active revenue streams"
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-2 items-start">
-                      <div className="h-4 w-4 rounded-full bg-secondary/20 flex items-center justify-center shrink-0 mt-1">
-                        <div className="h-1.5 w-1.5 rounded-full bg-secondary" />
-                      </div>
-                      <p className="text-sm font-bold text-slate-200">{item}</p>
-                    </div>
-                  ))}
-                </div>
-             </div>
-             
-             <div className="bg-secondary p-4 rounded-xl shadow-lg">
-                <p className="text-white font-black text-xs sm:text-sm uppercase tracking-wider text-center">
-                   HOW WE BYPASS THE STUDY BLOAT & TIME DELAY
-                </p>
-             </div>
-          </div>
-
-          <div className="bg-white p-6 sm:p-8 rounded-[2rem] shadow-xl space-y-4 sm:space-y-6">
-            <h3 className="text-slate-900 text-xl sm:text-2xl font-serif font-black tracking-tight uppercase leading-tight">The only effective and easy learning route you need</h3>
-            <div className="bg-approve/10 border-l-4 border-approve p-3 rounded-r-lg">
-               <p className="text-approve text-[9px] font-black uppercase tracking-widest">
-                  MINIMIZING YOUR EFFORT & MAXIMIZING DREAM OUTCOME:
-               </p>
-            </div>
-            <div className="space-y-3">
-              {[
-                { title: "Directly solve messy business problems using pre-built models", icon: <Target className="h-4.5 w-4.5 text-orange-500" /> },
-                { title: "Master only the exact SQL, Excel, and Power BI commands that secure jobs", icon: <Cpu className="h-4.5 w-4.5 text-orange-500" /> },
-                { title: "Apply pre-built proposals to lock in ₦50k–₦250k dashboard projects", icon: <ShieldCheck className="h-4.5 w-4.5 text-orange-500" /> }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-3 items-center p-3 bg-slate-50 rounded-xl border border-slate-100">
-                  <div className="shrink-0">{item.icon}</div>
-                  <p className="text-slate-700 text-xs sm:text-sm font-bold">{item.title}</p>
-                </div>
-              ))}
-            </div>
-            <a 
-              href="#enroll-section" 
-              onClick={scrollToEnroll}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white px-4 py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md"
-            >
-              Enroll Risk-Free Now <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. REVIEW SECTION (Perceived Likelihood of Achievement) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-orange-500/5">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="text-center space-y-1">
-             <h4 className="text-orange-500 font-black uppercase tracking-[0.25em] text-[9px] sm:text-xs">Real Proof: High Likelihood of Success</h4>
-             <h2 className="text-xl sm:text-4xl font-serif font-black tracking-tight leading-tight uppercase px-1">"THE ACADEMY REMOVED MY STUCK-FEELINGS & GAVE ME PRACTICAL PORTFOLIO POWER"</h2>
-          </div>
-
-          <div className="bg-white text-slate-900 p-6 sm:p-10 rounded-[2rem] shadow-xl relative">
-            <div className="absolute -top-3 -left-3 bg-orange-500 p-3 rounded-xl text-white shadow-lg">
-               <Star className="h-5 w-5 fill-current" />
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-6 items-center text-center sm:text-left">
-              <div className="shrink-0 w-24 h-24 sm:w-36 sm:h-36 bg-slate-100 rounded-2xl overflow-hidden shadow-inner border border-slate-200">
-                <img src="/cornelius.jpg" alt="Data Analyst Trainee - CS" className="w-full h-full object-cover" />
-              </div>
-              <div className="space-y-3 flex-1">
-                <div>
-                  <h3 className="text-lg font-serif font-black text-orange-600 uppercase">Cornelius</h3>
-                  <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Data Analyst Trainee, Batch 2</p>
-                </div>
-                <div className="relative">
-                  <span className="absolute -top-4 -left-4 text-5xl text-slate-100 font-serif leading-none -z-10">"</span>
-                  <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed italic relative z-10">
-                    "My experience at Veleon Academy as a data analyst trainee has been very impactful. I’ve gained practical skills in data analysis, especially in Excel, data cleaning, and visualization. The training is well-structured and easy to understand, with hands-on projects that helped me apply what I learned. The instructors are supportive and always ready to help. Overall, the academy has boosted my confidence and given me a strong foundation in data analysis. I highly recommend it to anyone starting a career in this field. 100% ✅"
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <Link to="/reviews" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 border border-white/10 text-white px-6 py-4 rounded-xl font-black text-[9px] sm:text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 mx-auto">
-            To See More Real Student Proof (Click Here) <ArrowRight className="h-4.5 w-4.5" />
-          </Link>
-        </div>
-      </section>
-
-        {/* 5. OUTCOMES SECTION (Minimizing Effort & Time Delay) */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 overflow-hidden relative">
-          <div className="max-w-4xl mx-auto space-y-10">
-            <div className="text-center">
-               <span className="text-orange-500 text-[10px] font-black uppercase tracking-widest block mb-2">MAXIMUM VALUE • MINIMUM FRICTION</span>
-               <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase leading-tight">BY THE END OF THIS ACCELERATOR, YOU WILL BE ABLE TO:</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-              {/* Replaced heavy Unsplash external image with a local gradient card for speed */}
-              <div className="relative aspect-video sm:aspect-square md:aspect-auto rounded-[2rem] overflow-hidden group shadow-xl bg-gradient-to-br from-slate-900 via-orange-950/40 to-slate-900 flex items-end">
-                 <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                   <svg viewBox="0 0 100 100" className="w-48 h-48 text-orange-500" fill="currentColor"><path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z"/></svg>
-                 </div>
-                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                 <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-orange-500/90 backdrop-blur-md p-4 rounded-xl">
-                      <p className="text-white font-black text-sm uppercase tracking-wider text-center">BECOME THE HIGH-STATUS TECH ASSET BUSINESSES PAY RETAINERS FOR</p>
-                    </div>
-                 </div>
-              </div>
-
-              <div className="space-y-4">
-                {[
-                  "Clean messy databases in Excel using expert techniques, cutting manual effort by 90%",
-                  "Query live SQL servers confidently using joins and CTEs without getting code errors",
-                  "Construct executive dashboard portals in Power BI from raw data within hours",
-                  "Deploy advanced AI prompts to summarize analytical findings instantly for management",
-                  "Confidently pitch SME business owners and bill ₦50,000–₦250,000 per dashboard setup"
-                ].map((item, i) => (
-                  <div 
-                    key={i} 
-                    className={`flex gap-3 items-center p-4 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition-colors group anim-right-${i}`}
-                  >
-                    <div className="h-7 w-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
-                      <CheckCircle2 className="h-4.5 w-4.5" />
-                    </div>
-                    <p className="text-sm font-bold text-slate-100">{item}</p>
-                  </div>
-                ))}
-                
-                <a 
-                  href="#enroll-section" 
-                  onClick={scrollToEnroll}
-                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md"
-                >
-                  Yes, I Want to Secure These Skills <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      <section className="px-4 sm:px-6">
-         <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_segun.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"   />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
-                 <h3 className="text-xl font-serif font-black leading-tight uppercase">Segun</h3>
-                 <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
-              </div>
-           </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 items-center">
-               <a 
-                 href="#enroll-section" 
-                 onClick={scrollToEnroll}
-                 className="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-all shadow-md text-center"
-               >
-                  Claim My Grand Slam Offer
-               </a>
-               <Link to="/reviews" className="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all text-center">
-                  Read Success Stories
-               </Link>
-             </div>
-      </section>
-
-      {/* 6. COURSE OVERVIEW & MODULES (Framed as Objection Busters) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <div className="text-center space-y-3">
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em] border border-orange-500/20">
-               6-Week System Milestones
-             </div>
-             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-none">
-               THE SYSTEM <span className="text-orange-500 italic">MILESTONES</span>
-             </h2>
-             <p className="text-slate-400 text-sm sm:text-base font-semibold max-w-xl mx-auto leading-relaxed">
-               Each track is specifically engineered to overcome a standard career-limiting obstacle:
-             </p>
-          </div>
-
-          {/* Timeline Stack (TSA Inspired) */}
-          <div className="space-y-6 max-w-2xl mx-auto">
-            {[
-              { 
-                step: "TRACK 1", 
-                title: "Business Excel & Reporting (Week 1 & 2)", 
-                objection: "Overcomes: 'Excel is too basic or raw data is too confusing'",
-                desc: "Clean dirty CRM databases (TRIM, PROPER, IFERROR). Command high-performance lookups (XLOOKUP, FILTER, INDEX+MATCH). Group transactions, construct interactive executive slicers, and build decision-focused KPI dashboards in PivotTables. Solve forecasting and sensitivity assumptions." 
-              },
-              { 
-                step: "TRACK 2", 
-                title: "Relational SQL Databases & Querying (Week 3 & 4)", 
-                objection: "Overcomes: 'SQL querying requires a computer science degree'",
-                desc: "Query databases from scratch (SELECT, DISTINCT, WHERE, ORDER BY). Master the art of multi-table Joins (INNER, LEFT) to analyze customer databases. Command window functions (ROW_NUMBER, LAG, LEAD) and subqueries/CTEs to solve real-world analyst SQL interview patterns." 
-              },
-              { 
-                step: "TRACK 3", 
-                title: "Power BI Storytelling & Star Schema Modeling (Week 5)", 
-                objection: "Overcomes: 'I do not know how to present my results to managers'",
-                desc: "Connect multiple CSV, Excel, and database sources in Power Query. Architect bulletproof star schema relational models (Fact vs Dimension tables). Master DAX calculation metrics (Measures, CALCULATE, Time Intelligence) and configure Row-Level Security." 
-              },
-              { 
-                step: "TRACK 4", 
-                title: "AI Tools & Client Monetization Blueprint (Week 6)", 
-                objection: "Overcomes: 'I don't know how to land a job or make money with my skills'",
-                desc: "Leverage advanced ChatGPT and Gemini prompt frameworks to accelerate workflows. Optimize your LinkedIn personal brand (Headline, About, visibility sprint) and build an ATS-optimized resume. Learn to price SME dashboard packages, write high-converting proposals, and secure recurring monthly reporting retainers." 
-              }
-            ].map((mod, i) => (
-              <div 
-                key={i} 
-                className="bg-[#0b0f19] border border-white/10 p-6 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-6 items-start relative hover:border-orange-500/40 transition-all group"
-              >
-                <div className="bg-orange-500 text-white font-black text-xs tracking-widest px-3 py-1 rounded-full shrink-0">
-                  {mod.step}
-                </div>
-                <div className="space-y-2">
-                  <span className="text-[10px] font-black tracking-wider text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded">
-                     {mod.objection}
-                  </span>
-                  <h3 className="text-lg font-serif font-black tracking-tight text-white group-hover:text-orange-400 transition-colors">
-                    {mod.title}
-                  </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed">
-                    {mod.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto pt-6">
-             <a 
-               href="#enroll-section" 
-               onClick={scrollToEnroll}
-               className="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
-             >
-               Start Learning Now <ArrowRight className="h-4 w-4" />
-             </a>
-             {/* <Link to="/curriculum" className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:bg-white/10 flex items-center justify-center gap-2">
-               Download Details <FileText className="h-4 w-4 text-orange-500" />
-             </Link> */}
-          </div>
-        </div>
-      </section>
-
-      {/* 6.5 ALEX HORMOZI $100M GRAND SLAM OFFER STACK (Value Stack & Objection Busters) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514] border-t border-b border-white/5">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-orange-600/5 blur-[120px] rounded-full -z-10" />
-        
-        <div className="max-w-4xl mx-auto space-y-12">
-          <div className="text-center space-y-3">
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em] border border-orange-500/20">
-               Your No-Brainer Value Stack
-             </div>
-             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-none uppercase">
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 italic">THE GRAND SLAM OFFER STACK</span>
-             </h2>
-             <p className="text-slate-400 text-sm sm:text-base font-semibold max-w-xl mx-auto leading-relaxed">
-               Here is the exact value stack you receive today. We address and eliminate every single obstacle in your way:
-             </p>
-          </div>
-
-          <div className="bg-[#110925]/60 border border-orange-500/30 p-6 sm:p-10 rounded-[2.5rem] shadow-2xl space-y-8 max-w-2xl mx-auto text-left relative">
-             <div className="absolute top-4 right-4 bg-orange-600 text-white px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest rotate-2 shadow-md">
-                Unbeatable Offer
-             </div>
-             
-             {/* Offer Stack Items */}
-             <div className="space-y-6 divide-y divide-white/5">
-                {[
-                  { 
-                    title: "Core 6-Week Data Analysis Accelerator", 
-                    sub: "Direct hands-on technical curriculum (Excel reporting pipelines, relational SQL server database querying, and executive Power BI dashboards).", 
-                    objection: "Busts: 'I don't know where to start or how to learn systematically.'",
-                    val: "₦150,000" 
-                  },
-                  { 
-                    title: "Bonus #1: Recruiter-Approved ATS CV & Resume Templates", 
-                    sub: "Tailored career templates and frameworks engineered to bypass automatic corporate filtering bots.", 
-                    objection: "Busts: 'Will my applications get ignored by resume scanners?'",
-                    val: "₦25,000" 
-                  },
-                  { 
-                    title: "Bonus #2: LinkedIn Profile Optimization & 30-Day Visibility Script", 
-                    sub: "Complete profile layout guides and commenting blueprints designed to make recruiters search you out.", 
-                    objection: "Busts: 'I don't know how to network or get recruiters to notice me.'",
-                    val: "₦30,000" 
-                  },
-                  { 
-                    title: "Bonus #3: SME Proposal & Client Outreach Pricing Templates", 
-                    sub: "Copy-and-paste worksheets to confidently pitch reporting dashboards and secure monthly consulting retainers.", 
-                    objection: "Busts: 'I have no sales skills and don't know how to bill clients.'",
-                    val: "₦20,000" 
-                  },
-                  { 
-                    title: "Bonus #4: 10 Proprietary Real-World Business Datasets", 
-                    sub: "Simulated retail, inventory, SaaS, and database CSVs to practice on and feature in your public portfolio.", 
-                    objection: "Busts: 'How do I build a portfolio without previous job experience?'",
-                    val: "₦25,000" 
-                  },
-                  { 
-                    title: "Bonus #5: WhatsApp VIP Direct Support & Private Alumni Network", 
-                    sub: "Direct access to Coach Ayodeji and batch graduates to review broken queries and grading support.", 
-                    objection: "Busts: 'What if I get completely stuck with code or formula errors?'",
-                    val: "₦50,000" 
-                  }
-                ].map((item, idx) => (
-                   <div key={idx} className={`pt-6 flex flex-col sm:flex-row justify-between items-start gap-4 ${idx === 0 ? 'border-none pt-0' : ''}`}>
-                      <div className="space-y-2 flex-1">
-                         <div className="flex items-center gap-2 flex-wrap">
-                           <h4 className="text-white font-bold text-sm sm:text-base tracking-tight">{item.title}</h4>
-                           <span className="text-[9px] font-black text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded">
-                              {item.objection}
-                           </span>
-                         </div>
-                         <p className="text-slate-400 text-[11px] sm:text-xs leading-relaxed">{item.sub}</p>
-                      </div>
-                      <div className="text-orange-400 font-serif font-black text-xs sm:text-sm shrink-0 uppercase tracking-widest sm:self-center">
-                         {item.val}
-                      </div>
-                   </div>
-                ))}
-             </div>
-
-             {/* Total vs Price comparison */}
-             <div className="bg-slate-950/60 p-6 rounded-2xl border border-white/10 space-y-4">
-                <div className="flex justify-between items-center text-slate-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
-                   <span>Combined Real Value:</span>
-                   <span className="line-through text-slate-500 font-serif font-black">₦300,000+</span>
-                </div>
-                <div className="flex justify-between items-center border-t border-white/10 pt-3">
-                   <span className="text-white font-black text-sm sm:text-base uppercase tracking-wider">Your Grand Slam Price Today:</span>
-                   <div className="text-right">
-                      <span className="text-3xl font-serif font-black text-orange-500 tracking-tighter">₦25,000</span>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">( <span className="text-[10px] font-serif font-black text-orange-500 ">Installments</span>  Available) </p>
-                   </div>
-                </div>
-             </div>
-              <div className="text-xs font-black text-orange-600  text-center">
-                      PAY ₦10,000 NOW AND PAY THE REST BY WEEK 6
-              </div>
-
-             <div className="text-center">
-                <a 
-                  href="#enroll-section" 
-                  onClick={scrollToEnroll}
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-4 px-6 rounded-xl font-black text-xs uppercase tracking-widest shadow-xl transition-all inline-block text-center"
-                >
-                   Claim My Grand Slam Offer Now
-                </a>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. SCHEDULE SECTION (Reducing Effort & Time Delay) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative">
-        <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
-           <div className="p-6 sm:p-10 space-y-6 md:w-3/5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-[9px] font-black uppercase tracking-widest">
-                High-Flex Efficiency System
-              </div>
-              <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight leading-none uppercase">
-                TRAINING <span className="text-orange-500 italic">SCHEDULE</span>
-              </h2>
-              <p className="text-sm text-slate-600 font-bold uppercase tracking-tight">HOW WE REDUCE YOUR WEEKLY EFFORT:</p>
-              
-              <div className="space-y-4">
-                 <div className="flex gap-3 items-start">
-                    <div className="h-8 w-8 bg-approve rounded-lg flex items-center justify-center text-white shrink-0 shadow-md">
-                       <CheckCircle2 className="h-4.5 w-4.5" />
-                    </div>
-                    <div>
-                       <h4 className="font-black text-sm uppercase tracking-tight">Monday to Friday (Pre-recorded Lessons)</h4>
-                       <p className="text-slate-500 text-xs sm:text-sm font-medium">Bite-sized, practical analytics video lessons released daily (30 to 45 mins). Designed to slot into the busiest schedules easily.</p>
-                    </div>
-                 </div>
-                 <div className="flex gap-3 items-start">
-                    <div className="h-8 w-8 bg-approve rounded-lg flex items-center justify-center text-white shrink-0 shadow-md">
-                       <CheckCircle2 className="h-4.5 w-4.5" />
-                    </div>
-                    <div>
-                       <h4 className="font-black text-sm uppercase tracking-tight">Saturday Live Technical Classes</h4>
-                       <p className="text-slate-500 text-xs font-bold italic mb-1">"Build the skills that unlock high-paying job offers."</p>
-                       <p className="text-slate-500 text-xs sm:text-sm font-medium">Meet live with Coach Ayodeji for 1 hour where i guide you through real workplace projects, using what you learned during the week. You will get to ask questions and get answers immediately from me.</p>
-                    </div>
-                 </div>
-                 <div className="flex gap-3 items-start">
-                    <div className="h-8 w-8 bg-approve rounded-lg flex items-center justify-center text-white shrink-0 shadow-md">
-                       <CheckCircle2 className="h-4.5 w-4.5" />
-                    </div>
-                    <div>
-                       <h4 className="font-black text-sm uppercase tracking-tight">Sunday Live Monetization Classes</h4>
-                       <p className="text-slate-500 text-xs font-bold italic mb-1">"Turn your high-income skills into an active revenue machine."</p>
-                       <p className="text-slate-500 text-xs sm:text-sm font-medium">Meet live with Coach Ayodeji to deploy pricing frameworks, outreach strategies, packages, and write proposals.</p>
-                    </div>
-                 </div>
-              </div>
-              
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 italic font-medium text-slate-500 text-[10px] sm:text-xs">
-                Busy schedule? You retake or review any recording via your private student dashboard with permanent lifetime access.
-              </div>
-           </div>
-           
-           <div className="md:w-2/5 bg-slate-950 p-6 sm:p-10 flex flex-col justify-center text-center space-y-6 relative overflow-hidden">
-              <div className="h-1 w-10 bg-orange-600 rounded-full mx-auto" />
-              <div className="space-y-2 relative z-10">
-                 <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Direct Risk-Reversal</p>
-                 <h3 className="text-xl sm:text-2xl text-white font-serif font-black uppercase leading-tight">LIMITED TO ONLY 30 SEATS</h3>
-                 <p className="text-slate-400 text-xs font-medium">23/30 spots secured. Only 7 spots remaining for the {month} 6th class.</p>
-              </div>
-              <a 
-                href="#enroll-section" 
-                onClick={scrollToEnroll}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:scale-[1.02] shadow-xl shadow-orange-600/30 relative z-10 text-center"
-              >
-                Enroll Now
-              </a>
-           </div>
-        </div>
-      </section>
-
-      {/* 8. WHO IT IS FOR SECTION */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40">
-        <div className="max-w-4xl mx-auto space-y-10">
-          <div className="text-center space-y-2">
-             <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase leading-tight">WHO IS THIS <span className="text-orange-500 italic">TRAINING</span> FOR?</h2>
-             <p className="text-slate-400 text-xs sm:text-sm font-semibold">Designed primarily to help the following people bypass struggle:</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              { 
-                cat: "Students & Graduates", 
-                desc: "Equip yourself with SQL querying, Excel reporting, and Power BI skills that recruiter bot filters prioritize." 
-              },
-              { 
-                cat: "Job Seekers", 
-                desc: "Gain raw capstone portfolio project assets and SQL expertise to outshine candidates in corporate interviews." 
-              },
-              { 
-                cat: "Young Professionals", 
-                desc: "Boost your current status and visibility by automating complex monthly business reporting templates." 
-              },
-              { 
-                cat: "Career Transitioners", 
-                desc: "Successfully pivot into high-paying corporate data roles, even starting with zero prior technical code experience." 
-              }
-            ].map((item, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-6 rounded-2xl group hover:border-orange-500/50 transition-all flex flex-col gap-3 text-left">
-                <div className="h-10 w-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
-                  <Users className="h-5 w-5" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="text-base sm:text-lg font-serif font-black tracking-tight uppercase">{item.cat}</h3>
-                  <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="flex flex-col items-center gap-6">
-            <div className="bg-approve/10 border border-approve/30 p-5 rounded-2xl text-center w-full">
-               <p className="text-approve text-sm sm:text-base font-black italic uppercase tracking-tight">
-                  If you fit any of these avatars, this accelerator was custom-built for your success.
-               </p>
-            </div>
-            <a 
-              href="#enroll-section" 
-              onClick={scrollToEnroll}
-              className="w-full sm:w-auto bg-orange-500 text-white px-10 py-5 rounded-xl font-black text-sm uppercase tracking-widest shadow-xl shadow-orange-500/20 transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
-            >
-              Reserve My Seat Now <ArrowRight className="h-4.5 w-4.5" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. LEAD TRAINER SECTION */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+      {/* 4. LEAD TRAINER SECTION */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden border-b border-white/5">
         <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row">
            <div className="md:w-1/2 relative bg-slate-100 min-h-[250px] sm:min-h-[400px]">
-              <img src="/ayodeji_trainer.jpg" alt="Lead Trainer Omidoyin Ayodeji" className="absolute inset-0 w-full h-full object-cover"   />
+              <img src="/ayodeji_trainer.jpg" alt="Lead Trainer Omidoyin Ayodeji" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
                  <h3 className="text-xl font-serif font-black leading-tight uppercase">Omidoyin Ayodeji</h3>
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">CEO & Lead Data Analyst Trainer</p>
@@ -911,81 +548,524 @@ const SalesLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 10. REVIEWS CALLOUT */}
-      <section className="py-16 sm:py-24 px-4 bg-orange-500/5">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-           {/* <div className="shrink-0 w-48 h-48 bg-slate-900 rounded-[2rem] overflow-hidden shadow-lg relative rotate-2">
-              <img src="https://i.pravatar.cc/400?u=student3" alt="Success Student Portrait" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 border-8 border-white/10" />
-           </div> */}
-           
-           <div className="space-y-4 flex-1">
-             <h3 className="text-xl sm:text-2xl font-serif font-black leading-tight uppercase">"THE METHODOLOGY IS EXTREMELY LOGICAL, PRACTICAL, AND EASY TO ABSORB"</h3>
-             <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Feedback from a Batch 3 Graduate</p>
-             <div className="flex flex-col sm:flex-row gap-3 items-center">
-               <a 
-                 href="#enroll-section" 
-                 onClick={scrollToEnroll}
-                 className="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-all shadow-md text-center"
-               >
-                  Claim My Grand Slam Offer
-               </a>
-               <Link to="/reviews" className="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all text-center">
-                  Read Success Stories
-               </Link>
-             </div>
-           </div>
+      {/* 5. STUDENT TESTIMONIALS SECTION (Proof) */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-orange-500/5 space-y-12 border-b border-white/5">
+        <div className="max-w-4xl mx-auto text-center space-y-3">
+           <h4 className="text-orange-500 font-black uppercase tracking-[0.25em] text-[9px] sm:text-xs">Real Proof: High Likelihood of Success</h4>
+           <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase px-1 text-white">"THE ACADEMY REMOVED MY STUCK-FEELINGS & GAVE ME PRACTICAL PORTFOLIO POWER"</h2>
         </div>
-      </section>
 
-      {/* 11. QUALITY PROOF */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514]">
-        <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8 text-center">
-          <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight uppercase leading-[1.1] px-1">
-            WHY ACCELERATOR <span className="text-orange-500 italic">GRADUATES</span> SUCCEED?
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-lg font-black italic uppercase tracking-wider underline decoration-orange-500/30 underline-offset-4">"THEY PROVE IT."</p>
-
-          <div className="space-y-4 text-slate-300 text-sm sm:text-base font-medium leading-relaxed max-w-xl mx-auto px-1">
-            <p>Anyone can buy a low-grade certificate. But companies pay for tested results.</p>
-            <p className="text-white font-black text-lg sm:text-xl uppercase tracking-tight font-serif">THAT IS THE VELEON STANDARD.</p>
-            <p>Before graduating, every student builds an individual capstone project from scratch. No shortcuts. No copy-paste code.</p>
-            <p>You apply SQL querying, Excel cleanup, and Power BI dashboards to a real-world messy dataset, proving your skills to yourself and potential clients.</p>
+        {/* Cornelius Testimonial */}
+        <div className="max-w-4xl mx-auto bg-white text-slate-900 p-6 sm:p-10 rounded-[2rem] shadow-xl relative">
+          <div className="absolute -top-3 -left-3 bg-orange-500 p-3 rounded-xl text-white shadow-lg">
+             <Star className="h-5 w-5 fill-current" />
           </div>
           
-          <div className="pt-6">
-            <a 
-              href="#enroll-section" 
-              onClick={scrollToEnroll}
-              className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 text-white px-10 py-5 rounded-xl font-black text-sm sm:text-base uppercase tracking-[0.15em] shadow-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-2 mx-auto"
-            >
-              ENROLL NOW <ArrowRight className="h-5 w-5" />
-            </a>
+          {/* Before/After summary */}
+          <div className="bg-orange-50 border border-orange-100 p-4 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center text-left mb-6 font-sans">
+            <div>
+              <span className="text-red-600 text-[10px] font-black uppercase tracking-widest block">Before:</span>
+              <p className="text-slate-700 text-xs sm:text-sm font-bold">Unsure where to start in Data Analysis.</p>
+            </div>
+            <div className="hidden sm:block border-r border-orange-200" />
+            <div>
+              <span className="text-emerald-600 text-[10px] font-black uppercase tracking-widest block">After:</span>
+              <p className="text-slate-700 text-xs sm:text-sm font-bold">Built practical projects and gained confidence working with data.</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-6 items-center text-center sm:text-left">
+            <div className="shrink-0 w-24 h-24 sm:w-36 sm:h-36 bg-slate-100 rounded-2xl overflow-hidden shadow-inner border border-slate-200">
+              <img src="/cornelius.jpg" alt="Data Analyst Trainee - CS" className="w-full h-full object-cover" />
+            </div>
+            <div className="space-y-3 flex-1">
+              <div>
+                <h3 className="text-lg font-serif font-black text-orange-600 uppercase">Cornelius</h3>
+                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Data Analyst Trainee, Batch 2</p>
+              </div>
+              <div className="relative text-left">
+                <span className="absolute -top-4 -left-4 text-5xl text-slate-100 font-serif leading-none -z-10">"</span>
+                <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed italic relative z-10">
+                  "My experience at Veleon Academy as a data analyst trainee has been very impactful. I’ve gained practical skills in data analysis, especially in Excel, data cleaning, and visualization. The training is well-structured and easy to understand, with hands-on projects that helped me apply what I learned. The instructors are supportive and always ready to help. Overall, the academy has boosted my confidence and given me a strong foundation in data analysis. I highly recommend it to anyone starting a career in this field. 100% ✅"
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Segun Testimonial */}
+        <div className="max-w-4xl mx-auto bg-slate-900 border border-white/10 p-6 sm:p-10 rounded-[2rem] shadow-xl relative">
+          {/* Before/After summary */}
+          <div className="bg-orange-500/10 border border-orange-500/20 p-4 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center text-left mb-6 font-sans">
+            <div>
+              <span className="text-red-500 text-[10px] font-black uppercase tracking-widest block">Before:</span>
+              <p className="text-slate-300 text-xs sm:text-sm font-bold">Struggled with disorganized learning materials and lack of guidance.</p>
+            </div>
+            <div className="hidden sm:block border-r border-orange-500/20" />
+            <div>
+              <span className="text-emerald-500 text-[10px] font-black uppercase tracking-widest block">After:</span>
+              <p className="text-slate-300 text-xs sm:text-sm font-bold">Mastered structured data analytics and successfully built business-ready dashboard solutions.</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6 items-stretch">
+             <div className="md:w-1/2 relative bg-slate-800 rounded-2xl overflow-hidden min-h-[300px]">
+                <img src="/Testimonial_segun.jpg" alt="Cohort 2 Student Segun" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-6 text-white text-left">
+                   <h3 className="text-xl font-serif font-black leading-tight uppercase">Segun</h3>
+                   <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
+                </div>
+             </div>
+             <div className="md:w-1/2 flex flex-col justify-center space-y-4 text-left">
+               <h3 className="text-white font-serif font-black text-xl uppercase">Fast tracked career ready portfolio</h3>
+               <p className="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed">
+                 Segun joined Veleon Academy to transition from theory to real-world deployment. The intensive cohort modules and supportive mentor check-ins allowed him to build data dashboards that match institutional quality.
+               </p>
+             </div>
+          </div>
+        </div>
+
+        {/* Barry Testimonial */}
+        <div className="max-w-4xl mx-auto bg-slate-900 border border-white/10 p-6 sm:p-10 rounded-[2rem] shadow-xl relative">
+          {/* Before/After summary */}
+          <div className="bg-orange-500/10 border border-orange-500/20 p-4 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center text-left mb-6 font-sans">
+            <div>
+              <span className="text-red-500 text-[10px] font-black uppercase tracking-widest block">Before:</span>
+              <p className="text-slate-300 text-xs sm:text-sm font-bold">Needed practical experience to complement theoretical knowledge.</p>
+            </div>
+            <div className="hidden sm:block border-r border-orange-500/20" />
+            <div>
+              <span className="text-emerald-500 text-[10px] font-black uppercase tracking-widest block">After:</span>
+              <p className="text-slate-300 text-xs sm:text-sm font-bold">Built real capstone projects and gained technical SQL & Power BI confidence for hiring managers.</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6 items-stretch">
+             <div className="md:w-1/2 relative bg-slate-800 rounded-2xl overflow-hidden min-h-[300px]">
+                <img src="/Testimonial_Barry.jpg" alt="Cohort 2 Student Barry" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-6 text-white text-left">
+                   <h3 className="text-xl font-serif font-black leading-tight uppercase">Barry</h3>
+                   <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
+                </div>
+             </div>
+             <div className="md:w-1/2 flex flex-col justify-center space-y-4 text-left">
+               <h3 className="text-white font-serif font-black text-xl uppercase">Real corporate workflows</h3>
+               <p className="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed">
+                 Barry built a highly detailed end-to-end relational database workspace. Through direct coaching and practical exercises, he bridged the gap from simple worksheets to advanced analytical capabilities.
+               </p>
+             </div>
+          </div>
+        </div>
+
+        {/* Batch 3 Graduate Testimonial */}
+        <div className="max-w-4xl mx-auto bg-slate-900 border border-white/10 p-6 sm:p-10 rounded-[2rem] shadow-xl relative">
+          {/* Before/After summary */}
+          <div className="bg-orange-500/10 border border-orange-500/20 p-4 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center text-left mb-6 font-sans">
+            <div>
+              <span className="text-red-500 text-[10px] font-black uppercase tracking-widest block">Before:</span>
+              <p className="text-slate-300 text-xs sm:text-sm font-bold">Tried self-teaching through scattered online tutorials.</p>
+            </div>
+            <div className="hidden sm:block border-r border-orange-500/20" />
+            <div>
+              <span className="text-emerald-500 text-[10px] font-black uppercase tracking-widest block">After:</span>
+              <p className="text-slate-300 text-xs sm:text-sm font-bold">Mastered data pipelines with a logical, step-by-step corporate methodology.</p>
+            </div>
+          </div>
+
+          <div className="text-left space-y-4">
+             <h3 className="text-xl sm:text-2xl font-serif font-black leading-tight uppercase text-orange-400">"THE METHODOLOGY IS EXTREMELY LOGICAL, PRACTICAL, AND EASY TO ABSORB"</h3>
+             <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">Feedback from a Batch 3 Graduate</p>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row gap-4 justify-center">
+             <a 
+               href="#enroll-section" 
+               onClick={scrollToEnroll}
+               className="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-all shadow-md text-center"
+             >
+                Claim My Grand Slam Offer
+             </a>
+             <Link to="/reviews" className="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all text-center">
+                Read Success Stories
+             </Link>
+        </div>
+      </section>
+
+      {/* 6. OUTCOMES SECTION (Minimizing Effort & Time Delay) */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 overflow-hidden relative bg-slate-950 border-b border-white/5">
+        <div className="max-w-4xl mx-auto space-y-10">
+          <div className="text-center space-y-3">
+             <span className="text-orange-500 text-xs font-black uppercase tracking-[0.2em] block">MAXIMUM VALUE • MINIMUM FRICTION</span>
+             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight uppercase leading-tight text-white">
+               BY THE END OF THIS PROGRAM, YOU'LL BE ABLE TO:
+             </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center ">
+            <div className="relative  sm:aspect-square md:aspect-auto rounded-[2rem] overflow-hidden group shadow-xl bg-gradient-to-br from-slate-900 via-orange-950/40 to-slate-900 flex items-end min-h-[300px]">
+               <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                 <svg viewBox="0 0 100 100" className="w-48 h-48 text-orange-500" fill="currentColor"><path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z"/></svg>
+               </div>
+               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent  " />
+               <div className="absolute bottom-4 left-4 right-4 w-full pr-8">
+                  <div className="bg-orange-500/90 backdrop-blur-md p-4 rounded-xl">
+                    <p className="text-white font-black text-sm  uppercase tracking-wider text-center">BECOME THE HIGH-STATUS TECH ASSET BUSINESSES PAY RETAINERS FOR</p>
+                  </div>
+               </div>
+            </div>
+
+            <div className="space-y-4">
+              {[
+                "Build professional dashboards using Excel and Power BI",
+                "Query databases confidently using SQL",
+                "Create portfolio projects recruiters can actually evaluate",
+                "Present data insights in a way decision-makers understand",
+                "Apply for analyst roles with confidence",
+                "Offer dashboard and reporting services to businesses"
+              ].map((item, i) => (
+                <div 
+                  key={i} 
+                  className={`flex gap-3 items-center p-4 bg-white/5 border border-white/10 rounded-xl hover:border-orange-500/50 transition-colors group`}
+                >
+                  <div className="h-7 w-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shrink-0">
+                    <CheckCircle2 className="h-4.5 w-4.5" />
+                  </div>
+                  <p className="text-sm font-bold text-slate-100 text-left">{item}</p>
+                </div>
+              ))}
+              
+              <a 
+                href="#enroll-section" 
+                onClick={scrollToEnroll}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-md"
+              >
+                Yes, I Want to Secure These Skills <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-       <section className="px-4 sm:px-6">
-         <div className="md:w-1/2 relative bg-slate-100 h-full">
-              <img src="/Testimonial_Barry.jpg" alt="Lead Trainer Omidoyin Ayodeji" className=" inset-0 w-full h-full object-cover"   />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent p-6 text-white">
-                 <h3 className="text-xl font-serif font-black leading-tight uppercase">Barry</h3>
-                 <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Cohort 2 Student</p>
+      {/* 7. COURSE OVERVIEW & MODULES (System Milestones) */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40 border-b border-white/5">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em] border border-orange-500/20">
+               6-Week System Milestones
+             </div>
+             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-none text-white">
+               THE SYSTEM <span className="text-orange-500 italic">MILESTONES</span>
+             </h2>
+             <p className="text-slate-400 text-sm sm:text-base font-semibold max-w-xl mx-auto leading-relaxed">
+               Each track is specifically engineered to overcome a standard career-limiting obstacle:
+             </p>
+          </div>
+
+          {/* Timeline Stack */}
+          <div className="space-y-6 max-w-2xl mx-auto">
+            {[
+              { 
+                step: "TRACK 1", 
+                title: "Business Excel & Reporting (Week 1 & 2)", 
+                objection: "Overcomes: 'Excel is too basic or raw data is too confusing'",
+                desc: "Clean dirty CRM databases (TRIM, PROPER, IFERROR). Command high-performance lookups (XLOOKUP, FILTER, INDEX+MATCH). Group transactions, construct interactive executive slicers, and build decision-focused KPI dashboards in PivotTables. Solve forecasting and sensitivity assumptions." 
+              },
+              { 
+                step: "TRACK 2", 
+                title: "Relational SQL Databases & Querying (Week 3 & 4)", 
+                objection: "Overcomes: 'SQL querying requires a computer science degree'",
+                desc: "Query databases from scratch (SELECT, DISTINCT, WHERE, ORDER BY). Master the art of multi-table Joins (INNER, LEFT) to analyze customer databases. Learn advanced SQL techniques used in real analyst roles and technical interviews, and subqueries/CTEs to solve real-world analyst SQL interview patterns." 
+              },
+              { 
+                step: "TRACK 3", 
+                title: "Power BI Storytelling & Star Schema Modeling (Week 5)", 
+                objection: "Overcomes: 'I do not know how to present my results to managers'",
+                desc: "Connect multiple CSV, Excel, and database sources in Power Query. Learn how to organize and model business data so your dashboards remain accurate and easy to maintain. Master DAX calculation metrics (Measures, CALCULATE, Time Intelligence) and configure Row-Level Security." 
+              },
+              { 
+                step: "TRACK 4", 
+                title: "AI Tools & Client Monetization Blueprint (Week 6)", 
+                objection: "Overcomes: 'I don't know how to land a job or make money with my skills'",
+                desc: "Leverage advanced ChatGPT and Gemini prompt frameworks to accelerate workflows. Optimize your LinkedIn personal brand (Headline, About, visibility sprint) and build an ATS-optimized resume. Learn to price SME dashboard packages, write high-converting proposals, and secure recurring monthly reporting retainers." 
+              }
+            ].map((mod, i) => (
+              <div 
+                key={i} 
+                className="bg-[#0b0f19] border border-white/10 p-6 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-6 items-start relative hover:border-orange-500/40 transition-all group"
+              >
+                <div className="bg-orange-500 text-white font-black text-xs tracking-widest px-3 py-1 rounded-full shrink-0 animate-bounce">
+                   {mod.step}
+                </div>
+                <div className="space-y-2 text-left">
+                  <span className="text-[10px] font-black tracking-wider text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded">
+                     {mod.objection}
+                  </span>
+                  <h3 className="text-lg font-serif font-black tracking-tight text-white group-hover:text-orange-400 transition-colors">
+                     {mod.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed">
+                     {mod.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto pt-6">
+             <a 
+               href="#enroll-section" 
+               onClick={scrollToEnroll}
+               className="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-md transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+             >
+               Start Learning Now <ArrowRight className="h-4 w-4" />
+             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. TRAINING SCHEDULE SECTION */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 relative bg-[#060b18] border-b border-white/5">
+        <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+           <div className="p-6 sm:p-10 space-y-6 md:w-3/5 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-[9px] font-black uppercase tracking-widest">
+                High-Flex Efficiency System
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight leading-none uppercase text-slate-900">
+                TRAINING <span className="text-orange-500 italic">SCHEDULE</span>
+              </h2>
+              <p className="text-sm text-slate-600 font-bold uppercase tracking-tight">HOW WE REDUCE YOUR WEEKLY EFFORT:</p>
+              
+              <div className="space-y-4">
+                 <div className="flex gap-3 items-start">
+                    <div className="h-8 w-8 bg-approve rounded-lg flex items-center justify-center text-white shrink-0 shadow-md">
+                       <CheckCircle2 className="h-4.5 w-4.5" />
+                    </div>
+                    <div>
+                       <h4 className="font-black text-sm uppercase tracking-tight text-slate-900">Monday to Friday (Pre-recorded Lessons)</h4>
+                       <p className="text-slate-500 text-xs sm:text-sm font-medium">Bite-sized, practical analytics video lessons released daily (30 to 45 mins). Designed to slot into the busiest schedules easily.</p>
+                    </div>
+                 </div>
+                 <div className="flex gap-3 items-start">
+                    <div className="h-8 w-8 bg-approve rounded-lg flex items-center justify-center text-white shrink-0 shadow-md">
+                       <CheckCircle2 className="h-4.5 w-4.5" />
+                    </div>
+                    <div>
+                       <h4 className="font-black text-sm uppercase tracking-tight text-slate-900">Saturday Live Technical Classes</h4>
+                       <p className="text-slate-500 text-xs font-bold italic mb-1">"Build the skills that unlock high-paying job offers."</p>
+                       <p className="text-slate-500 text-xs sm:text-sm font-medium">Meet live with Coach Ayodeji for 1 hour where I guide you through real workplace projects, using what you learned during the week. You will get to ask questions and get answers immediately from me.</p>
+                    </div>
+                 </div>
+                 <div className="flex gap-3 items-start">
+                    <div className="h-8 w-8 bg-approve rounded-lg flex items-center justify-center text-white shrink-0 shadow-md">
+                       <CheckCircle2 className="h-4.5 w-4.5" />
+                    </div>
+                    <div>
+                       <h4 className="font-black text-sm uppercase tracking-tight text-slate-900">Sunday Live Monetization Classes</h4>
+                       <p className="text-slate-500 text-xs font-bold italic mb-1">"Turn your high-income skills into an active revenue machine."</p>
+                       <p className="text-slate-500 text-xs sm:text-sm font-medium">Meet live with Coach Ayodeji to deploy pricing frameworks, outreach strategies, packages, and write proposals.</p>
+                    </div>
+                 </div>
+              </div>
+              
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 italic font-medium text-slate-500 text-[10px] sm:text-xs">
+                Busy schedule? You retake or review any recording via your private student dashboard with permanent lifetime access.
               </div>
            </div>
+           
+           <div className="md:w-2/5 bg-slate-950 p-6 sm:p-10 flex flex-col justify-center text-center space-y-6 relative overflow-hidden">
+              <div className="h-1 w-10 bg-orange-600 rounded-full mx-auto" />
+              <div className="space-y-2 relative z-10">
+                 <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Direct Risk-Reversal</p>
+                 <h3 className="text-xl sm:text-2xl text-white font-serif font-black uppercase leading-tight">LIMITED TO ONLY {cap} SEATS</h3>
+                 <p className="text-slate-400 text-xs font-medium">{secured}/{cap} spots secured. Only {remaining} spots remaining for the {month} batch.</p>
+              </div>
+              <a 
+                href="#enroll-section" 
+                onClick={scrollToEnroll}
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:scale-[1.02] shadow-xl shadow-orange-600/30 relative z-10 text-center"
+              >
+                Enroll Now
+              </a>
+           </div>
+        </div>
+      </section>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-center">
-               <a 
-                 href="#enroll-section" 
-                 onClick={scrollToEnroll}
-                 className="w-full sm:w-auto bg-orange-500 text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-all shadow-md text-center"
-               >
-                  Claim My Grand Slam Offer
-               </a>
-               <Link to="/reviews" className="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all text-center">
-                  Read Success Stories
-               </Link>
+      {/* 9. ALEX HORMOZI $100M GRAND SLAM OFFER STACK */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514] border-b border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-orange-600/5 blur-[120px] rounded-full -z-10" />
+        
+        <div className="max-w-4xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em] border border-orange-500/20">
+                Your No-Brainer Value Stack
              </div>
+             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-none uppercase text-white">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-300 italic">THE GRAND SLAM OFFER STACK</span>
+             </h2>
+             <p className="text-slate-400 text-sm sm:text-base font-semibold max-w-xl mx-auto leading-relaxed">
+                Most courses teach tools. This accelerator helps you build skills, projects, career assets, and income opportunities—all in one structured roadmap.
+             </p>
+          </div>
+
+          <div className="bg-[#110925]/60 border border-orange-500/30 p-6 sm:p-10 rounded-[2.5rem] shadow-2xl space-y-8 max-w-2xl mx-auto text-left relative">
+             <div className="absolute top-4 right-4 bg-orange-600 text-white px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest rotate-2 shadow-md">
+                Unbeatable Offer
+             </div>
+             
+             {/* Offer Stack Items */}
+             <div className="space-y-6 divide-y divide-white/5">
+                {[
+                  { 
+                    title: "Core 6-Week Data Analysis Accelerator", 
+                    sub: "Direct hands-on technical curriculum (Excel reporting pipelines, relational SQL server database querying, and executive Power BI dashboards).", 
+                    objection: "Busts: 'I don't know where to start or how to learn systematically.'",
+                    val: "₦150,000" 
+                  },
+                  { 
+                    title: "Bonus #1: Recruiter-Approved ATS CV & Resume Templates", 
+                    sub: "Tailored career templates and frameworks engineered to bypass automatic corporate filtering bots.", 
+                    objection: "Busts: 'Will my applications get ignored by resume scanners?'",
+                    val: '₦25,000'
+                  },
+                  { 
+                    title: "Bonus #2: LinkedIn Profile Optimization & 30-Day Visibility Script", 
+                    sub: "Complete profile layout guides and commenting blueprints designed to make recruiters search you out.", 
+                    objection: "Busts: 'I don't know how to network or get recruiters to notice me.'",
+                    val: "₦30,000" 
+                  },
+                  { 
+                    title: "Bonus #3: SME Proposal & Client Outreach Pricing Templates", 
+                    sub: "Copy-and-paste worksheets to confidently pitch reporting dashboards and secure monthly consulting retainers.", 
+                    objection: "Busts: 'I have no sales skills and don't know how to bill clients.'",
+                    val: "₦20,000" 
+                  },
+                  { 
+                    title: "Bonus #4: 10 Proprietary Real-World Business Datasets", 
+                    sub: "Simulated retail, inventory, SaaS, and database CSVs to practice on and feature in your public portfolio.", 
+                    objection: "Busts: 'How do I build a portfolio without previous job experience?'",
+                    val: '₦25,000'
+                  },
+                  { 
+                    title: "Bonus #5: WhatsApp VIP Direct Support & Private Alumni Network", 
+                    sub: "Direct access to Coach Ayodeji and batch graduates to review broken queries and grading support.", 
+                    objection: "Busts: 'What if I get completely stuck with code or formula errors?'",
+                    val: "₦50,000" 
+                  }
+                ].map((item, idx) => (
+                   <div key={idx} className={`pt-6 flex flex-col sm:flex-row justify-between items-start gap-4 ${idx === 0 ? 'border-none pt-0' : ''}`}>
+                      <div className="space-y-2 flex-1">
+                         <div className="flex items-center gap-2 flex-wrap">
+                            <h4 className="text-white font-bold text-sm sm:text-base tracking-tight">{item.title}</h4>
+                            <span className="text-[9px] font-black text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded">
+                               {item.objection}
+                            </span>
+                         </div>
+                         <p className="text-slate-400 text-[11px] sm:text-xs leading-relaxed">{item.sub}</p>
+                      </div>
+                      <div className="text-orange-400 font-serif font-black text-xs sm:text-sm shrink-0 uppercase tracking-widest sm:self-center">
+                         {item.val}
+                      </div>
+                   </div>
+                ))}
+             </div>
+
+             {/* Total vs Price comparison */}
+             <div className="bg-slate-950/60 p-6 rounded-2xl border border-white/10 space-y-4">
+                <div className="flex justify-between items-center text-slate-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
+                   <span>Combined Real Value:</span>
+                   <span className="line-through text-slate-500 font-serif font-black">₦300,000+</span>
+                </div>
+                <div className="flex justify-between items-center border-t border-white/10 pt-3">
+                   <span className="text-white font-black text-sm sm:text-base uppercase tracking-wider">Your Grand Slam Price Today:</span>
+                   <div className="text-right">
+                      <span className="text-3xl font-serif font-black text-orange-500 tracking-tighter">{price1}</span>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">( <span className="text-[10px] font-serif font-black text-orange-500 ">Installments</span> Available) </p>
+                   </div>
+                </div>
+             </div>
+             
+             <div className="text-xs font-black text-orange-600 text-center">
+                 PAY ₦10,000 NOW AND PAY THE REST BY WEEK 6
+             </div>
+
+             <div className="text-center">
+                <a 
+                  href="#enroll-section" 
+                  onClick={scrollToEnroll}
+                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-4 px-6 rounded-xl font-black text-xs uppercase tracking-widest shadow-xl transition-all inline-block text-center"
+                >
+                   Claim My Grand Slam Offer Now
+                </a>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. TWO WAYS THIS PROGRAM PAYS FOR ITSELF */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#07020d] border-b border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-orange-500/5 blur-[100px] rounded-full -z-10" />
+        
+        <div className="max-w-4xl mx-auto space-y-10">
+          <div className="text-center space-y-3">
+             <span className="text-orange-500 text-xs font-black uppercase tracking-[0.25em]">Return on Investment</span>
+             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase text-white">
+               TWO WAYS THIS PROGRAM PAYS FOR ITSELF
+             </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+            {/* Path 1 */}
+            <div className="bg-[#110925]/40 border border-orange-500/20 p-6 sm:p-8 rounded-[2rem] space-y-6 flex flex-col justify-between hover:border-orange-500/50 transition-all text-left">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
+                  Career Acceleration
+                </div>
+                <h3 className="text-xl sm:text-2xl font-serif font-black text-white uppercase">
+                  PATH #1: LAND A DATA ANALYST ROLE
+                </h3>
+                <div className="space-y-3 pt-2">
+                  {[
+                    "Build portfolio projects.",
+                    "Upgrade your CV.",
+                    "Improve your LinkedIn profile.",
+                    "Position yourself for analyst interviews."
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-2 items-center text-slate-300 font-bold text-sm">
+                      <CheckCircle2 className="h-4.5 w-4.5 text-orange-500 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Path 2 */}
+            <div className="bg-[#110925]/40 border border-orange-500/20 p-6 sm:p-8 rounded-[2rem] space-y-6 flex flex-col justify-between hover:border-orange-500/50 transition-all text-left">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                  Freelancing & Consulting
+                </div>
+                <h3 className="text-xl sm:text-2xl font-serif font-black text-white uppercase">
+                  PATH #2: OFFER DATA SERVICES TO BUSINESSES
+                </h3>
+                <div className="space-y-3 pt-2">
+                  {[
+                    "Use the proposal templates.",
+                    "Apply the pricing framework.",
+                    "Create dashboards for SMEs.",
+                    "Generate income while building experience."
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-2 items-center text-slate-300 font-bold text-sm">
+                      <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 11.5 SECURE CHECKOUT & PAYMENT SECTION (New Single-Page Funnel Integration) */}
@@ -1038,26 +1118,25 @@ const SalesLandingPage: React.FC = () => {
             ))}
           </div>
 
-          {/* The Unbeatable Hormozi-Style "Double Guarantee" (Ultimate Risk Reversal) */}
+          {/* Simplified Guarantee */}
           <div className="bg-[#110925] border-2 border-orange-500/50 p-6 sm:p-10 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-6 text-left relative max-w-3xl mx-auto shadow-2xl">
              <div className="shrink-0 h-20 w-20 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-500 shadow-inner">
                 <ShieldCheck className="h-12 w-12 animate-pulse" />
              </div>
              <div className="space-y-4">
                 <h3 className="text-xl sm:text-2xl font-serif font-black uppercase tracking-tight text-orange-400 italic">
-                   THE UNBEATABLE "DO-THE-WORK" DOUBLE GUARANTEE
+                   100% Risk-Free Enrollment
                 </h3>
-                <p className="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed">
-                  We are so confident in our 6-week curriculum and monetization blueprint that we absorb 100% of the risk:
-                  <span className="block mt-2 text-white font-extrabold">
-                     🛡️ Guarantee #1: The 14-Day Performance Check
-                  </span>
-                  Try the first two weeks. If you aren't absolutely blown away by the depth of the Excel modules, simply message us for a 100% immediate refund. No hassle, no hard feelings.
-                  <span className="block mt-2 text-white font-extrabold">
-                     🛡️ Guarantee #2: The Ayodeji 1-on-1 Action Guarantee
-                  </span>
-                  If you attend the live sessions, submit your weekly tasks, build your capstone portfolio, and pitch at least 5 businesses or job roles—and you still don’t feel 100% confident querying SQL databases, building premium Power BI dashboards, or pitching digital clients... Coach Ayodeji will work with you 1-on-1 for free until you do. If you still want your money back, we will refund every single Kobo of your tuition **AND** let you keep all ATS templates, visibility scripts, and datasets for free just to compensate you for your time.
-                </p>
+                <div className="space-y-3 text-slate-300 text-xs sm:text-sm font-medium">
+                  <div>
+                    <span className="text-white font-extrabold block">🛡️ 14-Day Refund Guarantee</span>
+                    <p className="text-slate-400 mt-1">Try the first two weeks. If you aren't absolutely blown away, simply message us for a 100% immediate refund.</p>
+                  </div>
+                  <div>
+                    <span className="text-white font-extrabold block">🛡️ 1-on-1 Support Guarantee</span>
+                    <p className="text-slate-400 mt-1">If you do the work and still don't feel confident, Coach Ayodeji will coach you 1-on-1 for free until you do, or refund your tuition in full.</p>
+                  </div>
+                </div>
              </div>
              <div className="absolute -top-3 -right-3 bg-orange-600 text-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg rotate-3">
                 Zero Risk
@@ -1113,13 +1192,13 @@ const SalesLandingPage: React.FC = () => {
                       <h4 className="text-base font-black tracking-tight text-slate-900 font-bold">Full Accelerator Program</h4>
                       <div className="flex items-baseline gap-1.5 mt-1">
                          <span className="text-2xl font-black text-orange-600 tracking-tighter">
-                            {isInstallment ? '₦10,000' : '₦25,000'}
+                            {isInstallment ? installment1 : price1}
                          </span>
                          <span className="text-slate-400 line-through text-xs font-semibold">₦50,000</span>
                       </div>
                       <p className="text-slate-500 text-[10px] font-medium mt-1 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦15,000 DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)" 
+                           ? `(INSTALLMENT DEPOSIT. BALANCE OF ${priceremaining1} DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)` 
                            : "(INCLUDES EXCEL + SQL + POWER BI + AI + MONETIZATION + ALL 5 BONUSES)"}
                       </p>
                    </button>
@@ -1134,13 +1213,13 @@ const SalesLandingPage: React.FC = () => {
                       <h4 className="text-base font-black tracking-tight text-slate-900 font-bold">Excel + AI Track Only</h4>
                       <div className="flex items-baseline gap-1.5 mt-1">
                          <span className="text-2xl font-black text-orange-600 tracking-tighter">
-                            {isInstallment ? '₦10,000' : '₦15,000'}
+                            {isInstallment ? installment2 : price2}
                          </span>
                          <span className="text-slate-400 line-through text-xs font-semibold">₦30,000</span>
                       </div>
                       <p className="text-slate-500 text-[10px] font-medium mt-1 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦5,000 DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)" 
+                           ? `(INSTALLMENT DEPOSIT. BALANCE OF ${priceremaining2} DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)` 
                            : "(INCLUDES DATASETS + EXCEL + AI MODULES ONLY. NO SQL / POWER BI / LINKEDIN SPRINT)"}
                       </p>
                    </button>
@@ -1202,7 +1281,7 @@ const SalesLandingPage: React.FC = () => {
                       <div className="flex justify-between items-center text-sm font-black uppercase tracking-tight text-slate-900">
                         <span>Amount Due Now:</span>
                         <span className="text-xl text-orange-600 font-serif font-black">
-                          {isInstallment ? '₦10,000' : selectedTrack === 'full' ? '₦25,000' : '₦15,000'}
+                          {isInstallment ? (selectedTrack === 'full' ? installment1:installment2) : selectedTrack === 'full' ? price1 : price2}
                         </span>
                       </div>
                    </div>
@@ -1283,7 +1362,7 @@ const SalesLandingPage: React.FC = () => {
                },
                { 
                  q: "Is the double money-back guarantee actually real?", 
-                 a: "Yes. Coach Ayodeji is committed to student success. If you complete the lessons and assignments, apply the templates, and still don't feel ready or haven't closed client interest, Coach Ayodeji will coach you 1-on-1. If you're still not satisfied, we refund every single Kobo, and you keep all the templates and files anyway." 
+                 a: "Yes. Coach Ayodeji is committed to student success. If you complete the lessons and assignments, apply the templates, and still don't feel confident, Coach Ayodeji will coach you 1-on-1. If you're still not satisfied, we refund every single Kobo, and you keep all the templates and files anyway." 
                },
                { 
                  q: "Do I get a certificate of completion?", 
@@ -1312,7 +1391,7 @@ const SalesLandingPage: React.FC = () => {
            <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider">{month} Batch Enrollment</p>
            <div className="flex items-baseline gap-1">
               <span className="text-lg font-black text-orange-500">
-                 {isInstallment ? '₦10,000' : selectedTrack === 'full' ? '₦25,000' : '₦15,000'}
+                 {isInstallment ? (selectedTrack === 'full' ? installment1 : installment2) : selectedTrack === 'full' ? price1 : price2}
               </span>
               <span className="text-[9px] font-bold text-slate-400 line-through">
                  {selectedTrack === 'full' ? '₦50,000' : '₦30,000'}
