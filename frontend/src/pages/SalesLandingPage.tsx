@@ -119,9 +119,21 @@ const SalesLandingPage: React.FC = () => {
   }, []);
 
   const month = "July"
+ 
+  const slotCap = 30;
+  const slotSecured = 15;
+  const slotsLeft = slotCap - slotSecured;
+  const targetDate = "2026-07-02T23:59:59"
+
+  const fullProgramPrice = "₦25,999"
+  const ExcelAndAIPrice = "₦15,999"
+  const fullProgramInstallment = "₦10,999"
+  const ExcelAndAIInstallment = "₦10,999"
+  const fullProgramPriceRemaining = "₦15,000"
+  const ExcelAndAIPriceRemaining = "₦5,000"
 
   useEffect(() => {
-    const target = new Date("2026-06-06T23:59:59").getTime();
+    const target = new Date(targetDate).getTime();
     const updateCountdown = () => {
       const now = new Date().getTime();
       const difference = target - now;
@@ -243,7 +255,7 @@ const SalesLandingPage: React.FC = () => {
 
         {/* Top Banner Urgency & Scarcity */}
       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-2.5 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] relative z-50 flex flex-wrap justify-center items-center gap-2">
-        <span>⚠️ {month} Batch Enrollment Capped to 30 Spots: 23 Secured — Only 7 Seats Left!</span>
+        <span>⚠️ {month} Batch Enrollment Capped to {slotCap} Spots: {slotSecured} Secured — Only {slotsLeft} Seats Left!</span>
         <span className="hidden sm:inline">•</span>
         <span className="bg-black/20 px-2 py-0.5 rounded animate-pulse">
           Closes in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s ⏳
@@ -315,7 +327,7 @@ const SalesLandingPage: React.FC = () => {
                 Claim My Grand Slam Offer Now <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
               </a>
               <p className="mt-4 text-slate-500 text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-orange-500" /> Only 7 of 30 Seats Remaining for {month} Batch!
+                <Clock className="h-4 w-4 text-orange-500" /> Only {slotsLeft} of {slotCap} Seats Remaining for {month} Batch!
               </p>
             </div>
 
@@ -342,7 +354,7 @@ const SalesLandingPage: React.FC = () => {
         </section>
 
       {/* 2. WELCOME SECTION (Identifying the Avatar) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative">
+      <section className="py-4 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative">
         <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-[10px] font-black uppercase tracking-widest">
             A System Tailored for Career Pivots
@@ -377,7 +389,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 3. REALITY CHECK SECTION (Busting Sacrifices & Effort) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+      <section className="py-4 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-secondary/5 blur-[100px] rounded-full -z-10" />
         
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -477,7 +489,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
         {/* 5. OUTCOMES SECTION (Minimizing Effort & Time Delay) */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 overflow-hidden relative">
+        <section className="py-4 sm:py-24 px-4 sm:px-6 overflow-hidden relative">
           <div className="max-w-4xl mx-auto space-y-10">
             <div className="text-center">
                <span className="text-orange-500 text-[10px] font-black uppercase tracking-widest block mb-2">MAXIMUM VALUE • MINIMUM FRICTION</span>
@@ -553,7 +565,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 6. COURSE OVERVIEW & MODULES (Framed as Objection Busters) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 bg-slate-900/40">
         <div className="max-w-4xl mx-auto space-y-12">
           <div className="text-center space-y-3">
              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em] border border-orange-500/20">
@@ -632,8 +644,76 @@ const SalesLandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* 10. TWO WAYS THIS PROGRAM PAYS FOR ITSELF */}
+      <section className="py-4 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#07020d] border-b border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-orange-500/5 blur-[100px] rounded-full -z-10" />
+        
+        <div className="max-w-4xl mx-auto space-y-10">
+          <div className="text-center space-y-3">
+             <span className="text-orange-500 text-xs font-black uppercase tracking-[0.25em]">Return on Investment</span>
+             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase text-white">
+               TWO WAYS THIS PROGRAM PAYS FOR ITSELF
+             </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+            {/* Path 1 */}
+            <div className="bg-[#110925]/40 border border-orange-500/20 p-6 sm:p-8 rounded-[2rem] space-y-6 flex flex-col justify-between hover:border-orange-500/50 transition-all text-left">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-black uppercase tracking-widest border border-orange-500/20">
+                  Career Acceleration
+                </div>
+                <h3 className="text-xl sm:text-2xl font-serif font-black text-white uppercase">
+                  PATH #1: LAND A DATA ANALYST ROLE
+                </h3>
+                <div className="space-y-3 pt-2">
+                  {[
+                    "Build portfolio projects.",
+                    "Upgrade your CV.",
+                    "Improve your LinkedIn profile.",
+                    "Position yourself for analyst interviews."
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-2 items-center text-slate-300 font-bold text-sm">
+                      <CheckCircle2 className="h-4.5 w-4.5 text-orange-500 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Path 2 */}
+            <div className="bg-[#110925]/40 border border-orange-500/20 p-6 sm:p-8 rounded-[2rem] space-y-6 flex flex-col justify-between hover:border-orange-500/50 transition-all text-left">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                  Freelancing & Consulting
+                </div>
+                <h3 className="text-xl sm:text-2xl font-serif font-black text-white uppercase">
+                  PATH #2: OFFER DATA SERVICES TO BUSINESSES
+                </h3>
+                <div className="space-y-3 pt-2">
+                  {[
+                    "Use the proposal templates.",
+                    "Apply the pricing framework.",
+                    "Create dashboards for SMEs.",
+                    "Generate income while building experience."
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-2 items-center text-slate-300 font-bold text-sm">
+                      <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
       {/* 6.5 ALEX HORMOZI $100M GRAND SLAM OFFER STACK (Value Stack & Objection Busters) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514] border-t border-b border-white/5">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514] border-t border-b border-white/5">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-orange-600/5 blur-[120px] rounded-full -z-10" />
         
         <div className="max-w-4xl mx-auto space-y-12">
@@ -720,13 +800,13 @@ const SalesLandingPage: React.FC = () => {
                 <div className="flex justify-between items-center border-t border-white/10 pt-3">
                    <span className="text-white font-black text-sm sm:text-base uppercase tracking-wider">Your Grand Slam Price Today:</span>
                    <div className="text-right">
-                      <span className="text-3xl font-serif font-black text-orange-500 tracking-tighter">₦25,000</span>
+                      <span className="text-3xl font-serif font-black text-orange-500 tracking-tighter">{fullProgramPrice}</span>
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">( <span className="text-[10px] font-serif font-black text-orange-500 ">Installments</span>  Available) </p>
                    </div>
                 </div>
              </div>
               <div className="text-xs font-black text-orange-600  text-center">
-                      PAY ₦10,000 NOW AND PAY THE REST BY WEEK 6
+                      PAY {fullProgramInstallment } NOW AND PAY THE REST BY WEEK 6
               </div>
 
              <div className="text-center">
@@ -743,7 +823,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 7. SCHEDULE SECTION (Reducing Effort & Time Delay) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 relative">
         <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
            <div className="p-6 sm:p-10 space-y-6 md:w-3/5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-[9px] font-black uppercase tracking-widest">
@@ -796,7 +876,7 @@ const SalesLandingPage: React.FC = () => {
               <div className="space-y-2 relative z-10">
                  <p className="text-orange-500 font-black uppercase tracking-widest text-[9px]">Direct Risk-Reversal</p>
                  <h3 className="text-xl sm:text-2xl text-white font-serif font-black uppercase leading-tight">LIMITED TO ONLY 30 SEATS</h3>
-                 <p className="text-slate-400 text-xs font-medium">23/30 spots secured. Only 7 spots remaining for the {month} 6th class.</p>
+                 <p className="text-slate-400 text-xs font-medium">{slotSecured}/{slotCap} spots secured. Only {slotsLeft} spots remaining for the {month} 6th class.</p>
               </div>
               <a 
                 href="#enroll-section" 
@@ -810,7 +890,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 8. WHO IT IS FOR SECTION */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 bg-slate-900/40">
         <div className="max-w-4xl mx-auto space-y-10">
           <div className="text-center space-y-2">
              <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase leading-tight">WHO IS THIS <span className="text-orange-500 italic">TRAINING</span> FOR?</h2>
@@ -866,7 +946,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 9. LEAD TRAINER SECTION */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
         <div className="max-w-4xl mx-auto bg-white text-slate-900 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row">
            <div className="md:w-1/2 relative bg-slate-100 min-h-[250px] sm:min-h-[400px]">
               <img src="/ayodeji_trainer.jpg" alt="Lead Trainer Omidoyin Ayodeji" className="absolute inset-0 w-full h-full object-cover"   />
@@ -912,7 +992,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 10. REVIEWS CALLOUT */}
-      <section className="py-16 sm:py-24 px-4 bg-orange-500/5">
+      <section className="py-8 sm:py-24 px-4 bg-orange-500/5">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
            {/* <div className="shrink-0 w-48 h-48 bg-slate-900 rounded-[2rem] overflow-hidden shadow-lg relative rotate-2">
               <img src="https://i.pravatar.cc/400?u=student3" alt="Success Student Portrait" className="w-full h-full object-cover" />
@@ -939,7 +1019,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 11. QUALITY PROOF */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514]">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-[#0a0514]">
         <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8 text-center">
           <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight uppercase leading-[1.1] px-1">
             WHY ACCELERATOR <span className="text-orange-500 italic">GRADUATES</span> SUCCEED?
@@ -989,7 +1069,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 11.5 SECURE CHECKOUT & PAYMENT SECTION (New Single-Page Funnel Integration) */}
-      <section id="enroll-section" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-slate-900/30 border-t border-b border-white/5">
+      <section id="enroll-section" className="py-8 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-slate-900/30 border-t border-b border-white/5">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[250px] bg-orange-500/10 blur-[90px] rounded-full -z-10" />
         
         <div className="max-w-4xl mx-auto space-y-12">
@@ -1089,7 +1169,7 @@ const SalesLandingPage: React.FC = () => {
                    {
                     isInstallment &&
                     <div className="text-xs font-black text-orange-600 text-center">
-                      PAY ₦10,000 NOW AND PAY THE REST BY WEEK 6
+                      PAY { selectedTrack === 'full' ? fullProgramInstallment : ExcelAndAIInstallment} NOW AND PAY THE REST BY WEEK 6
                     </div>
                    }
                 </div>
@@ -1113,13 +1193,13 @@ const SalesLandingPage: React.FC = () => {
                       <h4 className="text-base font-black tracking-tight text-slate-900 font-bold">Full Accelerator Program</h4>
                       <div className="flex items-baseline gap-1.5 mt-1">
                          <span className="text-2xl font-black text-orange-600 tracking-tighter">
-                            {isInstallment ? '₦10,000' : '₦25,000'}
+                            {isInstallment ? fullProgramInstallment : fullProgramPrice}
                          </span>
                          <span className="text-slate-400 line-through text-xs font-semibold">₦50,000</span>
                       </div>
                       <p className="text-slate-500 text-[10px] font-medium mt-1 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦15,000 DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)" 
+                           ? "(INSTALLMENT DEPOSIT. BALANCE OF " + fullProgramPriceRemaining + " DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)" 
                            : "(INCLUDES EXCEL + SQL + POWER BI + AI + MONETIZATION + ALL 5 BONUSES)"}
                       </p>
                    </button>
@@ -1134,13 +1214,13 @@ const SalesLandingPage: React.FC = () => {
                       <h4 className="text-base font-black tracking-tight text-slate-900 font-bold">Excel + AI Track Only</h4>
                       <div className="flex items-baseline gap-1.5 mt-1">
                          <span className="text-2xl font-black text-orange-600 tracking-tighter">
-                            {isInstallment ? '₦10,000' : '₦15,000'}
+                            {isInstallment ? ExcelAndAIInstallment : ExcelAndAIPrice}
                          </span>
                          <span className="text-slate-400 line-through text-xs font-semibold">₦30,000</span>
                       </div>
                       <p className="text-slate-500 text-[10px] font-medium mt-1 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF ₦5,000 DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)" 
+                           ? "(INSTALLMENT DEPOSIT. BALANCE OF " + ExcelAndAIPriceRemaining + " DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)" 
                            : "(INCLUDES DATASETS + EXCEL + AI MODULES ONLY. NO SQL / POWER BI / LINKEDIN SPRINT)"}
                       </p>
                    </button>
@@ -1202,7 +1282,7 @@ const SalesLandingPage: React.FC = () => {
                       <div className="flex justify-between items-center text-sm font-black uppercase tracking-tight text-slate-900">
                         <span>Amount Due Now:</span>
                         <span className="text-xl text-orange-600 font-serif font-black">
-                          {isInstallment ? '₦10,000' : selectedTrack === 'full' ? '₦25,000' : '₦15,000'}
+                          {isInstallment ? selectedTrack === 'full' ? fullProgramInstallment : ExcelAndAIInstallment : selectedTrack === 'full' ? fullProgramPrice : ExcelAndAIPrice}
                         </span>
                       </div>
                    </div>
@@ -1256,7 +1336,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 12. STATIC INLINE FAQs (Busting lingering objections) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-white/5 bg-[#020617]">
+      <section className="py-8 sm:py-24 px-4 sm:px-6 border-t border-white/5 bg-[#020617]">
         <div className="max-w-2xl mx-auto space-y-10">
           <div className="text-center space-y-2">
              <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase">
@@ -1312,7 +1392,7 @@ const SalesLandingPage: React.FC = () => {
            <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider">{month} Batch Enrollment</p>
            <div className="flex items-baseline gap-1">
               <span className="text-lg font-black text-orange-500">
-                 {isInstallment ? '₦10,000' : selectedTrack === 'full' ? '₦25,000' : '₦15,000'}
+                 {isInstallment ? fullProgramInstallment : selectedTrack === 'full' ? fullProgramPrice : ExcelAndAIPrice}
               </span>
               <span className="text-[9px] font-bold text-slate-400 line-through">
                  {selectedTrack === 'full' ? '₦50,000' : '₦30,000'}
