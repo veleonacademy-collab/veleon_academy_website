@@ -13006,3 +13006,5 @@
 2026-06-19 06:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
 2026-06-19 07:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
 2026-06-19 07:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-06-24 14:48:28:4828 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-06-24 14:48:28:4828 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m

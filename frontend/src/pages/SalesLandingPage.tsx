@@ -258,7 +258,7 @@ const SalesLandingPage: React.FC = () => {
       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-2.5 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] relative z-50 flex flex-wrap justify-center items-center gap-2">
         <span>⚠️ {month} Batch Enrollment Capped to {cap} Spots: {secured} Secured — Only {remaining} Seats Left!</span>
         <span className="hidden sm:inline">•</span>
-        <span className="bg-black/20 px-2 py-0.5 rounded animate-pulse">
+        <span className="bg-black/20 px-2 py-0.5 rounded ">
           Closes in: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s ⏳
         </span>
       </div>
@@ -368,10 +368,10 @@ const SalesLandingPage: React.FC = () => {
         </section>
 
       {/* 2. PROBLEM SECTION (Why Most Aspiring Data Analysts Never Get Hired) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-slate-950 border-t border-b border-white/5">
+      <section className="py-4 sm:py-24 px-4 sm:px-6 relative overflow-hidden bg-slate-950 border-t border-b border-white/5">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-red-500/5 blur-[100px] rounded-full -z-10" />
         
-        <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
+        <div className="max-w-4xl mx-auto space-y-4 sm:space-y-12">
           <div className="text-center space-y-4">
             <span className="text-red-500 text-xs font-black uppercase tracking-[0.2em]">The Hard Reality</span>
             <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase text-white">
@@ -444,7 +444,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 3. WHO THIS IS PERFECT FOR SECTION */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative border-b border-white/5">
+      <section className="py-4 sm:py-24 px-4 sm:px-6 bg-slate-900/40 relative border-b border-white/5">
         <div className="max-w-4xl mx-auto text-center space-y-10">
           <div className="space-y-4">
             <span className="text-orange-500 text-xs font-black uppercase tracking-[0.2em]">Targeted Audience</span>
@@ -549,7 +549,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 5. STUDENT TESTIMONIALS SECTION (Proof) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-orange-500/5 space-y-12 border-b border-white/5">
+      <section className="py-4 sm:py-24 px-4 sm:px-6 bg-orange-500/5 space-y-12 border-b border-white/5">
         <div className="max-w-4xl mx-auto text-center space-y-3">
            <h4 className="text-orange-500 font-black uppercase tracking-[0.25em] text-[9px] sm:text-xs">Real Proof: High Likelihood of Success</h4>
            <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-tight leading-tight uppercase px-1 text-white">"THE ACADEMY REMOVED MY STUCK-FEELINGS & GAVE ME PRACTICAL PORTFOLIO POWER"</h2>
@@ -1335,7 +1335,7 @@ const SalesLandingPage: React.FC = () => {
       </section>
 
       {/* 12. STATIC INLINE FAQs (Busting lingering objections) */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-white/5 bg-[#020617]">
+      <section className="py-4 sm:py-24 px-4 sm:px-6 border-t border-white/5 bg-[#020617]">
         <div className="max-w-2xl mx-auto space-y-10">
           <div className="text-center space-y-2">
              <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-tight uppercase">
