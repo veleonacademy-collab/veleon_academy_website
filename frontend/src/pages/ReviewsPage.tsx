@@ -20,6 +20,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ReviewsPage: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<{ title: string; url: string } | null>(null);
 
+  const month = 'JULY'
+
   const handlePlayVideo = (name: string) => {
     // Premium custom mockup YouTube embeds or test video URLs
     const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; // Placeholder premium video link
@@ -74,7 +76,7 @@ const ReviewsPage: React.FC = () => {
 
       {/* Top Banner Urgency */}
       <div className="bg-orange-600 text-white py-2.5 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] relative z-20">
-        Registration for June 2026 Batch is Closing Soon! ⏳
+        Registration for {month} 2026 Batch is Closing Soon! ⏳
       </div>
 
       {/* Header */}
@@ -219,7 +221,7 @@ const ReviewsPage: React.FC = () => {
               to="/data#enroll-section" 
               className="w-full sm:w-auto bg-white text-orange-600 px-8 py-4 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2"
             >
-               ENROLL NOW FOR JUNE BATCH <ArrowRight className="h-4.5 w-4.5" />
+               ENROLL NOW FOR {month} BATCH <ArrowRight className="h-4.5 w-4.5" />
             </Link>
          </div>
       </section>
@@ -350,10 +352,10 @@ const ReviewsPage: React.FC = () => {
                  to="/data#enroll-section" 
                  className="inline-flex bg-orange-600 text-white px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-orange-600/30 hover:scale-[1.02] active:scale-95 transition-all items-center gap-3"
                >
-                  SECURE MY SPOT FOR JUNE BATCH <ArrowRight className="h-5 w-5" />
+                  SECURE MY SPOT FOR {month} BATCH <ArrowRight className="h-5 w-5" />
                </Link>
                <p className="text-slate-500 text-[9px] font-black uppercase tracking-[0.3em] mt-6">
-                  REGISTRATION CLOSING SOON • JUNE 2026 BATCH
+                  REGISTRATION CLOSING SOON • {month} 2026 BATCH
                </p>
             </div>
          </div>
