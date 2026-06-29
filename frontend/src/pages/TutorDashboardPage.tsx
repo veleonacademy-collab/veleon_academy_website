@@ -13,6 +13,7 @@ const TutorDashboardPage: React.FC = () => {
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isRemarkModalOpen, setIsRemarkModalOpen] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
+  const [selectedCohort, setSelectedCohort] = useState<string | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<{ studentId: number; courseId: number; name: string } | null>(null);
 
   const [folderName, setFolderName] = useState("");
@@ -57,8 +58,8 @@ const TutorDashboardPage: React.FC = () => {
   });
 
   const { data: currentFolders, refetch: refetchFolders } = useQuery({
-    queryKey: ["course-folders", selectedCourseId],
-    queryFn: () => selectedCourseId ? academyApi.getCourseFolders(selectedCourseId) : Promise.resolve([]),
+    queryKey: ["course-folders", selectedCourseId, selectedCohort],
+    queryFn: () => selectedCourseId ? academyApi.getCourseFolders(selectedCourseId, selectedCohort || undefined) : Promise.resolve([]),
     enabled: !!selectedCourseId,
   });
 
@@ -229,6 +230,7 @@ const TutorDashboardPage: React.FC = () => {
                   <button 
                     onClick={() => {
                         setSelectedCourseId(course.id);
+                        setSelectedCohort(course.cohort || null);
                         setUploadData({
                             folderId: "",
                             newFolderName: "",
@@ -254,6 +256,7 @@ const TutorDashboardPage: React.FC = () => {
                   <button 
                      onClick={() => {
                           setSelectedCourseId(course.id);
+                          setSelectedCohort(course.cohort || null);
                           setFolderName("");
                           setIsFolderModalOpen(true);
                      }}
@@ -314,6 +317,7 @@ const TutorDashboardPage: React.FC = () => {
                 <button 
                   onClick={() => {
                     setSelectedCourseId(course.id);
+                    setSelectedCohort(course.cohort || null);
                     setIsManageFoldersOpen(true);
                   }}
                   className="px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all"
@@ -552,7 +556,7 @@ const TutorDashboardPage: React.FC = () => {
             >
               <option value="">Select an existing folder</option>
               {currentFolders?.map((f: any) => (
-                <option key={f.id} value={f.id}>{f.name}</option>
+                <option key={f.id} value={f.id}>{f.name}{f.cohort ? ` (${f.cohort})` : ''}</option>
               ))}
               <option value="new">+ Create New Folder inline</option>
             </select>

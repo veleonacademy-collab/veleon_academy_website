@@ -1,5 +1,3 @@
-make each classes lessons collapsible and all should be collapsed at first.
+in uploading lessons in the tutor portal:
 
-make the main classes collapsed at first too.
-
-on tutor side, let the lessons and assignments be editable.
+the Upload Class Materials form, the options in the folder selection should folders that belong to that particular cohort.
