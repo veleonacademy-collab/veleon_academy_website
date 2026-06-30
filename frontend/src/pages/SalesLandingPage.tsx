@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '../utils/constants';
 import { http } from '../api/http';
+import { formatCurrency } from '../utils/formatUtils';
 
 declare global {
   interface Window {
@@ -307,16 +308,18 @@ const SalesLandingPage: React.FC = () => {
   const month = "July";
  
   const slotCap = 30;
-  const slotSecured = 15;
+  const slotSecured = 20;
   const slotsLeft = slotCap - slotSecured;
   const targetDate = "2026-07-02T23:59:59";
 
-  const fullProgramPrice = "₦25,999";
-  const ExcelAndAIPrice = "₦15,999";
-  const fullProgramInstallment = "₦10,999";
-  const ExcelAndAIInstallment = "₦10,999";
-  const fullProgramPriceRemaining = "₦15,000";
-  const ExcelAndAIPriceRemaining = "₦5,000";
+  const fullProgramPrice = 25999;
+  const ExcelAndAIPrice =  15999;
+  const fullProgramInstallment = 10999;
+  const ExcelAndAIInstallment = 10999;
+  const fullProgramPriceRemaining = 15000;
+  const ExcelAndAIPriceRemaining = 5000;
+
+  // const 
 
   useEffect(() => {
     if (window.location.hash === '#enroll-section') {
@@ -340,8 +343,8 @@ const SalesLandingPage: React.FC = () => {
 
   // Calculate the amount due based on selections
   const getAmountDue = (): number => {
-    if (isInstallment) return 10000;
-    return selectedTrack === 'full' ? 25000 : 15000;
+    if (isInstallment) return selectedTrack === 'full' ? fullProgramInstallment : ExcelAndAIInstallment;
+    return selectedTrack === 'full' ? fullProgramPrice : ExcelAndAIPrice;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -887,13 +890,13 @@ const SalesLandingPage: React.FC = () => {
                 <div className="flex justify-between items-center border-t border-white/10 pt-2">
                    <span className="text-white font-black text-xs sm:text-base uppercase tracking-wider">Your Grand Slam Price Today:</span>
                    <div className="text-right">
-                      <span className="text-2xl font-serif font-black text-orange-500 tracking-tighter">{fullProgramPrice}</span>
+                      <span className="text-2xl font-serif font-black text-orange-500 tracking-tighter ">{formatCurrency(fullProgramPrice)}</span>
                       <p className="text-[9px] font-black tracking-wider uppercase text-slate-400">( <span className="text-[9px] font-serif font-black text-orange-500">Installments</span> Available) </p>
                    </div>
                 </div>
              </div>
              <div className="text-[10px] font-black text-orange-600 text-center uppercase tracking-wider">
-                PAY {fullProgramInstallment} NOW AND PAY THE REST BY WEEK 6
+                PAY {formatCurrency(fullProgramInstallment)} NOW AND PAY THE REST BY WEEK 6
              </div>
 
              <div className="text-center">
@@ -1116,7 +1119,7 @@ const SalesLandingPage: React.FC = () => {
                    {
                     isInstallment &&
                     <div className="text-[10px] font-black text-orange-600 text-center uppercase tracking-wider">
-                      PAY { selectedTrack === 'full' ? fullProgramInstallment : ExcelAndAIInstallment} NOW AND PAY THE REST BY WEEK 6
+                      PAY { selectedTrack === 'full' ? formatCurrency(fullProgramInstallment) : formatCurrency(ExcelAndAIInstallment)} NOW AND PAY THE REST BY WEEK 6
                     </div>
                    }
                 </div>
@@ -1140,13 +1143,13 @@ const SalesLandingPage: React.FC = () => {
                       <h4 className="text-sm font-black tracking-tight text-slate-900 font-bold">Full Accelerator Program</h4>
                       <div className="flex items-baseline gap-1 mt-0.5">
                          <span className="text-lg font-black text-orange-600 tracking-tighter">
-                            {isInstallment ? fullProgramInstallment : fullProgramPrice}
+                            {isInstallment ? formatCurrency(fullProgramInstallment) : formatCurrency(fullProgramPrice)}
                          </span>
                          <span className="text-slate-400 line-through text-[10px] font-semibold">₦50,000</span>
                       </div>
                       <p className="text-slate-500 text-[10px] font-medium mt-0.5 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF " + fullProgramPriceRemaining + " DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)" 
+                           ? "(INSTALLMENT DEPOSIT. BALANCE OF " + formatCurrency(fullProgramPriceRemaining) + " DUE BY WEEK 6. INCLUDES ALL 5 BONUSES)" 
                            : "(INCLUDES EXCEL + SQL + POWER BI + AI + MONETIZATION + ALL 5 BONUSES)"}
                       </p>
                    </button>
@@ -1161,13 +1164,13 @@ const SalesLandingPage: React.FC = () => {
                       <h4 className="text-sm font-black tracking-tight text-slate-900 font-bold">Excel + AI Track Only</h4>
                       <div className="flex items-baseline gap-1 mt-0.5">
                          <span className="text-lg font-black text-orange-600 tracking-tighter">
-                            {isInstallment ? ExcelAndAIInstallment : ExcelAndAIPrice}
+                            {isInstallment ?  formatCurrency(ExcelAndAIInstallment) : formatCurrency(ExcelAndAIPrice)}
                          </span>
                          <span className="text-slate-400 line-through text-[10px] font-semibold">₦30,000</span>
                       </div>
                       <p className="text-slate-500 text-[10px] font-medium mt-0.5 leading-tight italic">
                          {isInstallment 
-                           ? "(INSTALLMENT DEPOSIT. BALANCE OF " + ExcelAndAIPriceRemaining + " DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)" 
+                           ? "(INSTALLMENT DEPOSIT. BALANCE OF " + formatCurrency(ExcelAndAIPriceRemaining) + " DUE BY WEEK 6. NO SQL / POWER BI / LINKEDIN SPRINT)" 
                            : "(INCLUDES DATASETS + EXCEL + AI MODULES ONLY. NO SQL / POWER BI / LINKEDIN SPRINT)"}
                       </p>
                    </button>
@@ -1229,7 +1232,7 @@ const SalesLandingPage: React.FC = () => {
                       <div className="flex justify-between items-center text-xs font-black uppercase tracking-tight text-slate-900">
                         <span>Amount Due Now:</span>
                         <span className="text-base text-orange-600 font-serif font-black">
-                          {isInstallment ? selectedTrack === 'full' ? fullProgramInstallment : ExcelAndAIInstallment : selectedTrack === 'full' ? fullProgramPrice : ExcelAndAIPrice}
+                          {isInstallment ? selectedTrack === 'full' ? formatCurrency(fullProgramInstallment) : formatCurrency(ExcelAndAIInstallment) : selectedTrack === 'full' ? formatCurrency(fullProgramPrice) : formatCurrency(ExcelAndAIPrice)}
                         </span>
                       </div>
                    </div>
@@ -1318,7 +1321,7 @@ const SalesLandingPage: React.FC = () => {
            <p className="text-[8px] font-black text-slate-500 uppercase tracking-wider">{month} Batch Enrollment</p>
            <div className="flex items-baseline gap-1">
               <span className="text-base font-black text-orange-500">
-                 {isInstallment ? fullProgramInstallment : selectedTrack === 'full' ? fullProgramPrice : ExcelAndAIPrice}
+                 {isInstallment ? formatCurrency(fullProgramInstallment) : selectedTrack === 'full' ? formatCurrency(fullProgramPrice) : formatCurrency(ExcelAndAIPrice)}
               </span>
               <span className="text-[8px] font-bold text-slate-400 line-through">
                  {selectedTrack === 'full' ? '₦50,000' : '₦30,000'}
