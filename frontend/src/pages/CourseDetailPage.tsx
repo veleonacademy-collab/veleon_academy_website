@@ -68,6 +68,7 @@ const CourseDetailPage: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<"folders" | "curriculum">("folders");
   const [expandedFolders, setExpandedFolders] = useState<Record<number, boolean>>({ [-1]: true });
+  const [expandedClasses, setExpandedClasses] = useState<Record<number, boolean>>({ [-1]: true });
 
   React.useEffect(() => {
     if (details?.folders) {
@@ -83,6 +84,13 @@ const CourseDetailPage: React.FC = () => {
     setExpandedFolders(prev => ({
       ...prev,
       [folderId]: !prev[folderId]
+    }));
+  };
+
+  const toggleClass = (classId: number) => {
+    setExpandedClasses(prev => ({
+      ...prev,
+      [classId]: !prev[classId]
     }));
   };
   
@@ -237,7 +245,7 @@ const CourseDetailPage: React.FC = () => {
             <div className="space-y-6">
               {folders.length > 0 ? (
                 folders.map((folder: any) => {
-                  const isExpanded = !!expandedFolders[folder.id];
+                  const isExpanded = !!!expandedFolders[folder.id];
                   const classesCount = folder.classes?.length || 0;
                   return (
                     <div key={folder.id} className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300">
@@ -268,13 +276,29 @@ const CourseDetailPage: React.FC = () => {
                       {isExpanded && (
                         <div className="p-6 space-y-6 border-t border-slate-100 divide-y divide-slate-100">
                           {folder.classes && folder.classes.length > 0 ? (
-                            folder.classes.map((cls: any, idx: number) => (
-                              <div key={cls.id} className={`pt-6 ${idx === 0 ? "pt-0" : ""}`}>
-                                <div className="mb-4">
-                                  <h4 className="text-base font-black text-slate-900 uppercase tracking-tight">{cls.name}</h4>
-                                  {cls.description && <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">{cls.description}</p>}
-                                </div>
+                            folder.classes.map((cls: any, idx: number) => {
+                              const isExpandedClass = !!expandedClasses[cls.id]; 
+                              return (
 
+                              <div key={cls.id} className={`pt-6 ${idx === 0 ? "pt-0" : ""}`}>
+                                <button
+                                  onClick={() => toggleClass(cls.id)}
+                                  className="w-full flex items-center justify-between mb-4 text-left group/cls"
+                                >
+                                  <div>
+                                    <h4 className="text-base font-black text-slate-900 uppercase tracking-tight group-hover/cls:text-primary transition-colors">{cls.name}</h4>
+                                    {cls.description && <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">{cls.description}</p>}
+                                  </div>
+                                  <div className="ml-4 flex-shrink-0">
+                                    {isExpandedClass ? (
+                                      <ChevronUp className="h-4 w-4 text-slate-400" />
+                                    ) : (
+                                      <ChevronDown className="h-4 w-4 text-slate-400" />
+                                    )}
+                                  </div>
+                                </button>
+
+                                {isExpandedClass && (
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                   {/* Recordings (Lessons) */}
                                   <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
@@ -339,8 +363,10 @@ const CourseDetailPage: React.FC = () => {
                                     )}
                                   </div>
                                 </div>
+                                )}
                               </div>
-                            ))
+
+                            )})
                           ) : (
                             <div className="py-6 text-center text-slate-400 text-xs">No classes uploaded in this folder yet.</div>
                           )}

@@ -375,3 +375,8 @@
 2026-06-07 20:29:40:2940 [31merror[39m: [31mError handler caught: Invalid email or password.[39m
 2026-06-07 20:30:44:3044 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
 2026-06-07 20:30:45:3045 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-07-03 22:48:37:4837 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-07-03 22:48:46:4846 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-07-03 22:48:48:4848 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-07-03 22:50:40:5040 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m
+2026-07-03 22:52:26:5226 [31merror[39m: [31mError handler caught: getaddrinfo EAI_AGAIN aws-1-eu-west-1.pooler.supabase.com[39m

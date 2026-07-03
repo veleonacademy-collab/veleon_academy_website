@@ -319,7 +319,6 @@ const SalesLandingPage: React.FC = () => {
   const fullProgramPriceRemaining = 15000;
   const ExcelAndAIPriceRemaining = 5000;
 
-  // const 
 
   useEffect(() => {
     if (window.location.hash === '#enroll-section') {
