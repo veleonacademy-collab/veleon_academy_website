@@ -6,6 +6,9 @@ import {
   updateUserStatus,
   getMyTransactions,
   getMyTasks,
+  deleteUser,
+  updateUserEmail,
+  resendUserCredentials,
 } from "../controllers/userController.js";
 
 export const userRouter = Router();
@@ -20,3 +23,7 @@ userRouter.use(authorize(["admin", "tutor"]));
 userRouter.get("/", getAllUsers);
 userRouter.put("/:id/role", updateUserRole);
 userRouter.put("/:id/status", updateUserStatus);
+
+userRouter.delete("/:id", authorize(["admin"]), deleteUser);
+userRouter.put("/:id/email", authorize(["admin"]), updateUserEmail);
+userRouter.post("/:id/resend-credentials", authorize(["admin"]), resendUserCredentials);

@@ -1,11 +1,11 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchUsers, updateUserRole, updateUserStatus } from "../../api/admin";
+import { fetchUsers, updateUserRole, updateUserStatus, deleteUser, updateUserEmail, resendUserCredentials } from "../../api/admin";
 import { BackButton } from "../../components/ui/BackButton";
 import toast from "react-hot-toast";
 import { academyApi } from "../../api/academy";
 import Modal from "../../components/Modal";
-import { Book, Plus, Trash2, UserPlus } from "lucide-react";
+import { Book, Plus, Trash2, UserPlus, Mail, Key } from "lucide-react";
 
 const AdminUsersPage: React.FC = () => {
   const queryClient = useQueryClient();
@@ -26,6 +26,55 @@ const AdminUsersPage: React.FC = () => {
       toast.success("User role updated");
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
+  });
+
+  const [selectedUserForEmail, setSelectedUserForEmail] = React.useState<{ id: number; name: string; email: string } | null>(null);
+  const [newEmail, setNewEmail] = React.useState("");
+  const [isEmailModalOpen, setIsEmailModalOpen] = React.useState(false);
+
+  const [userToDelete, setUserToDelete] = React.useState<{ id: number; name: string } | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+
+  const [userToResend, setUserToResend] = React.useState<{ id: number; name: string; email: string } | null>(null);
+  const [isResendModalOpen, setIsResendModalOpen] = React.useState(false);
+
+  const deleteMutation = useMutation({
+    mutationFn: (userId: number) => deleteUser(userId),
+    onSuccess: () => {
+      toast.success("User successfully deleted");
+      setIsDeleteModalOpen(false);
+      setUserToDelete(null);
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to delete user");
+    }
+  });
+
+  const emailMutation = useMutation({
+    mutationFn: ({ userId, email }: { userId: number; email: string }) => updateUserEmail(userId, email),
+    onSuccess: () => {
+      toast.success("User email updated");
+      setIsEmailModalOpen(false);
+      setSelectedUserForEmail(null);
+      setNewEmail("");
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to update email");
+    }
+  });
+
+  const resendCredentialsMutation = useMutation({
+    mutationFn: (userId: number) => resendUserCredentials(userId),
+    onSuccess: () => {
+      toast.success("Credentials successfully reset and sent");
+      setIsResendModalOpen(false);
+      setUserToResend(null);
+    },
+    onError: (err: any) => {
+      toast.error(err.response?.data?.message || "Failed to resend credentials");
+    }
   });
 
   const [selectedTutor, setSelectedTutor] = React.useState<{ id: number; name: string } | null>(null);
@@ -254,7 +303,41 @@ const AdminUsersPage: React.FC = () => {
                          <UserPlus className="h-4 w-4" />
                        </button>
                      )}
-                </td>
+
+                    <button
+                      onClick={() => {
+                        setSelectedUserForEmail({ id: u.id, name: `${u.firstName} ${u.lastName}`, email: u.email });
+                        setNewEmail(u.email);
+                        setIsEmailModalOpen(true);
+                      }}
+                      className="p-2 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 transition-colors"
+                      title="Edit Email"
+                    >
+                      <Mail className="h-4 w-4" />
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setUserToResend({ id: u.id, name: `${u.firstName} ${u.lastName}`, email: u.email });
+                        setIsResendModalOpen(true);
+                      }}
+                      className="p-2 rounded-lg bg-amber-50 text-amber-600 hover:bg-amber-100 transition-colors"
+                      title="Resend Credentials"
+                    >
+                      <Key className="h-4 w-4" />
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setUserToDelete({ id: u.id, name: `${u.firstName} ${u.lastName}` });
+                        setIsDeleteModalOpen(true);
+                      }}
+                      className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                      title="Delete User"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                 </td>
               </tr>
             ))}
           </tbody>
@@ -338,6 +421,36 @@ const AdminUsersPage: React.FC = () => {
                     <option value="tutor">Tutor</option>
                     <option value="admin">Admin</option>
                   </select>
+               </div>
+               <div className="pt-3 border-t border-gray-50 flex items-center justify-between gap-2">
+                  <button
+                    onClick={() => {
+                      setSelectedUserForEmail({ id: u.id, name: `${u.firstName} ${u.lastName}`, email: u.email });
+                      setNewEmail(u.email);
+                      setIsEmailModalOpen(true);
+                    }}
+                    className="flex-1 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold uppercase hover:bg-slate-100 transition-colors flex items-center justify-center gap-1"
+                  >
+                    <Mail className="h-3.5 w-3.5" /> Email
+                  </button>
+                  <button
+                    onClick={() => {
+                      setUserToResend({ id: u.id, name: `${u.firstName} ${u.lastName}`, email: u.email });
+                      setIsResendModalOpen(true);
+                    }}
+                    className="flex-1 py-2 bg-amber-50 text-amber-600 rounded-lg text-xs font-bold uppercase hover:bg-amber-100 transition-colors flex items-center justify-center gap-1"
+                  >
+                    <Key className="h-3.5 w-3.5" /> Reset
+                  </button>
+                  <button
+                    onClick={() => {
+                      setUserToDelete({ id: u.id, name: `${u.firstName} ${u.lastName}` });
+                      setIsDeleteModalOpen(true);
+                    }}
+                    className="flex-1 py-2 bg-red-50 text-red-600 rounded-lg text-xs font-bold uppercase hover:bg-red-100 transition-colors flex items-center justify-center gap-1"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" /> Delete
+                  </button>
                </div>
             </div>
          ))}
@@ -675,6 +788,156 @@ const AdminUsersPage: React.FC = () => {
             </button>
           </div>
         </form>
+      </Modal>
+
+      {/* Edit Email Modal */}
+      <Modal
+        isOpen={isEmailModalOpen}
+        onClose={() => {
+          setIsEmailModalOpen(false);
+          setSelectedUserForEmail(null);
+          setNewEmail("");
+        }}
+        title={`Edit Student Email: ${selectedUserForEmail?.name}`}
+      >
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (selectedUserForEmail) {
+              emailMutation.mutate({ userId: selectedUserForEmail.id, email: newEmail });
+            }
+          }}
+          className="space-y-5 py-4"
+        >
+          <div className="space-y-1">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Email Address</label>
+            <input
+              type="email"
+              required
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm focus:border-primary focus:outline-none"
+            />
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() => {
+                setIsEmailModalOpen(false);
+                setSelectedUserForEmail(null);
+                setNewEmail("");
+              }}
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:bg-slate-50 rounded-xl"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={emailMutation.isPending}
+              className="px-5 py-2 text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary/90 disabled:opacity-50 rounded-xl"
+            >
+              {emailMutation.isPending ? "Saving..." : "Save Email"}
+            </button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* Resend Credentials Confirmation Modal */}
+      <Modal
+        isOpen={isResendModalOpen}
+        onClose={() => {
+          setIsResendModalOpen(false);
+          setUserToResend(null);
+        }}
+        title="Reset & Resend Login Credentials"
+      >
+        <div className="space-y-5 py-4">
+          <p className="text-sm text-slate-600">
+            Are you sure you want to reset the password for <strong className="text-slate-900">{userToResend?.name}</strong> and send new credentials to <strong className="text-slate-900">{userToResend?.email}</strong>?
+          </p>
+          <div className="bg-amber-50 border border-amber-100 rounded-xl p-3 text-xs text-amber-800">
+            <strong>Note:</strong> This will generate a new random temporary password, update it in the database, and send the welcome onboarding email immediately. The student's old password will stop working.
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() => {
+                setIsResendModalOpen(false);
+                setUserToResend(null);
+              }}
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:bg-slate-50 rounded-xl"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                if (userToResend) {
+                  resendCredentialsMutation.mutate(userToResend.id);
+                }
+              }}
+              disabled={resendCredentialsMutation.isPending}
+              className="px-5 py-2 text-xs font-bold uppercase tracking-wider text-white bg-amber-600 hover:bg-amber-700 disabled:opacity-50 rounded-xl"
+            >
+              {resendCredentialsMutation.isPending ? "Resending..." : "Yes, Reset & Resend"}
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Delete User Confirmation Modal */}
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setUserToDelete(null);
+        }}
+        title="Delete User Account"
+      >
+        <div className="space-y-5 py-4">
+          <div className="text-sm text-slate-600 space-y-3">
+            <p>
+              Are you sure you want to permanently delete the account of <strong className="text-slate-900">{userToDelete?.name}</strong>?
+            </p>
+            <p className="font-semibold text-red-600">
+              ⚠️ DANGER: This action is permanent and CANNOT be undone.
+            </p>
+            <p>
+              This will completely erase:
+            </p>
+            <ul className="list-disc pl-5 space-y-1 text-xs">
+              <li>User login credentials and profile details.</li>
+              <li>Associated customer records, measurements, and files.</li>
+              <li>Course enrollments and learning progress.</li>
+              <li>Assigned tasks, remarks, and system configurations.</li>
+            </ul>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={() => {
+                setIsDeleteModalOpen(false);
+                setUserToDelete(null);
+              }}
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:bg-slate-50 rounded-xl"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                if (userToDelete) {
+                  deleteMutation.mutate(userToDelete.id);
+                }
+              }}
+              disabled={deleteMutation.isPending}
+              className="px-5 py-2 text-xs font-bold uppercase tracking-wider text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 rounded-xl"
+            >
+              {deleteMutation.isPending ? "Deleting..." : "Permanently Delete"}
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

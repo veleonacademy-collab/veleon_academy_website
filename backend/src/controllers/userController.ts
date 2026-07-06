@@ -51,3 +51,34 @@ export async function getMyTasks(req: Request, res: Response, next: NextFunction
     next(err);
   }
 }
+
+export async function deleteUser(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.id);
+    await userService.deleteUser(id);
+    res.json({ message: "User deleted successfully." });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updateUserEmail(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.id);
+    const { email } = req.body;
+    const user = await userService.updateUserEmail(id, email);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function resendUserCredentials(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = Number(req.params.id);
+    await userService.resendUserCredentials(id);
+    res.json({ message: "Credentials resent successfully." });
+  } catch (err) {
+    next(err);
+  }
+}

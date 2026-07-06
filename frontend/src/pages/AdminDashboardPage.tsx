@@ -29,6 +29,14 @@ const AdminDashboardPage: React.FC = () => {
           <p className="mt-1 text-sm text-muted-foreground">
             Welcome back. Here's what's happening today.
           </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+           How to enrol and assign course to students.
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+           Go to SALES LEADS then onboard. the student....
+           Go to STUDENTS  to Assign them a tutor.
+          </p>
+          
         </div>
       </div>
 

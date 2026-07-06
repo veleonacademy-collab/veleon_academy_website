@@ -13518,3 +13518,96 @@
 2026-07-03 22:56:24:5624 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
 2026-07-03 22:56:26:5626 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 2009ms[39m
 2026-07-03 22:56:26:5626 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 2008.664 ms[39m
+2026-07-03 22:58:38:5838 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 22:58:38:5838 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 21ms[39m
+2026-07-03 22:58:39:5839 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 22:58:40:5840 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 1882ms[39m
+2026-07-03 22:58:40:5840 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 1881.535 ms[39m
+2026-07-03 23:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-03 23:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-03 23:00:05:05 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:00:05:05 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 2ms[39m
+2026-07-03 23:00:05:05 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:00:07:07 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 2133ms[39m
+2026-07-03 23:00:07:07 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 2132.555 ms[39m
+2026-07-03 23:00:30:030 [32minfo[39m: [32mSocket ZhwpsxOZaHufDqULAAAD disconnected[39m
+2026-07-03 23:00:30:030 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:00:30:030 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-03 23:00:30:030 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:00:30:030 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 2ms[39m
+2026-07-03 23:00:30:030 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:00:31:031 [37mdebug[39m: [37m[Request End] GET /me took 234ms[39m
+2026-07-03 23:00:31:031 [35mhttp[39m: [35mGET /api/auth/me 304 - - 233.570 ms[39m
+2026-07-03 23:00:31:031 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:00:31:031 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:00:31:031 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 1ms[39m
+2026-07-03 23:00:31:031 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:00:31:031 [32minfo[39m: [32mUser 3 connected with socket 7R1QxyfXI3-woLN4AAAF[39m
+2026-07-03 23:00:31:031 [37mdebug[39m: [37m[Request End] GET /me took 255ms[39m
+2026-07-03 23:00:31:031 [35mhttp[39m: [35mGET /api/auth/me 304 - - 254.520 ms[39m
+2026-07-03 23:00:35:035 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 4419ms[39m
+2026-07-03 23:00:35:035 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 4418.503 ms[39m
+2026-07-03 23:01:52:152 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:01:52:152 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 9ms[39m
+2026-07-03 23:01:52:152 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:01:55:155 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 2631ms[39m
+2026-07-03 23:01:55:155 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 2629.674 ms[39m
+2026-07-03 23:07:32:732 [32minfo[39m: [32mSocket 7R1QxyfXI3-woLN4AAAF disconnected[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 7ms[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 4ms[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request End] GET /me took 246ms[39m
+2026-07-03 23:07:33:733 [35mhttp[39m: [35mGET /api/auth/me 304 - - 243.381 ms[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 4ms[39m
+2026-07-03 23:07:33:733 [32minfo[39m: [32mUser 3 connected with socket 9j2nFMMZB2upBYXaAAAH[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:07:33:733 [37mdebug[39m: [37m[Request End] GET /me took 247ms[39m
+2026-07-03 23:07:33:733 [35mhttp[39m: [35mGET /api/auth/me 304 - - 246.888 ms[39m
+2026-07-03 23:07:35:735 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 2039ms[39m
+2026-07-03 23:07:35:735 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 2038.739 ms[39m
+2026-07-03 23:07:47:747 [32minfo[39m: [32mSocket 9j2nFMMZB2upBYXaAAAH disconnected[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 0ms[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request End] GET /me took 236ms[39m
+2026-07-03 23:07:47:747 [35mhttp[39m: [35mGET /api/auth/me 304 - - 233.509 ms[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 8ms[39m
+2026-07-03 23:07:47:747 [32minfo[39m: [32mUser 3 connected with socket MPgr-mJjd4IGBmpJAAAJ[39m
+2026-07-03 23:07:47:747 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:07:48:748 [37mdebug[39m: [37m[Request End] GET /me took 280ms[39m
+2026-07-03 23:07:48:748 [35mhttp[39m: [35mGET /api/auth/me 304 - - 279.842 ms[39m
+2026-07-03 23:07:49:749 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 1849ms[39m
+2026-07-03 23:07:49:749 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 304 - - 1844.260 ms[39m
+2026-07-03 23:08:38:838 [32minfo[39m: [32mSocket MPgr-mJjd4IGBmpJAAAJ disconnected[39m
+2026-07-03 23:08:40:840 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:08:40:840 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 38ms[39m
+2026-07-03 23:08:40:840 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:08:40:840 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 5ms[39m
+2026-07-03 23:08:40:840 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:08:40:840 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5174[39m
+2026-07-03 23:08:41:841 [37mdebug[39m: [37m[Request End] GET /me took 867ms[39m
+2026-07-03 23:08:41:841 [35mhttp[39m: [35mGET /api/auth/me 200 325 - 864.909 ms[39m
+2026-07-03 23:08:41:841 [37mdebug[39m: [37m[Request End] GET /me took 860ms[39m
+2026-07-03 23:08:41:841 [35mhttp[39m: [35mGET /api/auth/me 200 325 - 865.933 ms[39m
+2026-07-03 23:08:41:841 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:08:41:841 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 1ms[39m
+2026-07-03 23:08:41:841 [32minfo[39m: [32mUser 3 connected with socket DoyhPd0c8Vgo_DzdAAAL[39m
+2026-07-03 23:08:41:841 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5174[39m
+2026-07-03 23:08:45:845 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 3865ms[39m
+2026-07-03 23:08:45:845 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 200 17855 - 3864.542 ms[39m
+2026-07-03 23:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-03 23:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-04 00:00:00:00 [32minfo[39m: [32mRunning daily overdue installment check...[39m
+2026-07-04 00:00:00:00 [32minfo[39m: [32mProcessing overdue installments...[39m
+2026-07-04 00:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-04 00:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-04 00:00:00:00 [32minfo[39m: [32mLocked portals for 0 students.[39m
+2026-07-04 00:00:43:043 [32minfo[39m: [32mSocket DoyhPd0c8Vgo_DzdAAAL disconnected[39m

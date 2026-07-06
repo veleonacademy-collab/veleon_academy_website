@@ -65,3 +65,18 @@ export const sendBulkMessage = async (payload: { recipients: { email: string; na
   const response = await http.post("/admin/bulk-email", payload);
   return response.data;
 };
+
+export const deleteUser = async (userId: number) => {
+  const response = await http.delete(`/users/${userId}`);
+  return response.data;
+};
+
+export const updateUserEmail = async (userId: number, email: string) => {
+  const response = await http.put(`/users/${userId}/email`, { email });
+  return response.data;
+};
+
+export const resendUserCredentials = async (userId: number) => {
+  const response = await http.post(`/users/${userId}/resend-credentials`);
+  return response.data;
+};
