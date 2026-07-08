@@ -13611,3 +13611,17 @@
 2026-07-04 00:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
 2026-07-04 00:00:00:00 [32minfo[39m: [32mLocked portals for 0 students.[39m
 2026-07-04 00:00:43:043 [32minfo[39m: [32mSocket DoyhPd0c8Vgo_DzdAAAL disconnected[39m
+2026-07-06 16:53:34:5334 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-06 16:53:34:5334 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-06 16:57:25:5725 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5174[39m
+2026-07-06 16:57:25:5725 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5174[39m
+2026-07-06 16:57:25:5725 [37mdebug[39m: [37m[Request End] GET / took 253ms[39m
+2026-07-06 16:57:25:5725 [35mhttp[39m: [35mGET /api/ads 200 2 - 251.884 ms[39m
+2026-07-06 16:57:27:5727 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 2391ms[39m
+2026-07-06 16:57:27:5727 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 2383.562 ms[39m
+2026-07-06 17:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-06 17:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-06 17:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-06 17:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-06 18:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-06 18:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m

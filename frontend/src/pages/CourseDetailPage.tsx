@@ -276,7 +276,8 @@ const CourseDetailPage: React.FC = () => {
                       {isExpanded && (
                         <div className="p-6 space-y-6 border-t border-slate-100 divide-y divide-slate-100">
                           {folder.classes && folder.classes.length > 0 ? (
-                            folder.classes.map((cls: any, idx: number) => {
+                             [...folder.classes]
+      .sort((a, b) => a.id - b.id).map((cls: any, idx: number) => {
                               const isExpandedClass = !!expandedClasses[cls.id]; 
                               return (
 
