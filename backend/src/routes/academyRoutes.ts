@@ -66,6 +66,20 @@ academyRouter.delete(
   AcademyController.deleteFolder
 );
 
+academyRouter.put(
+  "/tutor/recordings/:id",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.updateRecording
+);
+
+academyRouter.put(
+  "/tutor/assignments/:id",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.updateAssignment
+);
+
 academyRouter.post(
   "/tutor/upload-class-material",
   authenticate,

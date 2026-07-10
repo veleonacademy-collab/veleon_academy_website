@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { academyApi } from "../api/academy";
-import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail, Folder, ChevronDown, ChevronUp, Video } from "lucide-react";
+import { PlayCircle, FileText, ArrowLeft, Lock, Calendar, Book, Mail, Folder, ChevronDown, ChevronUp, Video, Edit } from "lucide-react";
 import SEO from "../components/SEO";
 import { useAuth } from "../state/AuthContext";
+import toast from "react-hot-toast";
+import Modal from "../components/Modal";
+import { Input } from "../components/forms/Input";
 
 const renderDescriptionWithLinks = (text: string) => {
   if (!text) return null;
@@ -95,6 +98,73 @@ const CourseDetailPage: React.FC = () => {
   };
   
   const { user } = useAuth();
+  const isTutorOrAdmin = user?.role === 'tutor' || user?.role === 'admin';
+
+  // Edit Recording State
+  const [editingRecording, setEditingRecording] = useState<any | null>(null);
+  const [editRecTitle, setEditRecTitle] = useState("");
+  const [editRecUrl, setEditRecUrl] = useState("");
+
+  // Edit Assignment State
+  const [editingAssignment, setEditingAssignment] = useState<any | null>(null);
+  const [editAssignTitle, setEditAssignTitle] = useState("");
+  const [editAssignDesc, setEditAssignDesc] = useState("");
+  const [editAssignFileUrl, setEditAssignFileUrl] = useState("");
+  const [editAssignDueDate, setEditAssignDueDate] = useState("");
+
+  const formatInputDate = (dateStr: string | null | undefined) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return "";
+    return date.toISOString().split("T")[0];
+  };
+
+  const handleEditRecording = (recording: any) => {
+    setEditingRecording(recording);
+    setEditRecTitle(recording.title || "");
+    setEditRecUrl(recording.video_url || "");
+  };
+
+  const handleEditAssignment = (assignment: any) => {
+    setEditingAssignment(assignment);
+    setEditAssignTitle(assignment.title || "");
+    setEditAssignDesc(assignment.description || "");
+    setEditAssignFileUrl(assignment.file_url || "");
+    setEditAssignDueDate(formatInputDate(assignment.due_date));
+  };
+
+  const queryClient = useQueryClient();
+
+  const updateRecordingMutation = useMutation({
+    mutationFn: (data: { id: number; title: string; videoUrl: string }) =>
+      academyApi.updateRecording(data.id, { title: data.title, videoUrl: data.videoUrl }),
+    onSuccess: () => {
+      toast.success("Recording updated successfully!");
+      setEditingRecording(null);
+      queryClient.invalidateQueries({ queryKey: ["course-details", id, cohort] });
+    },
+    onError: () => {
+      toast.error("Failed to update recording");
+    }
+  });
+
+  const updateAssignmentMutation = useMutation({
+    mutationFn: (data: { id: number; title: string; description: string; fileUrl?: string; dueDate?: string }) =>
+      academyApi.updateAssignment(data.id, {
+        title: data.title,
+        description: data.description,
+        fileUrl: data.fileUrl,
+        dueDate: data.dueDate
+      }),
+    onSuccess: () => {
+      toast.success("Assignment updated successfully!");
+      setEditingAssignment(null);
+      queryClient.invalidateQueries({ queryKey: ["course-details", id, cohort] });
+    },
+    onError: () => {
+      toast.error("Failed to update assignment");
+    }
+  });
   
   const course = details?.course;
   const enrollment = details?.enrollment;
@@ -320,9 +390,19 @@ const CourseDetailPage: React.FC = () => {
                                                 <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Published on {new Date(r.recording_date).toLocaleDateString()}</p>
                                               </div>
                                             </div>
-                                            <a href={r.video_url} target="_blank" rel="noreferrer" className="text-[10px] font-black text-primary uppercase tracking-widest transition-all hover:underline flex items-center gap-1">
-                                              Watch →
-                                            </a>
+                                            <div className="flex items-center gap-3">
+                                              {isTutorOrAdmin && (
+                                                <button
+                                                  onClick={() => handleEditRecording(r)}
+                                                  className="text-[10px] font-black text-slate-500 hover:text-primary uppercase tracking-widest transition-all hover:underline flex items-center gap-1"
+                                                >
+                                                  <Edit className="h-3 w-3" /> Edit
+                                                </button>
+                                              )}
+                                              <a href={r.video_url} target="_blank" rel="noreferrer" className="text-[10px] font-black text-primary uppercase tracking-widest transition-all hover:underline flex items-center gap-1">
+                                                Watch →
+                                              </a>
+                                            </div>
                                           </div>
                                         ))}
                                       </div>
@@ -349,6 +429,14 @@ const CourseDetailPage: React.FC = () => {
                                                   <span className="text-[10px] font-bold text-secondary">{new Date(a.due_date).toLocaleDateString()}</span>
                                                 </div>
                                               </div>
+                                              {isTutorOrAdmin && (
+                                                <button
+                                                  onClick={() => handleEditAssignment(a)}
+                                                  className="text-[10px] font-black text-slate-500 hover:text-secondary uppercase tracking-widest transition-all hover:underline flex items-center gap-1"
+                                                >
+                                                  <Edit className="h-3 w-3" /> Edit
+                                                </button>
+                                              )}
                                             </div>
                                             <p className="text-slate-500 text-[11px] leading-relaxed whitespace-pre-wrap">{renderDescriptionWithLinks(a.description)}</p>
                                             {a.file_url && (
@@ -419,6 +507,107 @@ const CourseDetailPage: React.FC = () => {
           )}
         </div>
       )}
+      {/* Edit Recording Modal */}
+      <Modal
+        isOpen={!!editingRecording}
+        onClose={() => setEditingRecording(null)}
+        title="Edit Lesson Recording"
+      >
+        <div className="space-y-4 py-4">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Lesson Title</label>
+            <Input
+              placeholder="e.g. Lesson 1a: Basic Math operations"
+              value={editRecTitle}
+              onChange={(e) => setEditRecTitle(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Video URL</label>
+            <Input
+              placeholder="https://youtube.com/watch?v=..."
+              value={editRecUrl}
+              onChange={(e) => setEditRecUrl(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={() => {
+              if (editingRecording) {
+                updateRecordingMutation.mutate({
+                  id: editingRecording.id,
+                  title: editRecTitle,
+                  videoUrl: editRecUrl
+                });
+              }
+            }}
+            disabled={updateRecordingMutation.isPending || !editRecTitle.trim() || !editRecUrl.trim()}
+            className="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
+          >
+            {updateRecordingMutation.isPending ? "Saving..." : "Save Changes"}
+          </button>
+        </div>
+      </Modal>
+
+      {/* Edit Assignment Modal */}
+      <Modal
+        isOpen={!!editingAssignment}
+        onClose={() => setEditingAssignment(null)}
+        title="Edit Class Assignment"
+      >
+        <div className="space-y-4 py-4 max-h-[80vh] overflow-y-auto pr-1">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Assignment Title</label>
+            <Input
+              placeholder="e.g. Homework: Formulas Practice"
+              value={editAssignTitle}
+              onChange={(e) => setEditAssignTitle(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Description / Instructions</label>
+            <textarea
+              className="w-full rounded-xl border border-slate-200 p-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+              rows={4}
+              placeholder="Write instructions here..."
+              value={editAssignDesc}
+              onChange={(e) => setEditAssignDesc(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Resource File URL (Optional)</label>
+            <Input
+              placeholder="https://..."
+              value={editAssignFileUrl}
+              onChange={(e) => setEditAssignFileUrl(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Due Date</label>
+            <Input
+              type="date"
+              value={editAssignDueDate}
+              onChange={(e) => setEditAssignDueDate(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={() => {
+              if (editingAssignment) {
+                updateAssignmentMutation.mutate({
+                  id: editingAssignment.id,
+                  title: editAssignTitle,
+                  description: editAssignDesc,
+                  fileUrl: editAssignFileUrl || undefined,
+                  dueDate: editAssignDueDate || undefined
+                });
+              }
+            }}
+            disabled={updateAssignmentMutation.isPending || !editAssignTitle.trim() || !editAssignDesc.trim()}
+            className="w-full bg-secondary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
+          >
+            {updateAssignmentMutation.isPending ? "Saving..." : "Save Changes"}
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

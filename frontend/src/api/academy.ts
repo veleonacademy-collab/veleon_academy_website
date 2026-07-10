@@ -156,5 +156,11 @@ export const academyApi = {
     } | null;
     cohort?: string;
   }) => http.post<any>("/academy/tutor/upload-class-material", data).then(r => r.data),
+
+  updateRecording: (id: number, data: { title: string; videoUrl: string }) =>
+    http.put<ClassRecording>(`/academy/tutor/recordings/${id}`, data).then(r => r.data),
+
+  updateAssignment: (id: number, data: { title: string; description: string; fileUrl?: string; dueDate?: string }) =>
+    http.put<Assignment>(`/academy/tutor/assignments/${id}`, data).then(r => r.data),
 };
 

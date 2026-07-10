@@ -118,6 +118,44 @@ export class AcademyController {
     }
   }
 
+  static async updateRecording(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { title, videoUrl, video_url } = req.body;
+      
+      const fields: string[] = [];
+      const values: any[] = [];
+      let idx = 1;
+
+      if (title !== undefined) {
+        fields.push(`title = $${idx++}`);
+        values.push(title);
+      }
+      
+      const actualVideoUrl = videoUrl !== undefined ? videoUrl : video_url;
+      if (actualVideoUrl !== undefined) {
+        fields.push(`video_url = $${idx++}`);
+        values.push(actualVideoUrl);
+      }
+
+      if (fields.length === 0) {
+        return res.status(400).json({ message: "No fields to update" });
+      }
+
+      values.push(id);
+      const query = `UPDATE class_recordings SET ${fields.join(", ")} WHERE id = $${idx} RETURNING *`;
+      const result = await pool.query(query, values);
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "Recording not found" });
+      }
+
+      res.json(result.rows[0]);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // --- ASSIGNMENTS ---
 
   static async createAssignment(req: Request, res: Response, next: NextFunction) {
@@ -167,6 +205,56 @@ export class AcademyController {
       }
 
       res.status(201).json(assignment);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async updateAssignment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { title, description, fileUrl, file_url, dueDate, due_date } = req.body;
+
+      const fields: string[] = [];
+      const values: any[] = [];
+      let idx = 1;
+
+      if (title !== undefined) {
+        fields.push(`title = $${idx++}`);
+        values.push(title);
+      }
+      if (description !== undefined) {
+        fields.push(`description = $${idx++}`);
+        values.push(description);
+      }
+      
+      const actualFileUrl = fileUrl !== undefined ? fileUrl : file_url;
+      if (actualFileUrl !== undefined) {
+        fields.push(`file_url = $${idx++}`);
+        values.push(actualFileUrl || null);
+      }
+      
+      const actualDueDate = dueDate !== undefined ? dueDate : due_date;
+      if (actualDueDate !== undefined) {
+        fields.push(`due_date = $${idx++}`);
+        values.push(actualDueDate || null);
+      }
+
+      if (fields.length === 0) {
+        return res.status(400).json({ message: "No fields to update" });
+      }
+
+      fields.push(`updated_at = NOW()`);
+
+      values.push(id);
+      const query = `UPDATE assignments SET ${fields.join(", ")} WHERE id = $${idx} RETURNING *`;
+      const result = await pool.query(query, values);
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "Assignment not found" });
+      }
+
+      res.json(result.rows[0]);
     } catch (error) {
       next(error);
     }
