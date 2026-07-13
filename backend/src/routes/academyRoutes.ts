@@ -87,6 +87,20 @@ academyRouter.post(
   AcademyController.uploadClassMaterial
 );
 
+academyRouter.put(
+  "/tutor/materials/:id",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.updateMaterial
+);
+
+academyRouter.delete(
+  "/tutor/materials/:id",
+  authenticate,
+  requireRole(["tutor", "admin"]),
+  AcademyController.deleteMaterial
+);
+
 academyRouter.get(
   "/courses/:courseId/folders",
   authenticate,

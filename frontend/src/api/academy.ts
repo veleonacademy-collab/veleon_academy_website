@@ -1,5 +1,5 @@
 import { http } from "./http";
-import { Course, Enrollment, ClassRecording, Assignment } from "../types/academy";
+import { Course, Enrollment, ClassRecording, Assignment, ClassMaterial } from "../types/academy";
 
 export const academyApi = {
   // Courses
@@ -154,6 +154,7 @@ export const academyApi = {
       fileUrl?: string;
       dueDate?: string;
     } | null;
+    materials?: Array<{ title: string; url: string; type: string }> | null;
     cohort?: string;
   }) => http.post<any>("/academy/tutor/upload-class-material", data).then(r => r.data),
 
@@ -162,5 +163,11 @@ export const academyApi = {
 
   updateAssignment: (id: number, data: { title: string; description: string; fileUrl?: string; dueDate?: string }) =>
     http.put<Assignment>(`/academy/tutor/assignments/${id}`, data).then(r => r.data),
+
+  updateMaterial: (id: number, data: { title: string; url: string; type: string }) =>
+    http.put<ClassMaterial>(`/academy/tutor/materials/${id}`, data).then(r => r.data),
+
+  deleteMaterial: (id: number) =>
+    http.delete<any>(`/academy/tutor/materials/${id}`).then(r => r.data),
 };
 

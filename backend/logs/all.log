@@ -13684,3 +13684,64 @@
 2026-07-08 10:17:49:1749 [32minfo[39m: [32mSocket Yh4JxMiuwVUlt242AAAB disconnected[39m
 2026-07-08 10:18:04:184 [32minfo[39m: [32mDatabase connection established successfully[39m
 2026-07-08 10:18:04:184 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-13 12:08:08:88 [32minfo[39m: [32mStarting database migrations...[39m
+2026-07-13 12:08:08:88 [32minfo[39m: [32mExecuting schema.sql...[39m
+2026-07-13 12:08:10:810 [32minfo[39m: [32m✓ schema.sql executed successfully[39m
+2026-07-13 12:08:10:810 [32minfo[39m: [32mExecuting items.sql...[39m
+2026-07-13 12:08:11:811 [32minfo[39m: [32m✓ items.sql executed successfully[39m
+2026-07-13 12:08:11:811 [32minfo[39m: [32mExecuting payments.sql...[39m
+2026-07-13 12:08:11:811 [32minfo[39m: [32m✓ payments.sql executed successfully[39m
+2026-07-13 12:08:11:811 [32minfo[39m: [32mExecuting chat.sql...[39m
+2026-07-13 12:08:11:811 [32minfo[39m: [32m✓ chat.sql executed successfully[39m
+2026-07-13 12:08:11:811 [32minfo[39m: [32mExecuting admin_tables.sql...[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32m✓ admin_tables.sql executed successfully[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32mExecuting trending_news.sql...[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32m✓ trending_news.sql executed successfully[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32mExecuting migration 001_add_course_slug.sql...[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32m✓ 001_add_course_slug.sql executed successfully[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32mExecuting migration add_curriculum_table.sql...[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32m✓ add_curriculum_table.sql executed successfully[39m
+2026-07-13 12:08:12:812 [32minfo[39m: [32mExecuting migration add_delivery_destination_to_tasks.sql...[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32m✓ add_delivery_destination_to_tasks.sql executed successfully[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32mExecuting migration add_folder_cohort_and_cleanup.sql...[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32m✓ add_folder_cohort_and_cleanup.sql executed successfully[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32mExecuting migration add_metadata_to_users.sql...[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32m✓ add_metadata_to_users.sql executed successfully[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32mExecuting migration add_provider_payment_id_to_installments.sql...[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32m✓ add_provider_payment_id_to_installments.sql executed successfully[39m
+2026-07-13 12:08:13:813 [32minfo[39m: [32mExecuting migration add_task_details.sql...[39m
+2026-07-13 12:08:14:814 [32minfo[39m: [32m✓ add_task_details.sql executed successfully[39m
+2026-07-13 12:08:14:814 [32minfo[39m: [32mExecuting migration add_timetable_and_progress.sql...[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32m✓ add_timetable_and_progress.sql executed successfully[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32mExecuting migration add_user_customer_relationship.sql...[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32m✓ add_user_customer_relationship.sql executed successfully[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32mExecuting migration create_academy_tables.sql...[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32m✓ create_academy_tables.sql executed successfully[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32mExecuting migration create_ads_table.sql...[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32m✓ create_ads_table.sql executed successfully[39m
+2026-07-13 12:08:15:815 [32minfo[39m: [32mExecuting migration create_system_settings.sql...[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32m✓ create_system_settings.sql executed successfully[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32mExecuting migration create_veleonheart_table.sql...[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32m✓ create_veleonheart_table.sql executed successfully[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32mExecuting migration create_webinar_leads_table.sql...[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32m✓ create_webinar_leads_table.sql executed successfully[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32mExecuting migration fix_customer_date_types.sql...[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32m✓ fix_customer_date_types.sql executed successfully[39m
+2026-07-13 12:08:16:816 [32minfo[39m: [32mExecuting migration fix_tasks_and_indexes.sql...[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32m✓ fix_tasks_and_indexes.sql executed successfully[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32mExecuting migration rename_user_role_to_student.sql...[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32m✓ rename_user_role_to_student.sql executed successfully[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32mExecuting migration sales_leads.sql...[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32m✓ sales_leads.sql executed successfully[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32mExecuting migration update_academy_schema.sql...[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32m✓ update_academy_schema.sql executed successfully[39m
+2026-07-13 12:08:17:817 [32minfo[39m: [32mExecuting migration update_courses_is_hidden_and_seed.sql...[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32m✓ update_courses_is_hidden_and_seed.sql executed successfully[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32mExecuting migration update_sales_leads_and_enrollments_price.sql...[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32m✓ update_sales_leads_and_enrollments_price.sql executed successfully[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32mExecuting migration zzz_add_class_materials_table.sql...[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32m✓ zzz_add_class_materials_table.sql executed successfully[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32mExecuting migration zz_folders_and_classes.sql...[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32m✓ zz_folders_and_classes.sql executed successfully[39m
+2026-07-13 12:08:18:818 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
+2026-07-13 12:08:19:819 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m

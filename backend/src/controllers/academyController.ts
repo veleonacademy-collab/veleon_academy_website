@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AcademyService } from "../services/academyService.js";
 import { pool } from "../database/pool.js";
-import { sendRecordingNotificationEmail, sendAssignmentNotificationEmail } from "../services/emailService.js";
+import { sendRecordingNotificationEmail, sendAssignmentNotificationEmail, sendMaterialNotificationEmail } from "../services/emailService.js";
 
 export class AcademyController {
   // --- COURSE MANAGEMENT (Admin/Tutor) ---
@@ -1024,6 +1024,7 @@ export class AcademyController {
         classDescription,
         lessons,
         assignment,
+        materials,
         cohort
       } = req.body;
 
@@ -1082,6 +1083,21 @@ export class AcademyController {
         insertedAssignment = assignmentRes.rows[0];
       }
 
+      // 4b. Insert class materials
+      const insertedMaterials: any[] = [];
+      if (Array.isArray(materials)) {
+        for (const mat of materials) {
+          if (mat.title && mat.url) {
+            const materialRes = await client.query(
+              `INSERT INTO class_materials (course_id, tutor_id, title, url, type, cohort, class_id)
+               VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+              [courseId, tutorId, mat.title, mat.url, mat.type || 'document', cohort || null, classId]
+            );
+            insertedMaterials.push(materialRes.rows[0]);
+          }
+        }
+      }
+
       await client.query("COMMIT");
 
       // 5. Notify enrolled students (Non-blocking)
@@ -1111,6 +1127,9 @@ export class AcademyController {
               for (const recording of insertedRecordings) {
                 await sendRecordingNotificationEmail(student.email, student.first_name, courseTitle, recording.title, recording.video_url);
               }
+              for (const material of insertedMaterials) {
+                await sendMaterialNotificationEmail(student.email, student.first_name, courseTitle, material.title, material.url, material.type);
+              }
             } catch (err) {
               console.error(`Failed to send email to ${student.email}:`, err);
             }
@@ -1125,13 +1144,56 @@ export class AcademyController {
         message: "Material uploaded successfully",
         classId,
         recordings: insertedRecordings,
-        assignment: insertedAssignment
+        assignment: insertedAssignment,
+        materials: insertedMaterials
       });
     } catch (error) {
       await client.query("ROLLBACK");
       next(error);
     } finally {
       client.release();
+    }
+  }
+
+  static async updateMaterial(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { title, url, type } = req.body;
+
+      const result = await pool.query(
+        `UPDATE class_materials
+         SET title = $1, url = $2, type = $3, updated_at = NOW()
+         WHERE id = $4
+         RETURNING *`,
+        [title, url, type, id]
+      );
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "Material not found" });
+      }
+
+      res.json({ message: "Material updated successfully", material: result.rows[0] });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deleteMaterial(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+
+      const result = await pool.query(
+        `DELETE FROM class_materials WHERE id = $1 RETURNING *`,
+        [id]
+      );
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "Material not found" });
+      }
+
+      res.json({ message: "Material deleted successfully" });
+    } catch (error) {
+      next(error);
     }
   }
 }

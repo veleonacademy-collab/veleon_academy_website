@@ -161,6 +161,34 @@ export async function sendRecordingNotificationEmail(
 }
 
 /**
+ * Send notification for a new class material
+ */
+export async function sendMaterialNotificationEmail(
+  email: string,
+  firstName: string,
+  courseTitle: string,
+  materialTitle: string,
+  materialUrl: string,
+  materialType: string
+): Promise<void> {
+  const html = `
+    <div style="font-family: Arial, sans-serif;">
+      <h2>Hi ${firstName}, New Class Material Available</h2>
+      <p>A new ${materialType} for <strong>${courseTitle}</strong> has been uploaded: <strong>${materialTitle}</strong></p>
+      <p>You can access it now using the link below:</p>
+      <p><a href="${materialUrl}">Open Material</a></p>
+      <p>Or log in to your portal to see all materials for this course.</p>
+    </div>
+  `;
+
+  await sendEmail({
+    to: email,
+    subject: `New Class Material: ${courseTitle} - ${materialTitle}`,
+    html,
+  });
+}
+
+/**
  * Send verification email with token
  */
 export async function sendVerificationEmail(

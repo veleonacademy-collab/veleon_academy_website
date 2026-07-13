@@ -6,6 +6,7 @@ import { Plus, Video, ClipboardList, Book, Users, ExternalLink, MessageSquare, F
 import toast from "react-hot-toast";
 import { Input } from "../components/forms/Input";
 import Modal from "../components/Modal";
+import { FileUpload } from "../components/forms/FileUpload";
 
 const TutorDashboardPage: React.FC = () => {
   const queryClient = useQueryClient();
@@ -36,6 +37,16 @@ const TutorDashboardPage: React.FC = () => {
     assignmentDescription: "",
     assignmentFileUrl: "",
     assignmentDueDate: "",
+    cohort: "Cohort 3"
+  });
+
+  const [isMaterialsModalOpen, setIsMaterialsModalOpen] = useState(false);
+  const [materialsUploadData, setMaterialsUploadData] = useState({
+    folderId: "",
+    newFolderName: "",
+    className: "",
+    classDescription: "",
+    materials: [{ title: "", url: "", type: "document" as "document" | "video" | "link" }],
     cohort: "Cohort 3"
   });
 
@@ -102,6 +113,7 @@ const TutorDashboardPage: React.FC = () => {
     onSuccess: () => {
       toast.success("Class material uploaded and students notified!");
       setIsUploadModalOpen(false);
+      setIsMaterialsModalOpen(false);
       setUploadData({
         folderId: "",
         newFolderName: "",
@@ -113,6 +125,14 @@ const TutorDashboardPage: React.FC = () => {
         assignmentDescription: "",
         assignmentFileUrl: "",
         assignmentDueDate: "",
+        cohort: "Cohort 3"
+      });
+      setMaterialsUploadData({
+        folderId: "",
+        newFolderName: "",
+        className: "",
+        classDescription: "",
+        materials: [{ title: "", url: "", type: "document" }],
         cohort: "Cohort 3"
       });
       queryClient.invalidateQueries({ queryKey: ["tutor-courses"] });
@@ -158,6 +178,28 @@ const TutorDashboardPage: React.FC = () => {
       const updated = [...prev.lessons];
       updated[index] = { ...updated[index], [field]: value };
       return { ...prev, lessons: updated };
+    });
+  };
+
+  const addMaterialRow = () => {
+    setMaterialsUploadData(prev => ({
+      ...prev,
+      materials: [...prev.materials, { title: "", url: "", type: "document" }]
+    }));
+  };
+
+  const removeMaterialRow = (index: number) => {
+    setMaterialsUploadData(prev => ({
+      ...prev,
+      materials: prev.materials.filter((_, idx) => idx !== index)
+    }));
+  };
+
+  const handleMaterialRowChange = (index: number, field: "title" | "url" | "type", value: string) => {
+    setMaterialsUploadData(prev => {
+      const updated = [...prev.materials];
+      updated[index] = { ...updated[index], [field]: value };
+      return { ...prev, materials: updated };
     });
   };
 
@@ -226,7 +268,7 @@ const TutorDashboardPage: React.FC = () => {
                   </Link>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-4 gap-2">
                   <button 
                     onClick={() => {
                         setSelectedCourseId(course.id);
@@ -246,13 +288,36 @@ const TutorDashboardPage: React.FC = () => {
                         });
                         setIsUploadModalOpen(true);
                     }}
-                    className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary hover:bg-white transition-all gap-2 group/btn"
+                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary hover:bg-white transition-all gap-1.5 group/btn"
                   >
                       <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-600 group-hover/btn:text-primary transition-colors">
                           <Plus className="h-4 w-4" />
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Upload</span>
+                      <span className="text-[9px] font-bold uppercase tracking-[0.05em] text-slate-900 text-center">Class</span>
                   </button>
+
+                  <button 
+                    onClick={() => {
+                        setSelectedCourseId(course.id);
+                        setSelectedCohort(course.cohort || null);
+                        setMaterialsUploadData({
+                            folderId: "",
+                            newFolderName: "",
+                            className: "",
+                            classDescription: "",
+                            materials: [{ title: "", url: "", type: "document" }],
+                            cohort: course.cohort || "Cohort 3"
+                        });
+                        setIsMaterialsModalOpen(true);
+                    }}
+                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-primary hover:bg-white transition-all gap-1.5 group/btn"
+                  >
+                      <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-600 group-hover/btn:text-primary transition-colors">
+                          <Book className="h-4 w-4" />
+                      </div>
+                      <span className="text-[9px] font-bold uppercase tracking-[0.05em] text-slate-900 text-center">Materials</span>
+                  </button>
+
                   <button 
                      onClick={() => {
                           setSelectedCourseId(course.id);
@@ -260,12 +325,12 @@ const TutorDashboardPage: React.FC = () => {
                           setFolderName("");
                           setIsFolderModalOpen(true);
                      }}
-                     className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-secondary hover:bg-white transition-all gap-2 group/btn"
+                     className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-secondary hover:bg-white transition-all gap-1.5 group/btn"
                   >
                       <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-600 group-hover/btn:text-secondary transition-colors">
                           <Folder className="h-4 w-4" />
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Folder</span>
+                      <span className="text-[9px] font-bold uppercase tracking-[0.05em] text-slate-900 text-center">Folder</span>
                   </button>
                   {course.timetable_url ? (
                     <a 
@@ -275,19 +340,19 @@ const TutorDashboardPage: React.FC = () => {
                       target="_blank"
                       rel="noreferrer"
                       download
-                      className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-900 hover:bg-white transition-all gap-2 group/btn"
+                      className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-900 hover:bg-white transition-all gap-1.5 group/btn"
                     >
                         <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-600 group-hover/btn:text-slate-900 transition-colors">
-                            <Book className="h-4 w-4" />
+                            <ExternalLink className="h-4 w-4" />
                         </div>
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-slate-900">Class</span>
+                        <span className="text-[9px] font-bold uppercase tracking-[0.05em] text-slate-900 text-center">Timetable</span>
                     </a>
                   ) : (
-                    <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50/50 border border-transparent gap-2 opacity-50">
+                    <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50/50 border border-transparent gap-1.5 opacity-50">
                         <div className="h-8 w-8 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-300">
-                            <Book className="h-4 w-4" />
+                            <ExternalLink className="h-4 w-4" />
                         </div>
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-slate-300">Soon</span>
+                        <span className="text-[9px] font-bold uppercase tracking-[0.05em] text-slate-300 text-center">Timetable</span>
                     </div>
                   )}
               </div>
@@ -723,6 +788,169 @@ const TutorDashboardPage: React.FC = () => {
             className="w-full bg-secondary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
           >
             {uploadMutation.isPending ? "Uploading..." : "Publish Class Material"}
+          </button>
+        </div>
+      </Modal>
+
+      {/* Upload Class Materials Modal (no assignment, just docs/links) */}
+      <Modal
+        isOpen={isMaterialsModalOpen}
+        onClose={() => setIsMaterialsModalOpen(false)}
+        title="Upload Class Materials"
+      >
+        <div className="space-y-4 py-4 max-h-[80vh] overflow-y-auto pr-2">
+          <p className="text-xs text-slate-500 bg-slate-50 border border-slate-100 p-3 rounded-xl">
+            Upload documents, video links, or general links for students. No assignment required.
+          </p>
+
+          {/* Folder selection */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Folder</label>
+            <select
+              value={materialsUploadData.folderId}
+              onChange={(e) => setMaterialsUploadData({ ...materialsUploadData, folderId: e.target.value, newFolderName: e.target.value === "new" ? "" : materialsUploadData.newFolderName })}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="">Select an existing folder</option>
+              {currentFolders?.map((f: any) => (
+                <option key={f.id} value={f.id}>{f.name}{f.cohort ? ` (${f.cohort})` : ''}</option>
+              ))}
+              <option value="new">+ Create New Folder inline</option>
+            </select>
+          </div>
+
+          {materialsUploadData.folderId === "new" && (
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">New Folder Name</label>
+              <Input
+                placeholder="e.g. Excel Intermediate Classes"
+                value={materialsUploadData.newFolderName}
+                onChange={(e) => setMaterialsUploadData({ ...materialsUploadData, newFolderName: e.target.value })}
+              />
+            </div>
+          )}
+
+          {/* Class/Topic title */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Topic / Class Title</label>
+            <Input
+              placeholder="e.g. Class 3: Advanced Formulas Resources"
+              value={materialsUploadData.className}
+              onChange={(e) => setMaterialsUploadData({ ...materialsUploadData, className: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Description (Optional)</label>
+            <textarea
+              className="w-full rounded-xl border border-slate-200 p-4 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+              rows={2}
+              placeholder="Briefly describe these materials..."
+              value={materialsUploadData.classDescription}
+              onChange={(e) => setMaterialsUploadData({ ...materialsUploadData, classDescription: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cohort Group</label>
+            <Input
+              placeholder="e.g. Cohort 3 (optional)"
+              value={materialsUploadData.cohort}
+              onChange={(e) => setMaterialsUploadData({ ...materialsUploadData, cohort: e.target.value })}
+            />
+          </div>
+
+          {/* Dynamic materials list */}
+          <div className="space-y-4 pt-4 border-t border-slate-100">
+            <label className="text-xs font-black uppercase tracking-widest text-slate-900 block">Materials</label>
+            {materialsUploadData.materials.map((mat, idx) => (
+              <div key={idx} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 relative space-y-3">
+                {idx > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => removeMaterialRow(idx)}
+                    className="absolute right-3 top-3 text-red-500 hover:text-red-700"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                )}
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Material #{idx + 1} Title</label>
+                  <Input
+                    placeholder="e.g. Excel Formula Reference Sheet"
+                    value={mat.title}
+                    onChange={(e) => handleMaterialRowChange(idx, "title", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Type</label>
+                  <select
+                    value={mat.type}
+                    onChange={(e) => handleMaterialRowChange(idx, "type", e.target.value)}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <option value="document">📄 Document File</option>
+                    <option value="video">🎥 Video Link</option>
+                    <option value="link">🔗 General Link</option>
+                  </select>
+                </div>
+                {mat.type === "document" ? (
+                  <FileUpload
+                    label="Upload Document"
+                    value={mat.url}
+                    onChange={(url) => handleMaterialRowChange(idx, "url", url)}
+                    folder="academy-materials"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip"
+                    type="document"
+                  />
+                ) : (
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                      {mat.type === "video" ? "Video URL" : "Link URL"}
+                    </label>
+                    <Input
+                      placeholder={mat.type === "video" ? "https://youtube.com/..." : "https://..."}
+                      value={mat.url}
+                      onChange={(e) => handleMaterialRowChange(idx, "url", e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addMaterialRow}
+              className="w-full py-2 bg-slate-100 hover:bg-slate-200 border border-dashed border-slate-300 text-slate-700 text-xs font-bold uppercase tracking-widest rounded-xl transition-all"
+            >
+              + Add Another Material
+            </button>
+          </div>
+
+          <button
+            onClick={() => {
+              const validMaterials = materialsUploadData.materials.filter(m => m.title && m.url);
+              const payload = {
+                courseId: selectedCourseId,
+                folderId: materialsUploadData.folderId === "new" || !materialsUploadData.folderId ? null : parseInt(materialsUploadData.folderId),
+                newFolderName: materialsUploadData.folderId === "new" ? materialsUploadData.newFolderName : null,
+                className: materialsUploadData.className,
+                classDescription: materialsUploadData.classDescription || null,
+                lessons: [],
+                assignment: null,
+                materials: validMaterials,
+                cohort: materialsUploadData.cohort
+              };
+              uploadMutation.mutate(payload);
+            }}
+            disabled={
+              uploadMutation.isPending ||
+              !materialsUploadData.className.trim() ||
+              (materialsUploadData.folderId === "new" && !materialsUploadData.newFolderName.trim()) ||
+              materialsUploadData.materials.filter(m => m.title && m.url).length === 0
+            }
+            className="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
+          >
+            {uploadMutation.isPending ? "Uploading..." : "Publish Materials"}
           </button>
         </div>
       </Modal>

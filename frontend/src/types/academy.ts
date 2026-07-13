@@ -50,3 +50,16 @@ export interface Assignment {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ClassMaterial {
+  id: number;
+  course_id: number;
+  tutor_id: number | null;
+  cohort: string | null;
+  class_id: number | null;
+  title: string;
+  url: string;
+  type: 'document' | 'video' | 'link';
+  created_at: string;
+  updated_at: string;
+}

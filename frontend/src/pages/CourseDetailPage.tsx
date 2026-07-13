@@ -165,6 +165,44 @@ const CourseDetailPage: React.FC = () => {
       toast.error("Failed to update assignment");
     }
   });
+
+  // Edit Material State
+  const [editingMaterial, setEditingMaterial] = useState<any | null>(null);
+  const [editMatTitle, setEditMatTitle] = useState("");
+  const [editMatUrl, setEditMatUrl] = useState("");
+  const [editMatType, setEditMatType] = useState("document");
+
+  const handleEditMaterial = (material: any) => {
+    setEditingMaterial(material);
+    setEditMatTitle(material.title || "");
+    setEditMatUrl(material.url || "");
+    setEditMatType(material.type || "document");
+  };
+
+  const updateMaterialMutation = useMutation({
+    mutationFn: (data: { id: number; title: string; url: string; type: string }) =>
+      academyApi.updateMaterial(data.id, { title: data.title, url: data.url, type: data.type }),
+    onSuccess: () => {
+      toast.success("Material updated successfully!");
+      setEditingMaterial(null);
+      queryClient.invalidateQueries({ queryKey: ["course-details", id, cohort] });
+    },
+    onError: () => {
+      toast.error("Failed to update material");
+    }
+  });
+
+  const deleteMaterialMutation = useMutation({
+    mutationFn: (materialId: number) => academyApi.deleteMaterial(materialId),
+    onSuccess: () => {
+      toast.success("Material deleted successfully!");
+      setEditingMaterial(null);
+      queryClient.invalidateQueries({ queryKey: ["course-details", id, cohort] });
+    },
+    onError: () => {
+      toast.error("Failed to delete material");
+    }
+  });
   
   const course = details?.course;
   const enrollment = details?.enrollment;
@@ -370,7 +408,7 @@ const CourseDetailPage: React.FC = () => {
                                 </button>
 
                                 {isExpandedClass && (
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                                   {/* Recordings (Lessons) */}
                                   <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
                                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
@@ -408,6 +446,54 @@ const CourseDetailPage: React.FC = () => {
                                       </div>
                                     ) : (
                                       <p className="text-xs text-slate-400 py-4 text-center font-medium">Class recordings will appear here as your tutor uploads them.</p>
+                                    )}
+                                  </div>
+
+                                  {/* Class Materials */}
+                                  <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
+                                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
+                                      <Book className="h-4 w-4 text-emerald-600" />
+                                      <h5 className="text-[10px] font-black uppercase tracking-widest text-slate-950">Class Materials</h5>
+                                    </div>
+                                    {cls.materials && cls.materials.length > 0 ? (
+                                      <div className="space-y-2.5">
+                                        {cls.materials.map((mat: any) => {
+                                          const isVideo = mat.type === 'video';
+                                          const isDoc = mat.type === 'document';
+                                          const iconColor = isVideo ? 'text-purple-600' : isDoc ? 'text-blue-600' : 'text-emerald-600';
+                                          const bgColor = isVideo ? 'bg-purple-50' : isDoc ? 'bg-blue-50' : 'bg-emerald-50';
+                                          const borderHover = isVideo ? 'hover:border-purple-400' : isDoc ? 'hover:border-blue-400' : 'hover:border-emerald-400';
+                                          const label = isVideo ? 'Video' : isDoc ? 'Document' : 'Link';
+                                          return (
+                                            <div key={mat.id} className={`bg-white p-4 rounded-xl border border-slate-100 flex items-center justify-between group ${borderHover} transition-all`}>
+                                              <div className="flex items-center gap-3 min-w-0">
+                                                <div className={`h-8 w-8 ${bgColor} rounded-lg flex items-center justify-center flex-shrink-0 ${iconColor}`}>
+                                                  {isVideo ? <PlayCircle className="h-4 w-4" /> : isDoc ? <FileText className="h-4 w-4" /> : <Book className="h-4 w-4" />}
+                                                </div>
+                                                <div className="min-w-0">
+                                                  <h6 className="font-bold text-slate-900 text-xs truncate">{mat.title}</h6>
+                                                  <p className={`text-[9px] font-black uppercase tracking-wider ${iconColor}`}>{label}</p>
+                                                </div>
+                                              </div>
+                                              <div className="flex items-center gap-2 ml-2 flex-shrink-0">
+                                                {isTutorOrAdmin && (
+                                                  <button
+                                                    onClick={() => handleEditMaterial(mat)}
+                                                    className="text-[10px] font-black text-slate-500 hover:text-emerald-600 uppercase tracking-widest transition-all hover:underline flex items-center gap-1"
+                                                  >
+                                                    <Edit className="h-3 w-3" /> Edit
+                                                  </button>
+                                                )}
+                                                <a href={mat.url} target="_blank" rel="noreferrer" className={`text-[10px] font-black ${iconColor} uppercase tracking-widest transition-all hover:underline`}>
+                                                  {isVideo ? 'Watch →' : isDoc ? 'Open →' : 'Visit →'}
+                                                </a>
+                                              </div>
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    ) : (
+                                      <p className="text-xs text-slate-400 py-4 text-center font-medium">No materials uploaded for this class yet.</p>
                                     )}
                                   </div>
 
@@ -606,6 +692,75 @@ const CourseDetailPage: React.FC = () => {
           >
             {updateAssignmentMutation.isPending ? "Saving..." : "Save Changes"}
           </button>
+        </div>
+      </Modal>
+
+      {/* Edit Material Modal */}
+      <Modal
+        isOpen={!!editingMaterial}
+        onClose={() => setEditingMaterial(null)}
+        title="Edit Class Material"
+      >
+        <div className="space-y-4 py-4">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Material Title</label>
+            <Input
+              placeholder="e.g. Excel Formula Reference Sheet"
+              value={editMatTitle}
+              onChange={(e) => setEditMatTitle(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Type</label>
+            <select
+              value={editMatType}
+              onChange={(e) => setEditMatType(e.target.value)}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
+              <option value="document">📄 Document File</option>
+              <option value="video">🎥 Video Link</option>
+              <option value="link">🔗 General Link</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-slate-500">
+              {editMatType === "document" ? "Document URL" : editMatType === "video" ? "Video URL" : "Link URL"}
+            </label>
+            <Input
+              placeholder="https://..."
+              value={editMatUrl}
+              onChange={(e) => setEditMatUrl(e.target.value)}
+            />
+          </div>
+          <div className="flex gap-3 mt-6">
+            <button
+              onClick={() => {
+                if (editingMaterial) {
+                  updateMaterialMutation.mutate({
+                    id: editingMaterial.id,
+                    title: editMatTitle,
+                    url: editMatUrl,
+                    type: editMatType
+                  });
+                }
+              }}
+              disabled={updateMaterialMutation.isPending || !editMatTitle.trim() || !editMatUrl.trim()}
+              className="flex-1 bg-emerald-600 text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all uppercase"
+            >
+              {updateMaterialMutation.isPending ? "Saving..." : "Save Changes"}
+            </button>
+            <button
+              onClick={() => {
+                if (editingMaterial && window.confirm("Are you sure you want to delete this material?")) {
+                  deleteMaterialMutation.mutate(editingMaterial.id);
+                }
+              }}
+              disabled={deleteMaterialMutation.isPending}
+              className="px-6 py-4 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-bold text-sm tracking-widest transition-all uppercase"
+            >
+              {deleteMaterialMutation.isPending ? "Deleting..." : "Delete"}
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
