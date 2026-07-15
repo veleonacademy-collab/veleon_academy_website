@@ -1,1 +1,0 @@
-Onboard Student for installments, i should be able to also select maybe its weekly, bi-weekly, monthly

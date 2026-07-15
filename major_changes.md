@@ -1,0 +1,1 @@
+separate the sales page from the whole website.

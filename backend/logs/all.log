@@ -13745,3 +13745,234 @@
 2026-07-13 12:08:18:818 [32minfo[39m: [32m✓ zz_folders_and_classes.sql executed successfully[39m
 2026-07-13 12:08:18:818 [32minfo[39m: [32mExecuting migration z_add_enrollment_to_transactions.sql...[39m
 2026-07-13 12:08:19:819 [32minfo[39m: [32m✓ z_add_enrollment_to_transactions.sql executed successfully[39m
+2026-07-13 12:13:50:1350 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-13 12:13:51:1351 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] OPTIONS /api/ads | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] OPTIONS /api/ads took 3ms[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses took 3ms[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 3ms[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 2ms[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] GET /me took 17ms[39m
+2026-07-13 12:14:01:141 [35mhttp[39m: [35mGET /api/auth/me 401 39 - 18.205 ms[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] GET /me took 13ms[39m
+2026-07-13 12:14:01:141 [35mhttp[39m: [35mGET /api/auth/me 401 39 - 12.736 ms[39m
+2026-07-13 12:14:01:141 [37mdebug[39m: [37m[Request End] GET / took 340ms[39m
+2026-07-13 12:14:01:141 [35mhttp[39m: [35mGET /api/ads 304 - - 329.601 ms[39m
+2026-07-13 12:14:02:142 [37mdebug[39m: [37m[Request Start] POST /api/auth/refresh | Origin: http://localhost:5173[39m
+2026-07-13 12:14:03:143 [37mdebug[39m: [37m[Request Start] POST /api/auth/refresh | Origin: http://localhost:5173[39m
+2026-07-13 12:14:03:143 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-07-13 12:14:03:143 [37mdebug[39m: [37m[Request End] POST /api/auth/refresh took 950ms[39m
+2026-07-13 12:14:03:143 [35mhttp[39m: [35mPOST /api/auth/refresh 401 36 - 949.092 ms[39m
+2026-07-13 12:14:03:143 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses took 2334ms[39m
+2026-07-13 12:14:03:143 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 2333.769 ms[39m
+2026-07-13 12:14:05:145 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-07-13 12:14:05:145 [33mwarn[39m: [33m[SLOW REQUEST] POST /api/auth/refresh took 1977ms[39m
+2026-07-13 12:14:05:145 [35mhttp[39m: [35mPOST /api/auth/refresh 401 36 - 1966.744 ms[39m
+2026-07-13 12:14:20:1420 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/login | Origin: http://localhost:5173[39m
+2026-07-13 12:14:20:1420 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/login took 1ms[39m
+2026-07-13 12:14:20:1420 [37mdebug[39m: [37m[Request Start] POST /api/auth/login | Origin: http://localhost:5173[39m
+2026-07-13 12:14:21:1421 [37mdebug[39m: [37m[Request End] POST /login took 648ms[39m
+2026-07-13 12:14:21:1421 [35mhttp[39m: [35mPOST /api/auth/login 200 741 - 649.544 ms[39m
+2026-07-13 12:14:21:1421 [32minfo[39m: [32mUser 3 connected with socket UhQl-oGuLK4D0NvnAAAB[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 242ms[39m
+2026-07-13 12:14:24:1424 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 248.223 ms[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request End] GET /tutor/students took 254ms[39m
+2026-07-13 12:14:24:1424 [35mhttp[39m: [35mGET /api/academy/tutor/students 200 3076 - 254.186 ms[39m
+2026-07-13 12:14:24:1424 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 334ms[39m
+2026-07-13 12:14:24:1424 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 200 3026 - 336.335 ms[39m
+2026-07-13 12:14:32:1432 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=cohort+3 | Origin: http://localhost:5173[39m
+2026-07-13 12:14:32:1432 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=cohort+3 took 1ms[39m
+2026-07-13 12:14:32:1432 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=cohort+3 | Origin: http://localhost:5173[39m
+2026-07-13 12:14:32:1432 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=cohort+3 took 226ms[39m
+2026-07-13 12:14:32:1432 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=cohort+3 200 287 - 226.684 ms[39m
+2026-07-13 12:14:36:1436 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 12:14:36:1436 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=cohort+1 took 0ms[39m
+2026-07-13 12:14:36:1436 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 12:14:37:1437 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=cohort+1 took 225ms[39m
+2026-07-13 12:14:37:1437 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=cohort+1 200 431 - 230.600 ms[39m
+2026-07-13 12:15:07:157 [32minfo[39m: [32mSocket UhQl-oGuLK4D0NvnAAAB disconnected[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 2ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] GET /me took 253ms[39m
+2026-07-13 12:15:08:158 [35mhttp[39m: [35mGET /api/auth/me 200 325 - 255.927 ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 3ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:15:08:158 [32minfo[39m: [32mUser 3 connected with socket mLEQaCIZmS1FFf0aAAAD[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] GET /me took 223ms[39m
+2026-07-13 12:15:08:158 [35mhttp[39m: [35mGET /api/auth/me 304 - - 221.692 ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 246ms[39m
+2026-07-13 12:15:08:158 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 243.040 ms[39m
+2026-07-13 12:15:08:158 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 245ms[39m
+2026-07-13 12:15:08:158 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 241.826 ms[39m
+2026-07-13 12:15:10:1510 [33mwarn[39m: [33m[SLOW REQUEST] GET /tutor/students took 1682ms[39m
+2026-07-13 12:15:10:1510 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 1681.659 ms[39m
+2026-07-13 12:15:12:1512 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+5 | Origin: http://localhost:5173[39m
+2026-07-13 12:15:12:1512 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+5 took 1ms[39m
+2026-07-13 12:15:12:1512 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=Cohort+5 | Origin: http://localhost:5173[39m
+2026-07-13 12:15:13:1513 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=Cohort+5 took 628ms[39m
+2026-07-13 12:15:13:1513 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=Cohort+5 200 431 - 627.928 ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 2ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 2ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+5 | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+5 took 1ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=Cohort+5 | Origin: http://localhost:5173[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 240ms[39m
+2026-07-13 12:16:19:1619 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 241.301 ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 257ms[39m
+2026-07-13 12:16:19:1619 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 258.939 ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] GET /tutor/students took 249ms[39m
+2026-07-13 12:16:19:1619 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 247.906 ms[39m
+2026-07-13 12:16:19:1619 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=Cohort+5 took 246ms[39m
+2026-07-13 12:16:19:1619 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=Cohort+5 304 - - 246.052 ms[39m
+2026-07-13 12:20:21:2021 [32minfo[39m: [32mSocket mLEQaCIZmS1FFf0aAAAD disconnected[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] GET /me took 237ms[39m
+2026-07-13 12:20:22:2022 [35mhttp[39m: [35mGET /api/auth/me 304 - - 236.445 ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 4ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 1ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 6ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [32minfo[39m: [32mUser 3 connected with socket aZebgZ4oPO4eHX0iAAAF[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] GET /me took 233ms[39m
+2026-07-13 12:20:22:2022 [35mhttp[39m: [35mGET /api/auth/me 304 - - 233.076 ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] GET /tutor/students took 238ms[39m
+2026-07-13 12:20:22:2022 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 238.543 ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 267ms[39m
+2026-07-13 12:20:22:2022 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 266.405 ms[39m
+2026-07-13 12:20:22:2022 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 259ms[39m
+2026-07-13 12:20:22:2022 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 259.358 ms[39m
+2026-07-13 12:20:32:2032 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+4 | Origin: http://localhost:5173[39m
+2026-07-13 12:20:32:2032 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+4 took 1ms[39m
+2026-07-13 12:20:32:2032 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=Cohort+4 | Origin: http://localhost:5173[39m
+2026-07-13 12:20:33:2033 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=Cohort+4 took 238ms[39m
+2026-07-13 12:20:33:2033 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=Cohort+4 200 431 - 237.592 ms[39m
+2026-07-13 12:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-13 12:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-13 12:56:04:564 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5173[39m
+2026-07-13 12:56:04:564 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=Cohort+4 took 1ms[39m
+2026-07-13 12:56:04:564 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=Cohort+4 | Origin: http://localhost:5173[39m
+2026-07-13 12:56:06:566 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=Cohort+4 took 2352ms[39m
+2026-07-13 12:56:06:566 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=Cohort+4 200 22298 - 2352.363 ms[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 1ms[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 0ms[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 0ms[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request End] GET /tutor/students took 268ms[39m
+2026-07-13 12:56:22:5622 [35mhttp[39m: [35mGET /api/academy/tutor/students 200 3076 - 268.612 ms[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 282ms[39m
+2026-07-13 12:56:22:5622 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 282.551 ms[39m
+2026-07-13 12:56:22:5622 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 331ms[39m
+2026-07-13 12:56:22:5622 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 331.170 ms[39m
+2026-07-13 12:56:33:5633 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+4 | Origin: http://localhost:5173[39m
+2026-07-13 12:56:33:5633 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=Cohort+4 took 1ms[39m
+2026-07-13 12:56:33:5633 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=Cohort+4 | Origin: http://localhost:5173[39m
+2026-07-13 12:56:33:5633 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=Cohort+4 took 225ms[39m
+2026-07-13 12:56:33:5633 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=Cohort+4 304 - - 224.452 ms[39m
+2026-07-13 13:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-13 13:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-13 13:01:13:113 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/upload-class-material | Origin: http://localhost:5173[39m
+2026-07-13 13:01:13:113 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/upload-class-material took 1ms[39m
+2026-07-13 13:01:13:113 [37mdebug[39m: [37m[Request Start] POST /api/academy/tutor/upload-class-material | Origin: http://localhost:5173[39m
+2026-07-13 13:01:15:115 [33mwarn[39m: [33m[SLOW REQUEST] POST /tutor/upload-class-material took 1969ms[39m
+2026-07-13 13:01:15:115 [35mhttp[39m: [35mPOST /api/academy/tutor/upload-class-material 201 765 - 1969.561 ms[39m
+2026-07-13 13:01:15:115 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 13:01:15:115 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 1ms[39m
+2026-07-13 13:01:15:115 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 13:01:15:115 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 236ms[39m
+2026-07-13 13:01:15:115 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 200 3026 - 236.847 ms[39m
+2026-07-13 13:01:20:120 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 13:01:20:120 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+1 took 1ms[39m
+2026-07-13 13:01:20:120 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 13:01:23:123 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+1 took 2286ms[39m
+2026-07-13 13:01:23:123 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+1 200 18940 - 2286.133 ms[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 0ms[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/students took 1ms[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/students | Origin: http://localhost:5173[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request End] GET /tutor/students took 383ms[39m
+2026-07-13 13:06:48:648 [35mhttp[39m: [35mGET /api/academy/tutor/students 304 - - 384.460 ms[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request End] GET /courses?all=true took 394ms[39m
+2026-07-13 13:06:48:648 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 392.927 ms[39m
+2026-07-13 13:06:48:648 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 410ms[39m
+2026-07-13 13:06:48:648 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 304 - - 410.088 ms[39m
+2026-07-13 13:06:56:656 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses/6/folders?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 13:06:56:656 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses/6/folders?cohort=cohort+1 took 1ms[39m
+2026-07-13 13:06:56:656 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses/6/folders?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 13:06:56:656 [37mdebug[39m: [37m[Request End] GET /courses/6/folders?cohort=cohort+1 took 261ms[39m
+2026-07-13 13:06:56:656 [35mhttp[39m: [35mGET /api/academy/courses/6/folders?cohort=cohort+1 304 - - 261.314 ms[39m
+2026-07-13 13:10:14:1014 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/upload-class-material | Origin: http://localhost:5173[39m
+2026-07-13 13:10:14:1014 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/upload-class-material took 1ms[39m
+2026-07-13 13:10:14:1014 [37mdebug[39m: [37m[Request Start] POST /api/academy/tutor/upload-class-material | Origin: http://localhost:5173[39m
+2026-07-13 13:10:16:1016 [33mwarn[39m: [33m[SLOW REQUEST] POST /tutor/upload-class-material took 1768ms[39m
+2026-07-13 13:10:16:1016 [35mhttp[39m: [35mPOST /api/academy/tutor/upload-class-material 201 765 - 1767.711 ms[39m
+2026-07-13 13:10:16:1016 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 13:10:16:1016 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/tutor/my-courses took 2ms[39m
+2026-07-13 13:10:16:1016 [37mdebug[39m: [37m[Request Start] GET /api/academy/tutor/my-courses | Origin: http://localhost:5173[39m
+2026-07-13 13:10:16:1016 [37mdebug[39m: [37m[Request End] GET /tutor/my-courses took 243ms[39m
+2026-07-13 13:10:16:1016 [35mhttp[39m: [35mGET /api/academy/tutor/my-courses 200 3026 - 243.518 ms[39m
+2026-07-13 13:16:30:1630 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/student/course/6?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 13:16:30:1630 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/student/course/6?cohort=cohort+1 took 2ms[39m
+2026-07-13 13:16:30:1630 [37mdebug[39m: [37m[Request Start] GET /api/academy/student/course/6?cohort=cohort+1 | Origin: http://localhost:5173[39m
+2026-07-13 13:16:32:1632 [33mwarn[39m: [33m[SLOW REQUEST] GET /student/course/6?cohort=cohort+1 took 2269ms[39m
+2026-07-13 13:16:32:1632 [35mhttp[39m: [35mGET /api/academy/student/course/6?cohort=cohort+1 200 20495 - 2269.365 ms[39m
+2026-07-13 13:16:45:1645 [32minfo[39m: [32mSocket aZebgZ4oPO4eHX0iAAAF disconnected[39m
+2026-07-13 13:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-13 13:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-13 14:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-13 14:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-13 14:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-13 14:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
