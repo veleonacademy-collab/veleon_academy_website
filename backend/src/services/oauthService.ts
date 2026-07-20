@@ -6,11 +6,13 @@ import type { PublicUser, User } from "../models/user.js";
 import { toPublicUser } from "../models/user.js";
 import { hashPassword } from "../utils/password.js";
 import { signAccessToken, signRefreshToken } from "../utils/jwt.js";
+import { generateUniqueReferralCode } from "./authService.js";
 
 const googleClient = new OAuth2Client(env.googleClientId);
 
 const oauthRequestSchema = z.object({
   idToken: z.string().min(1, "ID token is required."),
+  isPartner: z.boolean().optional(),
 });
 
 interface GoogleIdTokenPayload {
@@ -57,6 +59,11 @@ export async function loginWithGoogle(
 
   if (existing.rows.length > 0) {
     user = existing.rows[0];
+    if (data.isPartner && !user.referral_code) {
+      const code = await generateUniqueReferralCode(user.first_name, user.last_name);
+      await pool.query("UPDATE users SET referral_code = $1, updated_at = NOW() WHERE id = $2", [code, user.id]);
+      user.referral_code = code;
+    }
   } else {
     // Generate a random password hash for OAuth-only users; they do not log in via password.
     const randomPasswordHash = await hashPassword(
@@ -74,14 +81,17 @@ export async function loginWithGoogle(
       );
 
       const customerId = existingCustomer.rows.length > 0 ? existingCustomer.rows[0].id : null;
+      
+      const userRole = data.isPartner ? "user" : "student";
+      const referralCode = data.isPartner ? await generateUniqueReferralCode(firstName, lastName, client) : null;
 
       const insert = await client.query<User>(
         `
-          INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, customer_id)
-          VALUES ($1, $2, $3, $4, $5, true, $6)
+          INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, customer_id, referral_code)
+          VALUES ($1, $2, $3, $4, $5, true, $6, $7)
           RETURNING *
         `,
-        [firstName, lastName, email, randomPasswordHash, "student", customerId]
+        [firstName, lastName, email, randomPasswordHash, userRole, customerId, referralCode]
       );
 
       user = insert.rows[0];

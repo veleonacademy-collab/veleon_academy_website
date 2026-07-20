@@ -13,6 +13,7 @@ export interface User {
   isStudent?: boolean;
   phone?: string | null;
   dob?: string | null;
+  referralCode?: string | null;
 }
 
 export interface AuthTokens {

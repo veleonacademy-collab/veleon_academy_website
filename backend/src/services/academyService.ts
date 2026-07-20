@@ -14,6 +14,7 @@ export class AcademyService {
     customPrice?: number;
     cohort?: string;
     nextPaymentDue?: string;
+    referredById?: number;
   }) {
     const { 
       studentId, 
@@ -23,7 +24,8 @@ export class AcademyService {
       installmentsTotal = 1,
       customPrice,
       cohort,
-      nextPaymentDue: passedNextPaymentDue
+      nextPaymentDue: passedNextPaymentDue,
+      referredById: passedReferredById
     } = payload;
 
     // Upgrade role to student if they are currently just a base 'user'
@@ -76,10 +78,19 @@ export class AcademyService {
         nextPaymentDue = nextDate.toISOString();
       }
 
+      // Check student's profile for referring partner if not passed
+      let partnerId = passedReferredById || null;
+      if (!partnerId) {
+        const studentRes = await pool.query("SELECT referred_by_id FROM users WHERE id = $1", [studentId]);
+        if (studentRes.rows.length > 0) {
+          partnerId = studentRes.rows[0].referred_by_id || null;
+        }
+      }
+
       const result = await pool.query(
-        `INSERT INTO enrollments (student_id, course_id, payment_plan, total_paid, next_payment_due, installments_total, installments_paid, custom_price, cohort)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`,
-        [studentId, courseId, paymentPlan, amountPaid, nextPaymentDue, installmentsTotal, paymentPlan === "installment" ? 1 : 1, customPrice, cohort]
+        `INSERT INTO enrollments (student_id, course_id, payment_plan, total_paid, next_payment_due, installments_total, installments_paid, custom_price, cohort, referred_by_id)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`,
+        [studentId, courseId, paymentPlan, amountPaid, nextPaymentDue, installmentsTotal, paymentPlan === "installment" ? 1 : 1, customPrice, cohort, partnerId]
       );
       
       return result.rows[0].id;

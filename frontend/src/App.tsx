@@ -77,8 +77,17 @@ import SalesLandingPage from "./pages/SalesLandingPage";
 import PaymentPage from "./pages/PaymentPage";
 import ReviewsPage from "./pages/ReviewsPage";
 import EnrollPage from "./pages/EnrollPage";
+import PartnersPage from "./pages/PartnersPage";
+import PartnerDashboardPage from "./pages/PartnerDashboardPage";
 
 const App: React.FC = () => {
+  // Capture referral code from URL and persist in localStorage
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    if (ref) localStorage.setItem("veleon_ref_code", ref);
+  }, []);
+
   return (
     <Routes>
         {/* Standalone pages: Analytics injected individually since they are outside the Layout wrapper */}
@@ -86,6 +95,11 @@ const App: React.FC = () => {
         <Route path="/data" element={<><Analytics /><SalesLandingPage /></>} />
         <Route path="/reviews" element={<><Analytics /><ReviewsPage /></>} />
         <Route path="/checkout" element={<><Analytics /><PaymentPage /></>} />
+        {/* Partner pages: standalone (outside Layout, own nav) */}
+        <Route path="/partners" element={<><Analytics /><PartnersPage /></>} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/partners/dashboard" element={<><Analytics /><PartnerDashboardPage /></>} />
+        </Route>
         <Route path="*" element={
           <Layout>
             <Analytics />

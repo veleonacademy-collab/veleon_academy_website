@@ -171,6 +171,15 @@ export class PaystackService implements PaymentProvider {
     let firstName: string;
     const userRes = await pool.query("SELECT id, first_name FROM users WHERE email = $1", [email]);
     
+    const referralCode = metadata?.referralCode || null;
+    let partnerId: number | null = null;
+    if (referralCode) {
+      const partnerRes = await pool.query("SELECT id FROM users WHERE referral_code = $1", [referralCode]);
+      if (partnerRes.rows.length > 0) {
+        partnerId = partnerRes.rows[0].id;
+      }
+    }
+
     if (userRes.rows.length === 0) {
       // Auto-create account
       logger.info(`[PAYSTACK CHARGE] User ${email} not found. Creating student account...`);
@@ -181,9 +190,9 @@ export class PaystackService implements PaymentProvider {
       const lastName = metadata?.lastName || "";
 
       const newUser = await pool.query(
-        `INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified)
-         VALUES ($1, $2, $3, $4, 'student', true) RETURNING id`,
-        [firstName, lastName, email, passwordHash]
+        `INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, referred_by_id)
+         VALUES ($1, $2, $3, $4, 'student', true, $5) RETURNING id`,
+        [firstName, lastName, email, passwordHash, partnerId]
       );
       userId = newUser.rows[0].id;
 
@@ -194,6 +203,12 @@ export class PaystackService implements PaymentProvider {
     } else {
       userId = userRes.rows[0].id;
       firstName = userRes.rows[0].first_name || metadata?.firstName || "Student";
+      if (partnerId) {
+        await pool.query(
+          "UPDATE users SET referred_by_id = COALESCE(referred_by_id, $1), updated_at = NOW() WHERE id = $2",
+          [partnerId, userId]
+        );
+      }
     }
 
     // 2. Record Transaction
@@ -229,7 +244,8 @@ export class PaystackService implements PaymentProvider {
       courseId,
       paymentPlan: paymentPlan as "one-time" | "installment",
       amountPaid,
-      installmentsTotal
+      installmentsTotal,
+      referredById: partnerId || undefined
     });
 
     // 6. Record installment if applicable

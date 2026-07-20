@@ -20,6 +20,8 @@ export interface User {
   tasks_completed?: number;
   metadata: Record<string, any> | null;
   cohort?: string;
+  referral_code?: string | null;
+  referred_by_id?: number | null;
 }
 
 export interface PublicUser {
@@ -39,6 +41,8 @@ export interface PublicUser {
   phone: string | null;
   dob: string | null;
   cohort: string | null;
+  referralCode?: string | null;
+  referredById?: number | null;
 }
 
 import { formatDateOnly } from "../utils/dateUtils.js";
@@ -61,6 +65,8 @@ export function toPublicUser(row: User & { phone?: string | null; dob?: Date | s
     phone: row.phone || null,
     dob: formatDateOnly(row.dob),
     cohort: row.cohort || null,
+    referralCode: row.referral_code || null,
+    referredById: row.referred_by_id || null,
   };
 }
 

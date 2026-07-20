@@ -109,6 +109,9 @@ const RegisterPage: React.FC = () => {
     }
 
     const { confirmPassword: _omit, ...payload } = parsed.data;
+    // Attach referral code from localStorage if the user arrived via a partner link
+    const storedRef = localStorage.getItem("veleon_ref_code");
+    if (storedRef) (payload as any).referralCode = storedRef;
     registerMutation.mutate(payload);
   };
 

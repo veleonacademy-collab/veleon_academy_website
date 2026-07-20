@@ -33,6 +33,7 @@ import { AcademyService } from "./services/academyService.js";
 import { getSystemSetting, updateSystemSetting } from "./services/systemSettingsService.js";
 import { webinarRouter } from "./routes/webinarRoutes.js";
 import { salesLeadRouter } from "./routes/salesLeadRoutes.js";
+import { partnerRouter } from "./routes/partnerRoutes.js";
 
 
 async function bootstrap(): Promise<void> {
@@ -176,6 +177,7 @@ async function bootstrap(): Promise<void> {
   app.use("/api/academy", academyRouter);
   app.use("/api/webinar", webinarRouter);
   app.use("/api/sales-leads", salesLeadRouter);
+  app.use("/api/partners", partnerRouter);
   app.use("/api", categoryRouter);
 
 

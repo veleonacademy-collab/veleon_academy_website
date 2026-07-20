@@ -18,6 +18,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
   }
 
   if (!user) {
+    // Partner dashboard unauthenticated → go to partner landing page
+    if (location.pathname.startsWith("/partners/")) {
+      return <Navigate to="/partners" state={{ from: location }} replace />;
+    }
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

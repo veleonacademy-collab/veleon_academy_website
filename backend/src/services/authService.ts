@@ -32,6 +32,7 @@ const registerSchema = z.object({
     .min(8, "Password must be at least 8 characters long."),
   phone: z.string().optional().nullable(),
   courseOfInterest: z.number().optional().nullable(),
+  referralCode: z.string().optional().nullable(),
 });
 
 const loginSchema = z.object({
@@ -69,10 +70,18 @@ export async function registerUser(input: unknown): Promise<{ user: PublicUser; 
 
     const customerId = existingCustomer.rows.length > 0 ? existingCustomer.rows[0].id : null;
 
+    let referredById: number | null = null;
+    if (data.referralCode) {
+      const partnerRes = await client.query("SELECT id FROM users WHERE referral_code = $1", [data.referralCode]);
+      if (partnerRes.rows.length > 0) {
+        referredById = partnerRes.rows[0].id;
+      }
+    }
+
     const result = await client.query<User>(
       `
-        INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, email_verification_token, customer_id)
-        VALUES ($1, $2, $3, $4, $5, false, $6, $7)
+        INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, email_verification_token, customer_id, referred_by_id)
+        VALUES ($1, $2, $3, $4, $5, false, $6, $7, $8)
         RETURNING *
       `,
       [
@@ -82,7 +91,8 @@ export async function registerUser(input: unknown): Promise<{ user: PublicUser; 
         passwordHash,
         "student",
         verificationToken,
-        customerId
+        customerId,
+        referredById
       ]
     );
 
@@ -533,3 +543,116 @@ export async function changePassword(
     [newPasswordHash, userId]
   );
 }
+
+export async function generateUniqueReferralCode(
+  firstName: string,
+  lastName: string,
+  client: any = pool
+): Promise<string> {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let attempts = 0;
+  while (attempts < 50) {
+    let code = "";
+    for (let i = 0; i < 5; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    const check = await client.query("SELECT id FROM users WHERE referral_code = $1", [code]);
+    if (check.rows.length === 0) {
+      return code;
+    }
+    attempts++;
+  }
+  return Math.random().toString(36).substring(2, 7).toUpperCase();
+}
+
+export async function registerPartnerUser(input: unknown): Promise<{ user: PublicUser; verificationToken: string }> {
+  const data = registerSchema.parse(input);
+
+  const client = await pool.connect();
+  let verificationToken: string;
+  let user: User;
+  try {
+    await client.query("BEGIN");
+
+    const existing = await client.query<User>(
+      "SELECT * FROM users WHERE email = $1",
+      [data.email]
+    );
+    if (existing.rows.length > 0) {
+      const error = new Error("Email is already in use.");
+      (error as any).statusCode = 400;
+      throw error;
+    }
+
+    const passwordHash = await hashPassword(data.password);
+    verificationToken = randomBytes(32).toString("hex");
+
+    // Generate unique referral code for the partner
+    const referralCode = await generateUniqueReferralCode(data.firstName, data.lastName, client);
+
+    const result = await client.query<User>(
+      `
+        INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, email_verification_token, referral_code)
+        VALUES ($1, $2, $3, $4, 'user', false, $5, $6)
+        RETURNING *
+      `,
+      [
+        data.firstName,
+        data.lastName,
+        data.email,
+        passwordHash,
+        verificationToken,
+        referralCode
+      ]
+    );
+
+    user = result.rows[0];
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
+
+  sendVerificationEmail(data.email, data.firstName, verificationToken).catch((error) => {
+    console.error("Failed to send verification email (partner background):", error);
+  });
+
+  return { user: toPublicUser(user), verificationToken };
+}
+
+export async function joinPartnerProgram(userId: number): Promise<PublicUser> {
+  const client = await pool.connect();
+  let user: User;
+  try {
+    await client.query("BEGIN");
+    const res = await client.query<User>("SELECT * FROM users WHERE id = $1", [userId]);
+    const existing = res.rows[0];
+    if (!existing) {
+      const error = new Error("User not found.");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    if (existing.referral_code) {
+      await client.query("COMMIT");
+      return toPublicUser(existing);
+    }
+
+    const referralCode = await generateUniqueReferralCode(existing.first_name, existing.last_name, client);
+    const updateRes = await client.query<User>(
+      "UPDATE users SET referral_code = $1, updated_at = NOW() WHERE id = $2 RETURNING *",
+      [referralCode, userId]
+    );
+    user = updateRes.rows[0];
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
+  return toPublicUser(user);
+}
+

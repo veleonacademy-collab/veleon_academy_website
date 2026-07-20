@@ -6,8 +6,6 @@ import { useAuth } from "../state/AuthContext";
 const DashboardPage: React.FC = () => {
   const { user } = useAuth();
 
-
-
   if (!user) return null;
 
   if (user.role === "admin") {
@@ -18,7 +16,16 @@ const DashboardPage: React.FC = () => {
     return <Navigate to="/tutor/dashboard" replace />;
   }
 
-  // Handle student role (and legacy 'user' role)
+  if (user.role === "student") {
+    return <Navigate to="/student/dashboard" replace />;
+  }
+
+  // Non-student users who are partners → go to partner portal
+  if (user.referralCode) {
+    return <Navigate to="/partners/dashboard" replace />;
+  }
+
+  // All other cases (plain 'user' role, not yet a partner)
   return <Navigate to="/student/dashboard" replace />;
 };
 

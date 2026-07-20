@@ -384,3 +384,4 @@
 2026-07-08 10:16:31:1631 [31merror[39m: [31mError handler caught: jwt expired[39m
 2026-07-13 12:14:03:143 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
 2026-07-13 12:14:05:145 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
+2026-07-20 19:14:45:1445 [31merror[39m: [31mError handler caught: Email is already in use.[39m
