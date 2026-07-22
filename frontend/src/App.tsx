@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import LandingPage from "./pages/LandingPage";
+import { http } from "./api/http";
+import AdminPartnersPage from "./pages/admin/AdminPartnersPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
@@ -79,13 +81,31 @@ import ReviewsPage from "./pages/ReviewsPage";
 import EnrollPage from "./pages/EnrollPage";
 import PartnersPage from "./pages/PartnersPage";
 import PartnerDashboardPage from "./pages/PartnerDashboardPage";
+import PartnerCampaignsPage from "./pages/PartnerCampaignsPage";
 
 const App: React.FC = () => {
-  // Capture referral code from URL and persist in localStorage
+  // Capture referral code from URL, persist in localStorage, and track click
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref");
-    if (ref) localStorage.setItem("veleon_ref_code", ref);
+    if (ref) {
+      localStorage.setItem("veleon_ref_code", ref);
+      const campaignId = params.get("campaign_id") || params.get("c");
+      const copyId = params.get("copy_id") || params.get("cp");
+      const sessionKey = `tracked_ref_${ref}_${campaignId || "none"}_${copyId || "none"}`;
+      
+      if (!sessionStorage.getItem(sessionKey)) {
+        http.post("/partners/click", {
+          referralCode: ref,
+          campaignId: campaignId ? Number(campaignId) : undefined,
+          copyId: copyId ? Number(copyId) : undefined
+        }).then(() => {
+          sessionStorage.setItem(sessionKey, "true");
+        }).catch(err => {
+          console.error("Referral click tracking failed:", err);
+        });
+      }
+    }
   }, []);
 
   return (
@@ -99,6 +119,7 @@ const App: React.FC = () => {
         <Route path="/partners" element={<><Analytics /><PartnersPage /></>} />
         <Route element={<ProtectedRoute />}>
           <Route path="/partners/dashboard" element={<><Analytics /><PartnerDashboardPage /></>} />
+          <Route path="/partners/campaigns" element={<><Analytics /><PartnerCampaignsPage /></>} />
         </Route>
         <Route path="*" element={
           <Layout>
@@ -151,6 +172,7 @@ const App: React.FC = () => {
                 <Route path="/admin/tutor/:tutorId" element={<AdminTutorDetailsPage />} />
                 <Route path="/admin/academy-support" element={<AdminAcademySupportPage />} />
                 <Route path="/admin/bulk-messaging" element={<AdminBulkMessagingPage />} />
+                <Route path="/admin/partners" element={<AdminPartnersPage />} />
               </Route>
               <Route element={<ProtectedRoute allowedRoles={["tutor"]} />}>
                 <Route path="/tutor/dashboard" element={<TutorDashboardPage />} />

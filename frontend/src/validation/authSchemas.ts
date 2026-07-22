@@ -8,7 +8,7 @@ export const loginSchema = z.object({
 export const registerSchema = z
   .object({
     firstName: z.string().min(1, "First name is required."),
-    lastName: z.string().min(1, "Last name is required."),
+    lastName: z.string(),
     email: z.string().email("Please enter a valid email."),
     password: z.string().min(8, "Password must be at least 8 characters."),
     confirmPassword: z.string().min(8, "Confirm password is required."),
@@ -36,7 +36,7 @@ export const resetPasswordSchema = z
 
 export const profileUpdateSchema = z.object({
   firstName: z.string().min(1, "First name is required."),
-  lastName: z.string().min(1, "Last name is required.")
+  lastName: z.string()
 });
 
 export const changePasswordSchema = z

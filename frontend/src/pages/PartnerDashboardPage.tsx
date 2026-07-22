@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Copy, ExternalLink, TrendingUp, Users, DollarSign, Trophy,
-  CheckCircle, Clock, ChevronRight, LogOut, Menu, X
+  CheckCircle, Clock, ChevronRight, LogOut, Menu, X, HelpCircle, Image, FileText
 } from "lucide-react";
 import { http } from "../api/http";
 import { useAuth } from "../state/AuthContext";
@@ -35,6 +35,8 @@ const DASHBOARD_STYLES = `
   .pd-mobile-nav { display: none; flex-direction: column; gap: 8px; padding: 12px 20px 16px; border-bottom: 1px solid #f3f4f6; background: #fff; }
   .pd-mobile-nav.open { display: flex; }
   .pd-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+  .pd-stat-card { background: #fff; border: 1.5px solid #f3f4f6; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .pd-stat-val { font-size: 22px; font-weight: 900; color: #111827; word-break: break-word; }
   .pd-links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
   .pd-referrals-table { display: block; }
   .pd-referrals-cards { display: none; }
@@ -47,33 +49,35 @@ const DASHBOARD_STYLES = `
   @media (max-width: 640px) {
     .pd-header-right { display: none; }
     .pd-hamburger { display: flex; align-items: center; justify-content: center; }
-    .pd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .pd-links-grid { grid-template-columns: 1fr; }
+    .pd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+    .pd-stat-card { padding: 12px 12px; gap: 3px; border-radius: 10px; }
+    .pd-stat-val { font-size: 17px; font-weight: 800; }
+    .pd-links-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
     .pd-referrals-table { display: none; }
-    .pd-referrals-cards { display: flex; flex-direction: column; gap: 12px; }
+    .pd-referrals-cards { display: flex; flex-direction: column; gap: 10px; }
     .pd-tabs-row { width: 100% !important; }
   }
 
-  @media (max-width: 400px) {
-    .pd-stats-grid { grid-template-columns: 1fr; }
+  @media (max-width: 380px) {
+    .pd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .pd-stat-card { padding: 10px 8px; }
+    .pd-stat-val { font-size: 15px; }
   }
 `;
 
 /* ─── sub-components ─────────────────────────────────────────────────────── */
 const StatCard = ({ label, value, sub, icon: Icon, accent = false }: any) => (
-  <div style={{
-    background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: "18px 20px",
-    display: "flex", flexDirection: "column", gap: 6,
+  <div className="pd-stat-card" style={{
     borderTop: accent ? "3px solid #f97316" : "1.5px solid #f3f4f6",
   }}>
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-      <span style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.1em" }}>{label}</span>
-      <div style={{ width: 30, height: 30, borderRadius: 8, background: accent ? "#fff7ed" : "#f9fafb", display: "flex", alignItems: "center", justifyContent: "center", color: accent ? "#f97316" : "#6b7280", flexShrink: 0 }}>
-        <Icon size={14} />
+      <span style={{ fontSize: 10, fontWeight: 800, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>{label}</span>
+      <div style={{ width: 26, height: 26, borderRadius: 6, background: accent ? "#fff7ed" : "#f9fafb", display: "flex", alignItems: "center", justifyContent: "center", color: accent ? "#f97316" : "#6b7280", flexShrink: 0 }}>
+        <Icon size={13} />
       </div>
     </div>
-    <div style={{ fontSize: 22, fontWeight: 900, color: "#111827", wordBreak: "break-word" }}>{value}</div>
-    {sub && <div style={{ fontSize: 11, color: "#9ca3af", fontWeight: 600 }}>{sub}</div>}
+    <div className="pd-stat-val">{value}</div>
+    {sub && <div style={{ fontSize: 10, color: "#9ca3af", fontWeight: 600 }}>{sub}</div>}
   </div>
 );
 
@@ -277,10 +281,16 @@ const JoinPrompt = () => {
 
 /* ─── Main Dashboard ─────────────────────────────────────────────────────── */
 const PartnerDashboardPage: React.FC = () => {
-  const { user, clearAuth } = useAuth();
+  const { user, clearAuth, refreshProfile } = useAuth();
   const navigate = useNavigate();
-  const [tab, setTab] = useState<"overview" | "referrals">("overview");
+  const queryClient = useQueryClient();
+  const [tab, setTab] = useState<"overview" | "referrals" | "campaigns">("overview");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  // Guide and Phone modal states
+  const [showGuide, setShowGuide] = useState(false);
+  const [phoneInput, setPhoneInput] = useState("");
+  const [savingPhone, setSavingPhone] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["partner-dashboard"],
@@ -288,15 +298,144 @@ const PartnerDashboardPage: React.FC = () => {
     retry: false,
   });
 
+  const { data: campaigns, isLoading: campaignsLoading } = useQuery({
+    queryKey: ["partner-campaigns"],
+    queryFn: () => http.get("/partners/campaigns").then(res => res.data),
+    enabled: !!data,
+  });
+
   const handleLogout = () => { clearAuth(); navigate("/partners"); };
+
+  const handlePhoneSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phoneInput.trim()) {
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
+    setSavingPhone(true);
+    try {
+      await http.put("/auth/me", {
+        firstName: data.partner.firstName,
+        lastName: data.partner.lastName,
+        phone: phoneInput
+      });
+      toast.success("Phone number successfully updated!");
+      await refreshProfile();
+      queryClient.invalidateQueries({ queryKey: ["partner-dashboard"] });
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Failed to update phone number.");
+    } finally {
+      setSavingPhone(false);
+    }
+  };
 
   const fontFamily = "'Plus Jakarta Sans', sans-serif";
   const containerStyle: React.CSSProperties = { maxWidth: 1100, margin: "0 auto", padding: "0 16px" };
+
+  const [activeCopyIdMap, setActiveCopyIdMap] = useState<Record<number, number>>({});
 
   return (
     <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily }}>
       <style>{DASHBOARD_STYLES}</style>
       <SEO title="Partner Dashboard — Veleon Growth Partner Program" description="Track your referrals, commissions, and milestones." />
+
+      {/* ── Phone Number Modal ── */}
+      {data && !data.partner.phone && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(15, 23, 42, 0.9)", backdropFilter: "blur(4px)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 1000, padding: 16
+        }}>
+          <div style={{
+            background: "#fff", borderRadius: 16, padding: "32px 24px",
+            maxWidth: 400, width: "100%", textAlign: "center",
+            boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+          }}>
+            <h2 style={{ fontSize: 20, fontWeight: 900, color: "#1e293b", marginBottom: 12 }}>Enter Your Phone Number</h2>
+            <p style={{ fontSize: 14, color: "#64748b", marginBottom: 24, lineHeight: 1.6 }}>
+              Welcome aboard! Before accessing your partner dashboard, please input your phone number so we can keep you updated with onboarding & payments.
+            </p>
+            <form onSubmit={handlePhoneSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <input
+                type="tel"
+                required
+                placeholder="e.g. +234 801 234 5678"
+                value={phoneInput}
+                onChange={e => setPhoneInput(e.target.value)}
+                style={{
+                  width: "100%", padding: "12px 16px", borderRadius: 8,
+                  border: "1.5px solid #e2e8f0", fontSize: 15, outline: "none",
+                  boxSizing: "border-box"
+                }}
+              />
+              <button
+                type="submit"
+                disabled={savingPhone}
+                style={{
+                  padding: "12px", background: "#f97316", color: "#fff",
+                  border: "none", borderRadius: 8, fontWeight: 800, fontSize: 15,
+                  cursor: savingPhone ? "not-allowed" : "pointer", opacity: savingPhone ? 0.8 : 1
+                }}
+              >
+                {savingPhone ? "Saving..." : "Start Earning"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── Guide Modal ── */}
+      {showGuide && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(15, 23, 42, 0.4)", display: "flex",
+          alignItems: "center", justifyContent: "center", zIndex: 999, padding: 16
+        }}>
+          <div style={{
+            background: "#fff", borderRadius: 16, padding: 28,
+            maxWidth: 480, width: "100%", boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
+            position: "relative"
+          }}>
+            <button onClick={() => setShowGuide(false)} style={{
+              position: "absolute", top: 16, right: 16, background: "none",
+              border: "none", cursor: "pointer", color: "#94a3b8"
+            }}>
+              <X size={20} />
+            </button>
+            <h2 style={{ fontSize: 18, fontWeight: 900, color: "#1e293b", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
+              🚀 Quick Start: What Next?
+            </h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
+              <div style={{ display: "flex", gap: 12 }}>
+                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, flexShrink: 0 }}>1</div>
+                <div>
+                  <strong>Get Your Link:</strong> Head to the <strong>Campaigns</strong> tab or copy your primary referral link below.
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 12 }}>
+                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, flexShrink: 0 }}>2</div>
+                <div>
+                  <strong>Share Graphics & Copy:</strong> Under the Campaigns tab, select any copy, download the flyer, and copy the WhatsApp or social text templates (which already include your custom link).
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 12 }}>
+                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, flexShrink: 0 }}>3</div>
+                <div>
+                  <strong>Collect Commissions:</strong> For every student who signs up and completes payment using your link, you earn <strong>₦5,000</strong> plus milestone bonus payouts!
+                </div>
+              </div>
+            </div>
+            <button onClick={() => setShowGuide(false)} style={{
+              width: "100%", padding: "11px", background: "#f1f5f9",
+              color: "#334155", border: "none", borderRadius: 8,
+              fontWeight: 800, fontSize: 14, marginTop: 24, cursor: "pointer"
+            }}>
+              Got it! Let's go
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <div style={{ background: "#fff", borderBottom: "1px solid #f3f4f6", padding: "0 16px", position: "sticky", top: 0, zIndex: 100 }}>
@@ -311,6 +450,14 @@ const PartnerDashboardPage: React.FC = () => {
 
           {/* Desktop right actions */}
           <div className="pd-header-right">
+            <Link to="/partners/campaigns"
+              style={{ fontSize: 12, fontWeight: 800, color: "#ea580c", textDecoration: "none", background: "#fff7ed", padding: "5px 10px", borderRadius: 6, display: "flex", alignItems: "center", gap: 4 }}>
+              <Image size={13} /> Campaigns
+            </Link>
+            <button onClick={() => setShowGuide(true)}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "#6b7280", display: "flex", alignItems: "center", gap: 4, fontSize: 12, fontWeight: 700 }}>
+              <HelpCircle size={14} className="text-primary" /> What's Next?
+            </button>
             <Link to="/student/dashboard"
               style={{ fontSize: 12, fontWeight: 600, color: "#6b7280", textDecoration: "none", display: "flex", alignItems: "center", gap: 3 }}>
               Student Portal <ChevronRight size={13} />
@@ -329,12 +476,20 @@ const PartnerDashboardPage: React.FC = () => {
 
         {/* Mobile nav dropdown */}
         <div className={`pd-mobile-nav${mobileNavOpen ? " open" : ""}`}>
+          <Link to="/partners/campaigns" onClick={() => setMobileNavOpen(false)}
+            style={{ fontSize: 14, fontWeight: 800, color: "#ea580c", textDecoration: "none", display: "flex", alignItems: "center", gap: 6, padding: "8px 0" }}>
+            <Image size={16} /> Campaigns Toolkit
+          </Link>
+          <button onClick={() => { setShowGuide(true); setMobileNavOpen(false); }}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#374151", display: "flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 700, padding: "8px 0", textAlign: "left" }}>
+            <HelpCircle size={15} className="text-primary" /> What's Next?
+          </button>
           <Link to="/student/dashboard" onClick={() => setMobileNavOpen(false)}
-            style={{ fontSize: 14, fontWeight: 600, color: "#374151", textDecoration: "none", display: "flex", alignItems: "center", gap: 4 }}>
+            style={{ fontSize: 14, fontWeight: 600, color: "#374151", textDecoration: "none", display: "flex", alignItems: "center", gap: 4, padding: "8px 0" }}>
             Student Portal <ChevronRight size={14} />
           </Link>
           <button onClick={() => { handleLogout(); setMobileNavOpen(false); }}
-            style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", display: "flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 600, padding: 0 }}>
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", display: "flex", alignItems: "center", gap: 6, fontSize: 14, fontWeight: 600, padding: "8px 0" }}>
             <LogOut size={14} /> Sign Out
           </button>
         </div>
@@ -355,26 +510,38 @@ const PartnerDashboardPage: React.FC = () => {
         {data && (
           <>
             {/* Greeting */}
-            <div style={{ marginBottom: 24 }}>
-              <p style={{ fontSize: 12, fontWeight: 700, color: "#f97316", marginBottom: 2 }}>Welcome back</p>
-              <h1 style={{ fontSize: "clamp(20px, 4vw, 28px)", fontWeight: 900, color: "#111827", margin: "0 0 4px", fontFamily }}>
-                {data.partner.firstName} {data.partner.lastName}
-              </h1>
-              <p style={{ fontSize: 13, color: "#9ca3af", margin: 0, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                Referral Code:&nbsp;
-                <button onClick={() => copyText(data.partner.referralCode, "Code copied!")}
-                  style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "monospace", fontWeight: 800, color: "#f97316", fontSize: 14, padding: 0, display: "inline-flex", alignItems: "center", gap: 4 }}>
-                  {data.partner.referralCode} <Copy size={12} />
-                </button>
-              </p>
+            <div style={{ marginBottom: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 16 }}>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 700, color: "#f97316", marginBottom: 2 }}>Welcome back</p>
+                <h1 style={{ fontSize: "clamp(20px, 4vw, 28px)", fontWeight: 900, color: "#111827", margin: "0 0 4px", fontFamily }}>
+                  {data.partner.firstName} {data.partner.lastName}
+                </h1>
+                <p style={{ fontSize: 13, color: "#9ca3af", margin: 0, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                  Referral Code:&nbsp;
+                  <button onClick={() => copyText(data.partner.referralCode, "Code copied!")}
+                    style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "monospace", fontWeight: 800, color: "#f97316", fontSize: 14, padding: 0, display: "inline-flex", alignItems: "center", gap: 4 }}>
+                    {data.partner.referralCode} <Copy size={12} />
+                  </button>
+                </p>
+              </div>
+              <button
+                onClick={() => setShowGuide(true)}
+                style={{
+                  padding: "10px 20px", background: "#fff", border: "1.5px solid #f3f4f6",
+                  borderRadius: 10, color: "#475569", fontWeight: 700, fontSize: 13,
+                  cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6
+                }}
+              >
+                <HelpCircle size={14} className="text-primary" /> What's Next?
+              </button>
             </div>
 
             {/* Stats */}
             <div className="pd-stats-grid">
-              <StatCard label="Total Referrals"    value={data.stats.totalReferrals}            sub="enrolled students"       icon={Users}       accent />
+              <StatCard label="Referral Clicks"   value={data.stats.totalClicks}               sub="link views"              icon={Users} />
+              <StatCard label="Leads Started"     value={data.stats.totalLeads}                sub="student signups"         icon={Users} />
+              <StatCard label="Enrollments"       value={data.stats.totalReferrals}            sub="paid students"           icon={Trophy} accent />
               <StatCard label="Commission Earned"  value={fmt(data.stats.totalCommission)}       sub="₦5,000 × students"       icon={DollarSign}  accent />
-              <StatCard label="Milestone Bonuses"  value={fmt(data.stats.totalBonuses)}          sub="from milestones"         icon={Trophy} />
-              <StatCard label="Total Earnings"     value={fmt(data.stats.totalEarnings)}         sub="commissions + bonuses"   icon={TrendingUp} />
             </div>
 
             {/* Referral Links */}
@@ -384,11 +551,20 @@ const PartnerDashboardPage: React.FC = () => {
                 link={data.partner.referralLink}
                 hint="Share this link anywhere — anyone who enrolls through it is credited to you."
               />
-              <LinkCard
-                label="Data Analytics Program Link"
-                link={data.partner.dataAnalysisLink}
-                hint="A direct link to the Data Analytics enrollment page — great for sharing with your audience."
-              />
+              <button
+                onClick={() => navigate("/partners/campaigns")}
+                style={{
+                  background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                  border: "none", borderRadius: 12, padding: 18, cursor: "pointer",
+                  display: "flex", flexDirection: "column", justifyContent: "center",
+                  alignItems: "center", color: "#fff", textDecoration: "none", gap: 6,
+                  textAlign: "center"
+                }}
+              >
+                <Image size={24} />
+                <span style={{ fontWeight: 800, fontSize: 15 }}>Browse Marketing Campaigns 🚀</span>
+                <span style={{ fontSize: 12, opacity: 0.9 }}>Get customized flyers and copy-paste text templates.</span>
+              </button>
             </div>
 
             {/* Milestone bar */}
@@ -399,24 +575,199 @@ const PartnerDashboardPage: React.FC = () => {
             {/* Tabs */}
             <div style={{ display: "flex", gap: 4, background: "#f3f4f6", borderRadius: 10, padding: 4, marginBottom: 16, width: "fit-content", maxWidth: "100%" }}
               className="pd-tabs-row">
-              {(["overview", "referrals"] as const).map(t => (
-                <button key={t} onClick={() => setTab(t)}
-                  style={{
-                    padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
-                    background: tab === t ? "#fff" : "transparent", color: tab === t ? "#111827" : "#9ca3af",
-                    boxShadow: tab === t ? "0 1px 4px rgba(0,0,0,.08)" : "none", whiteSpace: "nowrap",
-                  }}>
-                  {t === "overview" ? "Cohort Breakdown" : `Students (${data.stats.totalReferrals})`}
-                </button>
-              ))}
+              <button onClick={() => setTab("overview")}
+                style={{
+                  padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
+                  background: tab === "overview" ? "#fff" : "transparent", color: tab === "overview" ? "#111827" : "#9ca3af",
+                  boxShadow: tab === "overview" ? "0 1px 4px rgba(0,0,0,.08)" : "none", whiteSpace: "nowrap",
+                }}>
+                Cohort Breakdown
+              </button>
+              <button onClick={() => setTab("referrals")}
+                style={{
+                  padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
+                  background: tab === "referrals" ? "#fff" : "transparent", color: tab === "referrals" ? "#111827" : "#9ca3af",
+                  boxShadow: tab === "referrals" ? "0 1px 4px rgba(0,0,0,.08)" : "none", whiteSpace: "nowrap",
+                }}>
+                Students ({data.stats.totalReferrals})
+              </button>
+              <button onClick={() => navigate("/partners/campaigns")}
+                style={{
+                  padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
+                  background: "transparent", color: "#f97316", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 4
+                }}>
+                <Image size={13} /> Campaigns Page →
+              </button>
             </div>
 
-            {tab === "overview" && <CohortTable rows={data.cohortBreakdown} />}
+            {/* Tab: Overview */}
+            {tab === "overview" && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                <CohortTable rows={data.cohortBreakdown} />
+                
+                {/* Active campaigns quick stats */}
+                <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, overflow: "hidden" }}>
+                  <div style={{ padding: "16px 20px", borderBottom: "1px solid #f3f4f6" }}>
+                    <h3 style={{ fontSize: 13, fontWeight: 800, color: "#111827", margin: 0, fontFamily }}>Campaign Performance</h3>
+                  </div>
+                  {data.campaignStats?.length === 0 ? (
+                    <div style={{ padding: "24px", textCenter: "center", color: "#94a3b8", fontSize: 13 } as any}>No campaign activity yet. Go to Campaigns tab to share.</div>
+                  ) : (
+                    <div style={{ overflowX: "auto" }}>
+                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                        <thead>
+                          <tr style={{ background: "#f9fafb" }}>
+                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Campaign</th>
+                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Clicks</th>
+                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Enrollments</th>
+                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Commissions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {data.campaignStats?.map((c: any) => (
+                            <tr key={c.campaign_id} style={{ borderTop: "1px solid #f3f4f6" }}>
+                              <td style={{ padding: "12px 18px", fontWeight: 700 }}>{c.campaign_title}</td>
+                              <td style={{ padding: "12px 18px" }}>{c.clicks}</td>
+                              <td style={{ padding: "12px 18px", color: "#16a34a", fontWeight: 700 }}>{c.enrollments}</td>
+                              <td style={{ padding: "12px 18px", fontWeight: 700 }}>{fmt(c.enrollments * 5000)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Tab: Referrals */}
             {tab === "referrals" && (
               <>
                 <ReferralsDesktopTable referrals={data.referrals} />
                 <ReferralsMobileCards referrals={data.referrals} />
               </>
+            )}
+
+            {/* Tab: Campaigns Library */}
+            {tab === "campaigns" && (
+              <div className="pd-campaigns-grid">
+                {campaignsLoading ? (
+                  <div style={{ textAlign: "center", padding: "40px 0", color: "#94a3b8" }}>Loading campaigns library...</div>
+                ) : !campaigns || campaigns.length === 0 ? (
+                  <div style={{ textAlign: "center", padding: "40px 0", color: "#94a3b8" }}>No active promotional campaigns found. Check back later!</div>
+                ) : (
+                  campaigns.map((camp: any) => (
+                    <div key={camp.id} style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: 20 }}>
+                      <div style={{ borderBottom: "1.5px solid #f8fafc", paddingBottom: 12 }}>
+                        <h3 style={{ fontSize: 16, fontWeight: 900, color: "#1e293b", margin: 0 }}>{camp.title}</h3>
+                        <p style={{ fontSize: 13, color: "#64748b", margin: "4px 0 0" }}>{camp.description}</p>
+                      </div>
+
+                      {/* Copy Angles */}
+                      {!camp.copies || camp.copies.length === 0 ? (
+                        <p style={{ fontSize: 12, color: "#94a3b8", marginTop: 12 }}>No flyer versions uploaded yet for this campaign.</p>
+                      ) : (
+                        <div style={{ marginTop: 16 }}>
+                          {/* Inner Copy select row */}
+                          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 16 }}>
+                            {camp.copies.map((cp: any, idx: number) => {
+                              const activeCopyId = activeCopyIdMap[camp.id] ?? camp.copies[0].id;
+                              const isActive = activeCopyId === cp.id;
+                              return (
+                                <button
+                                  key={cp.id}
+                                  onClick={() => setActiveCopyIdMap(prev => ({ ...prev, [camp.id]: cp.id }))}
+                                  style={{
+                                    padding: "6px 12px", border: isActive ? "1.5px solid #ea580c" : "1.5px solid #e2e8f0",
+                                    borderRadius: 6, fontSize: 12, fontWeight: 700, cursor: "pointer",
+                                    background: isActive ? "#fff7ed" : "#fff", color: isActive ? "#ea580c" : "#64748b"
+                                  }}
+                                >
+                                  {cp.title}
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {/* Selected Copy Content */}
+                          {(() => {
+                            const activeCopyId = activeCopyIdMap[camp.id] ?? camp.copies[0].id;
+                            const copy = camp.copies.find((c: any) => c.id === activeCopyId);
+                            if (!copy) return null;
+
+                            return (
+                              <div style={{ display: "grid", gridTemplateColumns: copy.flyer_url ? "180px 1fr" : "1fr", gap: 20, alignItems: "start" }}>
+                                {/* Flyer preview column */}
+                                {copy.flyer_url && (
+                                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                                    <div style={{ border: "1.5px solid #f3f4f6", borderRadius: 8, overflow: "hidden", background: "#f8fafc" }}>
+                                      <img src={copy.flyer_url} alt="Flyer Preview" style={{ width: "100%", display: "block" }} />
+                                    </div>
+                                    <a
+                                      href={copy.flyer_url}
+                                      download
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      style={{
+                                        display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
+                                        padding: "8px", borderRadius: 6, border: "1.5px solid #e2e8f0", background: "#fff",
+                                        color: "#334155", fontSize: 12, fontWeight: 700, textDecoration: "none",
+                                        textAlign: "center"
+                                      }}
+                                    >
+                                      <Image size={12} /> Download Flyer
+                                    </a>
+                                  </div>
+                                )}
+
+                                {/* Message categories column */}
+                                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                                  {!copy.messages || copy.messages.length === 0 ? (
+                                    <p style={{ fontSize: 12, color: "#94a3b8" }}>No share templates added for this copy angle.</p>
+                                  ) : (
+                                    copy.messages.map((msg: any) => {
+                                      // Dynamically append campaign / copy params to referral link to track clicks
+                                      const campaignReferralLink = `${data.partner.referralLink}&c=${camp.id}&cp=${copy.id}`;
+                                      const renderedText = msg.message_text?.replace(/\{\{referral_link\}\}/g, campaignReferralLink);
+
+                                      return (
+                                        <div key={msg.id} style={{ border: "1.5px solid #f3f4f6", borderRadius: 8, padding: 14 }}>
+                                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+                                            <span style={{ fontSize: 11, fontWeight: 800, color: "#94a3b8", textTransform: "uppercase" }}>
+                                              {msg.categoryName}
+                                            </span>
+                                            <button
+                                              onClick={() => copyText(renderedText, "Message template copied!")}
+                                              style={{
+                                                background: "none", border: "none", cursor: "pointer",
+                                                color: "#ea580c", fontSize: 11, fontWeight: 700,
+                                                display: "inline-flex", alignItems: "center", gap: 4
+                                              }}
+                                            >
+                                              <Copy size={12} /> Copy Template
+                                            </button>
+                                          </div>
+                                          <p style={{
+                                            margin: 0, padding: 10, background: "#f8fafc", borderRadius: 6,
+                                            fontSize: 12, fontMono: "monospace", fontFamily: "monospace",
+                                            whiteSpace: "pre-wrap", color: "#334155", border: "1px solid #f1f5f9"
+                                          } as any}>
+                                            {renderedText}
+                                          </p>
+                                        </div>
+                                      );
+                                    })
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })()}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
             )}
 
             {/* Milestone details */}

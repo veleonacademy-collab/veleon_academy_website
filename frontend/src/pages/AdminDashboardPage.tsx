@@ -150,6 +150,11 @@ const AdminDashboardPage: React.FC = () => {
           <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">Bulk Messaging</h3>
           <p className="text-xs text-muted-foreground mt-2">Send bulk emails to users and students.</p>
         </Link>
+        <Link to="/admin/partners" className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
+          <div className="mb-4 text-3xl">🤝</div>
+          <h3 className="font-bold text-foreground group-hover:text-primary transition-colors">Growth Partners</h3>
+          <p className="text-xs text-muted-foreground mt-2">Manage marketing campaigns, copies, and view partner performance.</p>
+        </Link>
       </div>
     </div>
   );

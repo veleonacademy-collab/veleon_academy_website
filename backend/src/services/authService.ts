@@ -13,6 +13,7 @@ import { env } from "../config/env.js";
 import {
   sendVerificationEmail,
   sendPasswordResetEmail,
+  sendPartnerOnboardingEmail,
 } from "./emailService.js";
 import { createCustomer, updateCustomer } from "./customerService.js";
 import { trackTikTokEvent } from "./tiktokService.js";
@@ -24,7 +25,7 @@ const registerSchema = z.object({
     .max(100, "First name must be less than 100 characters."),
   lastName: z
     .string()
-    .min(1, "Last name is required.")
+    
     .max(100, "Last name must be less than 100 characters."),
   email: z.string().email("Please enter a valid email address."),
   password: z
@@ -375,7 +376,7 @@ const profileUpdateSchema = z.object({
     .max(100, "First name must be less than 100 characters."),
   lastName: z
     .string()
-    .min(1, "Last name is required.")
+   
     .max(100, "Last name must be less than 100 characters."),
   phone: z.string().optional().nullable(),
   dob: z.string().optional().nullable(),
@@ -619,6 +620,10 @@ export async function registerPartnerUser(input: unknown): Promise<{ user: Publi
     console.error("Failed to send verification email (partner background):", error);
   });
 
+  sendPartnerOnboardingEmail(data.email, data.firstName, user.referral_code || "").catch((error) => {
+    console.error("Failed to send onboarding email (partner background):", error);
+  });
+
   return { user: toPublicUser(user), verificationToken };
 }
 
@@ -647,6 +652,10 @@ export async function joinPartnerProgram(userId: number): Promise<PublicUser> {
     );
     user = updateRes.rows[0];
     await client.query("COMMIT");
+
+    sendPartnerOnboardingEmail(existing.email, existing.first_name, referralCode).catch((error) => {
+      console.error("Failed to send onboarding email (partner background):", error);
+    });
   } catch (error) {
     await client.query("ROLLBACK");
     throw error;

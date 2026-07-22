@@ -385,3 +385,33 @@
 2026-07-13 12:14:03:143 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
 2026-07-13 12:14:05:145 [31merror[39m: [31mError handler caught: Invalid refresh token.[39m
 2026-07-20 19:14:45:1445 [31merror[39m: [31mError handler caught: Email is already in use.[39m
+2026-07-22 16:40:50:4050 [31merror[39m: [31mError handler caught: jwt expired[39m
+2026-07-22 16:40:50:4050 [31merror[39m: [31mError handler caught: jwt expired[39m
+2026-07-22 16:42:07:427 [31merror[39m: [31mError handler caught: [[39m
+[31m  {[39m
+[31m    "code": "too_small",[39m
+[31m    "minimum": 1,[39m
+[31m    "type": "string",[39m
+[31m    "inclusive": true,[39m
+[31m    "exact": false,[39m
+[31m    "message": "Last name is required.",[39m
+[31m    "path": [[39m
+[31m      "lastName"[39m
+[31m    ][39m
+[31m  }[39m
+[31m][39m
+2026-07-22 16:42:24:4224 [31merror[39m: [31mError handler caught: [[39m
+[31m  {[39m
+[31m    "code": "too_small",[39m
+[31m    "minimum": 1,[39m
+[31m    "type": "string",[39m
+[31m    "inclusive": true,[39m
+[31m    "exact": false,[39m
+[31m    "message": "Last name is required.",[39m
+[31m    "path": [[39m
+[31m      "lastName"[39m
+[31m    ][39m
+[31m  }[39m
+[31m][39m
+2026-07-22 17:00:01:01 [31merror[39m: [31mFailed to send 24h reminder to jessyada20050@gmail.com Failed to send email: We have detected you are using an unrecognised IP address 105.127.7.47. If you performed this action make sure to add the new IP address in this link: https://app.brevo.com/security/authorised_ips[39m
+2026-07-22 17:00:01:01 [31merror[39m: [31mFailed to send 24h reminder to ellazino2004@gmail.com Failed to send email: We have detected you are using an unrecognised IP address 105.127.7.47. If you performed this action make sure to add the new IP address in this link: https://app.brevo.com/security/authorised_ips[39m

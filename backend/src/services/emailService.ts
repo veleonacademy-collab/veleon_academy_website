@@ -872,3 +872,77 @@ export async function sendBulkMessage(
 
   return { successCount, failedCount };
 }
+
+/**
+ * Send welcome onboarding email to a new Growth Partner
+ */
+export async function sendPartnerOnboardingEmail(
+  email: string,
+  firstName: string,
+  referralCode: string
+): Promise<void> {
+  const dashboardUrl = `${env.appUrl}/partners/dashboard`;
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+          body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background-color: #f8fafc; margin: 0; padding: 0; color: #1e293b; }
+          .container { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+          .hero { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 50px 40px; text-align: center; color: white; }
+          .content { padding: 40px; }
+          .code-box { background: #fff7ed; border: 2px dashed #f97316; border-radius: 12px; padding: 20px; text-align: center; margin: 24px 0; }
+          .code-text { font-size: 24px; font-weight: 800; color: #ea580c; letter-spacing: 2px; font-family: monospace; }
+          .step-list { padding-left: 20px; line-height: 1.8; margin-bottom: 30px; }
+          .step-list li { margin-bottom: 12px; }
+          .cta-button { display: inline-block; width: 100%; padding: 18px 0; background: #ea580c; color: #ffffff !important; text-decoration: none !important; border-radius: 12px; font-weight: 800; font-size: 16px; text-align: center; box-shadow: 0 10px 20px rgba(234, 88, 12, 0.25); text-transform: uppercase; box-sizing: border-box; }
+          .footer { background: #f1f5f9; padding: 30px; text-align: center; color: #64748b; font-size: 13px; border-top: 1px solid #e2e8f0; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="hero">
+            <h1 style="margin: 0; font-size: 28px; font-weight: 800;">Welcome to Veleon Partners! 🎉</h1>
+            <p style="margin-top: 10px; font-size: 16px; opacity: 0.9;">Your journey to earning starts right now.</p>
+          </div>
+          <div class="content">
+            <p style="font-size: 16px; line-height: 1.7;">
+              Hi ${firstName}, <br><br>
+              Congratulations! You are officially a <strong>Veleon Growth Partner</strong>. You now have the power to earn uncapped extra income while helping students launch rewarding careers in tech.
+            </p>
+            
+            <div class="code-box">
+              <div style="font-size: 12px; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Your Unique Referral Code</div>
+              <div class="code-text">${referralCode}</div>
+            </div>
+
+            <h3 style="color: #0f172a; font-size: 18px; margin-top: 30px; font-weight: 800;">🚀 What's Next? (Quick Start Guide)</h3>
+            <ol class="step-list">
+              <li><strong>Log In to Your Dashboard:</strong> Go to the partner portal to track your referrals, clicks, and earnings in real-time.</li>
+              <li><strong>Grab Your Materials:</strong> Click on the <strong>Campaigns</strong> tab to view pre-made campaigns, download flyers, and copy ready-to-share message templates.</li>
+              <li><strong>Share & Earn:</strong> Share your unique link (with your code) to friends, WhatsApp groups, and social networks. You earn ₦5,000 for every student who enrolls!</li>
+            </ol>
+
+            <a href="${dashboardUrl}" class="cta-button">Access Partner Dashboard</a>
+            
+            <p style="font-size: 14px; color: #64748b; margin-top: 30px; text-align: center;">
+              If you have any questions, feel free to reply directly to this email. Let's make this cohort count!
+            </p>
+          </div>
+          <div class="footer">
+            <p>&copy; ${new Date().getFullYear()} Veleon Academy • Growth Partner Program</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await sendEmail({
+    to: email,
+    subject: "🎉 Welcome onboard! Here's what to do next to start earning",
+    html,
+    text: `Welcome to the Veleon Growth Partner Program, ${firstName}!\n\nYour unique referral code is: ${referralCode}\n\nHere are your next steps:\n1. Log in to your dashboard: ${dashboardUrl}\n2. Grab your promotional materials (flyers & copy templates) under the Campaigns tab.\n3. Share your link & earn ₦5,000 for every enrollment!\n\nLet's get started!`
+  });
+}

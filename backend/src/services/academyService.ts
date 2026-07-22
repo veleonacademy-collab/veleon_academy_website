@@ -139,6 +139,7 @@ export class AcademyService {
        LEFT JOIN enrollments e ON u.id = e.student_id
        WHERE e.id IS NULL 
          AND u.role = 'student'
+         AND (u.referral_code IS NULL OR u.referral_code = '')
          AND u.created_at <= $1 
          AND (u.metadata->>'reminder_72h_sent' IS NULL OR u.metadata->>'reminder_72h_sent' = 'false')`,
       [seventyTwoHoursAgo.toISOString()]
@@ -166,6 +167,7 @@ export class AcademyService {
        LEFT JOIN enrollments e ON u.id = e.student_id
        WHERE e.id IS NULL 
          AND u.role = 'student'
+         AND (u.referral_code IS NULL OR u.referral_code = '')
          AND u.created_at <= $1 
          AND (u.metadata->>'reminder_24h_sent' IS NULL OR u.metadata->>'reminder_24h_sent' = 'false')
          AND (u.metadata->>'reminder_72h_sent' IS NULL OR u.metadata->>'reminder_72h_sent' = 'false')`,
@@ -189,6 +191,7 @@ export class AcademyService {
        LEFT JOIN enrollments e ON u.id = e.student_id
        WHERE e.id IS NULL
          AND u.role = 'student'
+         AND (u.referral_code IS NULL OR u.referral_code = '')
          AND u.created_at <= $1 
          AND (u.metadata->>'reminder_1h_sent' IS NULL OR u.metadata->>'reminder_1h_sent' = 'false')
          AND (u.metadata->>'reminder_24h_sent' IS NULL OR u.metadata->>'reminder_24h_sent' = 'false')`,

@@ -20,7 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ReviewsPage: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<{ title: string; url: string } | null>(null);
 
-  const month = 'JULY'
+  const month = 'August'
 
   const handlePlayVideo = (name: string) => {
     // Premium custom mockup YouTube embeds or test video URLs
