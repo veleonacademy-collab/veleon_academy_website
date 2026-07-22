@@ -14556,3 +14556,227 @@
 2026-07-22 17:27:34:2734 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 980.823 ms[39m
 2026-07-22 17:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
 2026-07-22 17:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-22 17:37:24:3724 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-22 17:37:24:3724 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-22 17:37:27:3727 [32minfo[39m: [32mUser 2 connected with socket 0O5VpqZrUZVmlPWQAAAB[39m
+2026-07-22 17:37:47:3747 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:37:47:3747 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 3ms[39m
+2026-07-22 17:37:47:3747 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:37:47:3747 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 2ms[39m
+2026-07-22 17:37:47:3747 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:37:47:3747 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:37:49:3749 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1717ms[39m
+2026-07-22 17:37:49:3749 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1715.114 ms[39m
+2026-07-22 17:37:53:3753 [33mwarn[39m: [33m[SLOW REQUEST] GET /campaigns took 5986ms[39m
+2026-07-22 17:37:53:3753 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 5982.906 ms[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 8ms[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 5ms[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:38:19:3819 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 349ms[39m
+2026-07-22 17:38:19:3819 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 304 - - 356.562 ms[39m
+2026-07-22 17:38:21:3821 [33mwarn[39m: [33m[SLOW REQUEST] GET /admin/campaigns took 2186ms[39m
+2026-07-22 17:38:21:3821 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 2183.836 ms[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 16ms[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 2ms[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:39:24:3924 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 351ms[39m
+2026-07-22 17:39:24:3924 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 304 - - 347.901 ms[39m
+2026-07-22 17:39:25:3925 [37mdebug[39m: [37m[Request End] GET /admin/campaigns took 999ms[39m
+2026-07-22 17:39:25:3925 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 1009.513 ms[39m
+2026-07-22 17:44:04:444 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:44:04:444 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 3ms[39m
+2026-07-22 17:44:04:444 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:44:04:444 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 2ms[39m
+2026-07-22 17:44:04:444 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:44:04:444 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:44:05:445 [33mwarn[39m: [33m[SLOW REQUEST] GET /campaigns took 1031ms[39m
+2026-07-22 17:44:05:445 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 1026.941 ms[39m
+2026-07-22 17:44:06:446 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1738ms[39m
+2026-07-22 17:44:06:446 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1736.535 ms[39m
+2026-07-22 17:45:45:4545 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:45:45:4545 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 2ms[39m
+2026-07-22 17:45:45:4545 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:45:45:4545 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 1ms[39m
+2026-07-22 17:45:45:4545 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:45:45:4545 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:45:46:4546 [33mwarn[39m: [33m[SLOW REQUEST] GET /campaigns took 1513ms[39m
+2026-07-22 17:45:46:4546 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 1509.653 ms[39m
+2026-07-22 17:45:46:4546 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1645ms[39m
+2026-07-22 17:45:46:4546 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1642.554 ms[39m
+2026-07-22 17:47:26:4726 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:47:26:4726 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 5ms[39m
+2026-07-22 17:47:26:4726 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:47:26:4726 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 5ms[39m
+2026-07-22 17:47:26:4726 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 17:47:26:4726 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:47:28:4728 [33mwarn[39m: [33m[SLOW REQUEST] GET /campaigns took 1532ms[39m
+2026-07-22 17:47:28:4728 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 1526.723 ms[39m
+2026-07-22 17:47:28:4728 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1643ms[39m
+2026-07-22 17:47:28:4728 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1641.352 ms[39m
+2026-07-22 17:50:30:5030 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 17:50:30:5030 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 19ms[39m
+2026-07-22 17:50:30:5030 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:50:30:5030 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 10ms[39m
+2026-07-22 17:50:30:5030 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 17:50:30:5030 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 17:50:31:5031 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 886ms[39m
+2026-07-22 17:50:31:5031 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 304 - - 1036.195 ms[39m
+2026-07-22 17:50:31:5031 [33mwarn[39m: [33m[SLOW REQUEST] GET /admin/campaigns took 1044ms[39m
+2026-07-22 17:50:31:5031 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 1000.034 ms[39m
+2026-07-22 17:55:09:559 [37mdebug[39m: [37m[Request Start] OPTIONS /api/admin/stats | Origin: http://localhost:5173[39m
+2026-07-22 17:55:09:559 [37mdebug[39m: [37m[Request End] OPTIONS /api/admin/stats took 6ms[39m
+2026-07-22 17:55:09:559 [37mdebug[39m: [37m[Request Start] GET /api/admin/stats | Origin: http://localhost:5173[39m
+2026-07-22 17:55:11:5511 [33mwarn[39m: [33m[SLOW REQUEST] GET /stats took 1695ms[39m
+2026-07-22 17:55:11:5511 [35mhttp[39m: [35mGET /api/admin/stats 304 - - 1690.240 ms[39m
+2026-07-22 17:55:13:5513 [37mdebug[39m: [37m[Request Start] OPTIONS /api/users | Origin: http://localhost:5173[39m
+2026-07-22 17:55:13:5513 [37mdebug[39m: [37m[Request End] OPTIONS /api/users took 2ms[39m
+2026-07-22 17:55:13:5513 [37mdebug[39m: [37m[Request Start] OPTIONS /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-22 17:55:13:5513 [37mdebug[39m: [37m[Request End] OPTIONS /api/academy/courses?all=true took 2ms[39m
+2026-07-22 17:55:13:5513 [37mdebug[39m: [37m[Request Start] GET /api/users | Origin: http://localhost:5173[39m
+2026-07-22 17:55:13:5513 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses?all=true | Origin: http://localhost:5173[39m
+2026-07-22 17:55:17:5517 [33mwarn[39m: [33m[SLOW REQUEST] GET /courses?all=true took 3312ms[39m
+2026-07-22 17:55:17:5517 [35mhttp[39m: [35mGET /api/academy/courses?all=true 200 3798 - 3311.891 ms[39m
+2026-07-22 17:55:29:5529 [33mwarn[39m: [33m[SLOW REQUEST] GET / took 15745ms[39m
+2026-07-22 17:55:29:5529 [35mhttp[39m: [35mGET /api/users 200 27530 - 15745.878 ms[39m
+2026-07-22 18:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-22 18:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-22 18:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-22 18:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 2ms[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 3ms[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request End] GET /me took 457ms[39m
+2026-07-22 18:57:00:570 [35mhttp[39m: [35mGET /api/auth/me 304 - - 451.674 ms[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 2ms[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 18:57:00:570 [37mdebug[39m: [37m[Request End] GET /me took 231ms[39m
+2026-07-22 18:57:00:570 [35mhttp[39m: [35mGET /api/auth/me 304 - - 230.868 ms[39m
+2026-07-22 18:57:02:572 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1241ms[39m
+2026-07-22 18:57:02:572 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1238.116 ms[39m
+2026-07-22 18:57:02:572 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 18:57:02:572 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 1ms[39m
+2026-07-22 18:57:02:572 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 18:57:02:572 [37mdebug[39m: [37m[Request End] GET /campaigns took 688ms[39m
+2026-07-22 18:57:02:572 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 687.994 ms[39m
+2026-07-22 18:58:50:5850 [37mdebug[39m: [37m[Request Start] OPTIONS /api/admin/stats | Origin: http://localhost:5173[39m
+2026-07-22 18:58:50:5850 [37mdebug[39m: [37m[Request End] OPTIONS /api/admin/stats took 1ms[39m
+2026-07-22 18:58:50:5850 [37mdebug[39m: [37m[Request Start] GET /api/admin/stats | Origin: http://localhost:5173[39m
+2026-07-22 18:58:52:5852 [33mwarn[39m: [33m[SLOW REQUEST] GET /stats took 1193ms[39m
+2026-07-22 18:58:52:5852 [35mhttp[39m: [35mGET /api/admin/stats 304 - - 1183.819 ms[39m
+2026-07-22 18:58:53:5853 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 18:58:53:5853 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 1ms[39m
+2026-07-22 18:58:53:5853 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 18:58:53:5853 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 1ms[39m
+2026-07-22 18:58:53:5853 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 18:58:53:5853 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 18:58:54:5854 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 247ms[39m
+2026-07-22 18:58:54:5854 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 304 - - 246.475 ms[39m
+2026-07-22 18:58:54:5854 [37mdebug[39m: [37m[Request End] GET /admin/campaigns took 695ms[39m
+2026-07-22 18:58:54:5854 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 694.663 ms[39m
+2026-07-22 18:59:04:594 [32minfo[39m: [32mSocket 0O5VpqZrUZVmlPWQAAAB disconnected[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/me took 1ms[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request End] GET /me took 241ms[39m
+2026-07-22 18:59:05:595 [35mhttp[39m: [35mGET /api/auth/me 200 373 - 241.649 ms[39m
+2026-07-22 18:59:05:595 [37mdebug[39m: [37m[Request Start] GET /api/auth/me | Origin: http://localhost:5173[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 1ms[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 1ms[39m
+2026-07-22 18:59:06:596 [32minfo[39m: [32mUser 2 connected with socket zNVectK36snIW6O8AAAD[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request End] GET /me took 242ms[39m
+2026-07-22 18:59:06:596 [35mhttp[39m: [35mGET /api/auth/me 304 - - 249.524 ms[39m
+2026-07-22 18:59:06:596 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 233ms[39m
+2026-07-22 18:59:06:596 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 304 - - 231.766 ms[39m
+2026-07-22 18:59:08:598 [33mwarn[39m: [33m[SLOW REQUEST] GET /admin/campaigns took 2329ms[39m
+2026-07-22 18:59:08:598 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 2329.044 ms[39m
+2026-07-22 19:00:00:00 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-22 19:00:00:00 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-22 19:05:18:518 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-22 19:05:18:518 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-22 19:05:21:521 [32minfo[39m: [32mUser 2 connected with socket 3MtvE0YBnVF9fmfxAAAB[39m
+2026-07-22 19:05:45:545 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-22 19:05:46:546 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-22 19:05:46:546 [32minfo[39m: [32mUser 2 connected with socket mkJny4JdtcG31FfaAAAB[39m
+2026-07-22 19:07:14:714 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-22 19:07:14:714 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-22 19:07:14:714 [32minfo[39m: [32mUser 2 connected with socket hKVj0RkzhpiaYdlzAAAB[39m
+2026-07-22 19:07:24:724 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 19:07:24:724 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 98ms[39m
+2026-07-22 19:07:24:724 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 19:07:24:724 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 2ms[39m
+2026-07-22 19:07:25:725 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 19:07:25:725 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 19:07:25:725 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 327ms[39m
+2026-07-22 19:07:25:725 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 200 1756 - 304.972 ms[39m
+2026-07-22 19:07:27:727 [33mwarn[39m: [33m[SLOW REQUEST] GET /admin/campaigns took 2115ms[39m
+2026-07-22 19:07:27:727 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 2109.170 ms[39m
+2026-07-22 19:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-22 19:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m
+2026-07-22 19:35:55:3555 [32minfo[39m: [32mSocket hKVj0RkzhpiaYdlzAAAB disconnected[39m
+2026-07-22 20:07:02:72 [32minfo[39m: [32mDatabase connection established successfully[39m
+2026-07-22 20:07:03:73 [32minfo[39m: [32mAPI server with Socket.io listening on http://localhost:5005[39m
+2026-07-22 20:07:12:712 [37mdebug[39m: [37m[Request Start] OPTIONS /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-07-22 20:07:12:712 [37mdebug[39m: [37m[Request End] OPTIONS /api/auth/oauth/google took 14ms[39m
+2026-07-22 20:07:12:712 [37mdebug[39m: [37m[Request Start] POST /api/auth/oauth/google | Origin: http://localhost:5173[39m
+2026-07-22 20:07:13:713 [33mwarn[39m: [33m[SLOW REQUEST] POST /oauth/google took 1265ms[39m
+2026-07-22 20:07:13:713 [35mhttp[39m: [35mPOST /api/auth/oauth/google 200 789 - 1169.248 ms[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/partners-performance took 2ms[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/admin/campaigns took 2ms[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/partners-performance | Origin: http://localhost:5173[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request Start] GET /api/partners/admin/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 20:07:14:714 [32minfo[39m: [32mUser 2 connected with socket w3hgCgyG-AuphkigAAAB[39m
+2026-07-22 20:07:14:714 [37mdebug[39m: [37m[Request End] GET /admin/partners-performance took 259ms[39m
+2026-07-22 20:07:14:714 [35mhttp[39m: [35mGET /api/partners/admin/partners-performance 304 - - 258.503 ms[39m
+2026-07-22 20:07:16:716 [33mwarn[39m: [33m[SLOW REQUEST] GET /admin/campaigns took 2109ms[39m
+2026-07-22 20:07:16:716 [35mhttp[39m: [35mGET /api/partners/admin/campaigns 304 - - 2104.008 ms[39m
+2026-07-22 20:09:09:99 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/oauth/google | Origin: http://localhost:5173[39m
+2026-07-22 20:09:09:99 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/oauth/google took 6ms[39m
+2026-07-22 20:09:09:99 [37mdebug[39m: [37m[Request Start] POST /api/partners/oauth/google | Origin: http://localhost:5173[39m
+2026-07-22 20:09:09:99 [37mdebug[39m: [37m[Request End] POST /oauth/google took 488ms[39m
+2026-07-22 20:09:09:99 [35mhttp[39m: [35mPOST /api/partners/oauth/google 200 803 - 484.736 ms[39m
+2026-07-22 20:09:10:910 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 20:09:10:910 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 2ms[39m
+2026-07-22 20:09:10:910 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 20:09:11:911 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1256ms[39m
+2026-07-22 20:09:11:911 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1254.986 ms[39m
+2026-07-22 20:09:11:911 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 20:09:11:911 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 11ms[39m
+2026-07-22 20:09:11:911 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 20:09:12:912 [37mdebug[39m: [37m[Request End] GET /campaigns took 728ms[39m
+2026-07-22 20:09:12:912 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 723.269 ms[39m
+2026-07-22 20:16:10:1610 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 20:16:10:1610 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/dashboard took 2ms[39m
+2026-07-22 20:16:10:1610 [37mdebug[39m: [37m[Request Start] OPTIONS /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 20:16:10:1610 [37mdebug[39m: [37m[Request End] OPTIONS /api/partners/campaigns took 1ms[39m
+2026-07-22 20:16:10:1610 [37mdebug[39m: [37m[Request Start] GET /api/partners/dashboard | Origin: http://localhost:5173[39m
+2026-07-22 20:16:10:1610 [37mdebug[39m: [37m[Request Start] GET /api/partners/campaigns | Origin: http://localhost:5173[39m
+2026-07-22 20:16:11:1611 [37mdebug[39m: [37m[Request End] GET /campaigns took 757ms[39m
+2026-07-22 20:16:11:1611 [35mhttp[39m: [35mGET /api/partners/campaigns 304 - - 711.279 ms[39m
+2026-07-22 20:16:12:1612 [33mwarn[39m: [33m[SLOW REQUEST] GET /dashboard took 1795ms[39m
+2026-07-22 20:16:12:1612 [35mhttp[39m: [35mGET /api/partners/dashboard 304 - - 1726.092 ms[39m
+2026-07-22 20:17:39:1739 [37mdebug[39m: [37m[Request Start] GET /api/ads | Origin: http://localhost:5173[39m
+2026-07-22 20:17:39:1739 [37mdebug[39m: [37m[Request Start] GET /api/academy/courses | Origin: http://localhost:5173[39m
+2026-07-22 20:17:40:1740 [37mdebug[39m: [37m[Request End] GET / took 279ms[39m
+2026-07-22 20:17:40:1740 [35mhttp[39m: [35mGET /api/ads 200 2 - 275.839 ms[39m
+2026-07-22 20:17:40:1740 [37mdebug[39m: [37m[Request End] GET /courses took 303ms[39m
+2026-07-22 20:17:40:1740 [35mhttp[39m: [35mGET /api/academy/courses 200 2915 - 301.394 ms[39m
+2026-07-22 20:30:00:300 [32minfo[39m: [32mRunning periodic payment reminder check...[39m
+2026-07-22 20:30:00:300 [32minfo[39m: [32mProcessing payment reminders...[39m

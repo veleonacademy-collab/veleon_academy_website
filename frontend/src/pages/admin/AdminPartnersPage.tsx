@@ -3,27 +3,15 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BackButton } from "../../components/ui/BackButton";
 import toast from "react-hot-toast";
 import { http } from "../../api/http";
-import {
-  Users,
-  Trophy,
-  Plus,
-  Trash2,
-  Edit2,
-  Upload,
-  Calendar,
-  Layers,
-  FileText,
-  Save,
-  X,
-  Eye,
-  Check
-} from "lucide-react";
+import { Users, Trophy, Plus, Trash2, Edit2, Upload, Layers, FileText, Save, X, Eye, Check, ChevronRight, Phone, Mail, Calendar, Link as LinkIcon, DollarSign, MousePointer } from "lucide-react";
+import Modal from "../../components/Modal";
 
 interface Partner {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
   referralCode: string;
   createdAt: string;
   clicks: number;
@@ -65,6 +53,7 @@ const fmt = (n: number) =>
 const AdminPartnersPage: React.FC = () => {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<"performance" | "campaigns">("performance");
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
 
   // Fetch partners
   const { data: partners, isLoading: partnersLoading } = useQuery<Partner[]>({
@@ -313,9 +302,16 @@ const AdminPartnersPage: React.FC = () => {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {partners.map(p => (
-                    <tr key={p.id} className="hover:bg-slate-50">
+                    <tr
+                      key={p.id}
+                      onClick={() => setSelectedPartner(p)}
+                      className="hover:bg-orange-50/40 cursor-pointer transition-colors group"
+                    >
                       <td className="py-4 px-5">
-                        <div className="font-bold text-slate-900">{p.firstName} {p.lastName}</div>
+                        <div className="font-bold text-slate-900 group-hover:text-primary transition-colors flex items-center gap-1.5">
+                          {p.firstName} {p.lastName}
+                          <ChevronRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+                        </div>
                         <div className="text-xs text-slate-400">{p.email}</div>
                       </td>
                       <td className="py-4 px-5 font-mono text-xs font-bold text-primary">{p.referralCode}</td>
@@ -704,12 +700,12 @@ const AdminPartnersPage: React.FC = () => {
                                 return (
                                 <div key={msg.id} className="rounded bg-slate-50 p-2.5 text-xs border border-slate-100 space-y-1.5">
                                   <div className="flex items-center justify-between font-bold text-slate-700">
-                                    <span>{msg.category_name}</span>
+                                    <span>{msg.categoryName || (msg as any).category_name}</span>
                                     <div className="flex items-center gap-1">
                                       <button
                                         onClick={() => {
                                           setEditingMessage(msg);
-                                          setEditMsgCategory(msg.category_name);
+                                          setEditMsgCategory(msg.categoryName || (msg as any).category_name || "");
                                           setEditMsgText(messageContent);
                                         }}
                                         className="text-slate-500 hover:bg-slate-200 p-0.5 rounded"
@@ -791,6 +787,94 @@ const AdminPartnersPage: React.FC = () => {
           )}
         </div>
       )}
+      {/* Partner Details Modal */}
+      <Modal
+        isOpen={!!selectedPartner}
+        onClose={() => setSelectedPartner(null)}
+        title="Partner Details & Contact"
+      >
+        {selectedPartner && (
+          <div className="space-y-5">
+            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-black text-lg">
+                {selectedPartner.firstName?.[0]}{selectedPartner.lastName?.[0]}
+              </div>
+              <div>
+                <h3 className="text-lg font-black text-slate-900">{selectedPartner.firstName} {selectedPartner.lastName}</h3>
+                <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-orange-100 text-orange-700 mt-1">
+                  Code: {selectedPartner.referralCode}
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl">
+                <span className="text-slate-500 font-medium flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-slate-400" /> Email Address
+                </span>
+                <a href={`mailto:${selectedPartner.email}`} className="font-bold text-primary hover:underline">{selectedPartner.email}</a>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl">
+                <span className="text-slate-500 font-medium flex items-center gap-2">
+                  <Phone className="h-4 w-4 text-slate-400" /> Phone Number
+                </span>
+                <span className="font-bold text-slate-900">
+                  {selectedPartner.phone ? (
+                    <a href={`tel:${selectedPartner.phone}`} className="text-slate-900 hover:text-primary font-bold">{selectedPartner.phone}</a>
+                  ) : (
+                    <span className="text-slate-400 italic">Not provided</span>
+                  )}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl">
+                <span className="text-slate-500 font-medium flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-slate-400" /> Joined Date
+                </span>
+                <span className="font-semibold text-slate-700">{new Date(selectedPartner.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Clicks</span>
+                <span className="text-lg font-black text-slate-900">{selectedPartner.clicks}</span>
+              </div>
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
+                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Leads</span>
+                <span className="text-lg font-black text-slate-900">{selectedPartner.leads}</span>
+              </div>
+              <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-center">
+                <span className="block text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Enrollments</span>
+                <span className="text-lg font-black text-emerald-700">{selectedPartner.enrollments}</span>
+              </div>
+            </div>
+
+            <div className="p-4 bg-orange-50/50 border border-orange-100 rounded-2xl space-y-2">
+              <div className="flex justify-between text-xs font-bold text-slate-600">
+                <span>Base Commission (₦5k/student):</span>
+                <span>{fmt(selectedPartner.commission || 0)}</span>
+              </div>
+              <div className="flex justify-between text-xs font-bold text-slate-600">
+                <span>Milestone Bonuses:</span>
+                <span>{fmt(selectedPartner.bonuses || 0)}</span>
+              </div>
+              <div className="pt-2 border-t border-orange-200/60 flex justify-between text-sm font-black text-slate-900">
+                <span>Total Earnings:</span>
+                <span className="text-primary">{fmt(selectedPartner.totalEarnings || 0)}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setSelectedPartner(null)}
+              className="w-full py-3 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors"
+            >
+              Close Details
+            </button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

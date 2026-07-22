@@ -465,10 +465,12 @@ export async function getAdminPartnersPerformance(
         u.email, 
         u.referral_code AS "referralCode",
         u.created_at AS "createdAt",
+        COALESCE(c.phone, '') AS phone,
         (SELECT COUNT(*)::int FROM referral_clicks rc WHERE rc.partner_id = u.id) AS clicks,
         (SELECT COUNT(*)::int FROM users lu WHERE lu.referred_by_id = u.id) AS leads,
         (SELECT COUNT(*)::int FROM enrollments e WHERE e.referred_by_id = u.id) AS enrollments
       FROM users u
+      LEFT JOIN customers c ON u.customer_id = c.id
       WHERE u.referral_code IS NOT NULL
       ORDER BY u.created_at DESC
     `;

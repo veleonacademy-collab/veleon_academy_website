@@ -409,7 +409,8 @@ const CourseDetailPage: React.FC = () => {
 
                                 {isExpandedClass && (
                                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                                  {/* Recordings (Lessons) */}
+                                  {/* Recordings column — always show for tutor/admin, hide for students when empty */}
+                                  {(isTutorOrAdmin || (cls.recordings && cls.recordings.length > 0)) && (
                                   <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
                                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
                                       <Video className="h-4 w-4 text-primary" />
@@ -444,12 +445,13 @@ const CourseDetailPage: React.FC = () => {
                                           </div>
                                         ))}
                                       </div>
-                                    ) : (
+                                    ) : isTutorOrAdmin ? (
                                       <p className="text-xs text-slate-400 py-4 text-center font-medium">Class recordings will appear here as your tutor uploads them.</p>
-                                    )}
+                                    ) : null}
                                   </div>
-
-                                  {/* Class Materials */}
+                                  )}
+                                  {/* Class Materials — hide from students when empty */}
+                                  {(isTutorOrAdmin || (cls.materials && cls.materials.length > 0)) && (
                                   <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
                                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
                                       <Book className="h-4 w-4 text-emerald-600" />
@@ -492,12 +494,13 @@ const CourseDetailPage: React.FC = () => {
                                           );
                                         })}
                                       </div>
-                                    ) : (
+                                    ) : isTutorOrAdmin ? (
                                       <p className="text-xs text-slate-400 py-4 text-center font-medium">No materials uploaded for this class yet.</p>
-                                    )}
+                                    ) : null}
                                   </div>
-
-                                  {/* Assignments */}
+                                  )}
+                                  {/* Assignments — hide from students when empty */}
+                                  {(isTutorOrAdmin || (cls.assignments && cls.assignments.length > 0)) && (
                                   <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100/80 space-y-3">
                                     <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
                                       <FileText className="h-4 w-4 text-secondary" />
@@ -533,10 +536,11 @@ const CourseDetailPage: React.FC = () => {
                                           </div>
                                         ))}
                                       </div>
-                                    ) : (
+                                    ) : isTutorOrAdmin ? (
                                       <p className="text-xs text-slate-400 py-4 text-center font-medium">No tasks assigned for this class yet.</p>
-                                    )}
+                                    ) : null}
                                   </div>
+                                  )}
                                 </div>
                                 )}
                               </div>
@@ -626,7 +630,7 @@ const CourseDetailPage: React.FC = () => {
                 });
               }
             }}
-            disabled={updateRecordingMutation.isPending || !editRecTitle.trim() || !editRecUrl.trim()}
+            disabled={updateRecordingMutation.isPending || !editRecTitle.trim()}
             className="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm tracking-widest hover:opacity-90 transition-all mt-6 uppercase"
           >
             {updateRecordingMutation.isPending ? "Saving..." : "Save Changes"}

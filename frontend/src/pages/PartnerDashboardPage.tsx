@@ -30,54 +30,163 @@ const STATUS_COLOR: Record<string, string> = {
 
 /* ─── Scoped responsive styles ───────────────────────────────────────────── */
 const DASHBOARD_STYLES = `
-  .pd-header-right { display: flex; gap: 12px; align-items: center; }
+  * { box-sizing: border-box; }
+  .pd-header-right { display: flex; gap: 8px; align-items: center; }
   .pd-hamburger { display: none; background: none; border: none; cursor: pointer; color: #374151; padding: 4px; }
-  .pd-mobile-nav { display: none; flex-direction: column; gap: 8px; padding: 12px 20px 16px; border-bottom: 1px solid #f3f4f6; background: #fff; }
+  .pd-mobile-nav { display: none; flex-direction: column; gap: 4px; padding: 8px 12px 12px; border-bottom: 1px solid #f3f4f6; background: #fff; }
   .pd-mobile-nav.open { display: flex; }
-  .pd-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
-  .pd-stat-card { background: #fff; border: 1.5px solid #f3f4f6; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
-  .pd-stat-val { font-size: 22px; font-weight: 900; color: #111827; word-break: break-word; }
-  .pd-links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
+
+  /* Single Card Stats layout */
+  .pd-stats-single-card {
+    background: #fff;
+    border: 1.5px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 10px 8px;
+    margin-bottom: 12px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  .pd-stats-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pd-stat-item {
+    flex: 1;
+    min-width: 0;
+    padding: 2px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .pd-stat-item:not(:last-child) {
+    border-right: 1px solid #f3f4f6;
+  }
+  .pd-stat-lbl {
+    font-size: 9px;
+    font-weight: 800;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .pd-stat-val {
+    font-size: 16px;
+    font-weight: 900;
+    color: #111827;
+    line-height: 1.2;
+    word-break: break-word;
+    margin: 2px 0 1px;
+  }
+  .pd-stat-val.accent {
+    color: #ea580c;
+  }
+  .pd-stat-sub {
+    font-size: 8.5px;
+    color: #9ca3af;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .pd-links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; width: 100%; }
   .pd-referrals-table { display: block; }
   .pd-referrals-cards { display: none; }
 
-  @media (max-width: 900px) {
-    .pd-stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .pd-links-grid { grid-template-columns: 1fr; }
+  .pd-tabs-row {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: 3px;
+    margin-bottom: 14px;
+    gap: 3px;
+  }
+  .pd-tab-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 7px 4px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
   }
 
   @media (max-width: 640px) {
     .pd-header-right { display: none; }
     .pd-hamburger { display: flex; align-items: center; justify-content: center; }
-    .pd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-    .pd-stat-card { padding: 12px 12px; gap: 3px; border-radius: 10px; }
-    .pd-stat-val { font-size: 17px; font-weight: 800; }
-    .pd-links-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+
+    .pd-stats-single-card { padding: 8px 4px; margin-bottom: 10px; }
+    .pd-stat-item { padding: 2px 3px; }
+    .pd-stat-lbl { font-size: 8.5px; }
+    .pd-stat-val { font-size: 14px; }
+    .pd-stat-sub { font-size: 8px; }
+
+    .pd-links-grid { grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px; }
     .pd-referrals-table { display: none; }
-    .pd-referrals-cards { display: flex; flex-direction: column; gap: 10px; }
-    .pd-tabs-row { width: 100% !important; }
+    .pd-referrals-cards { display: flex; flex-direction: column; gap: 8px; }
+
+    .pd-tab-btn { font-size: 11px; padding: 6px 3px; }
   }
 
   @media (max-width: 380px) {
-    .pd-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    .pd-stat-card { padding: 10px 8px; }
-    .pd-stat-val { font-size: 15px; }
+    .pd-stats-single-card { padding: 6px 2px; }
+    .pd-stat-lbl { font-size: 8px; }
+    .pd-stat-val { font-size: 13px; }
+    .pd-stat-sub { display: none; }
+    .pd-tab-btn { font-size: 10.5px; padding: 5px 2px; }
   }
 `;
 
-/* ─── sub-components ─────────────────────────────────────────────────────── */
-const StatCard = ({ label, value, sub, icon: Icon, accent = false }: any) => (
-  <div className="pd-stat-card" style={{
-    borderTop: accent ? "3px solid #f97316" : "1.5px solid #f3f4f6",
-  }}>
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-      <span style={{ fontSize: 10, fontWeight: 800, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em" }}>{label}</span>
-      <div style={{ width: 26, height: 26, borderRadius: 6, background: accent ? "#fff7ed" : "#f9fafb", display: "flex", alignItems: "center", justifyContent: "center", color: accent ? "#f97316" : "#6b7280", flexShrink: 0 }}>
-        <Icon size={13} />
+/* ─── Single Combined Stats Card ────────────────────────────────────────── */
+const StatsSingleCard = ({ stats }: { stats: any }) => (
+  <div className="pd-stats-single-card">
+    <div className="pd-stats-row">
+      <div className="pd-stat-item">
+        <span className="pd-stat-lbl">Clicks</span>
+        <div className="pd-stat-val">{stats.totalClicks}</div>
+        <div className="pd-stat-sub">link views</div>
+      </div>
+
+      <div className="pd-stat-item">
+        <span className="pd-stat-lbl">Leads</span>
+        <div className="pd-stat-val">{stats.totalLeads}</div>
+        <div className="pd-stat-sub">signups</div>
+      </div>
+
+      <div className="pd-stat-item">
+        <span className="pd-stat-lbl">Enrolled</span>
+        <div className="pd-stat-val accent">{stats.totalReferrals}</div>
+        <div className="pd-stat-sub">paid students</div>
+      </div>
+
+      <div className="pd-stat-item">
+        <span className="pd-stat-lbl">Commission</span>
+        <div className="pd-stat-val accent">{fmt(stats.totalCommission)}</div>
+        <div className="pd-stat-sub">earned</div>
       </div>
     </div>
-    <div className="pd-stat-val">{value}</div>
-    {sub && <div style={{ fontSize: 10, color: "#9ca3af", fontWeight: 600 }}>{sub}</div>}
   </div>
 );
 
@@ -89,55 +198,55 @@ const MilestoneBar = ({ total, milestones }: { total: number; milestones: any[] 
   const next = milestones[nextIdx];
 
   return (
-    <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: 20 }}>
-      <h3 style={{ fontSize: 13, fontWeight: 800, color: "#111827", marginBottom: 16, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+    <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: "12px 14px", width: "100%", boxSizing: "border-box" }}>
+      <h3 style={{ fontSize: 12, fontWeight: 800, color: "#111827", marginBottom: 12, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         Milestone Progress
       </h3>
-      <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
+      <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
         {MILESTONES.map(n => {
           const done = total >= n;
           return (
             <div key={n} style={{ flex: 1, textAlign: "center" }}>
-              <div style={{ height: 6, borderRadius: 100, background: done ? "#f97316" : "#f3f4f6", marginBottom: 5 }} />
-              <span style={{ fontSize: 10, fontWeight: 700, color: done ? "#f97316" : "#9ca3af" }}>{n}</span>
+              <div style={{ height: 5, borderRadius: 100, background: done ? "#f97316" : "#f3f4f6", marginBottom: 4 }} />
+              <span style={{ fontSize: 9.5, fontWeight: 800, color: done ? "#ea580c" : "#9ca3af" }}>{n}</span>
             </div>
           );
         })}
       </div>
       {next && (
-        <p style={{ fontSize: 13, color: "#6b7280", margin: 0 }}>
-          <strong style={{ color: "#111827" }}>{next.students - total} more</strong> student{next.students - total !== 1 ? "s" : ""} to unlock your next milestone — <strong style={{ color: "#f97316" }}>+{fmt(next.bonus)}</strong>
+        <p style={{ fontSize: 12, color: "#4b5563", margin: 0, lineHeight: 1.4 }}>
+          <strong style={{ color: "#111827" }}>{next.students - total} more</strong> student{next.students - total !== 1 ? "s" : ""} to unlock next milestone — <strong style={{ color: "#ea580c" }}>+{fmt(next.bonus)}</strong>
         </p>
       )}
-      {!next && <p style={{ fontSize: 13, color: "#16a34a", fontWeight: 700, margin: 0 }}>🎉 All milestones achieved!</p>}
+      {!next && <p style={{ fontSize: 12, color: "#16a34a", fontWeight: 700, margin: 0 }}>🎉 All milestones achieved!</p>}
     </div>
   );
 };
 
 /* ─── Cohort Breakdown ───────────────────────────────────────────────────── */
 const CohortTable = ({ rows }: { rows: any[] }) => (
-  <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, overflow: "hidden" }}>
-    <div style={{ padding: "16px 20px", borderBottom: "1px solid #f3f4f6" }}>
-      <h3 style={{ fontSize: 13, fontWeight: 800, color: "#111827", margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Earnings By Cohort</h3>
+  <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, overflow: "hidden", width: "100%", boxSizing: "border-box" }}>
+    <div style={{ padding: "12px 14px", borderBottom: "1px solid #f3f4f6" }}>
+      <h3 style={{ fontSize: 12, fontWeight: 800, color: "#111827", margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Earnings By Cohort</h3>
     </div>
     {rows.length === 0 ? (
-      <div style={{ padding: "32px 20px", textAlign: "center", color: "#9ca3af", fontSize: 14 }}>No cohort data yet.</div>
+      <div style={{ padding: "24px 14px", textAlign: "center", color: "#9ca3af", fontSize: 13 }}>No cohort data yet.</div>
     ) : (
-      <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14, minWidth: 360 }}>
+      <div style={{ overflowX: "auto", width: "100%", WebkitOverflowScrolling: "touch" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
           <thead>
             <tr style={{ background: "#f9fafb" }}>
               {["Cohort", "Referrals", "Commissions"].map(h => (
-                <th key={h} style={{ padding: "10px 18px", textAlign: "left", fontWeight: 700, fontSize: 11, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>{h}</th>
+                <th key={h} style={{ padding: "8px 12px", textAlign: "left", fontWeight: 800, fontSize: 10, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {rows.map((r: any, i: number) => (
               <tr key={i} style={{ borderTop: "1px solid #f3f4f6" }}>
-                <td style={{ padding: "12px 18px", fontWeight: 700, color: "#111827" }}>{r.cohort}</td>
-                <td style={{ padding: "12px 18px", color: "#374151" }}>{r.referrals}</td>
-                <td style={{ padding: "12px 18px", fontWeight: 700, color: "#f97316" }}>{fmt(r.earnings)}</td>
+                <td style={{ padding: "10px 12px", fontWeight: 700, color: "#111827" }}>{r.cohort}</td>
+                <td style={{ padding: "10px 12px", color: "#374151" }}>{r.referrals}</td>
+                <td style={{ padding: "10px 12px", fontWeight: 700, color: "#ea580c" }}>{fmt(r.earnings)}</td>
               </tr>
             ))}
           </tbody>
@@ -196,32 +305,32 @@ const ReferralsDesktopTable = ({ referrals }: { referrals: any[] }) => (
 /* ─── Referrals — Mobile Cards ───────────────────────────────────────────── */
 const ReferralsMobileCards = ({ referrals }: { referrals: any[] }) => (
   <div className="pd-referrals-cards">
-    <div style={{ padding: "16px 0 8px", fontWeight: 800, fontSize: 13, color: "#111827", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+    <div style={{ padding: "12px 0 6px", fontWeight: 800, fontSize: 12, color: "#111827", textTransform: "uppercase", letterSpacing: "0.05em", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       Students Enrolled Through You
     </div>
     {referrals.length === 0 ? (
-      <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: "32px 20px", textAlign: "center" }}>
-        <Users size={28} style={{ color: "#d1d5db", marginBottom: 10 }} />
-        <p style={{ color: "#9ca3af", fontSize: 14, margin: 0 }}>No referrals yet. Start sharing your link!</p>
+      <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: "24px 14px", textAlign: "center" }}>
+        <Users size={24} style={{ color: "#d1d5db", marginBottom: 8 }} />
+        <p style={{ color: "#9ca3af", fontSize: 13, margin: 0 }}>No referrals yet. Start sharing your link!</p>
       </div>
     ) : (
       referrals.map((r: any) => (
-        <div key={r.id} style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: 16 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+        <div key={r.id} style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
             <div>
-              <div style={{ fontWeight: 700, color: "#111827", fontSize: 14 }}>{r.firstName} {r.lastName}</div>
-              <div style={{ fontSize: 12, color: "#9ca3af" }}>{r.email}</div>
+              <div style={{ fontWeight: 700, color: "#111827", fontSize: 13 }}>{r.firstName} {r.lastName}</div>
+              <div style={{ fontSize: 11, color: "#9ca3af" }}>{r.email}</div>
             </div>
-            <span style={{ fontSize: 11, fontWeight: 700, color: STATUS_COLOR[r.status] || "#9ca3af", background: `${STATUS_COLOR[r.status] || "#9ca3af"}18`, padding: "3px 8px", borderRadius: 100, textTransform: "capitalize", flexShrink: 0 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: STATUS_COLOR[r.status] || "#9ca3af", background: `${STATUS_COLOR[r.status] || "#9ca3af"}18`, padding: "2px 6px", borderRadius: 100, textTransform: "capitalize", flexShrink: 0 }}>
               {r.status}
             </span>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 16px", fontSize: 12, color: "#6b7280" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "2px 10px", fontSize: 11, color: "#6b7280" }}>
             <span>{r.courseTitle}</span>
             <span>· {r.cohort}</span>
             <span>· {fmtDate(r.enrolledAt)}</span>
           </div>
-          <div style={{ marginTop: 8, fontWeight: 800, color: "#f97316", fontSize: 13 }}>Commission: ₦5,000</div>
+          <div style={{ marginTop: 6, fontWeight: 800, color: "#ea580c", fontSize: 12 }}>Commission: ₦5,000</div>
         </div>
       ))
     )}
@@ -230,18 +339,18 @@ const ReferralsMobileCards = ({ referrals }: { referrals: any[] }) => (
 
 /* ─── Link Card ──────────────────────────────────────────────────────────── */
 const LinkCard = ({ label, link, hint }: { label: string; link: string; hint: string }) => (
-  <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: 18 }}>
-    <div style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>{label}</div>
-    <div style={{ display: "flex", alignItems: "center", gap: 6, background: "#f9fafb", border: "1px solid #f3f4f6", borderRadius: 8, padding: "10px 12px", marginBottom: 8 }}>
-      <span style={{ flex: 1, fontSize: 12, color: "#374151", wordBreak: "break-all", fontWeight: 600, lineHeight: 1.5 }}>{link}</span>
-      <button onClick={() => copyText(link, "Link copied!")} style={{ flexShrink: 0, background: "none", border: "none", cursor: "pointer", color: "#f97316", padding: "2px 4px" }}>
-        <Copy size={14} />
+  <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: "10px 12px", width: "100%", boxSizing: "border-box" }}>
+    <div style={{ fontSize: 9, fontWeight: 800, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>{label}</div>
+    <div style={{ display: "flex", alignItems: "center", gap: 6, background: "#f9fafb", border: "1px solid #f3f4f6", borderRadius: 6, padding: "6px 8px", marginBottom: 6, minWidth: 0 }}>
+      <span style={{ flex: 1, minWidth: 0, fontSize: 11, color: "#374151", wordBreak: "break-all", fontWeight: 600, lineHeight: 1.4 }}>{link}</span>
+      <button onClick={() => copyText(link, "Link copied!")} style={{ flexShrink: 0, background: "none", border: "none", cursor: "pointer", color: "#ea580c", padding: "2px" }}>
+        <Copy size={13} />
       </button>
-      <a href={link} target="_blank" rel="noreferrer" style={{ flexShrink: 0, color: "#9ca3af", padding: "2px 4px" }}>
-        <ExternalLink size={14} />
+      <a href={link} target="_blank" rel="noreferrer" style={{ flexShrink: 0, color: "#9ca3af", padding: "2px" }}>
+        <ExternalLink size={13} />
       </a>
     </div>
-    <p style={{ fontSize: 11, color: "#9ca3af", margin: 0, lineHeight: 1.5 }}>{hint}</p>
+    <p style={{ fontSize: 10, color: "#9ca3af", margin: 0, lineHeight: 1.4 }}>{hint}</p>
   </div>
 );
 
@@ -389,47 +498,48 @@ const PartnerDashboardPage: React.FC = () => {
       {showGuide && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(15, 23, 42, 0.4)", display: "flex",
-          alignItems: "center", justifyContent: "center", zIndex: 999, padding: 16
+          background: "rgba(15, 23, 42, 0.5)", display: "flex",
+          alignItems: "center", justifyContent: "center", zIndex: 999, padding: 12,
+          boxSizing: "border-box"
         }}>
           <div style={{
-            background: "#fff", borderRadius: 16, padding: 28,
-            maxWidth: 480, width: "100%", boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
-            position: "relative"
+            background: "#fff", borderRadius: 16, padding: "20px 16px",
+            maxWidth: 440, width: "100%", boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
+            position: "relative", maxHeight: "90vh", overflowY: "auto", boxSizing: "border-box"
           }}>
             <button onClick={() => setShowGuide(false)} style={{
-              position: "absolute", top: 16, right: 16, background: "none",
-              border: "none", cursor: "pointer", color: "#94a3b8"
+              position: "absolute", top: 14, right: 14, background: "none",
+              border: "none", cursor: "pointer", color: "#94a3b8", padding: 4
             }}>
               <X size={20} />
             </button>
-            <h2 style={{ fontSize: 18, fontWeight: 900, color: "#1e293b", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
+            <h2 style={{ fontSize: 16, fontWeight: 900, color: "#1e293b", marginBottom: 14, display: "flex", alignItems: "center", gap: 6, paddingRight: 24, margin: 0 }}>
               🚀 Quick Start: What Next?
             </h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16, fontSize: 14, color: "#475569", lineHeight: 1.6 }}>
-              <div style={{ display: "flex", gap: 12 }}>
-                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, flexShrink: 0 }}>1</div>
-                <div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, fontSize: 13, color: "#475569", lineHeight: 1.5 }}>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 12, flexShrink: 0, marginTop: 1 }}>1</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <strong>Get Your Link:</strong> Head to the <strong>Campaigns</strong> tab or copy your primary referral link below.
                 </div>
               </div>
-              <div style={{ display: "flex", gap: 12 }}>
-                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, flexShrink: 0 }}>2</div>
-                <div>
-                  <strong>Share Graphics & Copy:</strong> Under the Campaigns tab, select any copy, download the flyer, and copy the WhatsApp or social text templates (which already include your custom link).
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 12, flexShrink: 0, marginTop: 1 }}>2</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <strong>Share Graphics & Copy:</strong> Under the Campaigns tab, select any copy, download the flyer, and copy text templates.
                 </div>
               </div>
-              <div style={{ display: "flex", gap: 12 }}>
-                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, flexShrink: 0 }}>3</div>
-                <div>
+              <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 12, flexShrink: 0, marginTop: 1 }}>3</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <strong>Collect Commissions:</strong> For every student who signs up and completes payment using your link, you earn <strong>₦5,000</strong> plus milestone bonus payouts!
                 </div>
               </div>
             </div>
             <button onClick={() => setShowGuide(false)} style={{
-              width: "100%", padding: "11px", background: "#f1f5f9",
+              width: "100%", padding: "10px", background: "#f1f5f9",
               color: "#334155", border: "none", borderRadius: 8,
-              fontWeight: 800, fontSize: 14, marginTop: 24, cursor: "pointer"
+              fontWeight: 800, fontSize: 13, marginTop: 18, cursor: "pointer"
             }}>
               Got it! Let's go
             </button>
@@ -496,11 +606,11 @@ const PartnerDashboardPage: React.FC = () => {
       </div>
 
       {/* ── Content ──────────────────────────────────────────────────────── */}
-      <div style={{ ...containerStyle, padding: "24px 16px 40px" }}>
+      <div style={{ ...containerStyle, padding: "16px 16px 28px" }}>
         {isLoading && (
-          <div style={{ textAlign: "center", padding: "80px 0" }}>
-            <div style={{ display: "inline-block", width: 36, height: 36, border: "3px solid #f3f4f6", borderTopColor: "#f97316", borderRadius: "50%", animation: "pd-spin 0.8s linear infinite" }} />
-            <p style={{ color: "#9ca3af", marginTop: 12, fontSize: 14 }}>Loading dashboard…</p>
+          <div style={{ textAlign: "center", padding: "60px 0" }}>
+            <div style={{ display: "inline-block", width: 32, height: 32, border: "3px solid #f3f4f6", borderTopColor: "#f97316", borderRadius: "50%", animation: "pd-spin 0.8s linear infinite" }} />
+            <p style={{ color: "#9ca3af", marginTop: 10, fontSize: 13 }}>Loading dashboard…</p>
             <style>{`@keyframes pd-spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         )}
@@ -510,39 +620,33 @@ const PartnerDashboardPage: React.FC = () => {
         {data && (
           <>
             {/* Greeting */}
-            <div style={{ marginBottom: 24, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 16 }}>
+            <div style={{ marginBottom: 14, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
               <div>
-                <p style={{ fontSize: 12, fontWeight: 700, color: "#f97316", marginBottom: 2 }}>Welcome back</p>
-                <h1 style={{ fontSize: "clamp(20px, 4vw, 28px)", fontWeight: 900, color: "#111827", margin: "0 0 4px", fontFamily }}>
-                  {data.partner.firstName} {data.partner.lastName}
+                <h1 style={{ fontSize: "clamp(18px, 3.5vw, 24px)", fontWeight: 900, color: "#111827", margin: 0, fontFamily }}>
+                  Welcome, {data.partner.firstName} 👋
                 </h1>
-                <p style={{ fontSize: 13, color: "#9ca3af", margin: 0, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                  Referral Code:&nbsp;
+                <p style={{ fontSize: 12, color: "#6b7280", margin: "2px 0 0", display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                  Code:&nbsp;
                   <button onClick={() => copyText(data.partner.referralCode, "Code copied!")}
-                    style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "monospace", fontWeight: 800, color: "#f97316", fontSize: 14, padding: 0, display: "inline-flex", alignItems: "center", gap: 4 }}>
-                    {data.partner.referralCode} <Copy size={12} />
+                    style={{ background: "#fff7ed", border: "1px solid #ffedd5", borderRadius: 4, cursor: "pointer", fontFamily: "monospace", fontWeight: 800, color: "#ea580c", fontSize: 12, padding: "1px 6px", display: "inline-flex", alignItems: "center", gap: 3 }}>
+                    {data.partner.referralCode} <Copy size={11} />
                   </button>
                 </p>
               </div>
               <button
                 onClick={() => setShowGuide(true)}
                 style={{
-                  padding: "10px 20px", background: "#fff", border: "1.5px solid #f3f4f6",
-                  borderRadius: 10, color: "#475569", fontWeight: 700, fontSize: 13,
-                  cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6
+                  padding: "6px 14px", background: "#fff", border: "1.5px solid #f3f4f6",
+                  borderRadius: 8, color: "#475569", fontWeight: 700, fontSize: 12,
+                  cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 4
                 }}
               >
-                <HelpCircle size={14} className="text-primary" /> What's Next?
+                <HelpCircle size={13} className="text-primary" /> What's Next?
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="pd-stats-grid">
-              <StatCard label="Referral Clicks"   value={data.stats.totalClicks}               sub="link views"              icon={Users} />
-              <StatCard label="Leads Started"     value={data.stats.totalLeads}                sub="student signups"         icon={Users} />
-              <StatCard label="Enrollments"       value={data.stats.totalReferrals}            sub="paid students"           icon={Trophy} accent />
-              <StatCard label="Commission Earned"  value={fmt(data.stats.totalCommission)}       sub="₦5,000 × students"       icon={DollarSign}  accent />
-            </div>
+            {/* Stats (Single Tight Card) */}
+            <StatsSingleCard stats={data.stats} />
 
             {/* Referral Links */}
             <div className="pd-links-grid">
@@ -555,81 +659,84 @@ const PartnerDashboardPage: React.FC = () => {
                 onClick={() => navigate("/partners/campaigns")}
                 style={{
                   background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                  border: "none", borderRadius: 12, padding: 18, cursor: "pointer",
+                  border: "none", borderRadius: 12, padding: 14, cursor: "pointer",
                   display: "flex", flexDirection: "column", justifyContent: "center",
-                  alignItems: "center", color: "#fff", textDecoration: "none", gap: 6,
+                  alignItems: "center", color: "#fff", textDecoration: "none", gap: 4,
                   textAlign: "center"
                 }}
               >
-                <Image size={24} />
-                <span style={{ fontWeight: 800, fontSize: 15 }}>Browse Marketing Campaigns 🚀</span>
-                <span style={{ fontSize: 12, opacity: 0.9 }}>Get customized flyers and copy-paste text templates.</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, fontWeight: 800, fontSize: 14 }}>
+                  <Image size={18} /> Marketing Campaigns 🚀
+                </div>
+                <span style={{ fontSize: 11, opacity: 0.9 }}>Get customized flyers and copy-paste text templates.</span>
               </button>
             </div>
 
             {/* Milestone bar */}
-            <div style={{ marginBottom: 20 }}>
+            <div style={{ marginBottom: 14 }}>
               <MilestoneBar total={data.stats.totalReferrals} milestones={data.milestones} />
             </div>
 
             {/* Tabs */}
-            <div style={{ display: "flex", gap: 4, background: "#f3f4f6", borderRadius: 10, padding: 4, marginBottom: 16, width: "fit-content", maxWidth: "100%" }}
-              className="pd-tabs-row">
+            <div className="pd-tabs-row">
               <button onClick={() => setTab("overview")}
+                className="pd-tab-btn"
                 style={{
-                  padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
-                  background: tab === "overview" ? "#fff" : "transparent", color: tab === "overview" ? "#111827" : "#9ca3af",
-                  boxShadow: tab === "overview" ? "0 1px 4px rgba(0,0,0,.08)" : "none", whiteSpace: "nowrap",
+                  background: tab === "overview" ? "#fff" : "transparent",
+                  color: tab === "overview" ? "#111827" : "#6b7280",
+                  boxShadow: tab === "overview" ? "0 1px 3px rgba(0,0,0,.08)" : "none",
                 }}>
-                Cohort Breakdown
+                Cohorts
               </button>
               <button onClick={() => setTab("referrals")}
+                className="pd-tab-btn"
                 style={{
-                  padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
-                  background: tab === "referrals" ? "#fff" : "transparent", color: tab === "referrals" ? "#111827" : "#9ca3af",
-                  boxShadow: tab === "referrals" ? "0 1px 4px rgba(0,0,0,.08)" : "none", whiteSpace: "nowrap",
+                  background: tab === "referrals" ? "#fff" : "transparent",
+                  color: tab === "referrals" ? "#111827" : "#6b7280",
+                  boxShadow: tab === "referrals" ? "0 1px 3px rgba(0,0,0,.08)" : "none",
                 }}>
                 Students ({data.stats.totalReferrals})
               </button>
               <button onClick={() => navigate("/partners/campaigns")}
+                className="pd-tab-btn"
                 style={{
-                  padding: "7px 16px", fontSize: 13, fontWeight: 700, borderRadius: 8, cursor: "pointer", border: "none", transition: "all .2s",
-                  background: "transparent", color: "#f97316", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 4
+                  background: "transparent",
+                  color: "#ea580c",
                 }}>
-                <Image size={13} /> Campaigns Page →
+                <Image size={12} /> Campaigns 🚀
               </button>
             </div>
 
             {/* Tab: Overview */}
             {tab === "overview" && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 <CohortTable rows={data.cohortBreakdown} />
                 
                 {/* Active campaigns quick stats */}
-                <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, overflow: "hidden" }}>
-                  <div style={{ padding: "16px 20px", borderBottom: "1px solid #f3f4f6" }}>
-                    <h3 style={{ fontSize: 13, fontWeight: 800, color: "#111827", margin: 0, fontFamily }}>Campaign Performance</h3>
+                <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, overflow: "hidden", width: "100%", boxSizing: "border-box" }}>
+                  <div style={{ padding: "12px 14px", borderBottom: "1px solid #f3f4f6" }}>
+                    <h3 style={{ fontSize: 12, fontWeight: 800, color: "#111827", margin: 0, fontFamily }}>Campaign Performance</h3>
                   </div>
                   {data.campaignStats?.length === 0 ? (
-                    <div style={{ padding: "24px", textCenter: "center", color: "#94a3b8", fontSize: 13 } as any}>No campaign activity yet. Go to Campaigns tab to share.</div>
+                    <div style={{ padding: "20px 14px", textAlign: "center", color: "#94a3b8", fontSize: 12 }}>No campaign activity yet. Go to Campaigns tab to share.</div>
                   ) : (
-                    <div style={{ overflowX: "auto" }}>
-                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                    <div style={{ overflowX: "auto", width: "100%", WebkitOverflowScrolling: "touch" }}>
+                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
                         <thead>
                           <tr style={{ background: "#f9fafb" }}>
-                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Campaign</th>
-                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Clicks</th>
-                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Enrollments</th>
-                            <th style={{ padding: "10px 18px", textAlign: "left", color: "#9ca3af", fontSize: 11, textTransform: "uppercase" }}>Commissions</th>
+                            <th style={{ padding: "8px 10px", textAlign: "left", color: "#9ca3af", fontSize: 10, textTransform: "uppercase", fontWeight: 800 }}>Campaign</th>
+                            <th style={{ padding: "8px 6px", textAlign: "center", color: "#9ca3af", fontSize: 10, textTransform: "uppercase", fontWeight: 800 }}>Clicks</th>
+                            <th style={{ padding: "8px 6px", textAlign: "center", color: "#9ca3af", fontSize: 10, textTransform: "uppercase", fontWeight: 800 }}>Enrolled</th>
+                            <th style={{ padding: "8px 10px", textAlign: "right", color: "#9ca3af", fontSize: 10, textTransform: "uppercase", fontWeight: 800 }}>Earned</th>
                           </tr>
                         </thead>
                         <tbody>
                           {data.campaignStats?.map((c: any) => (
                             <tr key={c.campaign_id} style={{ borderTop: "1px solid #f3f4f6" }}>
-                              <td style={{ padding: "12px 18px", fontWeight: 700 }}>{c.campaign_title}</td>
-                              <td style={{ padding: "12px 18px" }}>{c.clicks}</td>
-                              <td style={{ padding: "12px 18px", color: "#16a34a", fontWeight: 700 }}>{c.enrollments}</td>
-                              <td style={{ padding: "12px 18px", fontWeight: 700 }}>{fmt(c.enrollments * 5000)}</td>
+                              <td style={{ padding: "10px 10px", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>{c.campaign_title}</td>
+                              <td style={{ padding: "10px 6px", textAlign: "center", color: "#374151" }}>{c.clicks}</td>
+                              <td style={{ padding: "10px 6px", textAlign: "center", color: "#16a34a", fontWeight: 700 }}>{c.enrollments}</td>
+                              <td style={{ padding: "10px 10px", textAlign: "right", fontWeight: 700, color: "#ea580c" }}>{fmt(c.enrollments * 5000)}</td>
                             </tr>
                           ))}
                         </tbody>

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AcademyService } from "../services/academyService.js";
 import { pool } from "../database/pool.js";
-import { sendRecordingNotificationEmail, sendAssignmentNotificationEmail, sendMaterialNotificationEmail } from "../services/emailService.js";
+import { sendCombinedClassNotificationEmail } from "../services/emailService.js";
 
 export class AcademyController {
   // --- COURSE MANAGEMENT (Admin/Tutor) ---
@@ -134,8 +134,9 @@ export class AcademyController {
       
       const actualVideoUrl = videoUrl !== undefined ? videoUrl : video_url;
       if (actualVideoUrl !== undefined) {
+        // Allow empty string — store as null (tutor can clear video URL)
         fields.push(`video_url = $${idx++}`);
-        values.push(actualVideoUrl);
+        values.push(actualVideoUrl || null);
       }
 
       if (fields.length === 0) {
@@ -1061,18 +1062,18 @@ export class AcademyController {
       // 3. Insert class recordings
       if (Array.isArray(lessons)) {
         for (const lesson of lessons) {
-          if (lesson.title && lesson.videoUrl) {
+          if (lesson.title) {
             const recordingRes = await client.query(
               `INSERT INTO class_recordings (course_id, tutor_id, title, video_url, cohort, class_id)
                VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-              [courseId, tutorId, lesson.title, lesson.videoUrl, cohort || null, classId]
+              [courseId, tutorId, lesson.title, lesson.videoUrl || null, cohort || null, classId]
             );
             insertedRecordings.push(recordingRes.rows[0]);
           }
         }
       }
 
-      // 4. Insert assignment
+      // 4. Insert assignment (allow empty URL/description but require title)
       let insertedAssignment = null;
       if (assignment && assignment.title) {
         const assignmentRes = await client.query(
@@ -1118,20 +1119,30 @@ export class AcademyController {
         const studentsParams = cohortVal ? [courseId, cohortVal] : [courseId];
         const studentsRes = await client.query(studentsQuery, studentsParams);
 
+        // Build combined payload once (outside the per-student loop)
+        const combinedRecordings = insertedRecordings.map((r: any) => ({ title: r.title, videoUrl: r.video_url || '' }));
+        const combinedAssignment = insertedAssignment
+          ? { title: insertedAssignment.title, dueDate: insertedAssignment.due_date }
+          : null;
+        const combinedMaterials = insertedMaterials.map((m: any) => ({ title: m.title, url: m.url, type: m.type }));
+
         const notifyStudents = async () => {
           for (const student of studentsRes.rows) {
             try {
-              if (insertedAssignment) {
-                await sendAssignmentNotificationEmail(student.email, student.first_name, courseTitle, insertedAssignment.title, insertedAssignment.due_date);
-              }
-              for (const recording of insertedRecordings) {
-                await sendRecordingNotificationEmail(student.email, student.first_name, courseTitle, recording.title, recording.video_url);
-              }
-              for (const material of insertedMaterials) {
-                await sendMaterialNotificationEmail(student.email, student.first_name, courseTitle, material.title, material.url, material.type);
+              // Send ONE combined email per student instead of separate emails
+              if (combinedRecordings.length > 0 || combinedAssignment || combinedMaterials.length > 0) {
+                await sendCombinedClassNotificationEmail(
+                  student.email,
+                  student.first_name,
+                  courseTitle,
+                  className,
+                  combinedRecordings,
+                  combinedAssignment,
+                  combinedMaterials
+                );
               }
             } catch (err) {
-              console.error(`Failed to send email to ${student.email}:`, err);
+              console.error(`Failed to send combined class email to ${student.email}:`, err);
             }
           }
         };

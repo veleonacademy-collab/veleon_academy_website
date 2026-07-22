@@ -161,6 +161,96 @@ export async function sendRecordingNotificationEmail(
 }
 
 /**
+ * Send a single combined notification for a class upload:
+ * includes all new lesson recordings, materials, and the assignment (if any) in one email.
+ */
+export async function sendCombinedClassNotificationEmail(
+  email: string,
+  firstName: string,
+  courseTitle: string,
+  className: string,
+  recordings: { title: string; videoUrl: string }[],
+  assignment: { title: string; dueDate?: string } | null,
+  materials: { title: string; url: string; type: string }[]
+): Promise<void> {
+  const portalUrl = `${env.appUrl}/login`;
+
+  const recordingsHtml = recordings.length > 0 ? `
+    <div style="margin: 20px 0;">
+      <h3 style="color: #007d8f; font-size: 15px; margin-bottom: 10px; border-bottom: 2px solid #e0f7fa; padding-bottom: 6px;">📹 New Lesson Recordings</h3>
+      ${recordings.map(r => `
+        <div style="background: #f0fdfd; border-left: 3px solid #00a9c0; padding: 12px 16px; border-radius: 6px; margin-bottom: 8px;">
+          <strong style="color: #1e293b; font-size: 14px;">${r.title}</strong><br/>
+          ${r.videoUrl ? `<a href="${r.videoUrl}" style="color: #00a9c0; font-size: 13px; text-decoration: none; font-weight: 600;">▶ Watch now →</a>` : ''}
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  const assignmentHtml = assignment ? `
+    <div style="margin: 20px 0;">
+      <h3 style="color: #d11c07; font-size: 15px; margin-bottom: 10px; border-bottom: 2px solid #fee2e2; padding-bottom: 6px;">📋 New Assignment Posted</h3>
+      <div style="background: #fff5f4; border-left: 3px solid #d11c07; padding: 12px 16px; border-radius: 6px;">
+        <strong style="color: #1e293b; font-size: 14px;">${assignment.title}</strong><br/>
+        ${assignment.dueDate ? `<span style="font-size: 12px; color: #888; margin-top: 4px; display: block;">Due: ${new Date(assignment.dueDate).toLocaleDateString()}</span>` : ''}
+      </div>
+    </div>
+  ` : '';
+
+  const materialsHtml = materials.length > 0 ? `
+    <div style="margin: 20px 0;">
+      <h3 style="color: #15803d; font-size: 15px; margin-bottom: 10px; border-bottom: 2px solid #dcfce7; padding-bottom: 6px;">📁 New Class Materials</h3>
+      ${materials.map(m => `
+        <div style="background: #f0fdf4; border-left: 3px solid #16a34a; padding: 12px 16px; border-radius: 6px; margin-bottom: 8px;">
+          <strong style="color: #1e293b; font-size: 14px;">${m.title}</strong>
+          <span style="font-size: 11px; color: #16a34a; text-transform: uppercase; margin-left: 8px; font-weight: 700;">${m.type}</span><br/>
+          ${m.url ? `<a href="${m.url}" style="color: #16a34a; font-size: 13px; text-decoration: none; font-weight: 600;">Open material →</a>` : ''}
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; margin: 0; padding: 0;">
+        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+          <div style="background: linear-gradient(135deg, #00a9c0 0%, #007d8f 100%); padding: 30px 20px; text-align: center; color: white;">
+            <h1 style="margin: 0; font-size: 22px;">📚 New Class Content Available</h1>
+            <p style="margin-top: 6px; opacity: 0.9; font-size: 15px;">${className} — ${courseTitle}</p>
+          </div>
+          <div style="padding: 32px 30px;">
+            <p style="font-size: 16px; color: #444; margin-top: 0;">Hi <strong>${firstName}</strong>,</p>
+            <p style="font-size: 15px; color: #555; margin-bottom: 24px;">Your tutor has just uploaded new content for <strong>${courseTitle}</strong>. Here's what's new:</p>
+            ${recordingsHtml}
+            ${materialsHtml}
+            ${assignmentHtml}
+            <p style="text-align: center; margin-top: 30px;">
+              <a href="${portalUrl}" style="background-color: #00a9c0; color: white; padding: 13px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 700; font-size: 15px;">View in Student Portal →</a>
+            </p>
+          </div>
+          <div style="background: #fdfdfd; padding: 18px 30px; text-align: center; border-top: 1px solid #eee; color: #888; font-size: 13px;">
+            <p>© ${new Date().getFullYear()} Veleon Academy. All rights reserved.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  const textParts = [];
+  if (recordings.length > 0) textParts.push(`Lessons: ${recordings.map(r => r.title).join(', ')}`);
+  if (assignment) textParts.push(`Assignment: ${assignment.title}${assignment.dueDate ? ` (Due: ${new Date(assignment.dueDate).toLocaleDateString()})` : ''}`);
+  if (materials.length > 0) textParts.push(`Materials: ${materials.map(m => m.title).join(', ')}`);
+
+  await sendEmail({
+    to: email,
+    subject: `New Content: ${courseTitle} — ${className}`,
+    html,
+    text: `Hi ${firstName}, new content has been uploaded for ${courseTitle} (${className}).\n\n${textParts.join('\n')}\n\nLog in to access: ${portalUrl}`,
+  });
+}
+
+/**
  * Send notification for a new class material
  */
 export async function sendMaterialNotificationEmail(
