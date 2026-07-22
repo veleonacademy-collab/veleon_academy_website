@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { AcademyService } from "../services/academyService.js";
 import { pool } from "../database/pool.js";
-import { sendCombinedClassNotificationEmail } from "../services/emailService.js";
+import { 
+  sendCombinedClassNotificationEmail,
+  sendRecordingNotificationEmail,
+  sendAssignmentNotificationEmail
+} from "../services/emailService.js";
 
 export class AcademyController {
   // --- COURSE MANAGEMENT (Admin/Tutor) ---
