@@ -149,6 +149,7 @@ const AdminSalesLeadsPage: React.FC = () => {
                 <th className="px-6 py-4">Lead Name</th>
                 <th className="px-6 py-4">Email</th>
                 <th className="px-6 py-4">WhatsApp</th>
+                <th className="px-6 py-4">Source / Ref</th>
                 <th className="px-6 py-4">Selected Track</th>
                 <th className="px-6 py-4">Payment Plan</th>
                 <th className="px-6 py-4">Registration Date</th>
@@ -159,12 +160,12 @@ const AdminSalesLeadsPage: React.FC = () => {
             <tbody className="divide-y divide-gray-100">
               {isLoading && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-8 text-center text-gray-500">Loading sales leads...</td>
+                  <td colSpan={9} className="px-6 py-8 text-center text-gray-500">Loading sales leads...</td>
                 </tr>
               )}
               {error && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-8 text-center text-red-500 font-bold">Error loading sales leads.</td>
+                  <td colSpan={9} className="px-6 py-8 text-center text-red-500 font-bold">Error loading sales leads.</td>
                 </tr>
               )}
               {leads?.map((lead: any) => (
@@ -174,6 +175,13 @@ const AdminSalesLeadsPage: React.FC = () => {
                   </td>
                   <td className="px-6 py-5 font-medium text-gray-600">{lead.email}</td>
                   <td className="px-6 py-5 font-mono text-gray-500">{lead.whatsapp}</td>
+                  <td className="px-6 py-5">
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                      lead.referral_code ? "bg-purple-50 text-purple-700 border border-purple-200" : "bg-gray-100 text-gray-600"
+                    }`}>
+                      {lead.referral_code ? `Ref: ${lead.referral_code}` : "Direct"}
+                    </span>
+                  </td>
                   <td className="px-6 py-5">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
                       lead.selected_track === "full" ? "bg-orange-50 text-orange-600" : "bg-blue-50 text-blue-600"
@@ -211,7 +219,7 @@ const AdminSalesLeadsPage: React.FC = () => {
               ))}
               {leads?.length === 0 && !isLoading && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-8 text-center text-gray-400 font-bold">No sales leads found.</td>
+                  <td colSpan={9} className="px-6 py-8 text-center text-gray-400 font-bold">No sales leads found.</td>
                 </tr>
               )}
             </tbody>

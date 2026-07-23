@@ -236,7 +236,8 @@ const EnrollPage: React.FC = () => {
                                 email,
                                 courseId: course?.id.toString(),
                                 paymentPlan,
-                                installmentsTotal: paymentPlan === "installment" ? installmentCount.toString() : "1"
+                                installmentsTotal: paymentPlan === "installment" ? installmentCount.toString() : "1",
+                                referralCode: localStorage.getItem("veleon_ref_code") || undefined
                             }}
                         />
                         <div className="flex items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 opacity-40 grayscale group-hover:grayscale-0 transition-all">

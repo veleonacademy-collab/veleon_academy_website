@@ -1,0 +1,1 @@
+so now, how do we show we have paid partners? they should input their payment details.  then the admin can see it and the admin can copy it and make manual payment, then admin should be able to click a button on each enrollment by the partner, which should be shown in the details of the partner. so the partner too should be able to see paid ones too.

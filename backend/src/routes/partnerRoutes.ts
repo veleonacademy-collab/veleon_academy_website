@@ -19,6 +19,9 @@ import {
   updateMessage,
   deleteMessage,
   getAdminPartnersPerformance,
+  updatePartnerBankDetails,
+  getAdminPartnerDetails,
+  updateAdminEnrollmentPayout,
 } from "../controllers/partnerController.js";
 
 export const partnerRouter = Router();
@@ -32,6 +35,7 @@ partnerRouter.post("/oauth/google", partnerGoogleOAuth);
 partnerRouter.get("/dashboard", authenticate, getPartnerDashboard);
 partnerRouter.post("/join", authenticate, joinPartner);
 partnerRouter.get("/campaigns", authenticate, getPartnerCampaigns);
+partnerRouter.put("/bank-details", authenticate, updatePartnerBankDetails);
 
 // Admin routes — requires admin role
 partnerRouter.get("/admin/campaigns", authenticate, requireRole(["admin"]), getAdminCampaigns);
@@ -48,4 +52,6 @@ partnerRouter.put("/admin/messages/:id", authenticate, requireRole(["admin"]), u
 partnerRouter.delete("/admin/messages/:id", authenticate, requireRole(["admin"]), deleteMessage);
 
 partnerRouter.get("/admin/partners-performance", authenticate, requireRole(["admin"]), getAdminPartnersPerformance);
+partnerRouter.get("/admin/partners/:partnerId", authenticate, requireRole(["admin"]), getAdminPartnerDetails);
+partnerRouter.put("/admin/enrollments/:enrollmentId/payout", authenticate, requireRole(["admin"]), updateAdminEnrollmentPayout);
 

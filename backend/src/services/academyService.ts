@@ -78,12 +78,25 @@ export class AcademyService {
         nextPaymentDue = nextDate.toISOString();
       }
 
-      // Check student's profile for referring partner if not passed
+      // Check student's profile or originating sales lead for referring partner if not passed
       let partnerId = passedReferredById || null;
       if (!partnerId) {
-        const studentRes = await pool.query("SELECT referred_by_id FROM users WHERE id = $1", [studentId]);
+        const studentRes = await pool.query("SELECT referred_by_id, email FROM users WHERE id = $1", [studentId]);
         if (studentRes.rows.length > 0) {
           partnerId = studentRes.rows[0].referred_by_id || null;
+          if (!partnerId && studentRes.rows[0].email) {
+            const leadRes = await pool.query(
+              "SELECT referral_code FROM sales_leads WHERE email = $1 AND referral_code IS NOT NULL AND referral_code != '' ORDER BY id DESC LIMIT 1",
+              [studentRes.rows[0].email]
+            );
+            if (leadRes.rows.length > 0 && leadRes.rows[0].referral_code) {
+              const partnerRes = await pool.query("SELECT id FROM users WHERE referral_code = $1", [leadRes.rows[0].referral_code]);
+              if (partnerRes.rows.length > 0) {
+                partnerId = partnerRes.rows[0].id;
+                await pool.query("UPDATE users SET referred_by_id = $1 WHERE id = $2", [partnerId, studentId]);
+              }
+            }
+          }
         }
       }
 

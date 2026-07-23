@@ -51,10 +51,14 @@ export async function getPartnerDashboard(
     );
     const totalClicks = clicksRes.rows[0].count;
 
-    // Fetch leads count (referred users in users table)
+    // Fetch leads count (referred users in users table + unique sales_leads by referral_code)
     const leadsRes = await pool.query(
-      "SELECT COUNT(*)::int AS count FROM users WHERE referred_by_id = $1",
-      [userId]
+      `SELECT COUNT(DISTINCT email)::int AS count FROM (
+         SELECT email FROM users WHERE referred_by_id = $1
+         UNION
+         SELECT email FROM sales_leads WHERE referral_code = $2
+       ) combined_leads`,
+      [userId, partner.referral_code]
     );
     const totalLeads = leadsRes.rows[0].count;
 
@@ -63,12 +67,14 @@ export async function getPartnerDashboard(
       `SELECT 
          e.id,
          e.cohort,
-         e.created_at,
+         e.created_at AS "enrolledAt",
          e.status,
-         u.first_name,
-         u.last_name,
+         e.commission_paid AS "commissionPaid",
+         e.commission_paid_at AS "commissionPaidAt",
+         u.first_name AS "firstName",
+         u.last_name AS "lastName",
          u.email,
-         c.title AS course_title
+         c.title AS "courseTitle"
        FROM enrollments e
        JOIN users u ON e.student_id = u.id
        JOIN courses c ON e.course_id = c.id
@@ -80,6 +86,11 @@ export async function getPartnerDashboard(
     const referrals = enrollmentsRes.rows;
     const totalReferrals = referrals.length; // Enrollments
     const totalCommission = totalReferrals * COMMISSION_PER_STUDENT;
+
+    const paidReferrals = referrals.filter((r: any) => r.commissionPaid).length;
+    const pendingReferrals = totalReferrals - paidReferrals;
+    const paidCommission = paidReferrals * COMMISSION_PER_STUDENT;
+    const pendingCommission = pendingReferrals * COMMISSION_PER_STUDENT;
 
     // Milestone progress
     const nextMilestone = MILESTONES.find(m => m.students > totalReferrals) || null;
@@ -128,6 +139,9 @@ export async function getPartnerDashboard(
         referralCode: partner.referral_code,
         referralLink,
         dataAnalysisLink,
+        bankName: partner.bank_name || null,
+        accountNumber: partner.account_number || null,
+        accountName: partner.account_name || null,
       },
       stats: {
         totalClicks,
@@ -136,6 +150,10 @@ export async function getPartnerDashboard(
         totalCommission,
         totalBonuses,
         totalEarnings,
+        paidReferrals,
+        pendingReferrals,
+        paidCommission,
+        pendingCommission,
       },
       milestones: MILESTONES.map(m => ({
         ...m,
@@ -145,16 +163,7 @@ export async function getPartnerDashboard(
       nextMilestone,
       cohortBreakdown,
       campaignStats: campaignStatsRes.rows,
-      referrals: referrals.map(r => ({
-        id: r.id,
-        firstName: r.first_name,
-        lastName: r.last_name,
-        email: r.email,
-        courseTitle: r.course_title,
-        cohort: r.cohort || "Unassigned",
-        status: r.status,
-        enrolledAt: r.created_at,
-      })),
+      referrals,
     });
   } catch (err) {
     next(err);
@@ -243,6 +252,26 @@ export async function recordPartnerClick(
     const partner = partnerRes.rows[0];
     if (!partner) {
       res.status(404).json({ message: "Invalid referral code." });
+      return;
+    }
+
+    // Deduplication check: ignore duplicate click from same IP/partner/campaign/copy within 5 seconds
+    const recentClickRes = await pool.query(
+      `SELECT id FROM referral_clicks
+       WHERE partner_id = $1
+         AND (campaign_id IS NOT DISTINCT FROM $2)
+         AND (copy_id IS NOT DISTINCT FROM $3)
+         AND (ip_address IS NOT DISTINCT FROM $4)
+         AND created_at > NOW() - INTERVAL '5 seconds'`,
+      [
+        partner.id,
+        campaignId ? Number(campaignId) : null,
+        copyId ? Number(copyId) : null,
+        req.ip
+      ]
+    );
+    if (recentClickRes.rows.length > 0) {
+      res.json({ success: true, duplicate: true });
       return;
     }
 
@@ -465,10 +494,18 @@ export async function getAdminPartnersPerformance(
         u.email, 
         u.referral_code AS "referralCode",
         u.created_at AS "createdAt",
+        u.bank_name AS "bankName",
+        u.account_number AS "accountNumber",
+        u.account_name AS "accountName",
         COALESCE(c.phone, '') AS phone,
         (SELECT COUNT(*)::int FROM referral_clicks rc WHERE rc.partner_id = u.id) AS clicks,
-        (SELECT COUNT(*)::int FROM users lu WHERE lu.referred_by_id = u.id) AS leads,
-        (SELECT COUNT(*)::int FROM enrollments e WHERE e.referred_by_id = u.id) AS enrollments
+        (SELECT COUNT(DISTINCT email)::int FROM (
+          SELECT email FROM users WHERE referred_by_id = u.id
+          UNION
+          SELECT email FROM sales_leads WHERE referral_code = u.referral_code
+        ) combined_leads) AS leads,
+        (SELECT COUNT(*)::int FROM enrollments e WHERE e.referred_by_id = u.id) AS enrollments,
+        (SELECT COUNT(*)::int FROM enrollments e WHERE e.referred_by_id = u.id AND e.commission_paid = true) AS "paidEnrollments"
       FROM users u
       LEFT JOIN customers c ON u.customer_id = c.id
       WHERE u.referral_code IS NOT NULL
@@ -478,6 +515,8 @@ export async function getAdminPartnersPerformance(
     const result = await pool.query(query);
     const partners = result.rows.map(row => {
       const totalCommission = row.enrollments * COMMISSION_PER_STUDENT;
+      const paidCommission = row.paidEnrollments * COMMISSION_PER_STUDENT;
+      const pendingCommission = totalCommission - paidCommission;
       const achievedMilestones = MILESTONES.filter(m => m.students <= row.enrollments);
       const totalBonuses = achievedMilestones.reduce((sum, m) => sum + m.bonus, 0);
       const totalEarnings = totalCommission + totalBonuses;
@@ -485,12 +524,136 @@ export async function getAdminPartnersPerformance(
       return {
         ...row,
         commission: totalCommission,
+        paidCommission,
+        pendingCommission,
         bonuses: totalBonuses,
         totalEarnings,
       };
     });
 
     res.json(partners);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Update partner bank details
+export async function updatePartnerBankDetails(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    if (!req.user) {
+      res.status(401).json({ message: "Unauthorized." });
+      return;
+    }
+    const userId = req.user.id;
+    const { bankName, accountNumber, accountName } = req.body;
+
+    if (!bankName || !accountNumber || !accountName) {
+      res.status(400).json({ message: "Bank name, account number, and account name are required." });
+      return;
+    }
+
+    await pool.query(
+      `UPDATE users 
+       SET bank_name = $1, account_number = $2, account_name = $3, updated_at = NOW() 
+       WHERE id = $4`,
+      [bankName.trim(), accountNumber.trim(), accountName.trim(), userId]
+    );
+
+    res.json({ success: true, message: "Bank details updated successfully." });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Admin get partner details with referred enrollments
+export async function getAdminPartnerDetails(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const { partnerId } = req.params;
+    const partnerRes = await pool.query(
+      `SELECT u.id, u.first_name AS "firstName", u.last_name AS "lastName", u.email, 
+              u.referral_code AS "referralCode", u.created_at AS "createdAt",
+              u.bank_name AS "bankName", u.account_number AS "accountNumber", u.account_name AS "accountName",
+              COALESCE(c.phone, '') AS phone
+       FROM users u
+       LEFT JOIN customers c ON u.customer_id = c.id
+       WHERE u.id = $1`,
+      [partnerId]
+    );
+
+    const partner = partnerRes.rows[0];
+    if (!partner) {
+      res.status(404).json({ message: "Partner not found." });
+      return;
+    }
+
+    // Fetch enrollments referred by this partner
+    const enrollmentsRes = await pool.query(
+      `SELECT 
+         e.id,
+         e.cohort,
+         e.created_at AS "enrolledAt",
+         e.status,
+         e.commission_paid AS "commissionPaid",
+         e.commission_paid_at AS "commissionPaidAt",
+         u.first_name AS "firstName",
+         u.last_name AS "lastName",
+         u.email,
+         c.title AS "courseTitle"
+       FROM enrollments e
+       JOIN users u ON e.student_id = u.id
+       JOIN courses c ON e.course_id = c.id
+       WHERE e.referred_by_id = $1
+       ORDER BY e.created_at DESC`,
+      [partnerId]
+    );
+
+    res.json({
+      partner,
+      enrollments: enrollmentsRes.rows
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Admin update commission payout status on enrollment
+export async function updateAdminEnrollmentPayout(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const { enrollmentId } = req.params;
+    const { commissionPaid } = req.body;
+
+    const result = await pool.query(
+      `UPDATE enrollments
+       SET commission_paid = $1,
+           commission_paid_at = CASE WHEN $1 = true THEN NOW() ELSE NULL END,
+           updated_at = NOW()
+       WHERE id = $2
+       RETURNING id, referred_by_id, commission_paid, commission_paid_at`,
+      [Boolean(commissionPaid), enrollmentId]
+    );
+
+    if (result.rows.length === 0) {
+      res.status(404).json({ message: "Enrollment not found." });
+      return;
+    }
+
+    res.json({
+      success: true,
+      message: `Commission marked as ${commissionPaid ? "Paid" : "Pending"}.`,
+      enrollment: result.rows[0]
+    });
   } catch (err) {
     next(err);
   }

@@ -12,17 +12,67 @@ export class SalesLeadService {
    */
   static async captureLead(payload: CreateSalesLeadPayload) {
     try {
-      const { name, email, whatsapp, selectedTrack, paymentTerm, amountDue } = payload;
+      const { id, name, email, whatsapp, selectedTrack, paymentTerm, amountDue, referralCode, leadSource } = payload;
+      const trimmedEmail = email.trim();
+      const resolvedRef = referralCode || null;
+      const resolvedSource = leadSource || (referralCode ? 'growth_partner' : 'direct');
 
+      // 1. If explicit lead ID is provided, update that lead row
+      if (id) {
+        const idCheck = await pool.query("SELECT id FROM sales_leads WHERE id = $1", [id]);
+        if (idCheck.rows.length > 0) {
+          await pool.query(
+            `UPDATE sales_leads
+             SET name = $1,
+                 email = $2,
+                 whatsapp = $3,
+                 selected_track = $4,
+                 payment_term = $5,
+                 amount_due = $6,
+                 referral_code = COALESCE($7, referral_code),
+                 lead_source = COALESCE($8, lead_source)
+             WHERE id = $9`,
+            [name, trimmedEmail, whatsapp, selectedTrack, paymentTerm, amountDue, resolvedRef, resolvedSource, id]
+          );
+          logger.info(`Sales lead ID ${id} updated for ${trimmedEmail}`);
+          return id;
+        }
+      }
+
+      // 2. Check if a lead with this email already exists to prevent duplicate rows & lead counts
+      const existingRes = await pool.query(
+        "SELECT id FROM sales_leads WHERE LOWER(email) = LOWER($1) ORDER BY id DESC LIMIT 1",
+        [trimmedEmail]
+      );
+
+      if (existingRes.rows.length > 0) {
+        const existingId = existingRes.rows[0].id;
+        await pool.query(
+          `UPDATE sales_leads
+           SET name = $1,
+               whatsapp = $2,
+               selected_track = $3,
+               payment_term = $4,
+               amount_due = $5,
+               referral_code = COALESCE($6, referral_code),
+               lead_source = COALESCE($7, lead_source)
+           WHERE id = $8`,
+          [name, whatsapp, selectedTrack, paymentTerm, amountDue, resolvedRef, resolvedSource, existingId]
+        );
+        logger.info(`Sales lead updated for existing email ${trimmedEmail} (ID: ${existingId})`);
+        return existingId;
+      }
+
+      // 3. Otherwise insert a new lead record
       const result = await pool.query(
-        `INSERT INTO sales_leads (name, email, whatsapp, selected_track, payment_term, amount_due)
-         VALUES ($1, $2, $3, $4, $5, $6)
+        `INSERT INTO sales_leads (name, email, whatsapp, selected_track, payment_term, amount_due, referral_code, lead_source)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
          RETURNING id`,
-        [name, email, whatsapp, selectedTrack, paymentTerm, amountDue]
+        [name, trimmedEmail, whatsapp, selectedTrack, paymentTerm, amountDue, resolvedRef, resolvedSource]
       );
 
       const leadId = result.rows[0].id;
-      logger.info(`New sales lead captured: ${email} | Track: ${selectedTrack} | Term: ${paymentTerm} | Amount: ${amountDue}`);
+      logger.info(`New sales lead captured: ${trimmedEmail} | Track: ${selectedTrack} | Term: ${paymentTerm} | Amount: ${amountDue} | Ref: ${resolvedRef || 'None'}`);
 
       return leadId;
     } catch (error) {
@@ -72,6 +122,15 @@ export class SalesLeadService {
     const firstName = nameParts[0] || "Student";
     const lastName = nameParts.slice(1).join(" ") || "";
 
+    // Check if sales lead has referral code and resolve partner ID
+    let partnerId: number | null = null;
+    if (lead.referral_code) {
+      const partnerRes = await pool.query("SELECT id FROM users WHERE referral_code = $1", [lead.referral_code]);
+      if (partnerRes.rows.length > 0) {
+        partnerId = partnerRes.rows[0].id;
+      }
+    }
+
     // 2. Find or create user
     let userId: number;
     const userRes = await pool.query("SELECT id, first_name FROM users WHERE email = $1", [email]);
@@ -83,9 +142,9 @@ export class SalesLeadService {
       const passwordHash = await hashPassword(tempPassword);
 
       const newUser = await pool.query(
-        `INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified)
-         VALUES ($1, $2, $3, $4, 'student', true) RETURNING id`,
-        [firstName, lastName, email, passwordHash]
+        `INSERT INTO users (first_name, last_name, email, password_hash, role, is_email_verified, referred_by_id)
+         VALUES ($1, $2, $3, $4, 'student', true, $5) RETURNING id`,
+        [firstName, lastName, email, passwordHash, partnerId]
       );
       userId = newUser.rows[0].id;
 
@@ -95,6 +154,12 @@ export class SalesLeadService {
       });
     } else {
       userId = userRes.rows[0].id;
+      if (partnerId) {
+        await pool.query(
+          "UPDATE users SET referred_by_id = COALESCE(referred_by_id, $1), updated_at = NOW() WHERE id = $2",
+          [partnerId, userId]
+        );
+      }
     }
 
     // 3. Record Transaction (marked as succeeded, manually recorded by admin)

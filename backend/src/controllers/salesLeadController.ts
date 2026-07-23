@@ -7,7 +7,7 @@ export async function captureSalesLead(
   next: NextFunction
 ): Promise<void> {
   try {
-    const { name, email, whatsapp, selectedTrack, paymentTerm, amountDue } = req.body;
+    const { id, name, email, whatsapp, selectedTrack, paymentTerm, amountDue, referralCode, leadSource } = req.body;
 
     if (!name || !email || !whatsapp || !selectedTrack || !paymentTerm) {
       res.status(400).json({ error: "Missing required fields (name, email, whatsapp, selectedTrack, paymentTerm)" });
@@ -28,12 +28,15 @@ export async function captureSalesLead(
     }
 
     const leadId = await SalesLeadService.captureLead({
+      id: id ? Number(id) : undefined,
       name,
       email,
       whatsapp,
       selectedTrack,
       paymentTerm,
-      amountDue: amountDue || 0
+      amountDue: amountDue || 0,
+      referralCode: referralCode || null,
+      leadSource: leadSource || (referralCode ? 'growth_partner' : 'direct')
     });
 
     res.status(201).json({

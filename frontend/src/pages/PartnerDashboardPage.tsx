@@ -182,9 +182,15 @@ const StatsSingleCard = ({ stats }: { stats: any }) => (
       </div>
 
       <div className="pd-stat-item">
-        <span className="pd-stat-lbl">Commission</span>
-        <div className="pd-stat-val accent">{fmt(stats.totalCommission)}</div>
-        <div className="pd-stat-sub">earned</div>
+        <span className="pd-stat-lbl">Paid Payouts</span>
+        <div className="pd-stat-val" style={{ color: "#16a34a" }}>{fmt(stats.paidCommission || 0)}</div>
+        <div className="pd-stat-sub">{stats.paidReferrals || 0} paid</div>
+      </div>
+
+      <div className="pd-stat-item">
+        <span className="pd-stat-lbl">Pending Payout</span>
+        <div className="pd-stat-val" style={{ color: "#d97706" }}>{fmt(stats.pendingCommission || 0)}</div>
+        <div className="pd-stat-sub">{stats.pendingReferrals || 0} pending</div>
       </div>
     </div>
   </div>
@@ -269,10 +275,10 @@ const ReferralsDesktopTable = ({ referrals }: { referrals: any[] }) => (
       </div>
     ) : (
       <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, minWidth: 560 }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, minWidth: 640 }}>
           <thead>
             <tr style={{ background: "#f9fafb" }}>
-              {["Student", "Course", "Cohort", "Status", "Date", "Commission"].map(h => (
+              {["Student", "Course", "Cohort", "Status", "Payout Status", "Date", "Commission"].map(h => (
                 <th key={h} style={{ padding: "10px 14px", textAlign: "left", fontWeight: 700, fontSize: 11, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.05em", whiteSpace: "nowrap" }}>{h}</th>
               ))}
             </tr>
@@ -289,6 +295,19 @@ const ReferralsDesktopTable = ({ referrals }: { referrals: any[] }) => (
                 <td style={{ padding: "11px 14px" }}>
                   <span style={{ fontSize: 11, fontWeight: 700, color: STATUS_COLOR[r.status] || "#9ca3af", background: `${STATUS_COLOR[r.status] || "#9ca3af"}18`, padding: "3px 8px", borderRadius: 100, textTransform: "capitalize" }}>
                     {r.status}
+                  </span>
+                </td>
+                <td style={{ padding: "11px 14px" }}>
+                  <span style={{
+                    fontSize: 11,
+                    fontWeight: 800,
+                    color: r.commissionPaid ? "#15803d" : "#b45309",
+                    background: r.commissionPaid ? "#dcfce7" : "#fef3c7",
+                    border: r.commissionPaid ? "1px solid #bbf7d0" : "1px solid #fde68a",
+                    padding: "3px 8px",
+                    borderRadius: 100
+                  }}>
+                    {r.commissionPaid ? "PAID" : "PENDING PAYOUT"}
                   </span>
                 </td>
                 <td style={{ padding: "11px 14px", fontSize: 11, color: "#9ca3af", whiteSpace: "nowrap" }}>{fmtDate(r.enrolledAt)}</td>
@@ -330,7 +349,20 @@ const ReferralsMobileCards = ({ referrals }: { referrals: any[] }) => (
             <span>· {r.cohort}</span>
             <span>· {fmtDate(r.enrolledAt)}</span>
           </div>
-          <div style={{ marginTop: 6, fontWeight: 800, color: "#ea580c", fontSize: 12 }}>Commission: ₦5,000</div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6, paddingTop: 6, borderTop: "1px solid #f8fafc" }}>
+            <span style={{ fontSize: 12, fontWeight: 800, color: "#ea580c" }}>Commission: ₦5,000</span>
+            <span style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: r.commissionPaid ? "#15803d" : "#b45309",
+              background: r.commissionPaid ? "#dcfce7" : "#fef3c7",
+              border: r.commissionPaid ? "1px solid #bbf7d0" : "1px solid #fde68a",
+              padding: "2px 8px",
+              borderRadius: 100
+            }}>
+              {r.commissionPaid ? "PAID" : "PENDING PAYOUT"}
+            </span>
+          </div>
         </div>
       ))
     )}
@@ -401,6 +433,13 @@ const PartnerDashboardPage: React.FC = () => {
   const [phoneInput, setPhoneInput] = useState("");
   const [savingPhone, setSavingPhone] = useState(false);
 
+  // Bank details modal states
+  const [showBankModal, setShowBankModal] = useState(false);
+  const [bankNameInput, setBankNameInput] = useState("");
+  const [accountNumberInput, setAccountNumberInput] = useState("");
+  const [accountNameInput, setAccountNameInput] = useState("");
+  const [savingBank, setSavingBank] = useState(false);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["partner-dashboard"],
     queryFn: () => http.get("/partners/dashboard").then(r => r.data),
@@ -435,6 +474,29 @@ const PartnerDashboardPage: React.FC = () => {
       toast.error(err.response?.data?.message || "Failed to update phone number.");
     } finally {
       setSavingPhone(false);
+    }
+  };
+
+  const handleBankSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!bankNameInput.trim() || !accountNumberInput.trim() || !accountNameInput.trim()) {
+      toast.error("Please fill in all bank details.");
+      return;
+    }
+    setSavingBank(true);
+    try {
+      await http.put("/partners/bank-details", {
+        bankName: bankNameInput,
+        accountNumber: accountNumberInput,
+        accountName: accountNameInput
+      });
+      toast.success("Payout bank details updated!");
+      setShowBankModal(false);
+      queryClient.invalidateQueries({ queryKey: ["partner-dashboard"] });
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Failed to update bank details.");
+    } finally {
+      setSavingBank(false);
     }
   };
 
@@ -494,6 +556,108 @@ const PartnerDashboardPage: React.FC = () => {
         </div>
       )}
 
+      {/* Bank Details Modal */}
+      {showBankModal && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(15, 23, 42, 0.5)", display: "flex",
+          alignItems: "center", justifyContent: "center", zIndex: 999, padding: 12,
+          boxSizing: "border-box"
+        }}>
+          <div style={{
+            background: "#fff", borderRadius: 16, padding: "24px 20px",
+            maxWidth: 420, width: "100%", boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
+            position: "relative", boxSizing: "border-box"
+          }}>
+            <button onClick={() => setShowBankModal(false)} style={{
+              position: "absolute", top: 14, right: 14, background: "none",
+              border: "none", cursor: "pointer", color: "#94a3b8", padding: 4
+            }}>
+              <X size={20} />
+            </button>
+            <h2 style={{ fontSize: 16, fontWeight: 900, color: "#111827", marginBottom: 6, margin: 0 }}>
+              Payout Bank Account
+            </h2>
+            <p style={{ fontSize: 12, color: "#64748b", marginBottom: 16, marginTop: 4 }}>
+              Enter your bank account details where admins can issue manual commission payouts.
+            </p>
+            <form onSubmit={handleBankSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div>
+                <label style={{ display: "block", fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase", marginBottom: 4 }}>
+                  Bank Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Access Bank, GTBank, Kuda"
+                  value={bankNameInput}
+                  onChange={(e) => setBankNameInput(e.target.value)}
+                  style={{
+                    width: "100%", height: 40, borderRadius: 8, border: "1.5px solid #cbd5e1",
+                    padding: "0 12px", fontSize: 13, fontWeight: 600, outline: "none", boxSizing: "border-box"
+                  }}
+                />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase", marginBottom: 4 }}>
+                  Account Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. 0123456789"
+                  value={accountNumberInput}
+                  onChange={(e) => setAccountNumberInput(e.target.value)}
+                  style={{
+                    width: "100%", height: 40, borderRadius: 8, border: "1.5px solid #cbd5e1",
+                    padding: "0 12px", fontSize: 13, fontWeight: 700, fontFamily: "monospace", outline: "none", boxSizing: "border-box"
+                  }}
+                />
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: 11, fontWeight: 800, color: "#475569", textTransform: "uppercase", marginBottom: 4 }}>
+                  Account Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. John Doe"
+                  value={accountNameInput}
+                  onChange={(e) => setAccountNameInput(e.target.value)}
+                  style={{
+                    width: "100%", height: 40, borderRadius: 8, border: "1.5px solid #cbd5e1",
+                    padding: "0 12px", fontSize: 13, fontWeight: 600, outline: "none", boxSizing: "border-box"
+                  }}
+                />
+              </div>
+              <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+                <button
+                  type="button"
+                  onClick={() => setShowBankModal(false)}
+                  style={{
+                    flex: 1, padding: "10px", background: "#f1f5f9", color: "#475569",
+                    border: "none", borderRadius: 8, fontWeight: 800, fontSize: 13, cursor: "pointer"
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={savingBank}
+                  style={{
+                    flex: 1, padding: "10px", background: "#ea580c", color: "#fff",
+                    border: "none", borderRadius: 8, fontWeight: 800, fontSize: 13,
+                    cursor: savingBank ? "not-allowed" : "pointer", opacity: savingBank ? 0.7 : 1
+                  }}
+                >
+                  {savingBank ? "Saving..." : "Save Bank Details"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* ── Guide Modal ── */}
       {showGuide && (
         <div style={{
@@ -520,13 +684,13 @@ const PartnerDashboardPage: React.FC = () => {
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 12, flexShrink: 0, marginTop: 1 }}>1</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <strong>Get Your Link:</strong> Head to the <strong>Campaigns</strong> tab or copy your primary referral link below.
+                  <strong>Get Your Link:</strong> copy your primary referral link below.
                 </div>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                 <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 12, flexShrink: 0, marginTop: 1 }}>2</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <strong>Share Graphics & Copy:</strong> Under the Campaigns tab, select any copy, download the flyer, and copy text templates.
+                  <strong>Share Flyers & Copy:</strong> Click on the <strong>Marketing Campaigns</strong> button below. or Click the Campaigns tab, select any copy, download the flyer, and copy text templates.
                 </div>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
@@ -633,20 +797,72 @@ const PartnerDashboardPage: React.FC = () => {
                   </button>
                 </p>
               </div>
+              <style>{`
+                @keyframes pd-gentle-bounce {
+                  0%   { transform: translateY(0); }
+                  8%   { transform: translateY(-5px); }
+                  16%  { transform: translateY(0); }
+                  22%  { transform: translateY(-3px); }
+                  28%  { transform: translateY(0); }
+                  34%  { transform: translateY(-1.5px); }
+                  40%  { transform: translateY(0); }
+                  100% { transform: translateY(0); }
+                }
+                .pd-bounce-btn {
+                  animation: pd-gentle-bounce 6s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+                  animation-delay: 1.5s;
+                }
+              `}</style>
               <button
                 onClick={() => setShowGuide(true)}
+                className="pd-bounce-btn"
                 style={{
-                  padding: "6px 14px", background: "#fff", border: "1.5px solid #f3f4f6",
-                  borderRadius: 8, color: "#475569", fontWeight: 700, fontSize: 12,
+                  padding: "6px 14px", background: "#fff7ed", border: "1.5px solid #fed7aa",
+                  borderRadius: 8, color: "#ea580c", fontWeight: 700, fontSize: 12,
                   cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 4
                 }}
               >
-                <HelpCircle size={13} className="text-primary" /> What's Next?
+                <HelpCircle size={13} style={{ color: "#ea580c" }} /> What's Next?
               </button>
             </div>
 
             {/* Stats (Single Tight Card) */}
             <StatsSingleCard stats={data.stats} />
+
+            {/* Payout Bank Details Card */}
+            <div style={{ background: "#fff", border: "1.5px solid #f3f4f6", borderRadius: 12, padding: "12px 14px", marginBottom: 14, width: "100%", boxSizing: "border-box" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <h3 style={{ fontSize: 12, fontWeight: 800, color: "#111827", margin: 0, display: "flex", alignItems: "center", gap: 6, fontFamily }}>
+                  <DollarSign size={14} style={{ color: "#16a34a" }} /> Payout Bank Account Details
+                </h3>
+                <button
+                  onClick={() => {
+                    setBankNameInput(data.partner.bankName || "");
+                    setAccountNumberInput(data.partner.accountNumber || "");
+                    setAccountNameInput(data.partner.accountName || "");
+                    setShowBankModal(true);
+                  }}
+                  style={{
+                    background: "#fff7ed", border: "1px solid #ffedd5", borderRadius: 6,
+                    color: "#ea580c", fontSize: 11, fontWeight: 800, padding: "4px 10px",
+                    cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 4
+                  }}
+                >
+                  {data.partner.accountNumber ? "Edit Bank Details" : "+ Add Bank Account"}
+                </button>
+              </div>
+              {data.partner.accountNumber ? (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 24px", fontSize: 12, color: "#374151", paddingTop: 4 }}>
+                  <div><span style={{ fontSize: 9.5, color: "#9ca3af", fontWeight: 800, display: "block", textTransform: "uppercase" }}>Bank</span><strong style={{ color: "#111827" }}>{data.partner.bankName}</strong></div>
+                  <div><span style={{ fontSize: 9.5, color: "#9ca3af", fontWeight: 800, display: "block", textTransform: "uppercase" }}>Account Number</span><strong style={{ fontFamily: "monospace", color: "#111827" }}>{data.partner.accountNumber}</strong></div>
+                  <div><span style={{ fontSize: 9.5, color: "#9ca3af", fontWeight: 800, display: "block", textTransform: "uppercase" }}>Account Name</span><strong style={{ color: "#111827" }}>{data.partner.accountName}</strong></div>
+                </div>
+              ) : (
+                <p style={{ fontSize: 12, color: "#94a3b8", margin: "4px 0 0", lineHeight: 1.4 }}>
+                  ⚠️ No bank account details set. Please add your bank details so admins can process your manual commission payouts!
+                </p>
+              )}
+            </div>
 
             {/* Referral Links */}
             <div className="pd-links-grid">

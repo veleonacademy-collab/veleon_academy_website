@@ -240,8 +240,20 @@ const SalesLandingPage: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [referralCode, setReferralCode] = useState<string>('');
+  const [leadId, setLeadId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeModuleIndex, setActiveModuleIndex] = useState<number | null>(0);
+
+  // Capture referral code from URL parameter or localStorage
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref') || localStorage.getItem('veleon_ref_code') || '';
+    if (ref) {
+      setReferralCode(ref);
+      localStorage.setItem('veleon_ref_code', ref);
+    }
+  }, []);
 
   // Load Facebook Pixel deferred (non-blocking) — ONLY for the Sales Landing Page
   useEffect(() => {
@@ -370,12 +382,19 @@ const SalesLandingPage: React.FC = () => {
     // Save lead to database (fire-and-forget — don't block Paystack redirect)
     try {
       http.post('/sales-leads', {
+        id: leadId || undefined,
         name,
         email,
         whatsapp,
         selectedTrack,
         paymentTerm: isInstallment ? 'installment' : 'full',
-        amountDue: getAmountDue()
+        amountDue: getAmountDue(),
+        referralCode: referralCode || undefined,
+        leadSource: referralCode ? 'growth_partner' : 'direct'
+      }).then(res => {
+        if (res.data?.leadId) {
+          setLeadId(res.data.leadId);
+        }
       }).catch(() => {
         // Silently fail — we don't want to block the payment flow
       });

@@ -95,12 +95,11 @@ const App: React.FC = () => {
       const sessionKey = `tracked_ref_${ref}_${campaignId || "none"}_${copyId || "none"}`;
       
       if (!sessionStorage.getItem(sessionKey)) {
+        sessionStorage.setItem(sessionKey, "true");
         http.post("/partners/click", {
           referralCode: ref,
           campaignId: campaignId ? Number(campaignId) : undefined,
           copyId: copyId ? Number(copyId) : undefined
-        }).then(() => {
-          sessionStorage.setItem(sessionKey, "true");
         }).catch(err => {
           console.error("Referral click tracking failed:", err);
         });
